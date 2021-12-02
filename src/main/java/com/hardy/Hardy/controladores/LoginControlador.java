@@ -4,6 +4,8 @@ import com.hardy.Hardy.entidades.Usuario;
 import com.hardy.Hardy.servicios.RolServicio;
 import com.hardy.Hardy.servicios.UsuarioServicio;
 import java.security.Principal;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -25,9 +28,14 @@ public class LoginControlador {
     private RolServicio rs;
 
     @GetMapping("/login")
-    public ModelAndView login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
+    public ModelAndView login(HttpServletRequest request, @RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
 
         ModelAndView mv = new ModelAndView("login");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mv.addObject("exito", flashMap.get("exito-name"));
+            mv.addObject("error", flashMap.get("error-name"));
+        }
         if (error != null) {
             mv.addObject("error", "Correo o contraseña incorrecta");
         }
@@ -37,10 +45,11 @@ public class LoginControlador {
         if (principal != null) {
             mv.setViewName("redirect:/");
         }
+
         return mv;
     }
 
-    @GetMapping("/modificar-correo/{id}") 
+    @GetMapping("/modificar-correo/{id}")
     public ModelAndView editarUsuario(@PathVariable Integer id, HttpSession session) throws Exception {
         if (!session.getAttribute("id").equals(id)) {
             return new ModelAndView(new RedirectView("/"));
@@ -74,7 +83,6 @@ public class LoginControlador {
     }
 
     //Tengo separados los metodos para modificar correo y clave porque la clave no se completa con la info en los form, y sino hay que cambiarla si o si o volver a ingresarla    
-
     @GetMapping("/clave/{id}")
     public ModelAndView modificarClave(@PathVariable Integer id, HttpSession session) throws Exception {
         if (!session.getAttribute("id").equals(id)) { //Para que no pueda modificar la clave de nadie mas

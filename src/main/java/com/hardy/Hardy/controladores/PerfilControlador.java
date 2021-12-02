@@ -2,6 +2,7 @@ package com.hardy.Hardy.controladores;
 
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.servicios.ClienteServicio;
+import com.hardy.Hardy.servicios.UsuarioServicio;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Map;
@@ -27,8 +28,10 @@ class PerfilControlador {
     @Autowired
     private ClienteServicio clienteServicio;
 
-    //@Autowired
-    //private UsuarioServicio usuarioServicio;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
+    //metodos GET
     @GetMapping
     public ModelAndView mostrarPerfil(HttpSession sesion, HttpServletRequest request) throws MiExcepcion, Exception {
 
@@ -43,19 +46,21 @@ class PerfilControlador {
         return mav;
     }
 
+    // metodos POST
     @PostMapping("/guardar-usuario")
-    public RedirectView guardar(Principal principal, @RequestParam String correo, @RequestParam String claveUno,
+    public RedirectView guardar( HttpServletRequest request,
+           Principal principal, @RequestParam String correo, @RequestParam String claveUno,
             @RequestParam String claveDos,
-            @RequestParam String nombre, 
+            @RequestParam String nombre,
             @RequestParam String apellido, @RequestParam Integer dni,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento, 
-            @RequestParam Integer idRol,
-            @RequestParam MultipartFile imagen, RedirectAttributes attributes) throws Exception {
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento
+            /*@RequestParam MultipartFile imagen*/, RedirectAttributes attributes) throws Exception {
         try {
             if (principal != null) {
                 return new RedirectView("/inicio");
             }
-            //usuarioServicio.crearUsuario( nombre,  apellido,  dni,  fechaNacimiento,  correo,  claveUno, String claveDos, Integer idRol, imagen);
+            usuarioServicio.crearUsuario(nombre, apellido, dni, fechaNacimiento, correo, claveUno, claveDos);
+            request.login(correo, claveUno);
 
             attributes.addFlashAttribute("exito-name", "Usuario registrado exitosamente");
         } catch (Exception e) {
