@@ -53,13 +53,13 @@ class PerfilControlador {
             @RequestParam String claveDos,
             @RequestParam String nombre,
             @RequestParam String apellido, @RequestParam Integer dni,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento
-            /*@RequestParam MultipartFile imagen*/, RedirectAttributes attributes) throws Exception {
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento,
+            @RequestParam MultipartFile imagen, RedirectAttributes attributes) throws Exception {
         try {
             if (principal != null) {
                 return new RedirectView("/inicio");
             }
-            usuarioServicio.crearUsuario(nombre, apellido, dni, fechaNacimiento, correo, claveUno, claveDos);
+            usuarioServicio.crearUsuario(nombre, apellido, dni, fechaNacimiento, correo, claveUno, claveDos, imagen);
             request.login(correo, claveUno);
 
             attributes.addFlashAttribute("exito-name", "Usuario registrado exitosamente");
