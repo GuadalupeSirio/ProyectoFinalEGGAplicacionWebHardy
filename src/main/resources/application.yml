@@ -20,8 +20,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: 
-    password: 
+    username: asistente.hardy@gmail.com
+    password: asistente-hardy9
     properties:
       mail:
         smtp:
@@ -37,4 +37,4 @@ logging:
       springframework:
         web: debug
 my:
-    property: 
+    property: C:\Users\Andrea\Documents\NetBeansProjects\Proyecto-Final\src\main\resources\static\upload

@@ -42,41 +42,17 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private EmailServicio es;
 
+
     @Transactional
-    public void crearUsuario(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento, String correo, String clave, String clave2, Integer idRol, MultipartFile imagen) throws Exception {
+    public void crearUsuario(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento, String correo, String clave, String clave2, MultipartFile imagen) throws Exception {
 
         validarCorreo(correo);
         cs.validacionDni(dni);
         validarClave(clave, clave2);
-
-        Usuario u = new Usuario();
-        u.setCorreo(correo);
-        u.setClave(encoder.encode(clave));
-        if (ur.findAll().isEmpty()) {  //Si la lista esta vacia, se crean y guardan los dos roles y se le asigna el rol de ADMIN al primer usuario. 
-            Rol r1 = new Rol("ADMIN");
-            Rol r2 = new Rol("CLIENTE");
-            rr.save(r1);
-            rr.save(r2);
-            u.setRol(r1);
-        }else{
-            u.setRol(rr.buscarRol("CLIENTE")); //Luego todos los usuarios se setean con el rol de CLIENTE pero el admin puede modificarlo 
-        }
+        cs.validacionFechaNacimiento(fechaNacimiento);
+        cs.validacionNombre(nombre, "Nombre");
+        cs.validacionNombre(nombre, "Apellido");
         
-        u.setAlta(true);
-        //Despues de validar el correo, la clave y el DNI, pasamos a crear la entidad de cliente para que se hagan las validaciones de los campos 
-        //antes de guardar el usuario en la base de datos, si salta excepcion en cliente usuario no se persiste.
-
-        cs.guardarCliente(nombre, apellido, dni, fechaNacimiento, imagen, u);
-        ur.save(u);
-        // es.enviarThread(correo); --> para enviar el correo de bienvenida
-    }
-    
-    public void crearUsuario(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento, String correo, String clave, String clave2) throws Exception {
-
-        validarCorreo(correo);
-        cs.validacionDni(dni);
-        validarClave(clave, clave2);
-
         Usuario u = new Usuario();
         u.setCorreo(correo);
         u.setClave(encoder.encode(clave));
@@ -88,20 +64,29 @@ public class UsuarioServicio implements UserDetailsService {
             u.setRol(r1); 
         }else{
             u.setRol(rr.buscarRol("CLIENTE")); //Luego todos los usuarios se setean con el rol de CLIENTE pero el admin puede modificarlo 
-        }
-        
+        }       
         u.setAlta(true);
-        //Despues de validar el correo, la clave y el DNI, pasamos a crear la entidad de cliente para que se hagan las validaciones de los campos 
-        //antes de guardar el usuario en la base de datos, si salta excepcion en cliente usuario no se persiste.
 
         ur.save(u);
-        cs.guardarCliente(nombre, apellido, dni, fechaNacimiento, u);
+        cs.guardarCliente(nombre, apellido, dni, fechaNacimiento, imagen, u);
         
-        // es.enviarThread(correo); --> para enviar el correo de bienvenida
+        es.enviarThread(correo); //--> para enviar el correo de bienvenida
+    }
+    
+    @Transactional
+    public void crearAdmin(String correo, String clave, String clave2) throws MiExcepcion{
+        validarCorreo(correo);
+        validarClave(clave, clave2);
+        Usuario u = new Usuario();
+        u.setCorreo(correo);
+        u.setClave(encoder.encode(clave));
+        ur.save(u);
+        
+       // es.enviarThread(correo);
     }
 
     @Transactional
-    public void modificar(Integer id, String correo, Integer idRol) throws Exception {
+    public void modificarCorreo(Integer id, String correo) throws Exception {
 
         Usuario u = buscarPorId(id);
 
@@ -109,14 +94,11 @@ public class UsuarioServicio implements UserDetailsService {
             validarCorreo(correo);
             u.setCorreo(correo);
         }
-        if (idRol != 0 && idRol != u.getRol().getId()) {
-            u.setRol(rr.findById(idRol).orElse(null));
-        }
         ur.save(u);
     }
 
     @Transactional
-    public void clave(Integer id, String clave, String clave2) throws MiExcepcion {  
+    public void modificarClave(Integer id, String clave, String clave2) throws MiExcepcion {  
         Usuario u = buscarPorId(id);
 
         validarClave(clave, clave2);
