@@ -104,7 +104,6 @@ public class UsuarioServicio implements UserDetailsService {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attributes.getRequest().getSession(true);
 
-
         session.setAttribute("idUsuario", usuario.getId());
         session.setAttribute("correo", usuario.getCorreo());
         session.setAttribute("rol", usuario.getRol().getNombre());
