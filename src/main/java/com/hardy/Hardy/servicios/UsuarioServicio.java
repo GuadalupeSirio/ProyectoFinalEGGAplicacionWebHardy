@@ -70,6 +70,35 @@ public class UsuarioServicio implements UserDetailsService {
         ur.save(u);
         // es.enviarThread(correo); --> para enviar el correo de bienvenida
     }
+    
+    public void crearUsuario(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento, String correo, String clave, String clave2) throws Exception {
+
+        validarCorreo(correo);
+        cs.validacionDni(dni);
+        validarClave(clave, clave2);
+
+        Usuario u = new Usuario();
+        u.setCorreo(correo);
+        u.setClave(encoder.encode(clave));
+        if (ur.findAll().isEmpty()) {  //Si la lista esta vacia, se crean y guardan los dos roles y se le asigna el rol de ADMIN al primer usuario. 
+            Rol r1 = new Rol("ADMIN");
+            Rol r2 = new Rol("CLIENTE");
+            rr.save(r1);
+            rr.save(r2);
+            u.setRol(r1); 
+        }else{
+            u.setRol(rr.buscarRol("CLIENTE")); //Luego todos los usuarios se setean con el rol de CLIENTE pero el admin puede modificarlo 
+        }
+        
+        u.setAlta(true);
+        //Despues de validar el correo, la clave y el DNI, pasamos a crear la entidad de cliente para que se hagan las validaciones de los campos 
+        //antes de guardar el usuario en la base de datos, si salta excepcion en cliente usuario no se persiste.
+
+        ur.save(u);
+        cs.guardarCliente(nombre, apellido, dni, fechaNacimiento, u);
+        
+        // es.enviarThread(correo); --> para enviar el correo de bienvenida
+    }
 
     @Transactional
     public void modificar(Integer id, String correo, Integer idRol) throws Exception {
