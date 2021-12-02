@@ -18,23 +18,15 @@ public class ClienteServicio {
     @Autowired
     private ClienteRepositorio clienteRepositorio;
 
-    //@Autowired
-    //private ImagenServicio imagenServicio;
+    @Autowired
+    private ImagenServicio imagenServicio;
     
     //Metodos CRUD
     @Transactional
     public void guardarCliente(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento,
-            MultipartFile imagen,
-            Usuario usuario) throws Exception, MiExcepcion {
+            MultipartFile imagen, Usuario usuario) throws Exception, MiExcepcion {
         
         try {
-            validacionNombre(nombre, "Nombre");
-            validacionNombre(apellido, "Apellido");
-            validacionDni(dni);
-            validacionFechaNacimiento(fechaNacimiento);
-            /*if (!imagen.isEmpty()) {
-                cliente.setImagen(imagenServicio.copiar(imagen));
-            }*/
 
             Cliente cliente = new Cliente();
             cliente.setNombre(nombre);
@@ -42,35 +34,9 @@ public class ClienteServicio {
             cliente.setDni(dni);
             cliente.setFechaNacimiento(fechaNacimiento);
             cliente.setUsuario(usuario);
-
-            clienteRepositorio.save(cliente);
-        } catch (MiExcepcion ex) {
-            throw ex;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-    
-    @Transactional
-    public void guardarCliente(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento,
-            Usuario usuario) throws Exception, MiExcepcion {
-        
-        try {
-            validacionNombre(nombre, "Nombre");
-            validacionNombre(apellido, "Apellido");
-            validacionDni(dni);
-            validacionFechaNacimiento(fechaNacimiento);
-            /*if (!imagen.isEmpty()) {
+            if (!imagen.isEmpty()) {
                 cliente.setImagen(imagenServicio.copiar(imagen));
-            }*/
-
-            Cliente cliente = new Cliente();
-            cliente.setNombre(nombre);
-            cliente.setApellido(apellido);
-            cliente.setDni(dni);
-            cliente.setFechaNacimiento(fechaNacimiento);
-            cliente.setUsuario(usuario);
-
+            }
             clienteRepositorio.save(cliente);
         } catch (MiExcepcion ex) {
             throw ex;
@@ -78,7 +44,6 @@ public class ClienteServicio {
             throw e;
         }
     }
-
 
     //Metodos de validacion
     
