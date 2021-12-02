@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-@Table(name = "autor")
+//@Table(name = "autor")
 public class Registro {
     
     @Id
@@ -23,7 +23,7 @@ public class Registro {
     @Column(nullable = false, updatable = false)
     Date fecha;
     
-    List<String> estudio;
+    //List<String> estudio;
     
     @Column(nullable = false)
     String medico;
@@ -48,7 +48,7 @@ public class Registro {
     public Registro(Integer id, Date fecha, List<String> estudio, String medico, String cobertura, String lugar, String resultados, Especialidad especialidad, Cliente cliente) {
         this.id = id;
         this.fecha = fecha;
-        this.estudio = estudio;
+        //this.estudio = estudio;
         this.medico = medico;
         this.cobertura = cobertura;
         this.lugar = lugar;
@@ -77,13 +77,13 @@ public class Registro {
         this.fecha = fecha;
     }
 
-    public List<String> getEstudio() {
+   /* public List<String> getEstudio() {
         return estudio;
-    }
+    }*/
 
-    public void setEstudio(List<String> estudio) {
+   /* public void setEstudio(List<String> estudio) {
         this.estudio = estudio;
-    }
+    }*/
 
     public String getMedico() {
         return medico;
