@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardy</title>
+    <link rel="icon" th:href="@{../static/img/heartbeat-solid.svg}">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <!--Fontawesome icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <!--css-->
+    <link rel="stylesheet" th:href="@{../static/css/style.css}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" id="nav-bar">
+        <div class="container-fluid">
+            <img th:src="@{../static/img/logo-heart.png}" alt="logo-heart" class="logo-navbar">
+            <a class="navbar-brand" href="#">Hardy.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ficha medica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Registro medico</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container px-4">
+        <!--Titulo-->
+        <div class="container pt-4 px-5">
+            <h1 class="pt-5 titulo">Ingrese una especialidad</h1>
+        </div>
+        <!--Form-->
+        <div class="container mt-5 px-5 pt-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <img th:src="@{../static/img/Doctor-cuate.svg}" alt="" class="img-fluid d-none d-sm-block">
+                </div>
+                <div class="col-md-6 col-sm-12">
+
+                    <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+
+                    <form autocomplete="off" class="needs-validation pt-5" id="formulario" method="POST" novalidate
+                        th:action="@{/especialidades/__${action}__}" th:object="${editorial}">
+
+                        <div class="form-floating mb-4 ms-5 mt-5">
+                            <input type="text" class="form-control border border-secondary" id="nombre"
+                                placeholder="Nombre" required th:field="*{nombre}">
+                            <label for="nombre">Nombre</label>
+                        </div>
+
+                        <button class="btn btn-lg ms-5"
+                        th:text="${action == 'guardar'} ? 'Ingresar especialidad' : 'Guardar cambios'" type="submit"></button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
