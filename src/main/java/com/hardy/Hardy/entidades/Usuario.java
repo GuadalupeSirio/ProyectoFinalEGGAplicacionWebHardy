@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,7 +13,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
     @Column(nullable = false, unique = true)
     private String correo;
@@ -23,6 +24,7 @@ public class Usuario {
     private Boolean alta;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Rol rol;
 
     public Usuario() {

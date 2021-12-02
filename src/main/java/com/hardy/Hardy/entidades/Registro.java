@@ -20,6 +20,7 @@ public class Registro {
     
     @CreatedDate
     @Column(nullable = false, updatable = false)
+
     @Temporal(TemporalType.DATE)
     private Date fecha;
     

@@ -5,6 +5,7 @@ import com.hardy.Hardy.entidades.FichaMedica;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.repositorios.FichaMedicaRepositorio;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,52 @@ public class FichaMedicaServicio {
             validacionGrupoSanguineo(grupoSanguineo);
             validacionPeso(peso);
             validacionAltura(altura);
-            validacionEnfermedades(enfermedades);
+            //validacionEnfermedades(enfermedades);
             validacionUltimoChequeo(ultimoChequeo);
             validacionCliente(cliente);
-            
+
+            FichaMedica fichaMedica = new FichaMedica();
+
+            Integer edad = Period.between(cliente.getFechaNacimiento(), LocalDate.now()).getYears();
+
+            fichaMedica.setAlta(true);
+            fichaMedica.setGrupoSanguineo(grupoSanguineo);
+            fichaMedica.setPeso(peso);
+            fichaMedica.setAltura(altura);
+            //fichaMedica.setEnfermedades(enfermedades);
+            fichaMedica.setUltimoChequeo(ultimoChequeo);
+            fichaMedica.setCliente(cliente);
+            fichaMedica.setEdad(edad);
+
+            fichaMedicaRepositorio.save(fichaMedica);
+
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void modificarFichaMedica(String grupoSanguineo, Double peso, Integer altura,
+            String enfermedades, LocalDate ultimoChequeo, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionGrupoSanguineo(grupoSanguineo);
+            validacionPeso(peso);
+            validacionAltura(altura);
+            //validacionEnfermedades(enfermedades);
+            validacionUltimoChequeo(ultimoChequeo);
+            validacionCliente(cliente);
+
+            FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
+
+            fichaMedica.setGrupoSanguineo(grupoSanguineo);
+            fichaMedica.setPeso(peso);
+            fichaMedica.setAltura(altura);
+            //fichaMedica.setEnfermedades(enfermedades);
+            fichaMedica.setUltimoChequeo(ultimoChequeo);
+
+            fichaMedicaRepositorio.save(fichaMedica);
 
         } catch (MiExcepcion ex) {
             throw ex;
@@ -126,9 +169,8 @@ public class FichaMedicaServicio {
             throw e;
         }
     }
-    
+
     //Metodos de consulta
-    
     @Transactional(readOnly = true)
     public List<FichaMedica> obtenerFichasMedicas() throws Exception {
         try {
@@ -139,9 +181,9 @@ public class FichaMedicaServicio {
     }
 
     @Transactional(readOnly = true)
-    public FichaMedica obtenerFichamedicaId(Integer id) throws Exception, MiExcepcion {
+    public FichaMedica obtenerFichamedicaId(Integer idCliente) throws Exception, MiExcepcion {
         try {
-            FichaMedica fichaMedica = fichaMedicaRepositorio.findById(id).orElseThrow(() -> new MiExcepcion("Error al obtener ficha medica"));
+            FichaMedica fichaMedica = fichaMedicaRepositorio.obtenerFichaMedica(idCliente).orElseThrow(() -> new MiExcepcion("Error al obtener ficha medica"));
             return fichaMedica;
         } catch (Exception e) {
             throw e;
