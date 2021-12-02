@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/signup", "/registro", "/css/style.css", "/img/*" ).permitAll()
-                .antMatchers("/**").permitAll() //.authenticated() --> La seguridad esta desactivada hasta que cambiemos esto
+                .antMatchers("/perfil/guardar-usuario","/login", "/css/style.css", "/img/*" ).permitAll()
+                .antMatchers("/**").authenticated() //.authenticated() --> La seguridad esta desactivada hasta que cambiemos esto
                 .and()
                 .formLogin()
                 .loginPage("/login")
