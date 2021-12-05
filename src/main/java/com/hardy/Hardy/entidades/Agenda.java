@@ -34,6 +34,7 @@ public class Agenda {
    @Column(nullable = false)
    private String lugar;
    
+   @Column(nullable = false)
    private Boolean alta;
    
    @ManyToOne
