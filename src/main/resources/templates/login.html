@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      >
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <script src="https://kit.fontawesome.com/f5d0cfe0f6.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <!-- navbar login -->
+        <section class="section1 mb-5">
+
+
+            <nav class="navbar navbar-expand-lg navbar-light mb-3">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Hardy</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav text-end">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#beneficios">Beneficios</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#extras">Extras</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+
+            <div class="row justify-content-center">
+                <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+                     th:if="${exito != null}">
+                    <strong th:text="${exito}"></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
+                     th:if="${error != null}">
+                    <strong th:text="${error}"></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
+                     th:if="${errorLog != null}">
+                    <strong th:text="${errorLog}"></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
+                     th:if="${logout != null}">
+                    <strong th:text="${logout}"></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+
+
+            <!-- Primer pantalla -->
+
+            <div class="container">
+                <div class="row pb-5">
+                    <div class="col-12 col-md-12 col-lg-6 order-last order-lg-first mt-5">
+                        <div class="row">
+                            <h1 class="titulo col-12 align-self-start">Tu historial medico en un solo lugar</h1>
+                            <p class="col-12 align-self-center py-3 texto1">Guardá tus controles y examenes medicos de forma organizada.
+                                Agendá tus turnos y recibí informacion actualizada sobre tu salud</p>
+                            <div class="col-12 align-self-end"></div>
+
+                            <button type="button" class="btn  col-3 mx-3 reg py-2" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Registrarse</button>
+
+                            <button type="button" class="btn btn-outline-primary col-3 mx-3 ing " data-bs-toggle="modal"
+                                    data-bs-target="#ingreso">Ingresar</button>
+
+
+
+                        </div>
+
+                    </div>
+                    <div class="col-12 mb-3 mb-md-0  mt-5 pb-5 col-md-12 col-lg-6">
+
+
+
+                        <img  th:src="@{/img/routine-checkup-for-pet.png}" class="img-fluid">
+
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Segunda pantalla -->
+
+
+        <section class="container my-5 py-5 section2" id="beneficios">
+
+            <div class="row my-5 py-5">
+                <div class="col-6 col-12 col-md-12 col-lg-6">
+
+                    <img src="../static/img/consultancy.png" class="img-fluid">
+
+
+                </div>
+
+                <div class=" col-12 col-md-12 col-lg-6">
+                    <span class="badge rounded-pill bg-primary col mb-3 texto1">Beneficios</span>
+
+                    <div class="row justify-content-center">
+
+
+                        <h2 class="col-12 titulonegro ">Tu historia clinica al alcance de tu mano</h2>
+
+                        <p class="col-12 mt-2 texto2">Accedé a esta información de forma sencilla, a través de una aplicación web, en
+                            donde podrás tener tu historial médico organizado por especialidad, y orden cronológico</p>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Tercer pantalla -->
+        <section class="container py-5 my-5" id="extras">
+            <div class="row ">
+                <div class="col-12 text-center">
+                    <span class="badge rounded-pill bg-primary col  mb-3 texto1">Extras</span>
+
+                    <h2 class="col-12 titulonegro mb-5">Organizá todos tus chequeos</h2>
+
+                    <!-- Tarjetas -->
+                    <div class="row">
+                        <div class="col">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <div class="col">
+                                    <div class="card h-100 card1 rounded">
+                                        <img src="../static/img/hospital-reception.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Agenda</h5>
+                                            <p class="card-text">Guardá todos tus turnos y recordatorios aquí</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 card2 rounded">
+                                        <img src="../static/img/body-checkup.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Alertas</h5>
+                                            <p class="card-text">Recibí información importante sobre tus chequeos</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 card3 rounded">
+                                        <img src="../static/img/research-lab.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Lorem, ipsum</h5>
+                                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Cuarta pantalla -->
+        <section class="container-fluid py-5 my-5 cuartapantalla">
+            <div class="row text-center py-5 my-5">
+                <div class="col-12  ">
+                    <h1 class="titulonegro col-12 my-5">Dale a tu salud la atención que merece</h1>
+                    <button type="button" class="btn  col-3 mx-3 reg py-2" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Ingresá ya</button>
+
+
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+
+        <footer class="container-fluid py-5">
+            <div class="row text-center">
+                <h2 class="col-4 texto1 ">Hardy</h2>
+                <a class="col-4 texto1"  target="_blank">info@hardy.com</a>
+                <ul class="footer-social col-4">
+                    <li class="me-3"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="me-3"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><a href="#"><i class="fab fa-twitter"></i></a></a></li>
+                </ul>
+
+
+
+
+
+
+            </div>
+
+        </footer>
+
+
+        <!-- Modales -->
+
+        <!-- Modal registro -->
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title " id="exampleModalLabel">Registrate a la plataforma</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/perfil/guardar-usuario}" method="post" enctype="multipart/form-data">
+                            <div class="container">
+                                <div class="row">
+                                    <div class=" mb-3 col-12 col-md-6">
+
+                                        <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                               name="nombre">
+
+                                    </div>
+
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                               name="apellido">
+
+                                    </div>
+
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="exampleInputEmail1" class="form-label">Documento</label>
+                                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                               name="dni">
+
+                                    </div>
+
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento</label>
+                                        <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                               name="fechaNacimiento">
+
+                                    </div>
+
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                               name="correo">
+
+                                    </div>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1" name="claveUno">
+                                    </div>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1" name="claveDos">
+                                    </div>
+                                    <div class="mb-4 mt-2">
+                                        <label for="imagen" class="text-white">Cargar foto: </label> <br>
+                                        <input class="form-control border-0" type="file" name="imagen" accept="image/*">
+                                    </div>
+                                    <button type="submit" class="btn btn reg">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal login -->
+
+        <div class="modal fade" id="ingreso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ingresa a la plataforma</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/logincheck}" method="post">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                       name="correo">
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" name="clave">
+                            </div>
+
+                            <button type="submit" class="btn btn ing">Ingresar</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    </body>
+
+</html>

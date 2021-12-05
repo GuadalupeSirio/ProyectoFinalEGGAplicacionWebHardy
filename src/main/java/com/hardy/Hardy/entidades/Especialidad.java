@@ -10,12 +10,12 @@ public class Especialidad {
     
     @Id
     @GeneratedValue
-    Integer id;
+    private Integer id;
     
     @Column(nullable = false, length = 50)
-    String nombre;
+    private String nombre;
     
-    Boolean alta;
+    private Boolean alta;
 
     public Especialidad(Integer id, String nombre, Boolean alta) {
         this.id = id;
