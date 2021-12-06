@@ -1,9 +1,9 @@
-
 package com.hardy.Hardy.controladores;
 
 import com.hardy.Hardy.entidades.Estudio;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.servicios.EstudioServicio;
+import com.hardy.Hardy.servicios.RegistroServicio;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,13 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping("/estudios")
 public class EstudioControlador {
+
     @Autowired
     private RegistroServicio registroServicio;
-    
+
     @Autowired
     private EstudioServicio estudioServicio;
-    
+
     @GetMapping
     public ModelAndView mostrarTodos(HttpServletRequest request) throws Exception, MiExcepcion {
 
@@ -40,13 +41,13 @@ public class EstudioControlador {
         mav.addObject("estudios", estudioServicio.buscarTodos());
         return mav;
     }
-    
+
     @GetMapping("/crear")
     public ModelAndView crearEstudios() throws Exception {
         try {
             ModelAndView mav = new ModelAndView("estudios-formulario");
             mav.addObject("estudio", new Estudio());
-            mav.addObject("registro", registroServicio.buscarTodos());
+            mav.addObject("registros", registroServicio.obtenerRegistros());
             mav.addObject("title", "Crear Estudio");
             mav.addObject("action", "guardar");
             return mav;
@@ -55,24 +56,24 @@ public class EstudioControlador {
             throw e;
         }
     }
-    
+
     @PostMapping("/guardar")
-    public RedirectView guardarEstudios(@RequestParam MultipartFile adjunto, @RequestParam ("registro") Integer idRegistro, RedirectAttributes attributes) throws MiExcepcion {
+    public RedirectView guardarEstudios(@RequestParam MultipartFile adjunto, @RequestParam("registro") Integer idRegistro, RedirectAttributes attributes) throws MiExcepcion, Exception {
         try {
             estudioServicio.crearEstudio(idRegistro, adjunto);
             attributes.addFlashAttribute("exito-name", "El estudio ha sido guardado exitosamente");
-        } catch (MiExcepcion e) {
+        } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
         return new RedirectView("/estudios");
     }
-    
+
     @PostMapping("/baja/{id}")
     public RedirectView bajaEstudio(@PathVariable Integer idEstudio, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             estudioServicio.baja(idEstudio);
             Estudio estudio = estudioServicio.buscarPorId(idEstudio);
-           attributes.addFlashAttribute("exito-name", "El estudio ha sido "+((estudio.getAlta())? "habilitado" : "deshabilitado")+"  exitosamente");
+            attributes.addFlashAttribute("exito-name", "El estudio ha sido " + ((estudio.getAlta()) ? "habilitado" : "deshabilitado") + "  exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }

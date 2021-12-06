@@ -1,8 +1,11 @@
 package com.hardy.Hardy.controladores;
 
 import com.hardy.Hardy.entidades.Agenda;
+import com.hardy.Hardy.entidades.Cliente;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.servicios.AgendaServicio;
+import com.hardy.Hardy.servicios.ClienteServicio;
+import com.hardy.Hardy.servicios.EspecialidadServicio;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map;
@@ -57,7 +60,7 @@ public class AgendaControlador {
                 mav.addObject("error", flashMap.get("error-name"));
             }
             mav.addObject("agenda", new Agenda());
-            mav.addObject("especialidades", especialidadServicio.buscarTodos());
+            mav.addObject("especialidades", especialidadServicio.obtenerEspeciaidades());
             mav.addObject("title", "Crear Agenda");
             mav.addObject("action", "guardar");
             return mav;
@@ -77,7 +80,7 @@ public class AgendaControlador {
                 mav.addObject("error", flashMap.get("error-name"));
             }
             mav.addObject("agenda", agendaServicio.buscarPorId(id));
-            mav.addObject("editoriales", especialidadServicio.buscarTodos());
+            mav.addObject("especialidades", especialidadServicio.obtenerEspeciaidades());
             mav.addObject("title", "Editar Agenda");
             mav.addObject("action", "modificar");
             return mav;

@@ -20,31 +20,31 @@ public class EstudioServicio {
 
     @Autowired
     private RegistroRepositorio registroRepositorio;
-    
+
     @Autowired
     private ImagenServicio imagenServicio;
-    
+
     @Transactional
-    public void crearEstudio(Integer idRegistro, MultipartFile adjunto) throws MiExcepcion {
+    public void crearEstudio(Integer idRegistro, MultipartFile adjunto) throws MiExcepcion, Exception {
 
-        Estudio estudio = new Estudio();
+        try {
+            Estudio estudio = new Estudio();
 
-        estudio.setAlta(true);
-        if(!adjunto.isEmpty()){
-            estudio.setAdjunto(imagenServicio.copiar(adjunto));
-        }
+            estudio.setAlta(true);
+            if (!adjunto.isEmpty()) {
+                estudio.setAdjunto(imagenServicio.copiar(adjunto));
+            }
+            Registro registro = registroRepositorio.findById(idRegistro).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
 
-        Optional<Registro> respuesta1 = registroRepositorio.findById(idRegistro);
-        if (respuesta1.isPresent()) {
-            Registro registro = respuesta1.get();
             estudio.setRegistro(registro);
-        } else {
-            throw new MiExcepcion("No se encontró el Id");
+            estudioRepositorio.save(estudio);
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
         }
-        
-        estudioRepositorio.save(estudio);
     }
-    
+
     @Transactional(readOnly = true)
     public List<Estudio> buscarTodos() throws Exception {
         try {
@@ -53,7 +53,7 @@ public class EstudioServicio {
             throw new Exception("Error al obtener estudios");
         }
     }
-    
+
     @Transactional(readOnly = true)
     public Estudio buscarPorId(Integer id) throws Exception {
         try {
@@ -63,7 +63,7 @@ public class EstudioServicio {
             throw new Exception("Error al buscar por Id");
         }
     }
-    
+
     @Transactional
     public void baja(Integer id) throws MiExcepcion {
         try {

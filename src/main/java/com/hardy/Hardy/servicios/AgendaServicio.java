@@ -1,9 +1,11 @@
 package com.hardy.Hardy.servicios;
 
 import com.hardy.Hardy.entidades.Agenda;
+import com.hardy.Hardy.entidades.Cliente;
 import com.hardy.Hardy.entidades.Especialidad;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.repositorios.AgendaRepositorio;
+import com.hardy.Hardy.repositorios.ClienteRepositorio;
 import com.hardy.Hardy.repositorios.EspecialidadRepositorio;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -44,14 +46,9 @@ public class AgendaServicio {
             agenda.setAlta(true);
             agenda.setCliente(cliente);
 
-            Optional<Especialidad> respuesta1 = especialidadRepositorio.findById(idEspecialidad);
-            if (respuesta1.isPresent()) {
-                Especialidad especialidad = respuesta1.get();
-                agenda.setEspecialidad(especialidad);
-            } else {
-                throw new MiExcepcion("No se encontró el Id");
-            }
-
+            Especialidad especialidad = especialidadRepositorio.findById(idEspecialidad).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
+            agenda.setEspecialidad(especialidad);
+            
             agendaRepositorio.save(agenda);
 
         } catch (MiExcepcion ex) {
@@ -76,14 +73,8 @@ public class AgendaServicio {
             agenda.setMedico(medico);
             agenda.setLugar(lugar);
 
-            Optional<Especialidad> respuesta1 = especialidadRepositorio.findById(idEspecialidad);
-            if (respuesta1.isPresent()) {
-                Especialidad especialidad = respuesta1.get();
-                agenda.setEspecialidad(especialidad);
-            } else {
-                throw new MiExcepcion("No se encontró el Id");
-            }
-
+            Especialidad especialidad = especialidadRepositorio.findById(idEspecialidad).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
+            agenda.setEspecialidad(especialidad);
             agendaRepositorio.save(agenda);
 
         } catch (MiExcepcion ex) {
