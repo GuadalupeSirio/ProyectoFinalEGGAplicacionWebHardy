@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface EspecialidadRepositorio extends JpaRepository<Especialidad, Integer>{
     
     @Modifying
-    @Query("UPDATE Registro a SET a.alta = :alta WHERE a.id = :id")
+    @Query("UPDATE Especialidad a SET a.alta = :alta WHERE a.id = :id")
     void baja(@Param("id") Integer id, @Param("alta") Boolean alta);
 
 }
