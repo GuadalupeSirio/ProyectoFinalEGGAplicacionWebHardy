@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+
+
+
+.sectionindex{
+  background-color:rgb(254,245,228);
+
+}
+.cuadro{
+  background-color: rgb(122,205,52);
+  color: white;
+}
+
+.tarjeta{
+  background-color: rgb(247,246,254);
+}
+footer.foot, footer.foot a, footer.foot a:link, footer.foot a:visited{
+  background-color: rgb(93,33,210);
+  color: white;
+  text-decoration: none;
+}
