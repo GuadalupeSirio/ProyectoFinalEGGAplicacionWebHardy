@@ -8,6 +8,7 @@
 body{
     font-family: sans-serif;
     background-image: url("../img/Group6.png");
+    background-repeat: no-repeat;
     width: 100%;
     top:0;
     position: absolute;
@@ -63,4 +64,13 @@ body{
     background-color: rgb(84, 193, 251);
 }
 
+
+/*Flecha footer*/
+.arrow{
+    color: rgb(84, 193, 251);
+}
+
+.accordion {
+    border-radius: 20px;
+}
 
