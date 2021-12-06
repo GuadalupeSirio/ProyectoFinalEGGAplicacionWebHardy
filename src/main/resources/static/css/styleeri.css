@@ -66,4 +66,162 @@ body{
     background-color: rgb(84, 193, 251);
 }
 
+#editar{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
+#eliminar{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.rounded-3{
+    height: 150px;
+    width: 150px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+#identificacion{
+    height: 40px;
+    width: 40px;
+    margin-left: 0px;
+}
+
+#documento{
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.dni{
+    font-size: 15px;
+}
+
+#factor-sanguineo{
+    height: 40px;
+    width: 40px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#grupo-sanguineo{
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.tipo-sangre{
+    font-size: 15px;
+}
+
+#nacimiento{
+    height: 35px;
+    width: 35px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#fecha-nacimiento{
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.fecha{
+    font-size: 14px;
+}
+
+#balanza{
+    height: 50px;
+    width: 50px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#peso{
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.peso{
+    font-size: 14px;
+}
+
+#anios{
+    height: 70px;
+    width: 70px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#edad{
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.edad{
+    font-size: 14px;
+}
+
+#estatura{
+    height: 60px;
+    width: 60px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#altura{
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.altura{
+    font-size: 14px;
+}
+
+.card-text{
+    font-size: 15px;
+    text-align: right;
+}
+
+#turnos{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.calendario{
+    height: 300px;
+    width: 400px;
+}
+
+#especialidades{
+    height: 80px;
+    width: 80px;
+    padding-top: 15px;
+}
+
+#medicamentos{
+    height: 80px;
+    width: 60px;
+    padding-top: 15px;
+}
+
+#estudios{
+    height: 80px;
+    width: 60px;
+    padding-top: 15px;
+}
+
+#agenda{
+    height: 80px;
+    width: 60px;
+    padding-top: 15px;
+}
+
+h2{
+    font-size: 26px;
+    padding-top: 40px;
+    padding-left: 25px;
+}
