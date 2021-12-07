@@ -90,7 +90,7 @@ public class ClienteServicio {
             if (fechaNacimiento == null) {
                 throw new MiExcepcion("La fecha de nacimiento no fue cargada");
             } else if (edad.getYears() < 15) {
-                throw new MiExcepcion("La edad minima para crear una cuenta es de 14 años");
+                throw new MiExcepcion("La edad minima para crear una cuenta es de 15 años");
             }
         } catch (MiExcepcion es) {
             throw es;
