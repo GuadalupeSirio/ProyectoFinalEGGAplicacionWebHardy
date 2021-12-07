@@ -9,6 +9,7 @@ import com.hardy.Hardy.repositorios.ClienteRepositorio;
 import com.hardy.Hardy.repositorios.EspecialidadRepositorio;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class AgendaServicio {
     private ClienteRepositorio clienteRepositorio;
 
     @Transactional
-    public void crearAgenda(LocalDate fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad, Cliente cliente) throws MiExcepcion, Exception {
+    public void crearAgenda(Date fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad, Cliente cliente) throws MiExcepcion, Exception {
         try {
 
             validarNombre(medico, "medico");
@@ -59,7 +60,7 @@ public class AgendaServicio {
         }
     }
 
-    public void modificar(Integer idAgenda, LocalDate fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad) throws MiExcepcion, Exception {
+    public void modificar(Integer idAgenda, Date fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad) throws MiExcepcion, Exception {
         try {
             validarNombre(medico, "medico");
             validarNombre(lugar, "lugar");
@@ -160,7 +161,7 @@ public class AgendaServicio {
         }
     }
 
-    public void validarFecha(LocalDate fecha) throws MiExcepcion {
+    public void validarFecha(Date fecha) throws MiExcepcion {
         try {
             if (fecha == null) {
                 throw new MiExcepcion("Ingrese una fecha");
@@ -168,9 +169,9 @@ public class AgendaServicio {
                 throw new MiExcepcion("El campo fecha no puede estar vacìo");
             }
 
-            LocalDate fechaActual = LocalDate.now();
+            Date fechaActual = new Date();
 
-            if (fecha.equals(fechaActual) || fecha.isBefore(fechaActual)) {
+            if (fecha.equals(fechaActual) || fecha.before(fechaActual)) {
                 throw new MiExcepcion("La fecha ingresada no es válida");
             }
         } catch (MiExcepcion ex) {
