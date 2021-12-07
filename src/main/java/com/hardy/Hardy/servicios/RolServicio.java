@@ -11,10 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class RolServicio {
 
     @Autowired
-    private RolRepositorio rr;
+    private RolRepositorio rolRepositorio;
 
     @Transactional(readOnly = true)
     public List<Rol> buscarTodos() {
-        return rr.findAll();
+        try {
+         return rolRepositorio.findAll();   
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

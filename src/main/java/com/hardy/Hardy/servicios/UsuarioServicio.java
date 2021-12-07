@@ -28,88 +28,104 @@ import org.springframework.web.multipart.MultipartFile;
 public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
-    private UsuarioRepositorio ur;
+    private UsuarioRepositorio usuarioRepositorio;
 
     @Autowired
-    private ClienteServicio cs;
+    private ClienteServicio clienteServicio;
 
     @Autowired
-    private RolRepositorio rr;
+    private RolRepositorio rolRepositorio;
 
     @Autowired
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    private EmailServicio es;
-
+    private EmailServicio emailServicio;
 
     @Transactional
     public void crearUsuario(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento, String correo, String clave, String clave2, MultipartFile imagen) throws Exception {
+        try {
+            validarCorreo(correo);
+            clienteServicio.validacionDni(dni);
+            validarClave(clave, clave2);
+            clienteServicio.validacionFechaNacimiento(fechaNacimiento);
+            clienteServicio.validacionNombre(nombre, "Nombre");
+            clienteServicio.validacionNombre(nombre, "Apellido");
 
-        validarCorreo(correo);
-        cs.validacionDni(dni);
-        validarClave(clave, clave2);
-        cs.validacionFechaNacimiento(fechaNacimiento);
-        cs.validacionNombre(nombre, "Nombre");
-        cs.validacionNombre(nombre, "Apellido");
-        
-        Usuario u = new Usuario();
-        u.setCorreo(correo);
-        u.setClave(encoder.encode(clave));
-        if (ur.findAll().isEmpty()) {  //Si la lista esta vacia, se crean y guardan los dos roles y se le asigna el rol de ADMIN al primer usuario. 
-            Rol r1 = new Rol("ADMIN");
-            Rol r2 = new Rol("CLIENTE");
-            rr.save(r1);
-            rr.save(r2);
-            u.setRol(r1); 
-        }else{
-            u.setRol(rr.buscarRol("CLIENTE")); //Luego todos los usuarios se setean con el rol de CLIENTE pero el admin puede modificarlo 
-        }       
-        u.setAlta(true);
+            Usuario usuario = new Usuario();
+            usuario.setCorreo(correo);
+            usuario.setClave(encoder.encode(clave));
+            if (usuarioRepositorio.findAll().isEmpty()) {  //Si la lista esta vacia, se crean y guardan los dos roles y se le asigna el rol de ADMIN al primer usuario. 
+                Rol r1 = new Rol("ADMIN");
+                Rol r2 = new Rol("CLIENTE");
+                rolRepositorio.save(r1);
+                rolRepositorio.save(r2);
+                usuario.setRol(r1);
+            } else {
+                usuario.setRol(rolRepositorio.buscarRol("CLIENTE")); //Luego todos los usuarios se setean con el rol de CLIENTE pero el admin puede modificarlo 
+            }
+            usuario.setAlta(true);
 
-        ur.save(u);
-        cs.guardarCliente(nombre, apellido, dni, fechaNacimiento, imagen, u);
-        
-        es.enviarThread(correo); //--> para enviar el correo de bienvenida
+            usuarioRepositorio.save(usuario);
+            clienteServicio.guardarCliente(nombre, apellido, dni, fechaNacimiento, imagen, usuario);
+
+            emailServicio.enviarThread(correo); //--> para enviar el correo de bienvenida   
+        } catch (Exception e) {
+            throw e;
+        }
     }
-    
+
     @Transactional
-    public void crearAdmin(String correo, String clave, String clave2) throws MiExcepcion{
-        validarCorreo(correo);
-        validarClave(clave, clave2);
-        Usuario u = new Usuario();
-        u.setCorreo(correo);
-        u.setClave(encoder.encode(clave));
-        ur.save(u);
-        
-       // es.enviarThread(correo);
+    public void crearAdmin(String correo, String clave, String clave2) throws MiExcepcion {
+        try {
+            validarCorreo(correo);
+            validarClave(clave, clave2);
+            Usuario usuario = new Usuario();
+            usuario.setCorreo(correo);
+            usuario.setClave(encoder.encode(clave));
+            usuarioRepositorio.save(usuario);
+
+            // emailServicio.enviarThread(correo);           
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
     @Transactional
     public void modificarCorreo(Integer id, String correo) throws Exception {
+        try {
+            Usuario usuario = buscarPorId(id);
 
-        Usuario u = buscarPorId(id);
-
-        if (!u.getCorreo().equals(correo)) {
-            validarCorreo(correo);
-            u.setCorreo(correo);
+            if (!usuario.getCorreo().equals(correo)) {
+                validarCorreo(correo);
+                usuario.setCorreo(correo);
+            }
+            usuarioRepositorio.save(usuario);
+        } catch (Exception e) {
+            throw e;
         }
-        ur.save(u);
+
     }
 
     @Transactional
-    public void modificarClave(Integer id, String clave, String clave2) throws MiExcepcion {  
-        Usuario u = buscarPorId(id);
+    public void modificarClave(Integer id, String clave, String clave2) throws MiExcepcion {
+        try {
+            Usuario usuario = buscarPorId(id);
 
-        validarClave(clave, clave2);
-        u.setClave(encoder.encode(clave));
+            validarClave(clave, clave2);
+            usuario.setClave(encoder.encode(clave));
 
-        ur.save(u);
+            usuarioRepositorio.save(usuario);
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-        Usuario usuario = ur.findByCorreo(correo).orElseThrow(() -> new UsernameNotFoundException("No existe un usuario asociado al correo ingresado"));
+        Usuario usuario = usuarioRepositorio.findByCorreo(correo).orElseThrow(() -> new UsernameNotFoundException("No existe un usuario asociado al correo ingresado"));
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre());
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -124,36 +140,56 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional(readOnly = true)
     public List<Usuario> buscarTodos() {
-        return ur.findAll();
+        try {
+            return usuarioRepositorio.findAll();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Transactional(readOnly = true)
     public Usuario buscarPorId(Integer id) {
-        Optional<Usuario> uOptional = ur.findById(id);
-        return uOptional.orElse(null);
+        try {
+            Optional<Usuario> uOptional = usuarioRepositorio.findById(id);
+            return uOptional.orElse(null);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Transactional(readOnly = true)
     public Usuario buscarPorCorreo(String correo) {
-        Optional<Usuario> uOptional = ur.findByCorreo(correo);
-        return uOptional.orElse(null);
+        try {
+            Optional<Usuario> uOptional = usuarioRepositorio.findByCorreo(correo);
+            return uOptional.orElse(null);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Transactional
     public void baja(Integer id) { //Habria que agregar la baja del CLIENTE cuando se da de baja el usuario. 
-        ur.baja(id, false);
+        try {
+            usuarioRepositorio.baja(id, false);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Transactional
     public void alta(Integer id) {
-        ur.baja(id, true);
+        try {
+            usuarioRepositorio.baja(id, true);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void validarCorreo(String correo) throws MiExcepcion {
         if (correo == null || correo.trim().isEmpty()) {
             throw new MiExcepcion("El correo no puede estar vacio.");
         }
-        if (ur.existsUsuarioByCorreo(correo)) {
+        if (usuarioRepositorio.existsUsuarioByCorreo(correo)) {
             throw new MiExcepcion("Ya existe un usuario asociado al correo ingresado");
         }
         if (!(correo.contains("@") && correo.contains(".com"))) {
