@@ -48,13 +48,13 @@ class PerfilControlador {
 
     // metodos POST
     @PostMapping("/guardar-usuario")
-    public RedirectView guardar( HttpServletRequest request,
+    public RedirectView guardar( RedirectAttributes attributes,HttpServletRequest request,
            Principal principal, @RequestParam String correo, @RequestParam String claveUno,
             @RequestParam String claveDos,
             @RequestParam String nombre,
             @RequestParam String apellido, @RequestParam Integer dni,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento,
-            @RequestParam MultipartFile imagen, RedirectAttributes attributes) throws Exception {
+            @RequestParam MultipartFile imagen) throws Exception {
         try {
             if (principal != null) {
                 return new RedirectView("/inicio");
