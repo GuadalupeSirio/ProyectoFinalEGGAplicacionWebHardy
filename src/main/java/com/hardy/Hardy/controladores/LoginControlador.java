@@ -1,6 +1,5 @@
 package com.hardy.Hardy.controladores;
 
-import com.hardy.Hardy.servicios.RolServicio;
 import com.hardy.Hardy.servicios.UsuarioServicio;
 import java.security.Principal;
 import java.util.Map;
@@ -20,10 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class LoginControlador {
 
     @Autowired
-    private UsuarioServicio us;
-
-    @Autowired
-    private RolServicio rs;
+    private UsuarioServicio usuarioServicio;
 
     @GetMapping("/login")
     public ModelAndView login(HttpServletRequest request, @RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
@@ -46,35 +42,32 @@ public class LoginControlador {
 
         return mv;
     }
-    
+
     @PostMapping("/modificar-correo")
-    public RedirectView modificarCorreo(@RequestParam Integer id, @RequestParam String correo, HttpSession session, RedirectAttributes a) {
+    public RedirectView modificarCorreo(@RequestParam Integer id, @RequestParam String correo, HttpSession session, RedirectAttributes attributes) {
         try {
-            us.modificarCorreo((Integer)session.getAttribute("idUsuario"), correo);  
-            a.addFlashAttribute("exito", "El usuario se modificó correctamente!");
+            usuarioServicio.modificarCorreo((Integer) session.getAttribute("idUsuario"), correo);
+            attributes.addFlashAttribute("exito", "El usuario se modificó correctamente!");
         } catch (Exception e) {
-            a.addFlashAttribute("error", e.getMessage());
+            attributes.addFlashAttribute("error-name", e.getMessage());
         }
         return new RedirectView("/");
     }
 
     @PostMapping("/clave")
-    public RedirectView modificarClave(@RequestParam String clave, @RequestParam String clave2, HttpSession session, RedirectAttributes a) {
+    public RedirectView modificarClave(@RequestParam String clave, @RequestParam String clave2, HttpSession session, RedirectAttributes attributes) {
         try {
-            us.modificarClave((Integer)session.getAttribute("idUsuario"), clave, clave2);
-            a.addFlashAttribute("exito", "La clave se modificó correctamente!");
+            usuarioServicio.modificarClave((Integer) session.getAttribute("idUsuario"), clave, clave2);
+            attributes.addFlashAttribute("exito", "La clave se modificó correctamente!");
         } catch (Exception e) {
-            a.addFlashAttribute("error", e.getMessage());
+            attributes.addFlashAttribute("error-name", e.getMessage());
         }
         return new RedirectView("/");
     }
 }
 
 //Me parece que no vamos a necesitar estos GET ya que estamos trabajando el front con modales, lo dejo por las dudas
-//No se si esta bien como obtengo el ID para que lo haga conn el que esta loggeado
-
-
-
+//No se si esta bien como obtengo el ID para que lo haga con el que esta loggeado
 //    @GetMapping("/modificar-correo/{id}")
 //    public ModelAndView editarUsuario(@PathVariable Integer id, HttpSession session) throws Exception {
 //        if (!session.getAttribute("id").equals(id)) {
@@ -87,7 +80,6 @@ public class LoginControlador {
 //        mav.addObject("action", "modificar-correo");
 //        return mav;
 //    }
-
 //    @GetMapping("/clave/{id}")
 //    public ModelAndView modificarClave(@PathVariable Integer id, HttpSession session) throws Exception {
 //        if (!session.getAttribute("id").equals(id)) { //Para que no pueda modificar la clave de nadie mas
