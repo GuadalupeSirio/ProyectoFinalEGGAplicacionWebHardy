@@ -82,7 +82,7 @@
         <div class="container mt-5 px-5 pt-3">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="../static/img/body-checkup.png" alt="" class="img-fluid d-none d-sm-block">
+                    <img th:src="@{/img/body-checkup.png}" alt="" class="img-fluid d-none d-sm-block">
                 </div>
 
                 <form  class="col-md-6 col-sm-12" th:action="@{/registro/__${action}__}" method="POST"

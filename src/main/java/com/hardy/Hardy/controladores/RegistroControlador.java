@@ -38,7 +38,7 @@ public class RegistroControlador {
 
     @GetMapping
     public ModelAndView mostrarRegistros() throws Exception {
-        ModelAndView mav = new ModelAndView("registros");
+        ModelAndView mav = new ModelAndView("registros-vista");
         mav.addObject("registros", registroServicio.obtenerRegistros());
         return mav;
     }
