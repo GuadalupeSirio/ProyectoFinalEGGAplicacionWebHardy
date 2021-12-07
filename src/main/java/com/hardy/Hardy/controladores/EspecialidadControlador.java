@@ -33,7 +33,7 @@ public class EspecialidadControlador {
         return mav;
     }
     
-    @GetMapping
+    @GetMapping("/guardar-especialidad")
     public ModelAndView crearEspecialidad(HttpServletRequest request) {
 
         ModelAndView mav = new ModelAndView("especialidad-formulario");
