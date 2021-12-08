@@ -9,6 +9,7 @@ import com.hardy.Hardy.repositorios.ClienteRepositorio;
 import com.hardy.Hardy.repositorios.EspecialidadRepositorio;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,12 @@ public class AgendaServicio {
     private ClienteRepositorio clienteRepositorio;
 
     @Transactional
-    public void crearAgenda(LocalDate fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad, Cliente cliente) throws MiExcepcion, Exception {
+    public void crearAgenda(Date fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad, Cliente cliente) throws MiExcepcion, Exception {
         try {
 
             validarNombre(medico, "medico");
             validarNombre(lugar, "lugar");
-            validarFecha(fecha);
+            //validarFecha(fecha);
             validarHora(hora);
             validarCliente(cliente);
 
@@ -64,11 +65,11 @@ public class AgendaServicio {
             validarNombre(medico, "medico");
             validarNombre(lugar, "lugar");
             validarFecha(fecha);
-            validarHora(hora);
+            validarHora(hora); 
 
             Agenda agenda = agendaRepositorio.findById(idAgenda).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
 
-            agenda.setFecha(fecha);
+            //agenda.setFecha(fecha);
             agenda.setHora(hora);
             agenda.setMedico(medico);
             agenda.setLugar(lugar);

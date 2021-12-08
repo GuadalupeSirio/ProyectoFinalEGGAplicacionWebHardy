@@ -35,10 +35,15 @@ public class RegistroControlador {
 
     @Autowired
     private EspecialidadServicio especialidadServicio;
-
+ 
     @GetMapping
-    public ModelAndView mostrarRegistros() throws Exception {
+    public ModelAndView mostrarRegistros(HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView("registros-vista");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error-name"));
+        } 
         mav.addObject("registros", registroServicio.obtenerRegistros());
         return mav;
     }
