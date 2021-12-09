@@ -34,7 +34,7 @@ public class AgendaServicio {
 
             validarNombre(medico, "medico");
             validarNombre(lugar, "lugar");
-            validarFecha(fecha);
+            //validarFecha(fecha);
             validarHora(hora);
             validarCliente(cliente);
 
@@ -65,11 +65,11 @@ public class AgendaServicio {
             validarNombre(medico, "medico");
             validarNombre(lugar, "lugar");
             validarFecha(fecha);
-            validarHora(hora);
+            validarHora(hora); 
 
             Agenda agenda = agendaRepositorio.findById(idAgenda).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
 
-            agenda.setFecha(fecha);
+            //agenda.setFecha(fecha);
             agenda.setHora(hora);
             agenda.setMedico(medico);
             agenda.setLugar(lugar);

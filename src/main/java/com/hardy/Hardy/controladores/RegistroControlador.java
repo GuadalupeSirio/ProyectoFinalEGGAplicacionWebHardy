@@ -5,12 +5,14 @@ import com.hardy.Hardy.entidades.Especialidad;
 import com.hardy.Hardy.entidades.Registro;
 import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.EspecialidadServicio;
+import com.hardy.Hardy.servicios.EstudioServicio;
 import com.hardy.Hardy.servicios.RegistroServicio;
 import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +38,18 @@ public class RegistroControlador {
     @Autowired
     private EspecialidadServicio especialidadServicio;
 
+    @Autowired
+    private EstudioServicio estudioServicio;
+
     @GetMapping
-    public ModelAndView mostrarRegistros() throws Exception {
+    public ModelAndView mostrarRegistros(HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView("registros-vista");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error-name"));
+        }
+        mav.addObject("estudios", estudioServicio.buscarTodos());
         mav.addObject("registros", registroServicio.obtenerRegistros());
         return mav;
     }
@@ -79,9 +90,9 @@ public class RegistroControlador {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardar(HttpSession sesion, HttpServletRequest request, RedirectAttributes attributes, 
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico, 
-            @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados, 
+    public RedirectView guardar(HttpSession sesion, HttpServletRequest request, RedirectAttributes attributes,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico,
+            @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados,
             @RequestParam Integer especialidad) throws Exception {
 
         try {

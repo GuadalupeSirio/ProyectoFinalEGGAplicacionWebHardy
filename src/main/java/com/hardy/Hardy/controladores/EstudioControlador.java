@@ -58,14 +58,16 @@ public class EstudioControlador {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardarEstudios(@RequestParam MultipartFile adjunto, @RequestParam("registro") Integer idRegistro, RedirectAttributes attributes) throws MiExcepcion, Exception {
+    public RedirectView guardarEstudios(@RequestParam MultipartFile adjunto, @RequestParam Integer idRegistro, 
+            @RequestParam String nombre, RedirectAttributes attributes) throws MiExcepcion, Exception {
         try {
-            estudioServicio.crearEstudio(idRegistro, adjunto);
+            estudioServicio.crearEstudio(idRegistro, adjunto, nombre);
             attributes.addFlashAttribute("exito-name", "El estudio ha sido guardado exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
+         return new RedirectView("/registro");
         }
-        return new RedirectView("/estudios");
+        return new RedirectView("/registro");
     }
 
     @PostMapping("/baja/{id}")
