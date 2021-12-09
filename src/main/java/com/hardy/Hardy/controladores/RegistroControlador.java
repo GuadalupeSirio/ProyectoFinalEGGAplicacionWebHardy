@@ -5,8 +5,9 @@ import com.hardy.Hardy.entidades.Especialidad;
 import com.hardy.Hardy.entidades.Registro;
 import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.EspecialidadServicio;
+import com.hardy.Hardy.servicios.FichaMedicaServicio;
 import com.hardy.Hardy.servicios.RegistroServicio;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,19 +36,27 @@ public class RegistroControlador {
 
     @Autowired
     private EspecialidadServicio especialidadServicio;
+    
+    @Autowired
+    private FichaMedicaServicio fichaMedicaServicio;
 
     @GetMapping
-    public ModelAndView mostrarRegistros() throws Exception {
+    public ModelAndView mostrarRegistros(HttpSession sesion) throws Exception {
         ModelAndView mav = new ModelAndView("registros-vista");
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
         mav.addObject("registros", registroServicio.obtenerRegistros());
         return mav;
     }
 
     @GetMapping("/crear-registro")
-    public ModelAndView crearRegistro(RedirectAttributes attributes, HttpServletRequest request) {
+    public ModelAndView crearRegistro(HttpSession sesion, RedirectAttributes attributes, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("registro-formulario");
+     
         try {
-
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+            
             Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
             if (flashMap != null) {
                 mav.addObject("exito", flashMap.get("exito-name"));
@@ -80,7 +89,7 @@ public class RegistroControlador {
 
     @PostMapping("/guardar")
     public RedirectView guardar(HttpSession sesion, HttpServletRequest request, RedirectAttributes attributes, 
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico, 
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico, 
             @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados, 
             @RequestParam Integer especialidad) throws Exception {
 
@@ -99,7 +108,7 @@ public class RegistroControlador {
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificar(HttpServletRequest request, RedirectAttributes attributes, @RequestParam Integer id, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico, @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados, @RequestParam Especialidad especialidad) throws Exception {
+    public RedirectView modificar(HttpServletRequest request, RedirectAttributes attributes, @RequestParam Integer id, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico, @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados, @RequestParam Especialidad especialidad) throws Exception {
 
         try {
 

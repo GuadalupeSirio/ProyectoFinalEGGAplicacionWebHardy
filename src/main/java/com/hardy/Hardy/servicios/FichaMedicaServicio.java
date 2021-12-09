@@ -189,4 +189,14 @@ public class FichaMedicaServicio {
             throw e;
         }
     }
+    
+    @Transactional(readOnly = true)
+    public FichaMedica obtenerFichamedicaIdCliente(Integer idCliente) throws Exception, MiExcepcion {
+        try {
+            FichaMedica fichaMedica = fichaMedicaRepositorio.obtenerFichaMedica(idCliente).orElse(null);
+            return fichaMedica;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
