@@ -101,4 +101,15 @@ public class EstudioServicio {
             throw e;
         }
     }
+    
+        @Transactional(readOnly = true)
+    public List<Estudio> estudioxRegistro(Integer id) throws Exception {
+        try {
+
+            return estudioRepositorio.estudioxRegistro(id);
+        } catch (Exception e) {
+            throw new Exception("Error al buscar por Id");
+        }
+    }
+
 }

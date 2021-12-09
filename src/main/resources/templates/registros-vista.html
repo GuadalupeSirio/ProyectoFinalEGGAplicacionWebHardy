@@ -204,7 +204,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="estudio : ${estudios}">
+                 <tr th:each="estudio : ${estudios}">
 
                   <td th:if="${estudio.registro.id} eq ${registro.id}" th:text="${estudio.nombre}">
                   </td>
@@ -215,13 +215,10 @@
                     <a th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}">Descarga</a>
                   </td>
 
-                </tr>
+                </tr> 
               </tbody>
             </table>
-            <!-- 
-            <ul th:each="estudio : ${estudios}">
-              <li  th:text="${estudio.nombre}"></li>
-            </ul> -->
+
 
           </div>
         </div>
