@@ -25,9 +25,10 @@ public class EstudioServicio {
     private ImagenServicio imagenServicio;
 
     @Transactional
-    public void crearEstudio(Integer idRegistro, MultipartFile adjunto) throws MiExcepcion, Exception {
+    public void crearEstudio(Integer idRegistro, MultipartFile adjunto, String nombre) throws MiExcepcion, Exception {
 
         try {
+            validacionNombre(nombre);
             Estudio estudio = new Estudio();
 
             estudio.setAlta(true);
@@ -35,7 +36,8 @@ public class EstudioServicio {
                 estudio.setAdjunto(imagenServicio.copiar(adjunto));
             }
             Registro registro = registroRepositorio.findById(idRegistro).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
-
+            
+            estudio.setNombre(nombre);
             estudio.setRegistro(registro);
             estudioRepositorio.save(estudio);
         } catch (MiExcepcion ex) {
@@ -79,6 +81,34 @@ public class EstudioServicio {
             throw ex;
         } catch (Exception e) {
             throw e;
+        }
+    }
+
+    public void validacionNombre(String nombre) throws Exception, MiExcepcion{
+        try {
+            if (nombre == null) {
+                throw new MiExcepcion("Nombre del archivo no fue cargado");
+            } 
+            if (nombre.trim().isEmpty()) {
+                throw new MiExcepcion("Nombre del archivo invalido, no puede estar en blanco");
+            } 
+            if (nombre.length() < 1) {
+                throw new MiExcepcion("Nombre del archivo invalido, debe tener mas de un carácter");
+            } 
+        } catch (MiExcepcion es) {
+            throw es;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+        @Transactional(readOnly = true)
+    public List<Estudio> estudioxRegistro(Integer id) throws Exception {
+        try {
+
+            return estudioRepositorio.estudioxRegistro(id);
+        } catch (Exception e) {
+            throw new Exception("Error al buscar por Id");
         }
     }
 

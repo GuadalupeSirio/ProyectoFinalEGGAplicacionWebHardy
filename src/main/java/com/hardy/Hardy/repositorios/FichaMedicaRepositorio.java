@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FichaMedicaRepositorio extends JpaRepository<FichaMedica, Integer> {
-
+    
     @Query("SELECT f FROM FichaMedica f WHERE f.cliente.id = :id")
     public Optional<FichaMedica> obtenerFichaMedica(@Param("id") Integer id);
+    
 }

@@ -18,6 +18,9 @@ public class Estudio {
     @Column(nullable = false)
     private Boolean alta;
 
+    @Column(nullable = false)
+    private String nombre;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Registro registro;
@@ -28,9 +31,10 @@ public class Estudio {
     public Estudio() {
     }
 
-    public Estudio(Integer id, Boolean alta, Registro registro, String adjunto) {
+    public Estudio(Integer id, Boolean alta, String nombre, Registro registro, String adjunto) {
         this.id = id;
         this.alta = alta;
+        this.nombre = nombre;
         this.registro = registro;
         this.adjunto = adjunto;
     }
@@ -51,6 +55,14 @@ public class Estudio {
         this.alta = alta;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Registro getRegistro() {
         return registro;
     }
@@ -66,5 +78,6 @@ public class Estudio {
     public void setAdjunto(String adjunto) {
         this.adjunto = adjunto;
     }
-    
+
+   
 }

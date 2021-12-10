@@ -90,7 +90,7 @@ public class AgendaControlador {
             throw e;
         }
     }
-
+ 
     @PostMapping("/guardar")
     public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico, @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad,
             HttpSession sesion, RedirectAttributes attributes) throws Exception, MiExcepcion {
