@@ -53,13 +53,13 @@ public class FichaMedicaControlador {
     // metodos POST
     @PostMapping("/guardar-ficha")
     public RedirectView guardarFicha(@RequestParam String grupoSanguineo, @RequestParam Double peso,
-            @RequestParam Integer altura, @RequestParam String enfermedades, LocalDate ultimoChequeo,
+            @RequestParam Integer altura, @RequestParam String enfermedades, 
             HttpSession sesion, RedirectAttributes attributes) throws Exception {
         try {
 
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
 
-            fichaMedicaServicio.guardarFichaMedica(grupoSanguineo, peso, altura, enfermedades, ultimoChequeo, cliente);
+            fichaMedicaServicio.guardarFichaMedica(grupoSanguineo, peso, altura, enfermedades, cliente);
 
             attributes.addFlashAttribute("exito-name", "Ficha medica registrada exitosamente");
         } catch (Exception e) {

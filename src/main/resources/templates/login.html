@@ -237,7 +237,7 @@
         <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
             <div class="modal-content fondomodal">
                 <div class="modal-header">
-                    <h5 class="modal-title " id="exampleModalLabel">Registrate a la plataforma</h5>
+                    <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Registrate a la plataforma</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
@@ -246,7 +246,7 @@
                             <div class="col-6 d-none d-xl-block">
                             <img th:src="@{/img/Doctor-cuate.svg}" alt="" class="img-fluid ">
                             </div>
-                            <div class="col-12 col-xl-6">
+                            <div class="col-12 col-xl-6 align-self-center">
                                 <form th:action="@{/perfil/guardar-usuario}" method="post"
                                     enctype="multipart/form-data">
                                     <div class="container">
@@ -321,14 +321,43 @@
     <!-- Modal login -->
 
     <div class="modal fade" id="ingreso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
+        <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+            <div class="modal-content fondomodal">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ingresa a la plataforma</h5>
+                    <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Ingresa a la plataforma</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/logincheck}" method="post">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 d-none d-md-block">
+                            <img th:src="@{/img/Doctor-cuate.svg}" alt="" class="img-fluid ">
+                            </div>
+                            <div class="col-12 col-md-6 align-self-center">
+                                <form th:action="@{/logincheck}" method="post">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class=" mb-3 col-12">
+                                                <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                                    aria-describedby="emailHelp" name="correo">
+
+                                            </div>
+
+                                            <div class=" mb-3 col-12">
+                                                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                                                <input type="password" class="form-control" id="exampleInputPassword1" name="clave">
+
+                                            </div>
+
+                                            <button type="submit" class="btn btn reg">Ingresar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <form th:action="@{/logincheck}" method="post">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
                             <input type="email" class="form-control" id="exampleInputEmail1"
@@ -341,7 +370,7 @@
                         </div>
 
                         <button type="submit" class="btn btn ing">Ingresar</button>
-                    </form>
+                    </form> -->
                 </div>
 
             </div>
