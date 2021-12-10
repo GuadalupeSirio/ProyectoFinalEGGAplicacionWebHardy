@@ -2,10 +2,13 @@ package com.hardy.Hardy.servicios;
 
 import com.hardy.Hardy.entidades.Cliente;
 import com.hardy.Hardy.entidades.Especialidad;
+import com.hardy.Hardy.entidades.FichaMedica;
 import com.hardy.Hardy.entidades.Registro;
 import com.hardy.Hardy.excepciones.MiExcepcion;
+import com.hardy.Hardy.repositorios.FichaMedicaRepositorio;
 import com.hardy.Hardy.repositorios.RegistroRepositorio;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,11 +24,21 @@ public class RegistroServicio {
 
     @Autowired
     private EspecialidadServicio especialidadServicio;
+    
+    @Autowired
+    private FichaMedicaServicio fichaMedicaServicio;
+    
+    @Autowired
+    private FichaMedicaRepositorio fichaMedicaRepositorio;
 
     @Transactional
-    public void crearRegistro(Date fecha, String medico, String cobertura, String lugar, String resultados, Integer especialidad, Cliente cliente) throws Exception, MiExcepcion {
+    public void crearRegistro(LocalDate fecha, String medico, String cobertura, String lugar, String resultados, Integer especialidad, Cliente cliente) throws Exception, MiExcepcion {
 
         try {
+            
+            if(fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId())==null){
+                throw new Exception("Tiene que cargar la ficha medica primero");
+            }
             validacionFecha(fecha);
             validacionMedico(medico, "Medico");
             validacionCobertura(cobertura, "Cobertura");
@@ -41,8 +54,14 @@ public class RegistroServicio {
             registro.setResultados(resultados);
             registro.setEspecialidad(especialidadServicio.obtenerEspecialidadId(especialidad));
             registro.setCliente(cliente);
-
+            
+            FichaMedica fichamedica=fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId());
+            if(fichamedica.getUltimoChequeo().isBefore(fecha) || fichamedica.getUltimoChequeo()==null){
+                fichamedica.setUltimoChequeo(fecha);
+                fichaMedicaRepositorio.save(fichamedica);
+            }
             registroRepositorio.save(registro);
+            
         } catch (MiExcepcion ex) {
             throw ex;
         } catch (Exception e) {
@@ -51,7 +70,7 @@ public class RegistroServicio {
     }
 
     @Transactional
-    public void modificarRegistro(Integer id, Date fecha, String medico, String cobertura, String lugar, String resultados) throws Exception, MiExcepcion {
+    public void modificarRegistro(Integer id, LocalDate fecha, String medico, String cobertura, String lugar, String resultados) throws Exception, MiExcepcion {
 
         try {
 
@@ -141,14 +160,14 @@ public class RegistroServicio {
         }
     }
 
-    public void validacionFecha(Date fecha) throws Exception, MiExcepcion {
+    public void validacionFecha(LocalDate fecha) throws Exception, MiExcepcion {
         try {
-            Date actual = new Date();
+            LocalDate actual = LocalDate.now();
  
             if (fecha == null) {
                 throw new MiExcepcion("La fecha no fue cargada");
             }
-            if (fecha.after(actual)) {
+            if (fecha.isAfter(actual)) {
                 throw new MiExcepcion("La fecha no puede ser posterior a la actual");
             }
         } catch (MiExcepcion es) {
