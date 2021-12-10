@@ -3,7 +3,6 @@ package com.hardy.Hardy.entidades;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,9 +20,9 @@ public class Agenda {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer id;
    
-   @Temporal(TemporalType.DATE)
+   //@Temporal(TemporalType.DATE)
    @Column(nullable = false)
-   private Date fecha;
+   private LocalDate fecha;
    
    @Column(nullable = false)
    private LocalTime hora;
@@ -56,11 +55,11 @@ public class Agenda {
         this.id = id;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
