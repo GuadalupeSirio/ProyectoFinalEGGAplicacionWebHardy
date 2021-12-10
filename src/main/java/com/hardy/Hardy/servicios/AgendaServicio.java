@@ -29,7 +29,7 @@ public class AgendaServicio {
     private ClienteRepositorio clienteRepositorio;
 
     @Transactional
-    public void crearAgenda(Date fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad, Cliente cliente) throws MiExcepcion, Exception {
+    public void crearAgenda(LocalDate fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad, Cliente cliente) throws MiExcepcion, Exception {
         try {
 
             validarNombre(medico, "medico");
