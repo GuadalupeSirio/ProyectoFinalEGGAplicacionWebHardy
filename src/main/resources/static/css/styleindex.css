@@ -12,7 +12,13 @@
 }
 
 .tarjeta{
-  background-color: rgb(247,246,254);
+  background-color: rgb(193,193,233);
+}
+.tituloblanco{
+  color:black;
+}
+.bordes{
+  border-radius: 2rem;
 }
 footer.foot, footer.foot a, footer.foot a:link, footer.foot a:visited{
   background-color: rgb(93,33,210);
