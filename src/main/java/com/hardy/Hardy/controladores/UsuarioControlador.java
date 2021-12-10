@@ -20,37 +20,46 @@ import org.springframework.web.servlet.view.RedirectView;
 @PreAuthorize("hasRole('ADMIN')") //Esta ruta que tiene todos los usuarios solo la podrian ver los ADMIN - tenemos que ver si lo dejamos asi o lo juntamos con CLIENTE
 @RequestMapping("/usuarios")
 public class UsuarioControlador {
-    
+
     @Autowired
     private UsuarioServicio us;
-    
+
     @GetMapping
     public ModelAndView mostrarUsuarios() {
         ModelAndView mav = new ModelAndView("usuarios");
         mav.addObject("usuarios", us.buscarTodos());
         return mav;
     }
-    
+
     @PostMapping("/crear-admin")
-    public RedirectView admin(HttpServletRequest request, Principal principal, @RequestParam String correo, @RequestParam String claveUno, @RequestParam String claveDos, RedirectAttributes a) throws MiExcepcion {
+    public RedirectView admin(HttpServletRequest request, Principal principal, @RequestParam String correo, @RequestParam String claveUno, @RequestParam String claveDos, RedirectAttributes attributes) throws MiExcepcion {
         try {
-          us.crearAdmin(correo, claveDos, claveDos); 
-          a.addFlashAttribute("exito", "El admin se registro correctamente!");
+            us.crearAdmin(correo, claveDos, claveDos);
+            attributes.addFlashAttribute("exito", "El admin se registro correctamente!");
         } catch (Exception e) {
-            a.addFlashAttribute("error", e.getMessage());
-        }        
-        return new RedirectView("/usuarios");      
-    }
-    
-    @PostMapping("/baja/{id}")  //Al darse de baja deberia darse de baja el CLIENTE -
-    public RedirectView baja(@PathVariable Integer id) {
-        us.baja(id);
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
         return new RedirectView("/usuarios");
     }
-    
+
+    @PostMapping("/baja/{id}")  //Al darse de baja deberia darse de baja el CLIENTE -
+    public RedirectView baja(@PathVariable Integer id, RedirectAttributes attributes) {
+        try {
+            us.baja(id);
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+
+        return new RedirectView("/usuarios");
+    }
+
     @PostMapping("/alta/{id}")
-    public RedirectView alta(@PathVariable Integer id) {
-        us.baja(id);
+    public RedirectView alta(@PathVariable Integer id, RedirectAttributes attributes) {
+        try {
+            us.alta(id);
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
         return new RedirectView("/usuarios");
     }
 }

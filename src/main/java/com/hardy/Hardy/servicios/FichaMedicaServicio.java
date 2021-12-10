@@ -20,13 +20,13 @@ public class FichaMedicaServicio {
     //Metodos CRUD
     @Transactional
     public void guardarFichaMedica(String grupoSanguineo, Double peso, Integer altura,
-            String enfermedades, LocalDate ultimoChequeo, Cliente cliente) throws Exception, MiExcepcion {
+            String enfermedades, Cliente cliente) throws Exception, MiExcepcion {
         try {
             validacionGrupoSanguineo(grupoSanguineo);
             validacionPeso(peso);
             validacionAltura(altura);
             //validacionEnfermedades(enfermedades);
-            validacionUltimoChequeo(ultimoChequeo);
+            //metodo ficha
             validacionCliente(cliente);
 
             FichaMedica fichaMedica = new FichaMedica();
@@ -184,6 +184,16 @@ public class FichaMedicaServicio {
     public FichaMedica obtenerFichamedicaId(Integer idCliente) throws Exception, MiExcepcion {
         try {
             FichaMedica fichaMedica = fichaMedicaRepositorio.obtenerFichaMedica(idCliente).orElseThrow(() -> new MiExcepcion("Error al obtener ficha medica"));
+            return fichaMedica;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    @Transactional(readOnly = true)
+    public FichaMedica obtenerFichamedicaIdCliente(Integer idCliente) throws Exception, MiExcepcion {
+        try {
+            FichaMedica fichaMedica = fichaMedicaRepositorio.obtenerFichaMedica(idCliente).orElse(null);
             return fichaMedica;
         } catch (Exception e) {
             throw e;

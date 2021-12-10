@@ -20,11 +20,10 @@ public class Agenda {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer id;
    
-   @Temporal(TemporalType.DATE)
+   //@Temporal(TemporalType.DATE)
    @Column(nullable = false)
    private LocalDate fecha;
    
-   @Temporal(TemporalType.TIME)
    @Column(nullable = false)
    private LocalTime hora;
    
