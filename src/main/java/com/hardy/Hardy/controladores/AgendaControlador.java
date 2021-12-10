@@ -6,8 +6,8 @@ import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.servicios.AgendaServicio;
 import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.EspecialidadServicio;
-import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -92,7 +92,7 @@ public class AgendaControlador {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico, @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad,
+    public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico, @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad,
             HttpSession sesion, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
@@ -105,7 +105,7 @@ public class AgendaControlador {
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificarAgendas(@RequestParam Integer idAgenda, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, @RequestParam String medico, @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad, RedirectAttributes attributes) throws Exception, MiExcepcion {
+    public RedirectView modificarAgendas(@RequestParam Integer idAgenda, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, @RequestParam String medico, @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             agendaServicio.modificar(idAgenda, fecha, hora, medico, lugar, idEspecialidad);
             attributes.addFlashAttribute("exito-name", "La agenda ha sido modificada exitosamente");
