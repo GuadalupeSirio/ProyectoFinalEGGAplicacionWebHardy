@@ -20,13 +20,13 @@ public class FichaMedicaServicio {
     //Metodos CRUD
     @Transactional
     public void guardarFichaMedica(String grupoSanguineo, Double peso, Integer altura,
-            String enfermedades, LocalDate ultimoChequeo, Cliente cliente) throws Exception, MiExcepcion {
+            String enfermedades, Cliente cliente) throws Exception, MiExcepcion {
         try {
             validacionGrupoSanguineo(grupoSanguineo);
             validacionPeso(peso);
             validacionAltura(altura);
             //validacionEnfermedades(enfermedades);
-            validacionUltimoChequeo(ultimoChequeo);
+            //metodo ficha
             validacionCliente(cliente);
 
             FichaMedica fichaMedica = new FichaMedica();

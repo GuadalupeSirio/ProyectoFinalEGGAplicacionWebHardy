@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,11 +41,20 @@ public class RegistroControlador {
     @Autowired
     private FichaMedicaServicio fichaMedicaServicio;
 
+    @Autowired
+    private EstudioServicio estudioServicio;
+
     @GetMapping
-    public ModelAndView mostrarRegistros(HttpSession sesion) throws Exception {
+    public ModelAndView mostrarRegistros(HttpSession sesion, HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView("registros-vista");
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
         mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error-name"));
+        }
+        mav.addObject("estudios", estudioServicio.buscarTodos());
         mav.addObject("registros", registroServicio.obtenerRegistros());
         return mav;
     }
