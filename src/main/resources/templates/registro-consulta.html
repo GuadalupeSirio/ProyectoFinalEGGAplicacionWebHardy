@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/css/style-registro-consulta.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <img
+          src="../static/img/logo-heart.png"
+          class="logo-navbar"
+          width="34"
+          height="28"
+        />
+        <a class="navbar-brand ms-1" href="#">Hardy</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav text-end">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Registros
+              </a>
+              <ul
+                class="dropdown-menu text-end text-lg-start"
+                aria-labelledby="navbarDropdown"
+              >
+                <li><a class="dropdown-item" href="#">Agregar</a></li>
+                <li><a class="dropdown-item" href="#">Historial</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Agenda
+              </a>
+              <ul
+                class="dropdown-menu text-end text-lg-start"
+                aria-labelledby="navbarDropdown"
+              >
+                <li><a class="dropdown-item" href="#">Agendar</a></li>
+                <li><a class="dropdown-item" href="#">Turnos</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Documentos</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Perfil
+              </a>
+              <ul
+                class="dropdown-menu text-end text-lg-start"
+                aria-labelledby="navbarDropdown"
+              >
+                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Cambiar e-mail</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Cambiar contraseña</a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="container-fluid mt-5 ">
+      <div class="row">
+        <div class="col-12 col-lg-5 ps-5 me-5 mt-2 mb-5 mb-lg-0">
+
+          <div class="row h-100 circulop lineas">
+
+            <div class="col-12">
+              <div class="row justify-content-center">
+                <div class="col-6 text-center py-3">
+                  <img
+                    class="img-fluid"
+                    src="/antonella/inventarios.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <h3>Gestioná tu historial médico</h3>
+              <img
+                class="img-fluid"
+                src="/antonella/ornament-separador.8f2aa8ff6e.svg"
+                alt=""
+              />
+            </div>
+
+            <div class="col-11 parrafo">
+              <p>
+                Visualizá tus registros según la especialidad, agregá nuevas
+                consultas médicas y especialidades
+              </p>
+            </div>
+
+            <div class="col-12 pb-5 pb-lg-0">
+              <button
+                type="button"
+                class="btn col-6 reg py-3"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Nuevo registro
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 ">
+          <div class="row overflow-auto altura">
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                
+                    <div class="col-12 py-5 circulo circulo1">
+                        <button class="nobtn">
+                            <img
+                            class="img-fluid"
+                            src="../static/img/Agregar.svg"
+                            alt=""
+                          />
+                        </button>
+                      </div>
+                      <div class="col-12 mt-2 text-center">
+                        <p>Agregar nueva</p>
+                      </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                    <div class="col-12 text-center py-5 circulo circulo2">
+                        <a class="text-decoration-none text-reset" href="#">
+                            <img class="img-fluid" src="../static/img/Cardiología.png" alt=""/>
+                        </a>
+                        
+                      </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Cardiología</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo3">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img class="img-fluid" src="../static/img/Cirugía general.png" alt="" />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Cirugía general</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo3">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img
+                        class="img-fluid"
+                        src="../static/img/Clinica médica.png"
+                        alt=""
+                      />
+                    </a>
+  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Clinica médica</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo1">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img
+                        class="img-fluid"
+                        src="../static/img/Dermatología.png"
+                        alt=""
+                      />
+                    </a>
+
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Dermatología</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo2">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img class="img-fluid" src="../static/img/Gastroenterología.png" alt="" />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Gastroentorología</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo1">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img class="img-fluid" src="../static/img/Ginecología.png" alt="" />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Ginecología</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo2">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img class="img-fluid" src="../static/img/Neurología.png" alt="" />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Neurología</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo3">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img
+                    class="img-fluid"
+                    src="../static/img/Nutrición.png"
+                    alt=""
+                  />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Nutrición</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo3">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img
+                    class="img-fluid"
+                    src="../static/img/Obstetricia.png"
+                    alt=""
+                  />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Obstetricia</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo3">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img class="img-fluid" src="../static/img/Oftalmología.png" alt="" />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Oftalmología</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo3">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img class="img-fluid" src="../static/img/Pediatría.png" alt="" />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Pedriatría</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center py-5 circulo circulo3">
+                    <a class="text-decoration-none text-reset" href="#">
+                        <img
+                    class="img-fluid"
+                    src="../static/img/Psiquiatría.png"
+                    alt=""
+                  />
+                    </a>
+                  
+                </div>
+                <div class="col-12 mt-2 text-center">
+                  <p>Psiquiatría</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="container-fluid mt-5 py-3">
+        <div class="row ">
+            
+           <h6 class="col-12 text-center"><span><img
+            src="../static/img/logo-heart.png"
+            class="logo-navbar"
+            width="34"
+            height="28"
+          /></span> Hardy</h6>
+        
+        </div>
+
+    </footer>
+  </body>
+</html>
