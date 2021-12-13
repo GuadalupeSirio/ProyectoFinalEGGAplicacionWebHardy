@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    
+
     <nav class="navbar navbar-expand-lg navbar-light" id="nav-bar">
         <div class="container-fluid">
             <img src="../static/img/logo-heart.png" alt="logo-heart" class="logo-navbar">
@@ -55,66 +55,64 @@
         <div class="container mt-5 px-5 pt-3">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="../static/img/Doctor-cuate.svg" alt="" class="img-fluid d-none d-sm-block">
+                    <!--<img src="../static/img/Doctor-cuate.svg" alt="" class="img-fluid d-none d-sm-block">-->
+
+                    <form action="" method="POST">
+                        <div class="form-floating mb-3 ms-5 mt-5">
+                            <input type="text" class="form-control border border-secondary" id="firstname"
+                                placeholder="nombre" required autofocus>
+                            <label for="firstname">Nombre</label>
+                        </div>
+
+                        <div class="form-floating mb-3 ms-5 mt-5">
+                            <input type="text" class="form-control border border-secondary" id="lastname"
+                                placeholder="apellido" required>
+                            <label for="lastname">Apellido</label>
+                        </div>
+
+                        <div class="form-floating mb-3 ms-5 mt-5">
+                            <input type="number" class="form-control border border-secondary" id="dni"
+                                placeholder="ocumento Nacional de Identidad" required>
+                            <label for="dni">Documento Nacional de Identidad</label>
+                        </div>
+
+                        <div class="form-floating mb-3 ms-5 mt-5">
+                            <input type="date" class="form-control border border-secondary" id="birthday"
+                                placeholder="fecha de nacimiento" required>
+                            <label for="birthday">Fecha de Nacimiento</label>
+                        </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
+                    <div class="form-floating mb-3 ms-5 mt-5">
+                        <input type="email" class="form-control border border-secondary" id="mail"
+                            placeholder="mail@example.com" required>
+                        <label for="mail">Mail</label>
+                    </div>
 
-                    <form action="" method="post">
+                    <div class="form-floating mb-3 ms-5 mt-5">
+                        <input type="password" class="form-control border border-secondary" id="password"
+                            placeholder="password" required>
+                        <label for="password">Contraseña</label>
+                    </div>
 
-                            <div class="form-floating mb-3 ms-5 mt-5">
-                                <input type="text" class="form-control border border-secondary" id="firstname"
-                                    placeholder="nombre" required autofocus>
-                                <label for="firstname">Nombre</label>
-                            </div>
-                            
-                            <div class="form-floating mb-3 ms-5 mt-5">
-                                <input type="text" class="form-control border border-secondary" id="lastname"
-                                    placeholder="apellido" required>
-                                <label for="lastname">Apellido</label>
-                            </div>
+                    <div class="form-floating mb-3 ms-5 mt-5">
+                        <input type="password" class="form-control border border-secondary" id="repeat-password"
+                            placeholder="Repetir la contraseña" required>
+                        <label for="repeat-password">Repetir Contraseña</label>
+                    </div>
 
-                            <div class="form-floating mb-3 ms-5 mt-5">
-                                <input type="number" class="form-control border border-secondary" id="dni"
-                                    placeholder="ocumento Nacional de Identidad" required>
-                                <label for="dni">Documento Nacional de Identidad</label>
-                            </div>
+                    <div class="mb-3 ms-5 mt-5">
+                        <label for="formFile" class="form-label">Cargar imagen de perfil</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
 
-                            <div class="form-floating mb-3 ms-5 mt-5">
-                                <input type="date" class="form-control border border-secondary" id="birthday"
-                                    placeholder="fecha de nacimiento" required>
-                                <label for="birthday">Fecha de Nacimiento</label>
-                            </div>
-
-                            <div class="form-floating mb-3 ms-5 mt-5">
-                                <input type="email" class="form-control border border-secondary" id="mail"
-                                    placeholder="mail@example.com" required>
-                                <label for="mail">Mail</label>
-                            </div>
-
-                            <div class="form-floating mb-3 ms-5 mt-5">
-                                <input type="password" class="form-control border border-secondary" id="password"
-                                    placeholder="password" required>
-                                <label for="password">Contraseña</label>
-                            </div>
-
-                            <div class="form-floating mb-3 ms-5 mt-5">
-                                <input type="password" class="form-control border border-secondary" id="repeat-password"
-                                    placeholder="Repetir la contraseña" required>
-                                <label for="repeat-password">Repetir Contraseña</label>
-                            </div>
-
-                            <div class="mb-3 ms-5 mt-5">
-                                <label for="formFile" class="form-label">Cargar imagen de perfil</label>
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-
-                            <!--
+                    <!--
                             <div class="alert alert-danger mb-4 ms-5" role="alert">
                                 Mensaje de alerta
                             </div>
                             -->
 
-                             <input type="submit" class="btn btn-lg ms-5">
+                    <input type="submit" class="btn btn-lg ms-5">
 
                     </form>
 
@@ -131,7 +129,7 @@
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+        </script>
 
 </body>
 
