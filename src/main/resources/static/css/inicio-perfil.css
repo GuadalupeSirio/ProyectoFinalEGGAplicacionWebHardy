@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #89c0ff #b9d9fd;
+}
+
+
+/* Background*/
+
+
+body {
+    background: rgb(197, 200, 254);
+    background: linear-gradient(180deg, rgb(164, 187, 252) 1%, rgb(194, 235, 253) 35%, rgba(255, 255, 255, 1) 100%);
+    background-repeat: no-repeat;
+} 
+
+
+/* 
+body {
+    font-family: sans-serif;
+    background-image: url("../img/Group6.png");
+    width: 100%;
+    top: 0;
+    position: absolute;
+    left: 0px;
+    background-repeat: no-repeat;
+
+
+} */
+
+
+/*------NAVBAR------*/
+
+#nav-bar {
+    top: 0;
+    z-index: 10;
+    padding-left: 30px;
+}
+
+/*Titulo*/
+.navbar-brand {
+    font-family: 'Poppins',
+        sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.logo-navbar {
+    width: 40px;
+}
+
+
+/*Fonts links*/
+.navbar-nav {
+    padding-right: 40px;
+    font-family: 'Roboto',
+        sans-serif;
+    font-size: 18px;
+
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+    padding: 0 15px;
+}
+
+/*Titulo pag*/
+.titulo {
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: black;
+}
+
+
+
+/*Flecha footer*/
+.arrow {
+    color: rgb(126, 138, 252);
+}
+
+
+
+.turnos {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+    overflow: hidden;
+    color: #000;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(to right bottom rgba(225, 225, 255, 0.7), rgba(225, 225, 255, 0.3));
+}
+
+/*otro color*/
+.turnos {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+    overflow: hidden;
+    color: #000;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.774);
+    background: linear-gradient(to right bottom rgba(225, 225, 255, 0.795), rgba(225, 225, 255, 0.61));
+}
+
+
+
+.btn {
+    background-image: linear-gradient(to right, #6190E8 0%, #949bfd 51%, #6190E8 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: black;
+    box-shadow: 0 0 20px rgb(238, 238, 238);
+    border-radius: 10px;
+    display: block;
+}
+
+.btn:hover {
+    background-position: right center;
+    color: black;
+    text-decoration: none;
+}
+
+
+.boton-sesion {
+    background-image: linear-gradient(to right, #6190E8 0%, #8890fc 51%, #83aeff 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    box-shadow: 0 0 5px rgb(0, 0, 0);
+    background-size: 200% auto;
+    color: black;
+    border-radius: 10px;
+    display: block;
+}
+
+.boton-sesion:hover {
+    background-position: right center;
+    color: black;
+    text-decoration: none;
+}
+
+
+.header {
+    margin: 70px;
+    padding: 10px;
+    width: 800px;
+    height: 300px;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+    border-radius: 20px;
+    display: flex;
+}
+
+.titulo,
+.info p {
+
+    margin: 20px;
+    width: 400px;
+
+}
+
+.boton-sesion {
+    margin-left: 20px;
+}
+
+
+
+.imagen {
+    width: 300px;
+
+    top: 150px;
+    left: 600px;
+}
+
+/*-------------------------------------Glass----------------------------------------------------------*/
+
+.glass {
+    background: white;
+    min-height: 90vh;
+    width: 95%;
+    background: linear-gradient(to right bottom,
+            rgba(255, 255, 255, 0.7),
+            rgba(255, 255, 255, 0.3));
+
+
+    border-radius: 2rem;
+    z-index: 2;
+    backdrop-filter: blur(2rem);
+    margin-top: 3rem;
+    display: flex;
+}
+
+.perfil {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 2rem 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(to right bottom,
+            rgba(128, 161, 253, 0.74),
+            rgba(106, 141, 255, 0.3));
+    border-radius: 2rem;
+}
+
+.info-web {
+    flex: 2;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: none;
+    margin-top: 0;
+}
+
+.user img {
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid rgb(126, 105, 248);
+    border-radius: 10px;
+}
+
+.user h2 {
+    font-size: 20px;
+    font-weight: 500;
+    opacity: .8;
+    margin-top: 10px;
+}
+
+.user p {
+    font-size: 15px;
+    opacity: 0.8;
+    margin: 3px;
+}
+
+.ficha-med {
+    display: inline-flex;
+    margin-bottom: 2rem;
+    width: 400px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
+}
+
+.ficha-med .cards {
+    background: linear-gradient(to right bottom,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.5));
+    border-radius: 1rem;
+    margin: 1rem .3rem;
+    padding: .5rem;
+    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.ficha-med-img {
+    width: 40px;
+    padding: 0 3px;
+    padding-top: .5rem;
+}
+
+.cards h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.cards p {
+    font-size: 12px;
+}
+
+/*----------------------------*/
+
+.turno-card {
+    display: flex;
+    background: linear-gradient(to left top,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.5));
+    border-radius: 1rem;
+    margin: 0;
+    padding: .5rem 2rem;
+    margin-bottom: 15px;
+    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+
+    width: 300px;
+}
+
+.turno-card img {
+    width: 50px;
+    height: 50px;
+    margin: .5rem .5rem;
+    padding: 0;
+}
+
+
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-info h2 {
+    margin-top: 10px;
+}
+
+.card-info h2, .card-info p {
+    font-size: 16px;
+    margin-left: 10px;
+    
+}
+
+.header-web {
+    display: flex;
+    margin: 0;
+}
+
+.header-web h2{
+    font-weight: 600;
+    margin-left: 30px;
+}
+
+.header-web img {
+    width: 300px;
+    margin: 0;
+}
