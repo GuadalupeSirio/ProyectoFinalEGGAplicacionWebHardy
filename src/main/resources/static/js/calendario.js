@@ -60,14 +60,14 @@ let renderCalendar = () => {
     let dias = "";
 
     
-    //funcion para dias previos del mes anterior !!REVISAR!!!
+    
     for (let x = primerDiaMes; x > 0; x--) {
         dias += `<div class="dias-previos">${previoUltimoDia - x + 1}</div>`
         
     }
 
 
-    //si el dia coincide con el actual se agrega la class hoy, si no se asignan los numeros de los dias
+    
     for (let i = 1; i <= totalDiasMes; i++) {
         
         if (i == new Date().getDate() && fechaActual.getMonth() == new Date().getMonth() && fechaActual.getFullYear() == new Date().getFullYear()) {
