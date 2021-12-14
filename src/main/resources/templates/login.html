@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#extras">Extras</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contacto">Contacto</a>
+                        </li>
 
                     </ul>
 
@@ -116,7 +119,7 @@
         <div class="row my-5 py-5">
             <div class="col-6 col-12 col-md-12 col-lg-6">
 
-                <img th:src= "@{/img/consultancy.png}" class="img-fluid">
+                <img th:src="@{/img/consultancy.png}" class="img-fluid">
 
 
             </div>
@@ -208,52 +211,54 @@
     </section> -->
 
     <!-- Quinta pantalla -->
-    
-    <section class="container my-5 py-5">
+
+    <section class="container my-5 py-5" id="contacto">
         <div class="row py-5">
-    
+
             <div class="col-6">
                 <div class="row">
-    
+
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-    
-                                        <p class="contactotitulo"><span><img th:src="@{/img/mail.png}" alt=""></span> E-mail
+
+                                        <p class="contactotitulo"><span><img th:src="@{/img/mail.png}" alt=""></span>
+                                            E-mail
                                         </p>
                                         <p class="contactonormal">asistente.hardy@gmail.com</p>
                                     </div>
                                     <div class="col-6">
-                                        <p class="contactotitulo"><span><img th:src="@{/img/location.png}" alt=""></span>
+                                        <p class="contactotitulo"><span><img th:src="@{/img/location.png}"
+                                                    alt=""></span>
                                             Dirección</p>
                                         <p class="contactonormal">Barcala 643 Mendoza, Argentina</p>
                                     </div>
                                 </div>
-    
-    
+
+
                             </div>
-    
+
                         </div>
                     </div>
                     <div class="col-12">
                         <img th:src="@{/img/contacto.svg}" alt="">
                     </div>
-    
+
                 </div>
-    
+
             </div>
-    
+
             <div class="col-5 border offset-1 p-5 fondocontacto">
-    
+
                 <h3 class="text-center contactonormal mb-4">Contacto</h3>
-    
+
                 <form>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nombre completo</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    
+
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Correo electronico</label>
@@ -270,24 +275,24 @@
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
-    
+
                 </form>
-    
+
             </div>
         </div>
-    
+
     </section>
 
     <!-- Footer -->
 
     <footer class="container-fluid mt-5 py-3">
         <div class="row ">
-    
+
             <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
                         height="28" /></span> Hardy</h6>
-    
+
         </div>
-    
+
     </footer>
 
 
@@ -306,7 +311,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-6 d-none d-xl-block">
-                            <img th:src="@{/img/Doctor-cuate.svg}" alt="" class="img-fluid ">
+                                <img th:src="@{/img/Doctor-cuate.svg}" alt="" class="img-fluid ">
                             </div>
                             <div class="col-12 col-xl-6 align-self-center">
                                 <form th:action="@{/perfil/guardar-usuario}" method="post"
@@ -393,14 +398,15 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-6 d-none d-md-block">
-                            <img th:src="@{/img/Doctor-cuate.svg}" alt="" class="img-fluid ">
+                                <img th:src="@{/img/Doctor-cuate.svg}" alt="" class="img-fluid ">
                             </div>
                             <div class="col-12 col-md-6 align-self-center">
                                 <form th:action="@{/logincheck}" method="post">
                                     <div class="container">
                                         <div class="row">
                                             <div class=" mb-3 col-12">
-                                                <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+                                                <label for="exampleInputEmail1" class="form-label">Correo
+                                                    electronico</label>
                                                 <input type="email" class="form-control" id="exampleInputEmail1"
                                                     aria-describedby="emailHelp" name="correo">
 
@@ -408,7 +414,8 @@
 
                                             <div class=" mb-3 col-12">
                                                 <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1" name="clave">
+                                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                                    name="clave">
 
                                             </div>
 

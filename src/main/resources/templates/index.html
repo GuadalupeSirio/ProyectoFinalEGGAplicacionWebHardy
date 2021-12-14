@@ -32,7 +32,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Agenda</a>
+          <a class="nav-link" th:href="@{/agenda}">Agenda</a>
         </li>
 
         <li class="nav-item">
@@ -60,6 +60,20 @@
     </div>
   </div>
 </nav>
+  <div class="row justify-content-center">
+    <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+      th:if="${exito != null}">
+      <strong th:text="${exito}"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  
+    <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
+      th:if="${error != null}">
+      <strong th:text="${error}"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  
+  </div>
 
       <!-- Primer pantalla -->
 
@@ -83,7 +97,7 @@
               <div class="row justify-content-evenly ">
                 
                 <div class="col-4">
-                  <a href="" class="text-decoration-none text-reset">
+                  <a th:href="@{/registro}" class="text-decoration-none text-reset">
                     <div class="card h-100 card1 shadow bg-body rounded bordes">
                       <div class="row justify-content-center">
                         <div class="col-8">
@@ -105,7 +119,7 @@
                 </div>
 
                 <div class="col-4">
-                  <a href="" class="text-decoration-none text-reset">
+                  <a th:href="@{/agenda}" class="text-decoration-none text-reset">
                     <div class="card h-100 card1 shadow bg-body rounded">
                       <div class="row justify-content-center">
                         <div class="col-8">

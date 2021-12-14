@@ -55,7 +55,7 @@ public class RegistroControlador {
             mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error-name"));
         }
-        mav.addObject("estudios", estudioServicio.buscarTodos());
+        
         mav.addObject("especialidades", especialidadServicio.obtenerEspeciaidades());
         return mav;
     }
@@ -73,6 +73,7 @@ public class RegistroControlador {
         mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
         
         mav.addObject("tipo", "Historial medico");
+        mav.addObject("estudios", estudioServicio.buscarTodosxCliente(cliente.getId()));
         mav.addObject("registros", registroServicio.obtenerRegistroCliente(cliente.getId()));
         return mav;
     }

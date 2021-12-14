@@ -29,7 +29,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link " href="#">Agenda</a>
+            <a class="nav-link "th:href="@{/agenda}">Agenda</a>
           </li>
 
           <li class="nav-item">
@@ -59,6 +59,20 @@
       </div>
     </div>
   </nav>
+    <div class="row justify-content-center">
+      <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+        th:if="${exito != null}">
+        <strong th:text="${exito}"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    
+      <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
+        th:if="${error != null}">
+        <strong th:text="${error}"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    
+    </div>
 
   <section class="container-fluid mt-5 ">
     <div class="row">
