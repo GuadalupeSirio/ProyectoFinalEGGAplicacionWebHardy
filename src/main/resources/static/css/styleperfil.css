@@ -10,20 +10,20 @@
 
 } */
 .cabeza{
-    background-color:rgb(252,241,255);
+    background-color:rgb(157,184,254);
     border-radius: 15px;
 }
 .ficha{
-    background-color:rgb(241,243,255);
+    background-color:rgb(222,232,254);
     border-radius: 0px 15px 15px 0px;
 }
 .datos{
-    background-color:rgb(247,244,253);
+    background-color:rgb(229,246,254);
     border-radius: 15px 0px 0px 15px;
    
 }
 .reg{
-    background-color:rgb(183,195,255);
+    background-color:rgb(215,227,254);
     color:black;
     /* font-weight: bold; */
     border: 2px solid #8BE9E1;
@@ -38,7 +38,7 @@
       font-size: 1.1rem;
   }
   .bordes{
-    border-bottom: 6px solid rgb(232,234,237);
+    border-bottom: 1px solid black;
   }
 
   footer{
@@ -50,3 +50,37 @@
 .vr{
    height: 10em;
   }
+  
+  .ficha-med {
+    display: inline-flex;
+    margin-bottom: 2rem;
+    width: 400px;
+    height: 150px;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 0 1rem;
+}
+
+.ficha-med .cards {
+    background: linear-gradient(to right bottom,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.5));
+    border-radius: 1rem;
+    margin: 1rem .3rem;
+    padding: .5rem;
+    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+    /* justify-content: space-between;
+    align-items: center; */
+
+}
+
+.ficha-med-img {
+    width: 40px;
+    padding: 0 3px;
+    padding-top: .5rem;
+}
+.cards h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+}
