@@ -24,10 +24,10 @@ public class RegistroServicio {
 
     @Autowired
     private EspecialidadServicio especialidadServicio;
-    
+
     @Autowired
     private FichaMedicaServicio fichaMedicaServicio;
-    
+
     @Autowired
     private FichaMedicaRepositorio fichaMedicaRepositorio;
 
@@ -35,15 +35,14 @@ public class RegistroServicio {
     public void crearRegistro(LocalDate fecha, String medico, String cobertura, String lugar, String resultados, Integer especialidad, Cliente cliente) throws Exception, MiExcepcion {
 
         try {
-            
-            if(fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId())==null){
+
+            if (fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()) == null) {
                 throw new Exception("Tiene que cargar la ficha medica primero");
             }
             validacionFecha(fecha);
             validacionMedico(medico, "Medico");
             validacionCobertura(cobertura, "Cobertura");
             validacionLugar(lugar, "Lugar");
-            
 
             Registro registro = new Registro();
 
@@ -54,14 +53,14 @@ public class RegistroServicio {
             registro.setResultados(resultados);
             registro.setEspecialidad(especialidadServicio.obtenerEspecialidadId(especialidad));
             registro.setCliente(cliente);
-            
-            FichaMedica fichamedica=fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId());
-            if(fichamedica.getUltimoChequeo().isBefore(fecha) || fichamedica.getUltimoChequeo()==null){
+
+            FichaMedica fichamedica = fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId());
+            if (fichamedica.getUltimoChequeo().isBefore(fecha) || fichamedica.getUltimoChequeo() == null) {
                 fichamedica.setUltimoChequeo(fecha);
                 fichaMedicaRepositorio.save(fichamedica);
             }
             registroRepositorio.save(registro);
-            
+
         } catch (MiExcepcion ex) {
             throw ex;
         } catch (Exception e) {
@@ -117,7 +116,16 @@ public class RegistroServicio {
         }
     }
 
-    
+    @Transactional(readOnly = true)
+    public List<Registro> obtenerRegistroCliente(Integer clienteId) throws Exception {
+        try {
+            List<Registro> registro = registroRepositorio.obtenerRegistroCliente(clienteId);
+            return registro;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public void validacionMedico(String medico, String tipo) throws Exception, MiExcepcion {
         try {
             if (medico == null) {
@@ -163,7 +171,7 @@ public class RegistroServicio {
     public void validacionFecha(LocalDate fecha) throws Exception, MiExcepcion {
         try {
             LocalDate actual = LocalDate.now();
- 
+
             if (fecha == null) {
                 throw new MiExcepcion("La fecha no fue cargada");
             }

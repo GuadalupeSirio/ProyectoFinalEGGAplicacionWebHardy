@@ -5,6 +5,7 @@ import com.hardy.Hardy.entidades.Especialidad;
 import com.hardy.Hardy.entidades.Registro;
 import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.EspecialidadServicio;
+import com.hardy.Hardy.servicios.EstudioServicio;
 import com.hardy.Hardy.servicios.FichaMedicaServicio;
 import com.hardy.Hardy.servicios.RegistroServicio;
 import java.time.LocalDate;
@@ -37,7 +38,7 @@ public class RegistroControlador {
 
     @Autowired
     private EspecialidadServicio especialidadServicio;
-    
+
     @Autowired
     private FichaMedicaServicio fichaMedicaServicio;
 
@@ -45,8 +46,8 @@ public class RegistroControlador {
     private EstudioServicio estudioServicio;
 
     @GetMapping
-    public ModelAndView mostrarRegistros(HttpSession sesion, HttpServletRequest request) throws Exception {
-        ModelAndView mav = new ModelAndView("registros-vista");
+    public ModelAndView mostrarRegistro(HttpSession sesion, HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView("registro-vista");
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
         mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
@@ -55,18 +56,35 @@ public class RegistroControlador {
             mav.addObject("error", flashMap.get("error-name"));
         }
         mav.addObject("estudios", estudioServicio.buscarTodos());
-        mav.addObject("registros", registroServicio.obtenerRegistros());
+        mav.addObject("especialidades", especialidadServicio.obtenerEspeciaidades());
+        return mav;
+    }
+
+    @GetMapping("/ver-registros")
+    public ModelAndView mostrarRegistros(HttpSession sesion, HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView("registros-consulta");
+        
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error-name"));
+        }
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+        
+        mav.addObject("tipo", "Historial medico");
+        mav.addObject("registros", registroServicio.obtenerRegistroCliente(cliente.getId()));
         return mav;
     }
 
     @GetMapping("/crear-registro")
     public ModelAndView crearRegistro(HttpSession sesion, RedirectAttributes attributes, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("registro-formulario");
-     
+
         try {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
             mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
-            
+
             Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
             if (flashMap != null) {
                 mav.addObject("exito", flashMap.get("exito-name"));
@@ -98,9 +116,9 @@ public class RegistroControlador {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardar(HttpSession sesion, HttpServletRequest request, RedirectAttributes attributes, 
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico, 
-            @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados, 
+    public RedirectView guardar(HttpSession sesion, HttpServletRequest request, RedirectAttributes attributes,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico,
+            @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados,
             @RequestParam Integer especialidad) throws Exception {
 
         try {
@@ -110,7 +128,7 @@ public class RegistroControlador {
 
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
-            return new RedirectView("/registro/crear-registro");
+            return new RedirectView("/registro");
         }
 
         return new RedirectView("/registro");
