@@ -17,171 +17,126 @@
   </head>
   <body>
 
-    <!-- Navbar -->
+    <!--NAVBAR-->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
+      <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav text-end">
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
-        <img
-          src="../static/img/logo-heart.png"
-          class="logo-navbar"
-          width="34"
-          height="28"
-        />
-        <a class="navbar-brand ms-1" href="#">Hardy</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarSupportedContent"
-        >
-          <ul class="navbar-nav text-end">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Registros
-              </a>
-              <ul
-                class="dropdown-menu text-end text-lg-start"
-                aria-labelledby="navbarDropdown"
-              >
-                <li><a class="dropdown-item" href="#">Agregar</a></li>
-                <li><a class="dropdown-item" href="#">Historial</a></li>
-              </ul>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link " th:href="@{/registro}">Registros</a></li>
 
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Agenda
-              </a>
-              <ul
-                class="dropdown-menu text-end text-lg-start"
-                aria-labelledby="navbarDropdown"
-              >
-                <li><a class="dropdown-item" href="#">Agendar</a></li>
-                <li><a class="dropdown-item" href="#">Turnos</a></li>
-              </ul>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/agenda}">Agenda</a>
+          </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="#">Documentos</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Documentos</a>
+          </li>
 
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Perfil
-              </a>
-              <ul
-                class="dropdown-menu text-end text-lg-start"
-                aria-labelledby="navbarDropdown"
-              >
-                <li><a class="dropdown-item" href="#">Perfil</a></li>
-                <li>
-                  <a class="dropdown-item" href="#"
-                    >Cambiar e-mail</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Cambiar contraseña</a>
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Perfil
+            </a>
+            <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
+              <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
       </div>
-    </nav>
+    </div>
+  </nav>
 
     <!-- Cabecera -->
 
     <section class="container cabeza mt-5 py-4 shadow">
       <div class="row">
 
-            <div class="col-12 col-md-2">
-              <div class="row">
-                <div class="col-12 text-center">
+<div class="col-12 col-lg-7 col-xl-6">
+  <div class="row">
+
+
+            <div class="col-12 col-lg-5 align-self-center">
+              <div class="row text-center">
+                <div class="col-12">
                   <img class="img-fluid" src="../static/img/profile-1-1.png" alt="" />
                 </div>
               </div>
             </div>
     
-            <div class="col-12 col-md-4">
-              <div class="row justify-content-start">
-                <p class="col-12 nombre ">Tomas Felton</p>
+            <div class="col-12 col-lg-6">
+              <div class="row">
                 
                 <div class="ficha-med col-12">
-                  
-                      <div class="cards">
-                        <img src="../static/img/time.svg" alt="" class="ficha-med-img">
+                  <div class="row justify-content-around"> 
+                    <p class="col-12 col-lg-10 nombre text-center">Tomas Felton</p>
+
+                      <div class="cards col-3 text-center">
+                        <img src="../static/img/time.svg" alt="" class="ficha-med-img img-fluid">
                         <h3>34 años</h3>
                       </div>
     
-                      <div class="cards">
-                          <img src="../static/img/measuring-tape.png" alt="" class="ficha-med-img">
+                      <div class="cards col-3 text-center">
+                          <img src="../static/img/measuring-tape.png" alt="" class="ficha-med-img img-fluid">
                           <h3>170 cm</h3>
     
                       </div>
     
-                      <div class="cards">
-                        <img src="../static/img/weight-scale.png" alt="" class="ficha-med-img">
+                      <div class="cards col-3 text-center">
+                        <img src="../static/img/weight-scale.png" alt="" class="ficha-med-img img-fluid">
                         <h3>65 Kg</h3>
                     
                   </div>
-                  
+                </div>
                   
               </div>
               </div>
             </div>
-           
+          </div>
+        </div>
 
 
+<div class="col-12 col-lg-5 col-xl-6 border-start">
+  <div class="row align-items-center pt-4">
 
-            <div class="col-12 col-md-3 border-start">
-              <div class="row g-3">
+            <div class="col-4">
+              <div class="row gy-3 ">
                 <p class="col-12 text-center">Ultima consulta: 20/09/2021</p>
                 <p class="col-12 text-center">Enfermadades: No</p>
               </div>
             </div>
     
-            <div class="col-12 col-md-2">
-              <div class="row g-3">
-                <button type="button" class="btn  col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Modificar perfil</button>
+            <div class="col-8 ">
+              <div class="row gy-3 justify-content-center ">
+                <div class="col-7">
+                  <button type="button" class="btn  col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">Modificar perfil</button>
+                </div>
+                <div class="col-7">
+                  <button type="button" class="btn  col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">Modificar ficha</button>
+                </div>
 
-                                <button type="button" class="btn  col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Modificar ficha</button>
+                                
               </div>
             </div>
-
+          </div>
+        </div>
 
       </div>
 
@@ -248,7 +203,7 @@
                             <div class="row  bordes">
                                 <p class="col-4">Ultima consulta</p>
                                 <p class="col-4">20/09/2021</p>
-                                <a href="#" class="col-4 text-center">Cardiologia</a>
+                                <a href="#" class="col-4 text-center text-decoration-none text-reset">Cardiologia</a>
                             </div>
                            </div>
 

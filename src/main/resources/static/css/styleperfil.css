@@ -51,15 +51,15 @@
    height: 10em;
   }
   
-  .ficha-med {
+  /* .ficha-med {
     display: inline-flex;
     margin-bottom: 2rem;
     width: 400px;
     height: 150px;
-    /* justify-content: center; */
+     justify-content: center;
     align-items: center;
     margin: 0 1rem;
-}
+} */
 
 .ficha-med .cards {
     background: linear-gradient(to right bottom,
