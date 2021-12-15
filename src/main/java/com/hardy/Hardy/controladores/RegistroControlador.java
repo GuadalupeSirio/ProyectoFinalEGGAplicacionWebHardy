@@ -5,6 +5,7 @@ import com.hardy.Hardy.entidades.Especialidad;
 import com.hardy.Hardy.entidades.Registro;
 import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.EspecialidadServicio;
+import com.hardy.Hardy.servicios.EstudioServicio;
 import com.hardy.Hardy.servicios.FichaMedicaServicio;
 import com.hardy.Hardy.servicios.RegistroServicio;
 import java.time.LocalDate;
