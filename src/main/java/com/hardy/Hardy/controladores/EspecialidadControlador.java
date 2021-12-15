@@ -8,6 +8,7 @@ import com.hardy.Hardy.servicios.EspecialidadServicio;
 import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/especialidad")
 public class EspecialidadControlador {
     
+    @Autowired
     private EspecialidadServicio especialidadServicio;
     
     @GetMapping
@@ -33,7 +35,7 @@ public class EspecialidadControlador {
         return mav;
     }
     
-    @GetMapping("/guardar-especialidad")
+    /*@GetMapping("/guardar-especialidad")
     public ModelAndView crearEspecialidad(HttpServletRequest request) {
 
         ModelAndView mav = new ModelAndView("especialidad-formulario");
@@ -48,7 +50,7 @@ public class EspecialidadControlador {
         mav.addObject("action", "guardar");
 
         return mav;
-    }
+    }*/
     
      @GetMapping("/editar/{id}")
     public ModelAndView editarEspecialidad(HttpServletRequest request, @PathVariable Integer id) throws Exception {
@@ -78,7 +80,7 @@ public class EspecialidadControlador {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
 
-        return new RedirectView("/registros");
+        return new RedirectView("/registro");
 
     }
     

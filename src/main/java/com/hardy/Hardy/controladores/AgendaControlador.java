@@ -26,7 +26,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("/agendas")
+@RequestMapping("/agenda")
 public class AgendaControlador {
 
     @Autowired
@@ -41,7 +41,7 @@ public class AgendaControlador {
     @GetMapping
     public ModelAndView mostrarTodos(HttpServletRequest request) throws Exception, MiExcepcion {
 
-        ModelAndView mav = new ModelAndView("agendas");
+        ModelAndView mav = new ModelAndView("turnos");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             mav.addObject("exito", flashMap.get("exito-name"));
