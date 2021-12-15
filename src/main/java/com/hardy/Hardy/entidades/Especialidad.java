@@ -13,18 +13,22 @@ public class Especialidad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String nombre;
 
+    private String nombreImagen;
+    
+ 
+    
     private Boolean alta;
 
-    public Especialidad(Integer id, String nombre, Boolean alta) {
-        this.id = id;
-        this.nombre = nombre;
-        this.alta = alta;
+    public Especialidad() {
     }
 
-    public Especialidad() {
+    public Especialidad( String nombre, String nombreImagen, Boolean alta) {
+        this.nombre = nombre;
+        this.nombreImagen = nombreImagen;
+        this.alta = alta;
     }
 
     public Integer getId() {
@@ -43,6 +47,14 @@ public class Especialidad {
         this.nombre = nombre;
     }
 
+    public String getNombreImagen() {
+        return nombreImagen;
+    }
+
+    public void setNombreImagen(String nombreImagen) {
+        this.nombreImagen = nombreImagen;
+    }
+
     public Boolean getAlta() {
         return alta;
     }
@@ -51,4 +63,5 @@ public class Especialidad {
         this.alta = alta;
     }
 
+   
 }

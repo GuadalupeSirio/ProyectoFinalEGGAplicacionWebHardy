@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 public interface EstudioRepositorio extends JpaRepository<Estudio, Integer> {
 
     @Modifying
-    @Query ("SELECT e.adjunto FROM Estudio e INNER JOIN Registro r WHERE e.registro.id = :registroId")
-    List<Estudio>estudioxRegistro(@Param("registroId") Integer id);
+    @Query("SELECT e.adjunto FROM Estudio e INNER JOIN Registro r WHERE e.registro.id = :registroId")
+    List<Estudio> estudioxRegistro(@Param("registroId") Integer id);
 
+    @Query("SELECT e FROM Estudio e WHERE e.registro.cliente.id = :clienteId")
+    public List<Estudio> buscarTodosxCliente(@Param("clienteId") Integer clienteId);
 
 }

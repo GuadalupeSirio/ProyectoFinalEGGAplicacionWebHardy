@@ -1,8 +1,10 @@
 package com.hardy.Hardy.servicios;
 
+import com.hardy.Hardy.entidades.Especialidad;
 import com.hardy.Hardy.entidades.Rol;
 import com.hardy.Hardy.entidades.Usuario;
 import com.hardy.Hardy.excepciones.MiExcepcion;
+import com.hardy.Hardy.repositorios.EspecialidadRepositorio;
 import com.hardy.Hardy.repositorios.RolRepositorio;
 import com.hardy.Hardy.repositorios.UsuarioRepositorio;
 import java.time.LocalDate;
@@ -42,6 +44,9 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private EmailServicio emailServicio;
 
+    @Autowired
+    private EspecialidadRepositorio especialidadRepositorio;
+
     @Transactional
     public void crearUsuario(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento, String correo, String clave, String clave2, MultipartFile imagen) throws Exception {
         try {
@@ -61,6 +66,7 @@ public class UsuarioServicio implements UserDetailsService {
                 rolRepositorio.save(r1);
                 rolRepositorio.save(r2);
                 usuario.setRol(r1);
+                cargarEspecialidades();
             } else {
                 usuario.setRol(rolRepositorio.buscarRol("CLIENTE")); //Luego todos los usuarios se setean con el rol de CLIENTE pero el admin puede modificarlo 
             }
@@ -73,6 +79,40 @@ public class UsuarioServicio implements UserDetailsService {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    @Transactional
+    public void cargarEspecialidades() throws MiExcepcion {
+        try {
+            Especialidad especialidad = new Especialidad("Cardiología", "Cardiología.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Cirugía general", "Cirugía general.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Clinica médica", "Clinica médica.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Dermatología", "Dermatología.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Gastroenterología", "Gastroenterología.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Ginecología", "Ginecología.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Neurología", "Neurología.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Nutrición", "Nutrición.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Obstetricia", "Obstetricia.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Oftalmología", "Oftalmología.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Pediatría", "Pediatría.png", true);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Psiquiatría", "Psiquiatría.png", true);
+            especialidadRepositorio.save(especialidad);
+
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
     @Transactional
