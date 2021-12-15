@@ -14,16 +14,18 @@
     border-radius: 50%;
     width: 130px;
     height: 130px;
-}
-.circulo1{
     background: rgb(196,217,243);
 }
-.circulo2{
+ .estilo4, .estilo6, .estilo10, .estilo12{
+    background: rgb(196,217,243);
+}
+.estilo1, .estilo5, .estilo7, .estilo11{
     background: rgb(254,233,191);
 }
-.circulo3{
+.estilo2, .estilo3, .estilo8, .estilo9{
     background: rgb(243,211,212);
 }
+
 .circulop{
     background: rgb(241,243,255);
     border-radius: 15px 50px;

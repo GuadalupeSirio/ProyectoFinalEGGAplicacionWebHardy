@@ -12,5 +12,8 @@ public interface RegistroRepositorio extends JpaRepository<Registro, Integer> {
 
     @Query("SELECT r FROM Registro r WHERE r.cliente.id = :clienteId")
     public List<Registro> obtenerRegistroCliente(@Param("clienteId") Integer clienteId);
+    
+    @Query("SELECT r FROM Registro r WHERE r.cliente.id = :clienteId and r.especialidad.id= :especialidadId")
+    public List<Registro> obtenerRegistroEspecialidad(@Param("clienteId") Integer clienteId,@Param("especialidadId") Integer especialidadId);
 
 }
