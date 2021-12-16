@@ -56,7 +56,7 @@ public class RegistroControlador {
             mav.addObject("error", flashMap.get("error-name"));
         }
 
-        mav.addObject("especialidades", especialidadServicio.obtenerEspeciaidades());
+        mav.addObject("especialidades", especialidadServicio.buscarPorUsuario((Integer) sesion.getAttribute("idUsuario")));
         return mav;
     }
 

@@ -5,7 +5,6 @@ import com.hardy.Hardy.entidades.FichaMedica;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.FichaMedicaServicio;
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +52,7 @@ public class FichaMedicaControlador {
     // metodos POST
     @PostMapping("/guardar-ficha")
     public RedirectView guardarFicha(@RequestParam String grupoSanguineo, @RequestParam Double peso,
-            @RequestParam Integer altura, @RequestParam String enfermedades, 
+            @RequestParam Integer altura, @RequestParam String enfermedades,
             HttpSession sesion, RedirectAttributes attributes) throws Exception {
         try {
 

@@ -1,6 +1,4 @@
-
-
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,11 +37,20 @@
           <a class="nav-link" href="#">Documentos</a>
         </li>
 
+        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+          <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+        </li>
+
         <li class="nav-item dropdown">
+
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Perfil
+            aria-expanded="false"> 
+                       <img class="rounded-circle" th:src="${session.imagen != null} ? @{/upload/__${session.imagen}__} : @{/upload/usuario-sin-foto.png}"
+             width="50">
           </a>
+                          
+ 
+          
           <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Perfil</a></li>
             <li><a class="dropdown-item" href="#">Cambiar e-mail</a></li>
