@@ -1,6 +1,7 @@
 package com.hardy.Hardy.repositorios;
 
 import com.hardy.Hardy.entidades.Especialidad;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,7 @@ public interface EspecialidadRepositorio extends JpaRepository<Especialidad, Int
     @Modifying
     @Query("UPDATE Especialidad a SET a.alta = :alta WHERE a.id = :id")
     void baja(@Param("id") Integer id, @Param("alta") Boolean alta);
-
+    
+    @Query("SELECT e FROM Especialidad e WHERE e.idUsuario = :id OR e.idUsuario = 0 AND e.alta = true")
+    List<Especialidad> BuscarPorUsuario(@Param("id") Integer id);
 }

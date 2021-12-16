@@ -25,6 +25,7 @@ public class PrincipalControlador {
         }
 
         mav.addObject("id", (Integer) sesion.getAttribute("idUsuario"));
+        
         return mav;
     }
 }

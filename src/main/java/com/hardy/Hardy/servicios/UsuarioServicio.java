@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -67,15 +69,17 @@ public class UsuarioServicio implements UserDetailsService {
                 rolRepositorio.save(r2);
                 usuario.setRol(r1);
                 cargarEspecialidades();
+                
             } else {
                 usuario.setRol(rolRepositorio.buscarRol("CLIENTE")); //Luego todos los usuarios se setean con el rol de CLIENTE pero el admin puede modificarlo 
             }
             usuario.setAlta(true);
 
             usuarioRepositorio.save(usuario);
+            
             clienteServicio.guardarCliente(nombre, apellido, dni, fechaNacimiento, imagen, usuario);
 
-            emailServicio.enviarThread(correo); //--> para enviar el correo de bienvenida   
+           // emailServicio.enviarThread(correo); //--> para enviar el correo de bienvenida   
         } catch (Exception e) {
             throw e;
         }
@@ -84,29 +88,29 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public void cargarEspecialidades() throws MiExcepcion {
         try {
-            Especialidad especialidad = new Especialidad("Cardiología", "Cardiología.png", true);
+            Especialidad especialidad = new Especialidad("Cardiología", "Cardiología.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Cirugía general", "Cirugía general.png", true);
+            especialidad = new Especialidad("Cirugía general", "Cirugía general.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Clinica médica", "Clinica médica.png", true);
+            especialidad = new Especialidad("Clinica médica", "Clinica médica.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Dermatología", "Dermatología.png", true);
+            especialidad = new Especialidad("Dermatología", "Dermatología.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Gastroenterología", "Gastroenterología.png", true);
+            especialidad = new Especialidad("Gastroenterología", "Gastroenterología.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Ginecología", "Ginecología.png", true);
+            especialidad = new Especialidad("Ginecología", "Ginecología.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Neurología", "Neurología.png", true);
+            especialidad = new Especialidad("Neurología", "Neurología.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Nutrición", "Nutrición.png", true);
+            especialidad = new Especialidad("Nutrición", "Nutrición.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Obstetricia", "Obstetricia.png", true);
+            especialidad = new Especialidad("Obstetricia", "Obstetricia.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Oftalmología", "Oftalmología.png", true);
+            especialidad = new Especialidad("Oftalmología", "Oftalmología.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Pediatría", "Pediatría.png", true);
+            especialidad = new Especialidad("Pediatría", "Pediatría.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Psiquiatría", "Psiquiatría.png", true);
+            especialidad = new Especialidad("Psiquiatría", "Psiquiatría.png", true, 0);
             especialidadRepositorio.save(especialidad);
 
         } catch (Exception e) {
@@ -123,6 +127,8 @@ public class UsuarioServicio implements UserDetailsService {
             Usuario usuario = new Usuario();
             usuario.setCorreo(correo);
             usuario.setClave(encoder.encode(clave));
+            usuario.setRol(rolRepositorio.buscarRol("ADMIN"));
+            usuario.setAlta(true);
             usuarioRepositorio.save(usuario);
 
             // emailServicio.enviarThread(correo);           
@@ -145,7 +151,22 @@ public class UsuarioServicio implements UserDetailsService {
         } catch (Exception e) {
             throw e;
         }
+    }
+    
+    @Transactional
+    public void modificarConRol(Integer id, Integer idRol, String correo) throws Exception {
+        try {
+            Usuario usuario = buscarPorId(id);
 
+            if (!usuario.getCorreo().equals(correo)) {
+                validarCorreo(correo);
+                usuario.setCorreo(correo);
+            }
+            usuario.setRol(rolRepositorio.findById(idRol).orElse(usuario.getRol()));
+            usuarioRepositorio.save(usuario);
+        } catch (Exception e) {
+            throw e;
+       }
     }
 
     @Transactional
@@ -165,7 +186,10 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepositorio.findByCorreo(correo).orElseThrow(() -> new UsernameNotFoundException("No existe un usuario asociado al correo ingresado"));
+          Usuario usuario = usuarioRepositorio.findByCorreo(correo).orElseThrow(() -> new UsernameNotFoundException("No existe un usuario asociado al correo ingresado"));
+        if (!usuario.getAlta()) {
+            throw new UsernameNotFoundException("El usuario esta dado de baja");
+        }
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre());
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -174,8 +198,7 @@ public class UsuarioServicio implements UserDetailsService {
         session.setAttribute("idUsuario", usuario.getId());
         session.setAttribute("correo", usuario.getCorreo());
         session.setAttribute("rol", usuario.getRol().getNombre());
-
-        return new User(usuario.getCorreo(), usuario.getClave(), Collections.singletonList(authority));
+        return new User(usuario.getCorreo(), usuario.getClave(), Collections.singletonList(authority));          
     }
 
     @Transactional(readOnly = true)
