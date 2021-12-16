@@ -44,8 +44,13 @@
         <li class="nav-item dropdown">
 
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false"> Perfil
+            aria-expanded="false"> 
+                       <img class="rounded-circle" th:src="${session.imagen != null} ? @{/upload/__${session.imagen}__} : @{/upload/usuario-sin-foto.png}"
+             width="50">
           </a>
+                          
+ 
+          
           <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Perfil</a></li>
             <li><a class="dropdown-item" href="#">Cambiar e-mail</a></li>
