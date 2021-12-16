@@ -1,12 +1,11 @@
 package com.hardy.Hardy.entidades;
 
-import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,9 +20,8 @@ public class Registro {
     
     @CreatedDate
     @Column(nullable = false, updatable = false)
-
-    //@Temporal(TemporalType.DATE)
-    private LocalDate fecha;
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
     
     @Column(nullable = false)
     private String medico;
@@ -37,7 +35,7 @@ public class Registro {
     @Column(nullable = false)
     private String resultados;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(nullable = false)
     private Especialidad especialidad;
     
@@ -45,7 +43,7 @@ public class Registro {
     @JoinColumn(nullable = false)
     private Cliente cliente;
 
-    public Registro(Integer id, LocalDate fecha, String medico, String cobertura, String lugar, String resultados, Especialidad especialidad, Cliente cliente) {
+    public Registro(Integer id, Date fecha, String medico, String cobertura, String lugar, String resultados, Especialidad especialidad, Cliente cliente) {
         this.id = id;
         this.fecha = fecha;
         this.medico = medico;
@@ -68,11 +66,11 @@ public class Registro {
         this.id = id;
     }
 
-    public LocalDate getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
