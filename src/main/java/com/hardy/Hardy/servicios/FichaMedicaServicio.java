@@ -38,7 +38,7 @@ public class FichaMedicaServicio {
             fichaMedica.setPeso(peso);
             fichaMedica.setAltura(altura);
             //fichaMedica.setEnfermedades(enfermedades);
-            fichaMedica.setUltimoChequeo(ultimoChequeo);
+            //fichaMedica.setUltimoChequeo(ultimoChequeo);
             fichaMedica.setCliente(cliente);
             fichaMedica.setEdad(edad);
 

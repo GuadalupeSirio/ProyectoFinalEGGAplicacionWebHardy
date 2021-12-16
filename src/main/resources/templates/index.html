@@ -1,6 +1,4 @@
-
-
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,41 +25,35 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav text-end">
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Registros
-          </a>
-          <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" th:href="@{/registro}">Historial</a></li>
-            <li><a class="dropdown-item" th:href="@{/registro/crear-registro}">Agregar</a></li>
-            
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/registro}">Registros</a>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Agenda
-          </a>
-          <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Turnos</a></li>
-            <li><a class="dropdown-item" href="#">Agendar</a></li>          
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/agenda}">Agenda</a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link" href="#">Documentos</a>
         </li>
 
+        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+          <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+        </li>
+
         <li class="nav-item dropdown">
+
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Perfil
+            aria-expanded="false"> 
+                       <img class="rounded-circle" th:src="${session.imagen != null} ? @{/upload/__${session.imagen}__} : @{/upload/usuario-sin-foto.png}"
+             width="50">
           </a>
+                          
+ 
+          
           <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Perfil</a></li>
-            <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
+            <li><a class="dropdown-item" href="#">Cambiar e-mail</a></li>
             <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
             <li>
               <hr class="dropdown-divider">
@@ -75,6 +67,20 @@
     </div>
   </div>
 </nav>
+  <div class="row justify-content-center">
+    <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+      th:if="${exito != null}">
+      <strong th:text="${exito}"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  
+    <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
+      th:if="${error != null}">
+      <strong th:text="${error}"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  
+  </div>
 
       <!-- Primer pantalla -->
 
@@ -98,7 +104,7 @@
               <div class="row justify-content-evenly ">
                 
                 <div class="col-4">
-                  <a href="" class="text-decoration-none text-reset">
+                  <a th:href="@{/registro}" class="text-decoration-none text-reset">
                     <div class="card h-100 card1 shadow bg-body rounded bordes">
                       <div class="row justify-content-center">
                         <div class="col-8">
@@ -120,7 +126,7 @@
                 </div>
 
                 <div class="col-4">
-                  <a href="" class="text-decoration-none text-reset">
+                  <a th:href="@{/agenda}" class="text-decoration-none text-reset">
                     <div class="card h-100 card1 shadow bg-body rounded">
                       <div class="row justify-content-center">
                         <div class="col-8">
@@ -178,16 +184,14 @@
 
     <!-- Footer -->
 
-    <footer class="container-fluid py-5 foot">
-      <div class="row text-center">
-        <h2 class="col-4 texto1 ">Hardy</h2>
-        <a class="col-4 texto1" href="mailto:someone@example.com" target="_blank">info@hardy.com</a>
-        <ul class="footer-social col-4">
-          <li class="me-3"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-          <li class="me-3"><a href="#"><i class="fab fa-instagram"></i></a></li>
-          <li><a href="#"><a href="#"><i class="fab fa-twitter"></i></a></a></li>
-        </ul>
+    <footer class="container-fluid mt-5 py-3">
+      <div class="row ">
+    
+        <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
+              height="28" /></span> Hardy</h6>
+    
       </div>
+    
     </footer>
 
         

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 public class PrincipalControlador {
 
     @GetMapping
-    public ModelAndView inicio(HttpSession sesion, HttpServletRequest request) throws MiExcepcion, Exception {
+    public ModelAndView inicio(HttpSession session, HttpServletRequest request) throws MiExcepcion, Exception {
 
         ModelAndView mav = new ModelAndView("index");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
@@ -24,7 +24,8 @@ public class PrincipalControlador {
             mav.addObject("error", flashMap.get("error-name"));
         }
 
-        mav.addObject("id", (Integer) sesion.getAttribute("idUsuario"));
+        mav.addObject("id", (Integer) session.getAttribute("idUsuario"));
+        
         return mav;
     }
 }

@@ -55,6 +55,15 @@ public class EstudioServicio {
             throw new Exception("Error al obtener estudios");
         }
     }
+    
+        @Transactional(readOnly = true)
+    public List<Estudio> buscarTodosxCliente(Integer clienteId) throws Exception {
+        try {
+            return estudioRepositorio.buscarTodosxCliente(clienteId);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener estudios");
+        }
+    }
 
     @Transactional(readOnly = true)
     public Estudio buscarPorId(Integer id) throws Exception {

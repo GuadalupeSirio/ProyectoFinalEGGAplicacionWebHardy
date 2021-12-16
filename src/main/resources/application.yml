@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/hardy_spring
     username: root
-    password: Root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
@@ -37,5 +37,6 @@ logging:
       springframework:
         web: debug
 my:
-    property: C:\Users\JunioAbril\Desktop\GG\SPRING\ProyectoFinalEGGAplicacionWebHardy\src\main\resources\static\upload
-    #C:\Users\Andrea\Documents\NetBeansProjects\Proyecto-Final\src\main\resources\static\upload 
+    property: C:\Users\Andrea\Documents\NetBeansProjects\Proyecto-Final\src\main\resources\static\upload 
+    #C:\Users\JunioAbril\Desktop\GG\SPRING\ProyectoFinalEGGAplicacionWebHardy\src\main\resources\static\upload
+    

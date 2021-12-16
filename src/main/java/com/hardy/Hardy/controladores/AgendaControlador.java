@@ -8,7 +8,6 @@ import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.EspecialidadServicio;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +25,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("/agendas")
+@RequestMapping("/agenda")
 public class AgendaControlador {
 
     @Autowired
@@ -41,7 +40,7 @@ public class AgendaControlador {
     @GetMapping
     public ModelAndView mostrarTodos(HttpServletRequest request) throws Exception, MiExcepcion {
 
-        ModelAndView mav = new ModelAndView("agendas");
+        ModelAndView mav = new ModelAndView("turnos");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             mav.addObject("exito", flashMap.get("exito-name"));
@@ -93,7 +92,9 @@ public class AgendaControlador {
     }
  
     @PostMapping("/guardar")
-    public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico, @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad,
+    public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, 
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico, 
+            @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad,
             HttpSession sesion, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
