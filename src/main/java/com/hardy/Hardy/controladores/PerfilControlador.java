@@ -35,7 +35,7 @@ class PerfilControlador {
     @GetMapping
     public ModelAndView mostrarPerfil(HttpSession sesion, HttpServletRequest request) throws MiExcepcion, Exception {
 
-        ModelAndView mav = new ModelAndView("perfil");
+        ModelAndView mav = new ModelAndView("perfil-vista");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             mav.addObject("exito", flashMap.get("exito-name"));

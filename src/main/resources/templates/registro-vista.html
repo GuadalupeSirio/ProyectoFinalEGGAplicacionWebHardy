@@ -42,7 +42,7 @@
               Perfil
             </a>
             <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
               <li>
                 <a class="dropdown-item" href="#">Cambiar e-mail</a>
               </li>
@@ -52,7 +52,7 @@
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+              <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
             </ul>
           </li>
         </ul>
@@ -141,160 +141,6 @@
               </div>
             </div>
           </div>
-      
-          <!-- <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo3">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Cirugía general.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Cirugía general</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo3">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Clinica médica.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Clinica médica</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo1">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Dermatología.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Dermatología</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo2">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Gastroenterología.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Gastroentorología</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo1">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Ginecología.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Ginecología</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo2">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Neurología.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Neurología</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo3">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Nutrición.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Nutrición</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo3">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Obstetricia.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Obstetricia</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo3">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Oftalmología.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Oftalmología</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo3">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Pediatría.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Pedriatría</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="row justify-content-center">
-              <div class="col-12 text-center py-5 circulo circulo3">
-                <a class="text-decoration-none text-reset" href="#">
-                  <img class="img-fluid" th:src="@{/img/Psiquiatría.png}" alt="" />
-                </a>
-
-              </div>
-              <div class="col-12 mt-2 text-center">
-                <p>Psiquiatría</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </section>
 
   <!-- Footer -->
