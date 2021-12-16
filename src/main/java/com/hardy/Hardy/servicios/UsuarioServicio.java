@@ -198,6 +198,11 @@ public class UsuarioServicio implements UserDetailsService {
         session.setAttribute("idUsuario", usuario.getId());
         session.setAttribute("correo", usuario.getCorreo());
         session.setAttribute("rol", usuario.getRol().getNombre());
+        try {
+            session.setAttribute("imagen", clienteServicio.obtenerPerfil(usuario.getId()).getImagen());
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return new User(usuario.getCorreo(), usuario.getClave(), Collections.singletonList(authority));          
     }
 
