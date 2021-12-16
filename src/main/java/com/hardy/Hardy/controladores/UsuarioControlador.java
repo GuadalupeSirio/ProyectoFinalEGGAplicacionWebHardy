@@ -1,6 +1,8 @@
 package com.hardy.Hardy.controladores;
 
 import com.hardy.Hardy.excepciones.MiExcepcion;
+import com.hardy.Hardy.servicios.ClienteServicio;
+import com.hardy.Hardy.servicios.RolServicio;
 import com.hardy.Hardy.servicios.UsuarioServicio;
 import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
@@ -17,25 +19,40 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@PreAuthorize("hasRole('ADMIN')") //Esta ruta que tiene todos los usuarios solo la podrian ver los ADMIN - tenemos que ver si lo dejamos asi o lo juntamos con CLIENTE
+@PreAuthorize("hasRole('ADMIN')") //Todas las rutas de este service son solo para ADMIN
 @RequestMapping("/usuarios")
 public class UsuarioControlador {
 
     @Autowired
-    private UsuarioServicio us;
-
+    private UsuarioServicio usuarioServicio;
+    
+   @Autowired
+    private RolServicio rolServicio;
+    
     @GetMapping
     public ModelAndView mostrarUsuarios() {
         ModelAndView mav = new ModelAndView("usuarios");
-        mav.addObject("usuarios", us.buscarTodos());
+        mav.addObject("usuarios", usuarioServicio.buscarTodos());
+        mav.addObject("roles", rolServicio.buscarTodos());
         return mav;
     }
 
     @PostMapping("/crear-admin")
-    public RedirectView admin(HttpServletRequest request, Principal principal, @RequestParam String correo, @RequestParam String claveUno, @RequestParam String claveDos, RedirectAttributes attributes) throws MiExcepcion {
+    public RedirectView admin(@RequestParam String correo, @RequestParam String claveUno, @RequestParam String claveDos, RedirectAttributes attributes) throws MiExcepcion {
         try {
-            us.crearAdmin(correo, claveDos, claveDos);
+            usuarioServicio.crearAdmin(correo, claveDos, claveDos);
             attributes.addFlashAttribute("exito", "El admin se registro correctamente!");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/usuarios");
+    }
+    
+    @PostMapping("/editar")
+    public RedirectView editar(@RequestParam Integer idUsuario, @RequestParam String correo, @RequestParam Integer idRol, RedirectAttributes attributes) throws MiExcepcion {
+        try {
+            usuarioServicio.modificarConRol(idUsuario, idRol, correo);
+            attributes.addFlashAttribute("exito", "El usuario se modificó correctamente!");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
@@ -45,7 +62,7 @@ public class UsuarioControlador {
     @PostMapping("/baja/{id}")  //Al darse de baja deberia darse de baja el CLIENTE -
     public RedirectView baja(@PathVariable Integer id, RedirectAttributes attributes) {
         try {
-            us.baja(id);
+            usuarioServicio.baja(id);
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
@@ -56,7 +73,7 @@ public class UsuarioControlador {
     @PostMapping("/alta/{id}")
     public RedirectView alta(@PathVariable Integer id, RedirectAttributes attributes) {
         try {
-            us.alta(id);
+            usuarioServicio.alta(id);
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }

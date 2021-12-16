@@ -8,7 +8,6 @@ import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.EspecialidadServicio;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

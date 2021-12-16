@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/perfil/guardar-usuario","/login", "/css/*", "/img/*" ).permitAll()
-                .antMatchers("/**").authenticated() //.authenticated() --> La seguridad esta desactivada hasta que cambiemos esto
+                .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
