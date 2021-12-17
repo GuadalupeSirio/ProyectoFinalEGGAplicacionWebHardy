@@ -257,6 +257,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (correo == null || correo.trim().isEmpty()) {
             throw new MiExcepcion("El correo no puede estar vacio.");
         }
+        
         if (usuarioRepositorio.existsUsuarioByCorreo(correo)) {
             throw new MiExcepcion("Ya existe un usuario asociado al correo ingresado");
         }

@@ -170,7 +170,9 @@ public class ClienteServicio {
     public void modificarImagen(Cliente cliente, MultipartFile imagen) throws Exception {
         try {
             if (!imagen.isEmpty()) {
-                imagenServicio.borrarImagen(cliente.getImagen());
+                if (cliente.getImagen()!=null) {
+                    imagenServicio.borrarImagen(cliente.getImagen());
+                }
                 cliente.setImagen(imagenServicio.copiar(imagen));
                 clienteRepositorio.save(cliente);
             }
@@ -198,4 +200,5 @@ public class ClienteServicio {
             throw e;
         }
     }
+    
 }

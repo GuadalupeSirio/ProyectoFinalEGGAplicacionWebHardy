@@ -88,7 +88,7 @@
           <div class="col-12 col-lg-5 align-self-center">
             <div class="row text-center">
               <div class="col-12">
-                <img class="img-fluid" th:src="@{/img/profile-1-1.png}" alt="" />
+               <a data-bs-toggle="modal" data-bs-target="#editarFoto"> <img class="img-fluid rounded-circle" th:src="${cliente.imagen != null} ? @{/upload/__${cliente.imagen}__} : @{/upload/profile-1-1.png}" alt="" width="140"/></a>
               </div>
             </div>
           </div>
@@ -466,6 +466,31 @@
     </div>
   </div>
 
+
+<!-- Editar foto-->
+  <div class="modal fade" id="editarFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cambiar foto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-foto}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate enctype="multipart/form-data">
+            <label for="imagen">Nueva foto: </label>
+            <input class="form-control border-0" type="file" name="imagen" accept="image/*">
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal crear ficha medica -->
 
