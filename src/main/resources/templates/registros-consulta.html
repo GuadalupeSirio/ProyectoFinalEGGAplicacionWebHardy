@@ -168,7 +168,7 @@
               <input id="estudio" class="form-control border-0" type="file" name="adjunto"
                 accept="image/*,.pdf, .docx, .doc">
               <input type="hidden" th:value="${registro.id}" name="idRegistro">
-
+              <!-- <input type="hidden" th:value="|/registro/ver-registros/__${especialidad.id}__|" name="ruta"> --> MIRAR
               <hr class="my-4">
               <div class="modal-dialog-centered justify-content-center">
                 <button title="Guardar archivo" type="submit" class="btn no-btn">

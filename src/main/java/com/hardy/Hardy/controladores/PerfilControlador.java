@@ -1,7 +1,9 @@
 package com.hardy.Hardy.controladores;
 
+import com.hardy.Hardy.entidades.Cliente;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.servicios.ClienteServicio;
+import com.hardy.Hardy.servicios.FichaMedicaServicio;
 import com.hardy.Hardy.servicios.UsuarioServicio;
 import java.security.Principal;
 import java.time.LocalDate;
@@ -31,6 +33,9 @@ class PerfilControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private FichaMedicaServicio fichaMedicaServicio;
+
     //metodos GET
     @GetMapping
     public ModelAndView mostrarPerfil(HttpSession sesion, HttpServletRequest request) throws MiExcepcion, Exception {
@@ -41,15 +46,16 @@ class PerfilControlador {
             mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error-name"));
         }
-
-        mav.addObject("perfil", clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario")));
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+        mav.addObject("cliente", cliente);
         return mav;
     }
 
     // metodos POST
     @PostMapping("/guardar-usuario")
-    public RedirectView guardar( RedirectAttributes attributes,HttpServletRequest request,
-           Principal principal, @RequestParam String correo, @RequestParam String claveUno,
+    public RedirectView guardar(RedirectAttributes attributes, HttpServletRequest request,
+            Principal principal, @RequestParam String correo, @RequestParam String claveUno,
             @RequestParam String claveDos,
             @RequestParam String nombre,
             @RequestParam String apellido, @RequestParam Integer dni,
@@ -69,4 +75,69 @@ class PerfilControlador {
         return new RedirectView("/login");
     }
 
+    @PostMapping
+    public RedirectView modificarImagen(RedirectAttributes attributes, @RequestParam MultipartFile imagen, HttpSession sesion) throws Exception {
+        try {
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            clienteServicio.modificarImagen(cliente, imagen);
+            sesion.setAttribute("imagen", cliente.getImagen());
+            attributes.addFlashAttribute("exito-name", "La imagen se modifico correctamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/editar-nombre")
+    public RedirectView editarNombre(RedirectAttributes attributes, HttpServletRequest request, @RequestParam String nombre, HttpSession sesion) throws Exception {
+        try {
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            clienteServicio.editarNombre(nombre, cliente);
+            attributes.addFlashAttribute("exito-name", "El nombre se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/editar-apellido")
+    public RedirectView editarApellido(RedirectAttributes attributes, HttpServletRequest request,
+            @RequestParam String apellido, HttpSession sesion) throws Exception {
+        try {
+
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            clienteServicio.editarApellido(apellido, cliente);
+            attributes.addFlashAttribute("exito-name", "El apellido se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/editar-documento")
+    public RedirectView editarDocumento(RedirectAttributes attributes, HttpServletRequest request,
+            @RequestParam Integer documento, HttpSession sesion) throws Exception {
+        try {
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            clienteServicio.editarDocumento(documento, cliente);
+            attributes.addFlashAttribute("exito-name", "El documento se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/editar-fecha-nacimiento")
+    public RedirectView editarFecha(RedirectAttributes attributes, HttpServletRequest request,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento, HttpSession sesion) throws Exception {
+        try {
+
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            clienteServicio.editarFechaNacimiento(fechaNacimiento, cliente);
+            attributes.addFlashAttribute("exito-name", "La fecha de nacimiento se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
 }
