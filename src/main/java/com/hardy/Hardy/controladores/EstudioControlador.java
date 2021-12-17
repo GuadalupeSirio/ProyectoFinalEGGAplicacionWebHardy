@@ -59,7 +59,8 @@ public class EstudioControlador {
 
     @PostMapping("/guardar")
     public RedirectView guardarEstudios(@RequestParam MultipartFile adjunto, @RequestParam Integer idRegistro, 
-            @RequestParam String nombre,@RequestParam String ruta, RedirectAttributes attributes) throws MiExcepcion, Exception {
+            @RequestParam String nombre,@RequestParam String ruta, 
+            RedirectAttributes attributes) throws MiExcepcion, Exception {
         try {
             estudioServicio.crearEstudio(idRegistro, adjunto, nombre);
             attributes.addFlashAttribute("exito-name", "El estudio ha sido guardado exitosamente");

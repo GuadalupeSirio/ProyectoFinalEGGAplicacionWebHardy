@@ -168,7 +168,9 @@
               <input id="estudio" class="form-control border-0" type="file" name="adjunto"
                 accept="image/*,.pdf, .docx, .doc">
               <input type="hidden" th:value="${registro.id}" name="idRegistro">
-              <!-- <input type="hidden" th:value="|/registro/ver-registros/__${especialidad.id}__|" name="ruta"> --> MIRAR
+
+               <input type="hidden" th:value="${ruta}" name="ruta">
+
               <hr class="my-4">
               <div class="modal-dialog-centered justify-content-center">
                 <button title="Guardar archivo" type="submit" class="btn no-btn">
@@ -249,7 +251,7 @@
 
                   </div>
 
-                  <div class="col-12 col-md-6">
+                  <div th:if="${especialidad}" class="col-12 col-md-6">
                     <label>Especialidad</label> <br>
                      <select required class="form-select" name="especialidad">
                       <option  selected th:text="${especialidad.nombre}" th:value="${especialidad.id}"></option>
@@ -282,7 +284,7 @@
                     <!-- <input required type="text" name="resultados" class="form-control border border-secondary" rows="3"></input>  -->
                   </div>
 
-                  <input type="hidden" th:value="|/registro/ver-registros/__${especialidad.id}__|" name="ruta">
+                   <input type="hidden" th:value="${ruta}" name="ruta"> 
                   <!-- dirname="resultados.dir" form="registro" -->
                   <div class="col-12 col-lg-9 text-center text-xl-start">
                     <button type="submit" class="btn col-6 reg py-3">Agendar</button>
