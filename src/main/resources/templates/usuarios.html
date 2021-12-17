@@ -152,19 +152,19 @@ data-bs-target="#crearAdmin">Crear ADMIN</button>
                                             <div class=" mb-3 col-12">
                                                 <label for="correo" class="form-label">Correo
                                                     electronico</label>
-                                                <input type="email" class="form-control" id="correo" name="correo" value="correo">
+                                                <input type="email" class="form-control" id="correo" name="correo">
 
                                             </div>
 
                                             <div class=" mb-3 col-12">
                                                 <label for="claveUno" class="form-label">Contraseña</label>
                                                 <input type="password" class="form-control" id="claveUno"
-                                                    name="claveUno" value="claveUno">
+                                                    name="claveUno">
                                             </div>
                                             <div class=" mb-3 col-12">
                                                 <label for="claveDos" class="form-label">Repita la contraseña</label>
                                                 <input type="password" class="form-control" id="claveDos"
-                                                    name="claveDos" value="claveDos">
+                                                    name="claveDos">
                                             </div>
                                             <button type="submit" class="btn btn reg">Guardar</button>
                                         </div>
@@ -203,7 +203,7 @@ data-bs-target="#crearAdmin">Crear ADMIN</button>
                                                 </div>
                                                 <div class=" mb-3 col-12">
                                                     <label for="correo" class="form-label">Correo electronico</label>
-                                                    <input type="email" class="form-control" id="correo" name="correo" value="correo">
+                                                    <input type="email" class="form-control" id="correo" name="correo" th:value="${usuario.correo}">
                                                 </div>
                                                 <div class="form mb-3 col-xl-6 fs-5">
                                                     <label for="rol">Rol:</label> <br>

@@ -38,14 +38,15 @@ public class AgendaControlador {
     private ClienteServicio clienteServicio;
 
     @GetMapping
-    public ModelAndView mostrarTodos(HttpServletRequest request) throws Exception, MiExcepcion {
-
+    public ModelAndView mostrarTodos(HttpSession sesion, HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView("turnos");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error-name"));
         }
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        mav.addObject("especialidades", especialidadServicio.buscarPorUsuario((Integer) sesion.getAttribute("idUsuario")));
         mav.addObject("agendas", agendaServicio.buscarTodos());
         return mav;
     }
@@ -90,10 +91,10 @@ public class AgendaControlador {
             throw e;
         }
     }
- 
+
     @PostMapping("/guardar")
-    public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, 
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico, 
+    public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico,
             @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad,
             HttpSession sesion, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
