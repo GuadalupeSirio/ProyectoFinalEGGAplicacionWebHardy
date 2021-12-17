@@ -2,7 +2,6 @@ package com.hardy.Hardy.controladores;
 
 import com.hardy.Hardy.servicios.UsuarioServicio;
 import java.security.Principal;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -25,11 +23,7 @@ public class LoginControlador {
     public ModelAndView login(HttpServletRequest request, @RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
 
         ModelAndView mv = new ModelAndView("login");
-        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-        if (flashMap != null) {
-            mv.addObject("exito", flashMap.get("exito-name"));
-            mv.addObject("error", flashMap.get("error-name"));
-        }
+
         if (error != null) {
             mv.addObject("error", "Correo o contraseña incorrecta");
         }
@@ -44,12 +38,13 @@ public class LoginControlador {
     }
 
     @PostMapping("/modificar-correo")
-    public RedirectView modificarCorreo(@RequestParam Integer id, @RequestParam String correo, HttpSession session, RedirectAttributes attributes) {
+    public RedirectView modificarCorreo(@RequestParam String correo, HttpSession session, RedirectAttributes attributes) {
         try {
             usuarioServicio.modificarCorreo((Integer) session.getAttribute("idUsuario"), correo);
+            session.setAttribute("correo", correo);
             attributes.addFlashAttribute("exito", "El usuario se modificó correctamente!");
         } catch (Exception e) {
-            attributes.addFlashAttribute("error-name", e.getMessage());
+            attributes.addFlashAttribute("error", e.getMessage());
         }
         return new RedirectView("/");
     }
@@ -60,34 +55,8 @@ public class LoginControlador {
             usuarioServicio.modificarClave((Integer) session.getAttribute("idUsuario"), clave, clave2);
             attributes.addFlashAttribute("exito", "La clave se modificó correctamente!");
         } catch (Exception e) {
-            attributes.addFlashAttribute("error-name", e.getMessage());
+            attributes.addFlashAttribute("error", e.getMessage());
         }
         return new RedirectView("/");
     }
 }
-
-//Me parece que no vamos a necesitar estos GET ya que estamos trabajando el front con modales, lo dejo por las dudas
-//No se si esta bien como obtengo el ID para que lo haga con el que esta loggeado
-//    @GetMapping("/modificar-correo/{id}")
-//    public ModelAndView editarUsuario(@PathVariable Integer id, HttpSession session) throws Exception {
-//        if (!session.getAttribute("id").equals(id)) {
-//            return new ModelAndView(new RedirectView("/"));
-//        }
-//        ModelAndView mav = new ModelAndView(""); //completar
-//        mav.addObject("usuario", us.buscarPorId(id));
-//        mav.addObject("title", "Modificar correo");
-//        mav.addObject("roles", rs.buscarTodos());
-//        mav.addObject("action", "modificar-correo");
-//        return mav;
-//    }
-//    @GetMapping("/clave/{id}")
-//    public ModelAndView modificarClave(@PathVariable Integer id, HttpSession session) throws Exception {
-//        if (!session.getAttribute("id").equals(id)) { //Para que no pueda modificar la clave de nadie mas
-//            return new ModelAndView(new RedirectView("/"));
-//        }
-//        ModelAndView mav = new ModelAndView("");  //completar
-//        mav.addObject("usuario", us.buscarPorId(id));
-//        mav.addObject("title", "Modificar contraseña");
-//        mav.addObject("action", "clave");
-//        return mav;
-//    }

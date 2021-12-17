@@ -1,11 +1,8 @@
 package com.hardy.Hardy.controladores;
 
 import com.hardy.Hardy.excepciones.MiExcepcion;
-import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.RolServicio;
 import com.hardy.Hardy.servicios.UsuarioServicio;
-import java.security.Principal;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -59,7 +56,7 @@ public class UsuarioControlador {
         return new RedirectView("/usuarios");
     }
 
-    @PostMapping("/baja/{id}")  //Al darse de baja deberia darse de baja el CLIENTE -
+    @PostMapping("/baja/{id}")
     public RedirectView baja(@PathVariable Integer id, RedirectAttributes attributes) {
         try {
             usuarioServicio.baja(id);

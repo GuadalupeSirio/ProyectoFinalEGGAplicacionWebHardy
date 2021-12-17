@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,18 +54,19 @@ public class FichaMedicaControlador {
     @PostMapping("/guardar-ficha")
     public RedirectView guardarFicha(@RequestParam String grupoSanguineo, @RequestParam Double peso,
             @RequestParam Integer altura, @RequestParam String enfermedades,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate ultimoChequeo,
             HttpSession sesion, RedirectAttributes attributes) throws Exception {
         try {
 
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
 
-            fichaMedicaServicio.guardarFichaMedica(grupoSanguineo, peso, altura, enfermedades, cliente);
+            fichaMedicaServicio.guardarFichaMedica(grupoSanguineo, peso, altura, enfermedades, ultimoChequeo, cliente);
 
             attributes.addFlashAttribute("exito-name", "Ficha medica registrada exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
-        return new RedirectView("");
+        return new RedirectView("/perfil");
     }
 
     @PostMapping("/modificar-ficha")
@@ -81,6 +83,54 @@ public class FichaMedicaControlador {
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
-        return new RedirectView("");
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/modificar-peso")
+    public RedirectView modificarPeso(@RequestParam Double peso, HttpSession sesion,
+            RedirectAttributes attributes) throws Exception {
+        try {
+
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+
+            fichaMedicaServicio.modificarPeso(peso, cliente);
+
+            attributes.addFlashAttribute("exito-name", "El peso se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/modificar-altura")
+    public RedirectView modificarAltura(@RequestParam Integer altura, HttpSession sesion,
+            RedirectAttributes attributes) throws Exception {
+        try {
+
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+
+            fichaMedicaServicio.modificarAltura(altura, cliente);
+
+            attributes.addFlashAttribute("exito-name", "La altura se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/modificar-sanguineo")
+    public RedirectView modificarGrupoSanguineo(@RequestParam String sanguineo, HttpSession sesion,
+            RedirectAttributes attributes) throws Exception {
+        try {
+
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+
+            fichaMedicaServicio.modificarGrupoSanguineo(sanguineo, cliente);
+
+            attributes.addFlashAttribute("exito-name", "El grupo sanguineo se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
     }
 }
