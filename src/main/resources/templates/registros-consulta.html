@@ -51,13 +51,13 @@
               Perfil
             </a>
             <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
               <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
               <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+              <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
             </ul>
           </li>
 
@@ -169,6 +169,8 @@
                 accept="image/*,.pdf, .docx, .doc">
               <input type="hidden" th:value="${registro.id}" name="idRegistro">
 
+               <input type="hidden" th:value="${ruta}" name="ruta">
+
               <hr class="my-4">
               <div class="modal-dialog-centered justify-content-center">
                 <button title="Guardar archivo" type="submit" class="btn no-btn">
@@ -249,7 +251,7 @@
 
                   </div>
 
-                  <div class="col-12 col-md-6">
+                  <div th:if="${especialidad}" class="col-12 col-md-6">
                     <label>Especialidad</label> <br>
                      <select required class="form-select" name="especialidad">
                       <option  selected th:text="${especialidad.nombre}" th:value="${especialidad.id}"></option>
@@ -282,7 +284,7 @@
                     <!-- <input required type="text" name="resultados" class="form-control border border-secondary" rows="3"></input>  -->
                   </div>
 
-                  <input type="hidden" th:value="|/registro/ver-registros/__${especialidad.id}__|" name="ruta">
+                   <input type="hidden" th:value="${ruta}" name="ruta"> 
                   <!-- dirname="resultados.dir" form="registro" -->
                   <div class="col-12 col-lg-9 text-center text-xl-start">
                     <button type="submit" class="btn col-6 reg py-3">Agendar</button>

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!--css-->
+    <link rel="stylesheet" th:href="@{/css/styleSignup.css}">
     <link rel="stylesheet" th:href="@{/css/calendario.css}">
     <link rel="stylesheet" th:href="@{/css/turnos.css}">
 </head>
@@ -35,7 +36,7 @@
                 <ul class="navbar-nav text-end">
 
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/registro}">Registros</a>
+                        <a class="nav-link " th:href="@{/registro}">Registros</a>
                     </li>
 
                     <li class="nav-item">
@@ -52,13 +53,13 @@
                             Perfil
                         </a>
                         <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Cambiar e-mail</a></li>
+                            <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
                             <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
                         </ul>
                     </li>
 
@@ -73,13 +74,13 @@
             <strong th:text="${exito}"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    
+
         <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
             th:if="${error != null}">
             <strong th:text="${error}"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    
+
     </div>
 
 
@@ -88,37 +89,38 @@
 
             <!--Calendario-->
             <div class="col-12 col-md-6 col-lg-4">
-                        <div class="containerCal container pt-5">
-                            <div class="calendario">
-                                <div class="headerCal">
-                                    <i class="fas fa-chevron-left anterior flecha"></i>
-                                    <div class="header-fechas">
-                                        <p class="mes">
-                                        </p>
-                                        <p class="today">
-                                        </p>
-                                    </div>
-                                    <i class="fas fa-chevron-right siguiente flecha"></i>
-                                </div>
-                                <div class="diasSemana">
-
-                                    <div>Dom</div>
-                                    <div>Lun</div>
-                                    <div>Mar</div>
-                                    <div>Mie</div>
-                                    <div>Jue</div>
-                                    <div>Vie</div>
-                                    <div>Sab</div>
-
-                                </div>
-                                <div class="dias">
-
-
-                                </div>
-
+                <div class="containerCal container pt-5">
+                    <div class="calendario">
+                        <div class="headerCal">
+                            <i class="fas fa-chevron-left anterior flecha"></i>
+                            <div class="header-fechas">
+                                <p class="mes">
+                                </p>
+                                <p class="today">
+                                </p>
                             </div>
+                            <i class="fas fa-chevron-right siguiente flecha"></i>
+                        </div>
+                        <div class="diasSemana">
+
+                            <div>Dom</div>
+                            <div>Lun</div>
+                            <div>Mar</div>
+                            <div>Mie</div>
+                            <div>Jue</div>
+                            <div>Vie</div>
+                            <div>Sab</div>
+
+                        </div>
+                        <div class="dias">
+
+
                         </div>
 
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline-primary col-5 mx-3 ing " data-bs-toggle="modal"
+                    data-bs-target="#agendarTurno">Agendar Turno</button>
             </div>
 
             <!--Turnos-->
@@ -130,9 +132,9 @@
                             aria-selected="true">Turnos de este mes</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class=" nav-link" id="mesProximo" data-bs-toggle="pill"
-                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                            aria-selected="false">Futuros turnos</button>
+                        <button class=" nav-link" id="mesProximo" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                            type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Futuros
+                            turnos</button>
                     </li>
                 </ul>
                 <div class="container mt-5 px-4 turnos pt-4 mb-5 overflow-auto altura">
@@ -363,35 +365,95 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
 
         </div>
     </div>
 
+    <!-- modales -->
+
+    <!-- Modal agendar turno -->
+
+    <div class="modal fade " id="agendarTurno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+            <div class="modal-content fondomodal">
+                <div class="modal-header">
+                    <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Ficha Médica</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 d-none d-xl-block">
+                                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+                            </div>
+                            <div class="col-12 col-xl-6 align-self-center">
+
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-floating mb-4 ms-1 mt-1">
+                                            <input type="date" class="form-control border border-secondary" id="fecha">
+                                            <label for="fecha">Fecha del turno</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-floating mb-4 ms-1 mt-1">
+                                            <input type="time" class="form-control border border-secondary"
+                                                id="grupo-sanguineo">
+                                            <label for="horario">Horario</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-floating mb-4 ms-1 mt-1">
+                                            <input type="text" class="form-control border border-secondary" id="medico">
+                                            <label for="medico">medico</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-floating mb-4 ms-1 mt-1">
+                                            <input type="text" class="form-control border border-secondary"
+                                                id="locacion" placeholder="Altura">
+                                            <label for="locacion">Locacion</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="especialidad">Especialidades:</label> <br>
+                                            <select required aria-label="Elegir especialidad" class="form-select"
+                                                id="autor" name="especialidad">
+                                                <option selected value="">Elegir especialidad</option>
+                                                <option class="text-black" th:each="especialidad : ${especialidades}"
+                                                    th:text="|${especialidad.nombre}|" th:if="${especialidad.alta}"
+                                                    th:value="${especialidad.id}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-lg ms-1 reg">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
     <!--Footer-->
     <footer class="container-fluid mt-5 py-3">
         <div class="row ">
-    
+
             <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
                         height="28" /></span> Hardy</h6>
-    
+
         </div>
-    
+
     </footer>
 
 
@@ -401,7 +463,7 @@
         </script>
 
     <script th:src="@{/js/calendario.js}"></script>
-    
+
 
 </body>
 
