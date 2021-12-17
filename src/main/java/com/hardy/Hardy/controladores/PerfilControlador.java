@@ -1,5 +1,6 @@
 package com.hardy.Hardy.controladores;
 
+import com.hardy.Hardy.entidades.Cliente;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.servicios.ClienteServicio;
 import com.hardy.Hardy.servicios.UsuarioServicio;
@@ -68,5 +69,5 @@ class PerfilControlador {
         }
         return new RedirectView("/login");
     }
-
+ 
 }
