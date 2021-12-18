@@ -91,6 +91,26 @@ public class AgendaServicio {
             throw new Exception("Error al obtener turnos");
         }
     }
+    
+    @Transactional(readOnly = true)
+    public List<Agenda> buscarMes(Integer clienteId) throws Exception {
+        try {
+            LocalDate fechadeHoy = LocalDate.now();
+            return agendaRepositorio.obtenerAgendaMes(clienteId, fechadeHoy);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener turnos");
+        }
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Agenda> buscarFuturos(Integer clienteId) throws Exception {
+        try {
+            LocalDate fechadeHoy = LocalDate.now();
+            return agendaRepositorio.obtenerAgendaFuturo(clienteId, fechadeHoy);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener turnos");
+        }
+    }
 
     @Transactional(readOnly = true)
     public List<Agenda> buscarPorUsuario(Integer clienteId) throws Exception {
