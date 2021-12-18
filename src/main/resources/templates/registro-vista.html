@@ -16,56 +16,56 @@
   <!-- Navbar -->
 
   <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
-        <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
-        <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-          <ul class="navbar-nav text-end">
+    <div class="container">
+      <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
+      <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav text-end">
 
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/registro}">Registros</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/registro}">Registros</a>
+          </li>
 
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/agenda}">Agenda</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/agenda}">Agenda</a>
+          </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="#">Documentos</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Documentos</a>
+          </li>
 
-            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-              <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
-            </li>
+          <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+            <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+          </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <img th:src="${session.imagen != null} ? @{/upload/__${session.imagen}__} : @{/upload/profile-1-1.png}"
-                  alt="imagen de perfil" width="35" class=" rounded-circle mb-1">
-              </a>
-              <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarCorreo">Cambiar e-mail</a>
-                </li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarClave">Cambiar contraseña</a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
-              </ul>
-            </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <img th:src="${session.imagen != null} ? @{/upload/__${session.imagen}__} : @{/upload/profile-1-1.png}"
+                alt="imagen de perfil" width="35" class=" rounded-circle mb-1">
+            </a>
+            <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarCorreo">Cambiar e-mail</a>
+              </li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarClave">Cambiar contraseña</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+            </ul>
+          </li>
 
-          </ul>
+        </ul>
 
-        </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 
   <div class="row justify-content-center">
     <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
@@ -140,7 +140,7 @@
 
           <div class="col-4" th:each="especialidad : ${especialidades}">
             <div class="row justify-content-center">
-              <div th:attr="class=|col-12 py-5 text-center circulo estilo${especialidad.id}|">
+              <div th:attr="class=|col-12 py-5 text-center circ circulo estilo${especialidad.id}|">
                 <a class="text-decoration-none text-reset" th:href="@{registro/ver-registros/__${especialidad.id}__}">
                   <img class="img-fluid"
                     th:src="${especialidad.nombreImagen != null} ? @{/img/__${especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
@@ -153,6 +153,9 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
@@ -273,7 +276,7 @@
     </div>
   </div>
 
-   <!-- Modal cambio de correo -->
+  <!-- Modal cambio de correo -->
   <div class="modal fade" id="editarCorreo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
