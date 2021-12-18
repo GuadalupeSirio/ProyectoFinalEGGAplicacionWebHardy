@@ -1,74 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
 
-* {
+*{
     margin: 0;
     padding: 0;
 }
 
-body {
+body{
     font-family: sans-serif;
-    background-image: url("../img/Fondo.svg");
+    background-image: url("../img/Frame-174.jpg"); 
+    background-position: center;
+    
     background-repeat: no-repeat;
-    width: 100%;
-    top: 0;
-    position: absolute;
-    left: 0px;
-    background-repeat: no-repeat;
-
+    background-repeat: repeat-x, no-repeat;
+    background-repeat: repeat-y, no-repeat;
+    
 
 }
 
 /*------NAVBAR------*/
 
-#nav-bar {
+#nav-bar{
     /*position: sticky;*/
-    top: 0;
+    top:0;
     z-index: 10;
     padding-left: 30px;
 }
 
 /*Titulo*/
-.navbar-brand {
+.navbar-brand{
     font-family: 'Poppins',
-        sans-serif;
+    sans-serif;
     font-weight: bold;
     font-size: 30px;
     padding-left: 20px;
 }
 
-.logo-navbar {
-    width: 40px;
+.logo-navbar{
+    width: 40px; 
 }
 
 
 /*Fonts links*/
-.navbar-nav {
+.navbar-nav{
     padding-right: 40px;
     font-family: 'Roboto',
-        sans-serif;
+    sans-serif;
     font-size: 18px;
 }
 
 /*Espacio entre links*/
-.navbar-nav li {
+.navbar-nav li{
     padding: 0 10px;
 }
 
-
 /*Titulo pag*/
-.titulo {
+.titulo{
     font-family: 'Poppins';
     font-weight: bold;
     color: black;
 }
 
 /*Boton guardar*/
-.btn {
+.btn{
     background-color: rgb(84, 193, 251);
 }
 
 
 /*Flecha footer*/
-.arrow {
+.arrow{
     color: rgb(84, 193, 251);
+}
+
+.accordion {
+    border-radius: 20px;
+}
+.espacio{
+    margin-bottom: 20px;
+    border: none;
+    background:rgb(247,244,253)
+    
+}
+.colores{
+    background:rgb(93,33,210, 0.5);
+}
+
+.dropdown-menu{
+    background-color: transparent;
+    }
+footer {
+  background-color: rgb(241, 243, 255);
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
 }

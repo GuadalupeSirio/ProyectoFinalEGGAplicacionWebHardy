@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hardy</title>
+  <link rel="icon" href="../static/img/heartbeat-solid.svg">
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!--Bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <!--Fontawesome icons-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <!--css-->
+  <link rel="stylesheet" th:href="@{/css/style-registro-documentos.css}">
+</head>
+
+<body>
+
+  <!--NAVBAR-->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
+      <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav text-end">
+
+          <li class="nav-item">
+            <a class="nav-link " th:href="@{/registro}">Registros</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/agenda}">Agenda</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Documentos</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Perfil
+            </a>
+            <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+              <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
+              <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="row justify-content-center">
+    <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+      th:if="${exito != null}">
+      <strong th:text="${exito}"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
+      th:if="${error != null}">
+      <strong th:text="${error}"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+  </div>
+
+  <!--TARJETAS REGISTROS-->
+
+  <div class="container pt-4 px-5 mb-3">
+    <h1 class="pt-5 titulo text-center" th:text="${titulo}"></h1>
+  </div>
+
+  <div th:if=${registros.isEmpty()}>
+    <p>todavia no tienes registro cargados de esta especialidad</p>
+    <div class="col-12 pb-5 pb-lg-0 text-center">
+      <button type="button" class="btn col-6 reg py-3" data-bs-toggle="modal" data-bs-target="#registromedico">
+        Nuevo registro
+      </button>
+    </div>
+  </div>
+
+  <div class="container m-5 px-5">
+    <div class="accordion ps-5" id="accordionExample" th:each="registro : ${registros}">
+
+      <div class="accordion-item espacio">
+
+        <!--Databs-target = al id -->
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed colores" type="button" data-bs-toggle="collapse"
+            th:attr="data-bs-target=|#acordion${registro.id}|" th:text="${registro.fecha}" aria-expanded="false"
+            th:aria-controls="|#acordion${registro.id}|">
+
+          </button>
+        </h2>
+
+        <!--id = id del registro-->
+        <div th:attr="id=|acordion${registro.id}|" class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+
+            <h5> <b>Medico: </b></h5>
+            <p th:text="${registro.medico}"></p>
+
+            <h5> <b>Cobertura: </b></h5>
+            <p th:text="${registro.cobertura}"></p>
+
+            <h5> <b>Lugar: </b></h5>
+            <p th:text="${registro.lugar}"></p>
+
+            <h5> <b>Resultados: </b></h5>
+            <p th:text="${registro.resultados}"></p>
+
+            <h5> <b>Estudio: </b></h5>
+            <img src=".." class="img-thumbnail" alt="...">
+
+            <button class="btn" title="Agregar archivo" type="button" data-bs-toggle="modal"
+              th:attr="data-bs-target=|#cargarestudio${registro.id}|">
+              Agregar archivo
+            </button>
+
+            <button class="btn" title="Agregar archivo" type="button" data-bs-toggle="modal"
+              th:attr="data-bs-target=|#verestudio${registro.id}|">
+              Ver archivos
+            </button>
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div th:each="registro : ${registros}">
+
+    <div class="modal fade" th:attr="id=|cargarestudio${registro.id}|" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Agregar archivo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form th:action="@{/estudios/guardar}" enctype="multipart/form-data" method="POST">
+
+              <label for="nombre">Nombre del archivo</label>
+              <input class="form-control" id="nombre" type="text" name="nombre">
+              <label for="estudio" class="mt-3">Seleccione el archivo</label>
+              <input id="estudio" class="form-control border-0" type="file" name="adjunto"
+                accept="image/*,.pdf, .docx, .doc">
+              <input type="hidden" th:value="${registro.id}" name="idRegistro">
+
+               <input type="hidden" th:value="${ruta}" name="ruta">
+
+              <hr class="my-4">
+              <div class="modal-dialog-centered justify-content-center">
+                <button title="Guardar archivo" type="submit" class="btn no-btn">
+                  Guardar archivo
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" th:attr="id=|verestudio${registro.id}|" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Ver archivo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <table class="table table-hover text-center table-sm table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Ver archivo</th>
+                  <th scope="col">Descargar archivo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="estudio : ${estudios}">
+
+                  <td th:if="${estudio.registro.id} eq ${registro.id}" th:text="${estudio.nombre}">
+                  </td>
+                  <td th:if="${estudio.registro.id} eq ${registro.id}">
+                    <a th:attr="href=|\upload\${estudio.adjunto}|" target="_blank">Ver</a>
+                  </td>
+                  <td th:if="${estudio.registro.id} eq ${registro.id}">
+                    <a th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}">Descarga</a>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal registro de consulta-->
+
+  <div class="modal fade " id="registromedico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Registrá tu consulta</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/body-checkup.png}" alt="" class="img-fluid d-none d-sm-block">
+              </div>
+
+              <div class="col-12 col-xl-6 align-self-center">
+                <form class="row g-5 needs-validation" th:action="@{/registro/guardar}" method="POST" novalidate>
+
+                  <div class="col-12 col-md-6">
+                    <label for="consulta">Fecha de la Consulta</label>
+                    <input required type="date" class="form-control border border-secondary" id="consulta"
+                      placeholder="Consulta" name="fecha">
+
+                  </div>
+
+                  <div th:if="${especialidad}" class="col-12 col-md-6">
+                    <label>Especialidad</label> <br>
+                     <select required class="form-select" name="especialidad">
+                      <option  selected th:text="${especialidad.nombre}" th:value="${especialidad.id}"></option>
+                      </select> 
+                  </div>
+
+
+                  <div class="col-12 col-md-6">
+                    <label for="medico">Médico</label>
+                    <input required type="text" class="form-control border border-secondary" id="medico"
+                      placeholder="Medico" name="medico">
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <label for="cobertura">Cobertura</label>
+                    <input required type="text" class="form-control border border-secondary" id="cobertura"
+                      placeholder="Cobertura" name="cobertura">
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <label for="sede">Sede</label>
+                    <input required type="text" class="form-control border border-secondary" id="sede"
+                      placeholder="Sede" name="lugar">
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <label for="exampleFormControlTextarea1" class="form-label">Resultados</label>
+                    <textarea required class="form-control border border-secondary" id="exampleFormControlTextarea1"
+                      name="resultados" rows="4"></textarea>
+                    <!-- <input required type="text" name="resultados" class="form-control border border-secondary" rows="3"></input>  -->
+                  </div>
+
+                   <input type="hidden" th:value="${ruta}" name="ruta"> 
+                  <!-- dirname="resultados.dir" form="registro" -->
+                  <div class="col-12 col-lg-9 text-center text-xl-start">
+                    <button type="submit" class="btn col-6 reg py-3">Agendar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+      <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+          'use strict'
+
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.querySelectorAll('.needs-validation')
+
+          // Loop over them and prevent submission
+          Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+              form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                  event.preventDefault()
+                  event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+              }, false)
+            })
+        })()
+      </script>
+
+</body>
+
+</html>
