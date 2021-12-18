@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -155,34 +155,34 @@
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="mesCurso">
 
-                            <div class="turno row" th:each="turno : ${turnosMes}">
+                            <div class="turno" th:each="turno : ${turnosMes}">
 
-                                <div class="col-2">
-                                    <img class="img-fluid"
+                                <div class="especialidad-icon">
+                                    <img class="icono"
                                         th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
                                         alt="" />
                                 </div>
 
-                                <div class="info col-3">
+                                <div class="info">
                                     <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
-                                    <!-- <p class="medico" th:text="${turno.medico}">Medico dr asda</p>
-                                        <p class="direccion" th:text="${turno.lugar}"></p> -->
+                                    <p class="medico" th:text="${turno.medico}"></p>
+                                    <p class="direccion" th:text="${turno.lugar}"></p>
                                 </div>
 
-                                <div class="time col-5">
+                                <div class="time">
                                     <p class="dia" th:text="${turno.fecha}"></p>
-                                    <p class="hora d-none d-sm-block" th:text="|${turno.hora} Hrs|"></p>
+                                    <p class="hora " th:text="|${turno.hora} Hrs|"></p>
                                 </div>
 
-                                <div class="botones col-1 col-sm-2">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <a href="" class="editar"><i class="fas fa-edit"></i></a>
+                                <div class="botones">
+                                    
+                                        <div>
+                                            <a href="" class="editar" data-bs-toggle="modal" data-bs-target="#editarTurno"><i class="fas fa-edit"></i></a>
                                         </div>
-                                        <div class="col-6">
+                                        <div>
                                             <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
                                         </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -191,32 +191,33 @@
 
                             <div class="turno row" th:each="turno : ${turnosFuturo}">
 
-                                <div class="col-2">
-                                    <img class="img-fluid"
+                                <div class="especialidad-icon">
+                                    <img  class="icono"
                                         th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
                                         alt="" />
                                 </div>
 
-                                <div class="info col-3">
+                                
+                                <div class="info">
                                     <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
-                                    <!-- <p class="medico" th:text="${turno.medico}">Medico dr asda</p>
-                                                                    <p class="direccion" th:text="${turno.lugar}"></p> -->
+                                    <p class="medico" th:text="${turno.medico}"></p>
+                                    <p class="direccion" th:text="${turno.lugar}"></p>
                                 </div>
 
-                                <div class="time col-5">
+                                <div class="time">
                                     <p class="dia" th:text="${turno.fecha}"></p>
-                                    <p class="hora d-none d-sm-block" th:text="|${turno.hora} Hrs|"></p>
+                                    <p class="hora " th:text="|${turno.hora} Hrs|"></p>
                                 </div>
 
-                                <div class="botones col-1 col-sm-2">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <a href="" class="editar"><i class="fas fa-edit"></i></a>
+                                <div class="botones">
+                                    
+                                        <div>
+                                            <a href="" class="editar" data-bs-toggle="modal" data-bs-target="#editarTurno"><i class="fas fa-edit" ></i></a>
                                         </div>
-                                        <div class="col-6">
+                                        <div>
                                             <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
                                         </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -249,6 +250,90 @@
                             <div class="col-12 col-xl-6 align-self-center">
 
                                 <form class="needs-validation" th:action="@{/agenda/guardar}" method="POST" novalidate>
+                                    <div class="row g-5">
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="date" class="form-control border border-secondary"
+                                                    id="fecha" placeholder="fecha" name="fecha">
+                                                <label for="fecha">Fecha del turno</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="time" class="form-control border border-secondary"
+                                                    id="horario" placeholder="horario" name="hora">
+                                                <label for="horario">Horario</label>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="text" class="form-control border border-secondary"
+                                                    id="medico" placeholder="medico" name="medico">
+                                                <label for="medico">Médico</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="text" class="form-control border border-secondary"
+                                                    id="locacion" placeholder="locacion" name="lugar">
+                                                <label for="locacion">Locacion</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <select required aria-label="Elegir especialidad" class="form-select"
+                                                    id="especialidad" name="idEspecialidad">
+                                                    <option selected value="">Seleccionar</option>
+                                                    <option th:each="especialidad : ${especialidades}"
+                                                        th:text="|${especialidad.nombre}|" th:if="${especialidad.alta}"
+                                                        th:value="${especialidad.id}">
+                                                    </option>
+                                                </select>
+                                                <label for="especialidad">Especialidades:</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editar turno -->
+
+    <div class="modal fade " id="editarTurno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+            <div class="modal-content fondomodal">
+                <div class="modal-header">
+                    <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Editar turno</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 d-none d-xl-block">
+                                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+                            </div>
+                            <div class="col-12 col-xl-6 align-self-center">
+
+                                <form class="needs-validation" th:action="@{/agenda/editar}" method="POST" novalidate>
                                     <div class="row g-5">
 
                                         <div class="col-12 col-md-6">

@@ -18,7 +18,7 @@ body {
     background: rgb(197, 200, 254);
     background: linear-gradient(180deg, rgb(164, 187, 252) 1%, rgb(194, 235, 253) 35%, rgba(255, 255, 255, 1) 100%);
     background-repeat: no-repeat;
-} 
+}
 
 
 
@@ -50,7 +50,7 @@ body {
     font-family: 'Roboto',
         sans-serif;
     font-size: 18px;
-    
+
 }
 
 /*Espacio entre links*/
@@ -135,7 +135,7 @@ body {
     height: 85px;
     margin-bottom: 20px;
     border-radius: 10px; */
-}  
+}
 
 .turno:hover {
     transform: scale(1.02);
@@ -143,30 +143,31 @@ body {
 
 .icono {
     width: 50px;
-    margin: 15px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 
-/* .info {
+.info {
 
     width: 350px;
     text-align: center;
 }
 
 .especialidad {
-    font-size: 25px;
+    font-size: 23px;
     font-weight: 500;
     margin-top: 5px;
     margin-bottom: 0;
 }
 
 .medico {
-    font-size: 15px;
+    font-size: 12px;
     margin-bottom: 0;
 }
 
 .direccion {
-    font-size: 15px;
+    font-size: 12px;
     margin-bottom: 0;
 }
 
@@ -208,7 +209,7 @@ body {
     color: black;
     margin-right: 5px;
     margin-left: 2px;
-} */
+}
 
 
 
@@ -276,15 +277,25 @@ body {
 
 
 }
-.altura{
+
+.altura {
     height: 20rem;
 }
 
 footer {
-  background-color: rgb(241, 243, 255);
-  color: black;
-  text-decoration: none;
-  font-size: 1rem;
-  position:absolute;
-  bottom:0;
+    background-color: rgb(241, 243, 255);
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+    position: absolute;
+    bottom: 0;
+}
+
+.reg {
+    background-color: #8BE9E1;
+    color: black;
+    font-weight: bold;
+    border: 2px solid #8BE9E1;
+    padding: 10px;
+    border-radius: 2em 1em 4em / 0.5em 3em;
 }
