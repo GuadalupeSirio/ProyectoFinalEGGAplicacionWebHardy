@@ -2,6 +2,7 @@ package com.hardy.Hardy.controladores;
 
 import com.hardy.Hardy.entidades.Agenda;
 import com.hardy.Hardy.entidades.Cliente;
+import com.hardy.Hardy.entidades.Especialidad;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.servicios.AgendaServicio;
 import com.hardy.Hardy.servicios.ClienteServicio;
@@ -47,7 +48,7 @@ public class AgendaControlador {
         }
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
         mav.addObject("especialidades", especialidadServicio.buscarPorUsuario((Integer) sesion.getAttribute("idUsuario")));
-        mav.addObject("agendas", agendaServicio.buscarTodos());
+        mav.addObject("turnos", agendaServicio.buscarPorUsuario(cliente.getId()));
         return mav;
     }
 
@@ -95,16 +96,17 @@ public class AgendaControlador {
     @PostMapping("/guardar")
     public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico,
-            @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad,
+            @RequestParam String lugar, @RequestParam Integer idEspecialidad,
             HttpSession sesion, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
-            agendaServicio.crearAgenda(fecha, hora, medico, lugar, idEspecialidad, cliente);
-            attributes.addFlashAttribute("exito-name", "La agenda ha sido creada exitosamente");
+            Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(idEspecialidad, cliente.getId());
+            agendaServicio.crearAgenda(fecha, hora, medico, lugar, especialidad, cliente);
+            attributes.addFlashAttribute("exito-name", "El turno ha sido guardado exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
-        return new RedirectView("/agendas");
+        return new RedirectView("/agenda");
     }
 
     @PostMapping("/modificar")

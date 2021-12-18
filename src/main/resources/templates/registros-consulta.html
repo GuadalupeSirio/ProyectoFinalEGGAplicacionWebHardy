@@ -169,7 +169,7 @@
                 accept="image/*,.pdf, .docx, .doc">
               <input type="hidden" th:value="${registro.id}" name="idRegistro">
 
-               <input type="hidden" th:value="${ruta}" name="ruta">
+              <input type="hidden" th:value="${ruta}" name="ruta">
 
               <hr class="my-4">
               <div class="modal-dialog-centered justify-content-center">
@@ -245,46 +245,56 @@
                 <form class="row g-5 needs-validation" th:action="@{/registro/guardar}" method="POST" novalidate>
 
                   <div class="col-12 col-md-6">
-                    <label for="consulta">Fecha de la Consulta</label>
-                    <input required type="date" class="form-control border border-secondary" id="consulta"
-                      placeholder="Consulta" name="fecha">
-
+                    <div class="form-floating">
+                      <input required type="date" class="form-control border border-secondary" id="consulta"
+                        placeholder="Consulta" name="fecha">
+                      <label for="consulta">Fecha de la Consulta</label>
+                    </div>
                   </div>
 
                   <div th:if="${especialidad}" class="col-12 col-md-6">
-                    <label>Especialidad</label> <br>
-                     <select required class="form-select" name="especialidad">
-                      <option  selected th:text="${especialidad.nombre}" th:value="${especialidad.id}"></option>
-                      </select> 
+                    <div class="form-floating">
+                      <select id="especialidad" required class="form-select" name="especialidad">
+                        <option selected th:text="${especialidad.nombre}" th:value="${especialidad.id}"></option>
+                      </select>
+                      <label for="especialidad">Especialidad</label>
+                    </div>
                   </div>
 
 
                   <div class="col-12 col-md-6">
-                    <label for="medico">Médico</label>
-                    <input required type="text" class="form-control border border-secondary" id="medico"
-                      placeholder="Medico" name="medico">
+                    <div class="form-floating">
+                      <input required type="text" class="form-control border border-secondary" id="medico"
+                        placeholder="Medico" name="medico">
+                      <label for="medico">Médico</label>
+                    </div>
                   </div>
 
                   <div class="col-12 col-md-6">
-                    <label for="cobertura">Cobertura</label>
-                    <input required type="text" class="form-control border border-secondary" id="cobertura"
-                      placeholder="Cobertura" name="cobertura">
+                    <div class="form-floating">
+                      <input required type="text" class="form-control border border-secondary" id="cobertura"
+                        placeholder="Cobertura" name="cobertura">
+                      <label for="cobertura">Cobertura</label>
+                    </div>
                   </div>
 
                   <div class="col-12 col-md-6">
-                    <label for="sede">Sede</label>
-                    <input required type="text" class="form-control border border-secondary" id="sede"
-                      placeholder="Sede" name="lugar">
+                    <div class="form-floating">
+                      <input required type="text" class="form-control border border-secondary" id="sede"
+                        placeholder="Sede" name="lugar">
+                      <label for="sede">Sede</label>
+                    </div>
                   </div>
 
                   <div class="col-12 col-md-6">
-                    <label for="exampleFormControlTextarea1" class="form-label">Resultados</label>
-                    <textarea required class="form-control border border-secondary" id="exampleFormControlTextarea1"
-                      name="resultados" rows="4"></textarea>
-                    <!-- <input required type="text" name="resultados" class="form-control border border-secondary" rows="3"></input>  -->
+                    <div class="form-floating">
+                      <textarea required class="form-control border border-secondary" id="resultado"
+                        name="resultados" placeholder="resultados"></textarea>
+                      <label for="resultado" class="form-label">Resultados</label>
+                    </div>
                   </div>
 
-                   <input type="hidden" th:value="${ruta}" name="ruta"> 
+                  <input type="hidden" th:value="${ruta}" name="ruta">
                   <!-- dirname="resultados.dir" form="registro" -->
                   <div class="col-12 col-lg-9 text-center text-xl-start">
                     <button type="submit" class="btn col-6 reg py-3">Agendar</button>
@@ -304,28 +314,28 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
-      <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-          'use strict'
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict'
 
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.querySelectorAll('.needs-validation')
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
 
-          // Loop over them and prevent submission
-          Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-              form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                  event.preventDefault()
-                  event.stopPropagation()
-                }
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
 
-                form.classList.add('was-validated')
-              }, false)
-            })
-        })()
-      </script>
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
 
 </body>
 

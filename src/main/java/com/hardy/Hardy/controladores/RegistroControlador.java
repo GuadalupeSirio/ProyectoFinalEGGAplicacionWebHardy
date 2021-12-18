@@ -70,8 +70,8 @@ public class RegistroControlador {
             mav.addObject("error", flashMap.get("error-name"));
         }
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        
         mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
-
         mav.addObject("ruta", "/registro/ver-registros");
         mav.addObject("titulo", "Historial médico");
         mav.addObject("especialidad", new Especialidad());
@@ -90,7 +90,7 @@ public class RegistroControlador {
             mav.addObject("error", flashMap.get("error-name"));
         }
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
-        Especialidad especialidad = especialidadServicio.obtenerEspecialidadId(especialidadId);
+        Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(especialidadId, cliente.getId());
         mav.addObject("ruta", "/registro/ver-registros/"+especialidadId);
         mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
         mav.addObject("titulo", "Historial de " + especialidad.getNombre());
