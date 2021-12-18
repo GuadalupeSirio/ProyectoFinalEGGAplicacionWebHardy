@@ -119,6 +119,7 @@
 
                     </div>
                 </div>
+                
                 <button type="button" class="btn btn-outline-primary col-5 mx-3 ing " data-bs-toggle="modal"
                     data-bs-target="#agendarTurno">Agendar Turno</button>
             </div>
@@ -141,227 +142,75 @@
 
 
 
-                    <div class="tab-content " id="pills-tabContent">
+                    <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="mesCurso">
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
+
+                            <div class="turno row" th:each="turno : ${turnos}">
+
+                                <div class="col-2">
+                                    <img class="img-fluid"
+                                        th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
+                                        alt="" />
                                 </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
+
+                                <div class="info col-3">
+                                    <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
+                                    <!-- <p class="medico" th:text="${turno.medico}">Medico dr asda</p>
+                                        <p class="direccion" th:text="${turno.lugar}"></p> -->
                                 </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
+
+                                <div class="time col-5">
+                                    <p class="dia" th:text="${turno.fecha}"></p>
+                                    <p class="hora d-none d-sm-block" th:text="|${turno.hora} Hrs|"></p>
                                 </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+
+                                <div class="botones col-1 col-sm-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="" class="editar"><i class="fas fa-edit"></i></a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
-                                </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
-                                </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
-                                </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
-                                </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
-                                </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
-                                </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
-                                </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
-                                </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
-                                </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
-                                </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
-                                </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
-                                </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
 
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="mesProximo">
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
-                                </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
-                                </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
-                                </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
 
+                            <div class="turno row" th:each="turno : ${turnos}">
 
+                                <div class="col-2">
+                                    <img class="img-fluid"
+                                        th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
+                                        alt="" />
+                                </div>
 
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
+                                <div class="info col-3">
+                                    <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
+                                    <!-- <p class="medico" th:text="${turno.medico}">Medico dr asda</p>
+                                                                    <p class="direccion" th:text="${turno.lugar}"></p> -->
                                 </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
+
+                                <div class="time col-5">
+                                    <p class="dia" th:text="${turno.fecha}"></p>
+                                    <p class="hora d-none d-sm-block" th:text="|${turno.hora} Hrs|"></p>
                                 </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
-                                </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+
+                                <div class="botones col-1 col-sm-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="" class="editar"><i class="fas fa-edit"></i></a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-
-
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
-                                </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
-                                </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
-                                </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="turno">
-                                <div class="especialidad-icon">
-                                    <img th:src="@{/img/cuidado-dental2.png}" class="icono" alt="">
-                                </div>
-                                <div class="info">
-                                    <h3 class="especialidad">Especialidad</h3>
-                                    <p class="medico">Medico dr asda</p>
-                                    <p class="direccion">Direcion </p>
-                                </div>
-                                <div class="time">
-                                    <h3 class="dia">11/12/2021</h3>
-                                    <p class="hora">15:00 hs</p>
-                                </div>
-                                <div class="botones">
-                                    <div>
-                                        <a href="" class="editar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -379,7 +228,7 @@
         <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
             <div class="modal-content fondomodal">
                 <div class="modal-header">
-                    <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Ficha Médica</h3>
+                    <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Agendar Turno</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
@@ -390,49 +239,63 @@
                             </div>
                             <div class="col-12 col-xl-6 align-self-center">
 
+                                <form class="needs-validation" th:action="@{/agenda/guardar}" method="POST" novalidate>
+                                    <div class="row g-5">
 
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-floating mb-4 ms-1 mt-1">
-                                            <input type="date" class="form-control border border-secondary" id="fecha">
-                                            <label for="fecha">Fecha del turno</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-floating mb-4 ms-1 mt-1">
-                                            <input type="time" class="form-control border border-secondary"
-                                                id="grupo-sanguineo">
-                                            <label for="horario">Horario</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-floating mb-4 ms-1 mt-1">
-                                            <input type="text" class="form-control border border-secondary" id="medico">
-                                            <label for="medico">medico</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-floating mb-4 ms-1 mt-1">
-                                            <input type="text" class="form-control border border-secondary"
-                                                id="locacion" placeholder="Altura">
-                                            <label for="locacion">Locacion</label>
-                                        </div>
                                         <div class="col-12 col-md-6">
-                                            <label for="especialidad">Especialidades:</label> <br>
-                                            <select required aria-label="Elegir especialidad" class="form-select"
-                                                id="autor" name="especialidad">
-                                                <option selected value="">Elegir especialidad</option>
-                                                <option class="text-black" th:each="especialidad : ${especialidades}"
-                                                    th:text="|${especialidad.nombre}|" th:if="${especialidad.alta}"
-                                                    th:value="${especialidad.id}">
-                                                </option>
-                                            </select>
+                                            <div class="form-floating">
+                                                <input required type="date" class="form-control border border-secondary"
+                                                    id="fecha" placeholder="fecha" name="fecha">
+                                                <label for="fecha">Fecha del turno</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="time" class="form-control border border-secondary"
+                                                    id="horario" placeholder="horario" name="hora">
+                                                <label for="horario">Horario</label>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="text" class="form-control border border-secondary"
+                                                    id="medico" placeholder="medico" name="medico">
+                                                <label for="medico">Médico</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="text" class="form-control border border-secondary"
+                                                    id="locacion" placeholder="locacion" name="lugar">
+                                                <label for="locacion">Locacion</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <select required aria-label="Elegir especialidad" class="form-select"
+                                                    id="especialidad" name="idEspecialidad">
+                                                    <option selected value="">Seleccionar</option>
+                                                    <option th:each="especialidad : ${especialidades}"
+                                                        th:text="|${especialidad.nombre}|" th:if="${especialidad.alta}"
+                                                        th:value="${especialidad.id}">
+                                                    </option>
+                                                </select>
+                                                <label for="especialidad">Especialidades:</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
                                         </div>
                                     </div>
-                                </div>
-                                <button type="button" class="btn btn-lg ms-1 reg">Guardar</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -461,8 +324,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 
     <script th:src="@{/js/calendario.js}"></script>
+
 
 
 </body>

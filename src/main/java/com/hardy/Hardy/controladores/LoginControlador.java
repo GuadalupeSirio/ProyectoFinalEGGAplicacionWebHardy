@@ -2,6 +2,7 @@ package com.hardy.Hardy.controladores;
 
 import com.hardy.Hardy.servicios.UsuarioServicio;
 import java.security.Principal;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -20,20 +22,27 @@ public class LoginControlador {
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/login")
-    public ModelAndView login(HttpServletRequest request, @RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
+    public ModelAndView login(HttpServletRequest request, @RequestParam(required = false)
+            String error, @RequestParam(required = false) String logout, Principal principal) {
 
         ModelAndView mv = new ModelAndView("login");
-
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mv.addObject("exito", flashMap.get("exito-name"));
+            mv.addObject("error", flashMap.get("error-name"));
+            return mv;
+        }
         if (error != null) {
-            mv.addObject("error", "Correo o contraseña incorrecta");
+            mv.addObject("errorLog", "Correo o contraseña incorrecta");
+            return mv;
         }
         if (logout != null) {
             mv.addObject("logout", "Salió correctamente de la plataforma");
+            return mv;
         }
         if (principal != null) {
             mv.setViewName("redirect:/");
         }
-
         return mv;
     }
 
