@@ -96,7 +96,9 @@
           <div class="col-12 col-lg-5 align-self-center">
             <div class="row text-center">
               <div class="col-12">
-               <a data-bs-toggle="modal" data-bs-target="#editarFoto"> <img class="img-fluid rounded-circle" th:src="${cliente.imagen != null} ? @{/upload/__${cliente.imagen}__} : @{/upload/profile-1-1.png}" alt="" width="140"/></a>
+                <a data-bs-toggle="modal" data-bs-target="#editarFoto"> <img class="img-fluid rounded-circle"
+                    th:src="${cliente.imagen != null} ? @{/upload/__${cliente.imagen}__} : @{/upload/profile-1-1.png}"
+                    alt="" width="140" /></a>
               </div>
             </div>
           </div>
@@ -299,14 +301,17 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Cambiar nombre</h5>
+          <h5 class="modal-title">Editar</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form th:action="@{/perfil/editar-nombre}" autocomplete="off" method="POST" class="needs-validation"
             novalidate>
-            <label for="nombre">Nombre</label>
-            <input class="form-control" id="nombre" placeholder="Nombre" required type="text" name="nombre">
+
+            <div class="form-floating">
+              <input class="form-control" id="nombre" placeholder="Nombre" required type="text" name="nombre">
+              <label for="nombre">Nombre</label>
+            </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
@@ -325,14 +330,17 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Cambiar apellido</h5>
+          <h5 class="modal-title">Editar</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form th:action="@{/perfil/editar-apellido}" autocomplete="off" method="POST" class="needs-validation"
             novalidate>
-            <label for="apellido">Apellido</label>
-            <input class="form-control" id="apellido" required type="text" name="apellido">
+
+            <div class="form-floating">
+              <input class="form-control" id="apellido" required type="text" name="apellido" placeholder="Apellido">
+              <label for="apellido">Apellido</label>
+            </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
@@ -351,14 +359,17 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Cambiar documento</h5>
+          <h5 class="modal-title">Editar</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form th:action="@{/perfil/editar-documento}" autocomplete="off" method="POST" class="needs-validation"
             novalidate>
-            <label for="documento">Documento</label>
-            <input class="form-control" id="documento" required type="number" name="documento">
+
+            <div class="form-floating">
+              <input class="form-control" id="documento" required type="number" name="documento" placeholder="Documento">
+              <label for="documento">Documento</label>
+            </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
@@ -377,14 +388,17 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Cambiar fecha de nacimiento</h5>
+          <h5 class="modal-title">Editar</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form th:action="@{/perfil/editar-fecha-nacimiento}" autocomplete="off" method="POST" class="needs-validation"
             novalidate>
-            <label for="fecha">Fecha de nacimiento</label>
-            <input class="form-control" id="fecha" required type="date" name="fechaNacimiento">
+
+            <div class="form-floating">
+              <input class="form-control" id="fecha" required type="date" name="fechaNacimiento" placeholder="Fecha de nacimiento">
+              <label for="fecha">Fecha de nacimiento</label>
+            </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
@@ -404,13 +418,17 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Cambiar peso</h5>
+          <h5 class="modal-title">Editar</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form th:action="@{/ficha-medica/modificar-peso}" autocomplete="off" method="POST" class="needs-validation" novalidate>
-            <label for="peso">Peso</label>
-            <input class="form-control" id="peso" required type="number" name="peso">
+          <form th:action="@{/ficha-medica/modificar-peso}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="peso" required type="number" name="peso" placeholder="Peso">
+              <label for="peso">Peso</label>
+            </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
@@ -429,13 +447,17 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Cambiar altura</h5>
+          <h5 class="modal-title">Editar</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form th:action="@{/ficha-medica/modificar-altura}" autocomplete="off" method="POST" class="needs-validation" novalidate>
-            <label for="altura">Altura</label>
-            <input class="form-control" id="altura" required type="number" name="altura">
+          <form th:action="@{/ficha-medica/modificar-altura}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="altura" required type="number" name="altura" placeholder="Altura">
+              <label for="altura">Altura</label>
+            </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
@@ -458,9 +480,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form th:action="@{/ficha-medica/modificar-sanguineo}" autocomplete="off" method="POST" class="needs-validation" novalidate>
+          <form th:action="@{/ficha-medica/modificar-sanguineo}" autocomplete="off" method="POST"
+            class="needs-validation" novalidate>
+
+            <div class="form-floating">
+            <input class="form-control" id="sanguineo" required type="text" name="sanguineo" placeholder="Grupo sanguíneo">
             <label for="sanguineo">Grupo sanguíneo</label>
-            <input class="form-control" id="sanguineo" required type="text" name="sanguineo">
+            </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
@@ -475,7 +501,7 @@
   </div>
 
 
-<!-- Editar foto-->
+  <!-- Editar foto-->
   <div class="modal fade" id="editarFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -484,10 +510,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form th:action="@{/perfil/editar-foto}" autocomplete="off" method="POST" class="needs-validation"
-            novalidate enctype="multipart/form-data">
+          <form th:action="@{/perfil/editar-foto}" autocomplete="off" method="POST" class="needs-validation" novalidate
+            enctype="multipart/form-data">
+
             <label for="imagen">Nueva foto: </label>
             <input class="form-control border-0" type="file" name="imagen" accept="image/*">
+
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
               <button title="Guardar" type="submit" value="Submit" class="btn reg">
@@ -603,12 +631,14 @@
                   </div>
                 </div>
                 <div class="row">
+
                   <div class="col-md-6 col-sm-12">
                     <div class="form-floating mb-4 ms-1 mt-1">
                       <input type="number" class="form-control border border-secondary" id="peso" placeholder="Peso">
                       <label for="peso">Peso</label>
                     </div>
                   </div>
+
                   <div class="col-md-6 col-sm-12">
                     <div class="form-floating mb-4 ms-1 mt-1">
                       <input type="number" class="form-control border border-secondary" id="altura"
@@ -616,24 +646,41 @@
                       <label for="altura">Altura</label>
                     </div>
                   </div>
+
                 </div>
-                <div class="form-floating mb-4 ms-1 mt-1">
-                  <label for="exampleFormControlTextarea1" class="form-label">Enfermedades</label>
-                  <textarea class="form-control border border-secondary" id="enfermedades" rows="3"></textarea>
+
+                <div class="row">
+
+                  <div class="col-12  mb-4 ms-1 mt-1">
+                    <div class="form-floating">
+                      <textarea class="form-control border border-secondary" id="enfermedades" name="enfermedades"
+                        placeholder="Enfermedades"></textarea>
+                      <label for="enfermedades" class="form-label">Enfermedades</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12 mb-4 ms-1 mt-1">
+                    <div class="form-floating ">
+                      <input type="date" class="form-control border border-secondary" id="chequeo"
+                        placeholder="Chequeo">
+                      <label for="chequeo">Fecha Último Chequeo</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <button type="button" class="btn btn-lg ms-1 reg">Guardar</button>
+                  </div>
                 </div>
-                <div class="form-floating mb-4 ms-1 mt-1">
-                  <input type="date" class="form-control border border-secondary" id="chequeo" placeholder="Chequeo">
-                  <label for="chequeo">Fecha Último Chequeo</label>
-                </div>
-                <button type="button" class="btn btn-lg ms-1 reg">Guardar</button>
               </div>
+
             </div>
           </div>
-
         </div>
 
       </div>
+
     </div>
+  </div>
   </div>
 
 
@@ -678,6 +725,7 @@
                       <label for="dni">DNI</label>
                     </div>
                   </div>
+
                   <div class="col-md-6 col-sm-12">
                     <div class="form-floating mb-4 ms-1 mt-1">
                       <input type="date" class="form-control border border-secondary" id="fecha-nacimiento"
@@ -685,9 +733,8 @@
                       <label for="fecha-nacimiento">Fecha nacimiento</label>
                     </div>
                   </div>
+
                 </div>
-
-
                 <button type="button" class="btn btn-lg ms-1 reg">Guardar</button>
               </div>
             </div>

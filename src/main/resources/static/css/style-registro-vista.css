@@ -114,12 +114,21 @@ body {
     border: none;
     background-color: transparent;
 }
-
-footer {
-    background-color: rgb(241, 243, 255);
-    color: black;
-    text-decoration: none;
-    font-size: 1rem;
-    position: absolute;
+footer{
+    background-color: rgb(241,243,255);
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+  position: absolute;
     bottom: 0;
+}
+.fondomodal {
+  background-image: url("../img/Group6.png");
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  left: 0px;
 }

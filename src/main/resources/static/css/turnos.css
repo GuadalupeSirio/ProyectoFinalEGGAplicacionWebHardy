@@ -130,12 +130,12 @@ body {
 .turno {
     background-color: rgba(110, 166, 250, 0.432);
     box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
-    text-align: center;
+    /* text-align: center;
     display: flex;
     height: 85px;
     margin-bottom: 20px;
-    border-radius: 10px;
-}
+    border-radius: 10px; */
+}  
 
 .turno:hover {
     transform: scale(1.02);
@@ -147,7 +147,7 @@ body {
 }
 
 
-.info {
+/* .info {
 
     width: 350px;
     text-align: center;
@@ -208,7 +208,7 @@ body {
     color: black;
     margin-right: 5px;
     margin-left: 2px;
-}
+} */
 
 
 
