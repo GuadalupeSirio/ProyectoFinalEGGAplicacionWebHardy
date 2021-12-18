@@ -21,19 +21,6 @@ body {
 } 
 
 
-/* 
-body {
-    font-family: sans-serif;
-    background-image: url("../img/Group6.png");
-    width: 100%;
-    top: 0;
-    position: absolute;
-    left: 0px;
-    background-repeat: no-repeat;
-
-
-}
- */
 
 /*------NAVBAR------*/
 
@@ -48,12 +35,12 @@ body {
     font-family: 'Poppins',
         sans-serif;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     padding-left: 20px;
 }
 
 .logo-navbar {
-    width: 40px;
+    width: 35px;
 }
 
 
@@ -108,7 +95,7 @@ body {
 
 
 
-.btn {
+.boton {
     background-image: linear-gradient(to right, #6190E8 0%, #949bfd 51%, #6190E8 100%);
     text-align: center;
     text-transform: uppercase;
@@ -118,32 +105,15 @@ body {
     box-shadow: 0 0 20px rgb(238, 238, 238);
     border-radius: 10px;
     display: block;
+    width: 250px;
 }
 
-.btn:hover {
+.boton:hover {
     background-position: right center;
     color: black;
     text-decoration: none;
 }
 
-
-.boton-sesion {
-    background-image: linear-gradient(to right, #6190E8 0%, #6670fc 51%, #397bf5 100%);
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s;
-    box-shadow:none;
-    background-size: 200% auto;
-    color: black;
-    border-radius: 10px;
-    display: block;
-}
-
-.boton-sesion:hover {
-    background-position: right center;
-    color: black;
-    text-decoration: none;
-}
 
 /*CARDS*/
 .turno {
@@ -315,4 +285,6 @@ footer {
   color: black;
   text-decoration: none;
   font-size: 1rem;
+  position:absolute;
+  bottom:0;
 }
