@@ -53,3 +53,13 @@ footer{
   text-decoration: none;
   font-size: 1rem;
 }
+.fondomodal {
+  background-image: url("../img/Group6.png");
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  left: 0px;
+}
