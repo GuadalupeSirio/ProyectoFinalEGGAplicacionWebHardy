@@ -48,7 +48,8 @@ public class AgendaControlador {
         }
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
         mav.addObject("especialidades", especialidadServicio.buscarPorUsuario((Integer) sesion.getAttribute("idUsuario")));
-        mav.addObject("turnos", agendaServicio.buscarPorUsuario(cliente.getId()));
+        mav.addObject("turnosMes", agendaServicio.buscarMes(cliente.getId()));
+        mav.addObject("turnosFuturo", agendaServicio.buscarFuturos(cliente.getId()));
         return mav;
     }
 
