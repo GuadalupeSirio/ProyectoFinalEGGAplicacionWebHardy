@@ -18,7 +18,7 @@ public class EspecialidadServicio {
     private String mensaje = "No existe ninguna especialidad asociada con el ID %s";
 
     @Transactional
-    public void crearEspecialidad(String nombre) throws Exception, MiExcepcion {
+    public void crearEspecialidad(String nombre, Integer idUsuario) throws Exception, MiExcepcion {
         try {
 
             validacionNombre(nombre, "Nombre");
@@ -26,6 +26,7 @@ public class EspecialidadServicio {
             Especialidad especialidad = new Especialidad();
 
             especialidad.setNombre(nombre);
+            especialidad.setIdUsuario(idUsuario);
             especialidad.setAlta(true);
 
             especialidadRepositorio.save(especialidad);
@@ -65,12 +66,35 @@ public class EspecialidadServicio {
     }
 
     @Transactional(readOnly = true)
+    public List<Especialidad> buscarPorUsuario(Integer id) throws Exception {
+
+        try {
+            return especialidadRepositorio.BuscarPorUsuario(id);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    @Transactional(readOnly = true)
+    public Especialidad obtenerEspecialidadIdCliente(Integer especialidadId, Integer clienteId) throws Exception {
+        try {
+
+            Optional<Especialidad> especialidadOptional = especialidadRepositorio.BuscarPorUsuario(especialidadId, clienteId);
+            return especialidadOptional.orElse(null);
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+
+    @Transactional(readOnly = true)
     public Especialidad obtenerEspecialidadId(Integer id) throws Exception {
         try {
 
             Optional<Especialidad> especialidadOptional = especialidadRepositorio.findById(id);
             return especialidadOptional.orElse(null);
-            
+
         } catch (Exception e) {
             throw e;
         }

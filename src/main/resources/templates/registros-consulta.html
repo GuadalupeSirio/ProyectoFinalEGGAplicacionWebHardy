@@ -34,7 +34,8 @@
         <ul class="navbar-nav text-end">
 
           <li class="nav-item">
-            <a class="nav-link " th:href="@{/registro}">Registros</a></li>
+            <a class="nav-link " th:href="@{/registro}">Registros</a>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" th:href="@{/agenda}">Agenda</a>
@@ -50,13 +51,13 @@
               Perfil
             </a>
             <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
               <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
               <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+              <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
             </ul>
           </li>
 
@@ -84,7 +85,16 @@
   <!--TARJETAS REGISTROS-->
 
   <div class="container pt-4 px-5 mb-3">
-    <h1 class="pt-5 titulo text-center" th:text="${tipo}"></h1>
+    <h1 class="pt-5 titulo text-center" th:text="${titulo}"></h1>
+  </div>
+
+  <div th:if=${registros.isEmpty()}>
+    <p>todavia no tienes registro cargados de esta especialidad</p>
+    <div class="col-12 pb-5 pb-lg-0 text-center">
+      <button type="button" class="btn col-6 reg py-3" data-bs-toggle="modal" data-bs-target="#registromedico">
+        Nuevo registro
+      </button>
+    </div>
   </div>
 
   <div class="container m-5 px-5">
@@ -95,9 +105,9 @@
         <!--Databs-target = al id -->
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed colores" type="button" data-bs-toggle="collapse"
-            th:attr="data-bs-target=|#acordion${registro.id}|" th:text="${registro.fecha}" 
-            aria-expanded="false"  th:aria-controls="|#acordion${registro.id}|">
-            
+            th:attr="data-bs-target=|#acordion${registro.id}|" th:text="${registro.fecha}" aria-expanded="false"
+            th:aria-controls="|#acordion${registro.id}|">
+
           </button>
         </h2>
 
@@ -159,6 +169,8 @@
                 accept="image/*,.pdf, .docx, .doc">
               <input type="hidden" th:value="${registro.id}" name="idRegistro">
 
+              <input type="hidden" th:value="${ruta}" name="ruta">
+
               <hr class="my-4">
               <div class="modal-dialog-centered justify-content-center">
                 <button title="Guardar archivo" type="submit" class="btn no-btn">
@@ -189,7 +201,7 @@
                 </tr>
               </thead>
               <tbody>
-                 <tr th:each="estudio : ${estudios}">
+                <tr th:each="estudio : ${estudios}">
 
                   <td th:if="${estudio.registro.id} eq ${registro.id}" th:text="${estudio.nombre}">
                   </td>
@@ -200,7 +212,7 @@
                     <a th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}">Descarga</a>
                   </td>
 
-                </tr> 
+                </tr>
               </tbody>
             </table>
 
@@ -212,11 +224,118 @@
 
   </div>
 
-    
+  <!-- Modal registro de consulta-->
+
+  <div class="modal fade " id="registromedico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Registrá tu consulta</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/body-checkup.png}" alt="" class="img-fluid d-none d-sm-block">
+              </div>
+
+              <div class="col-12 col-xl-6 align-self-center">
+                <form class="row g-5 needs-validation" th:action="@{/registro/guardar}" method="POST" novalidate>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                      <input required type="date" class="form-control border border-secondary" id="consulta"
+                        placeholder="Consulta" name="fecha">
+                      <label for="consulta">Fecha de la Consulta</label>
+                    </div>
+                  </div>
+
+                  <div th:if="${especialidad}" class="col-12 col-md-6">
+                    <div class="form-floating">
+                      <select id="especialidad" required class="form-select" name="especialidad">
+                        <option selected th:text="${especialidad.nombre}" th:value="${especialidad.id}"></option>
+                      </select>
+                      <label for="especialidad">Especialidad</label>
+                    </div>
+                  </div>
+
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                      <input required type="text" class="form-control border border-secondary" id="medico"
+                        placeholder="Medico" name="medico">
+                      <label for="medico">Médico</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                      <input required type="text" class="form-control border border-secondary" id="cobertura"
+                        placeholder="Cobertura" name="cobertura">
+                      <label for="cobertura">Cobertura</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                      <input required type="text" class="form-control border border-secondary" id="sede"
+                        placeholder="Sede" name="lugar">
+                      <label for="sede">Sede</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                      <textarea required class="form-control border border-secondary" id="resultado"
+                        name="resultados" placeholder="resultados"></textarea>
+                      <label for="resultado" class="form-label">Resultados</label>
+                    </div>
+                  </div>
+
+                  <input type="hidden" th:value="${ruta}" name="ruta">
+                  <!-- dirname="resultados.dir" form="registro" -->
+                  <div class="col-12 col-lg-9 text-center text-xl-start">
+                    <button type="submit" class="btn col-6 reg py-3">Agendar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
 
 </body>
 
