@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!--css-->
+
     <link rel="stylesheet" th:href="@{/css/styleSignup.css}">
     <link rel="stylesheet" th:href="@{/css/calendario.css}">
     <link rel="stylesheet" th:href="@{/css/turnos.css}">
@@ -36,6 +37,7 @@
                 <ul class="navbar-nav text-end">
 
                     <li class="nav-item">
+
                         <a class="nav-link " th:href="@{/registro}">Registros</a>
                     </li>
 
@@ -53,12 +55,14 @@
                             Perfil
                         </a>
                         <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
+
                             <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
                             <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
                             <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
+
                             <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
                         </ul>
                     </li>
@@ -74,13 +78,6 @@
             <strong th:text="${exito}"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-
-        <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
-            th:if="${error != null}">
-            <strong th:text="${error}"></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
     </div>
 
 
@@ -89,6 +86,7 @@
 
             <!--Calendario-->
             <div class="col-12 col-md-6 col-lg-4">
+
                 <div class="containerCal container pt-5">
                     <div class="calendario">
                         <div class="headerCal">
@@ -133,12 +131,14 @@
                             aria-selected="true">Turnos de este mes</button>
                     </li>
                     <li class="nav-item" role="presentation">
+
                         <button class=" nav-link" id="mesProximo" data-bs-toggle="pill" data-bs-target="#pills-profile"
                             type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Futuros
                             turnos</button>
                     </li>
                 </ul>
                 <div class="container mt-5 px-4 turnos pt-4 mb-5 overflow-auto altura">
+
 
 
 
@@ -207,9 +207,11 @@
                                         <div class="col-6">
                                             <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
+
 
                         </div>
                     </div>
@@ -296,9 +298,11 @@
                                         </div>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
+
 
                 </div>
 
@@ -316,7 +320,6 @@
                         height="28" /></span> Hardy</h6>
 
         </div>
-
     </footer>
 
 
@@ -324,6 +327,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
+
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
@@ -348,8 +352,6 @@
     </script>
 
     <script th:src="@{/js/calendario.js}"></script>
-
-
 
 </body>
 

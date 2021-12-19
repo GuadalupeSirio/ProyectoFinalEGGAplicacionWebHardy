@@ -165,7 +165,7 @@ body {
     height: 85px;
     margin-bottom: 20px;
     border-radius: 10px; */
-}  
+}
 
 .turno:hover {
     transform: scale(1.02);
@@ -177,7 +177,9 @@ body {
 }
 
 
+
 /* .info {
+
 
     width: 350px;
     text-align: center;
@@ -238,7 +240,9 @@ body {
     color: black;
     margin-right: 5px;
     margin-left: 2px;
+
 } */
+
 
 
 
@@ -316,3 +320,14 @@ footer {
   text-decoration: none;
   font-size: 1rem;
 }
+
+
+.reg{
+    background-color:#8BE9E1;
+    color:black;
+    font-weight: bold;
+    border: 2px solid #8BE9E1;
+    padding: 10px;
+    border-radius: 2em 1em 4em / 0.5em 3em;
+  }
+
