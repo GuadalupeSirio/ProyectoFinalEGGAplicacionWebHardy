@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8" />
@@ -17,57 +17,7 @@
 <body>
 
   <!--NAVBAR-->
-  <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
-        <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
-        <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-          <ul class="navbar-nav text-end">
-
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/registro}">Registros</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/agenda}">Agenda</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#">Documentos</a>
-            </li>
-
-            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-              <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <img th:src="${session.imagen != null} ? @{/upload/__${session.imagen}__} : @{/upload/profile-1-1.png}"
-                  alt="imagen de perfil" width="35" class=" rounded-circle mb-1">
-              </a>
-              <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarCorreo">Cambiar e-mail</a>
-                </li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarClave">Cambiar contraseña</a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
-              </ul>
-            </li>
-
-          </ul>
-
-        </div>
-      </div>
-    </nav>
+  <nav th:replace="fragmentos :: navbar"></nav>
 
   <div class="row justify-content-center">
     <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
@@ -367,7 +317,8 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="documento" required type="number" name="documento" placeholder="Documento">
+              <input class="form-control" id="documento" required type="number" name="documento"
+                placeholder="Documento">
               <label for="documento">Documento</label>
             </div>
 
@@ -396,7 +347,8 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="fecha" required type="date" name="fechaNacimiento" placeholder="Fecha de nacimiento">
+              <input class="form-control" id="fecha" required type="date" name="fechaNacimiento"
+                placeholder="Fecha de nacimiento">
               <label for="fecha">Fecha de nacimiento</label>
             </div>
 
@@ -484,8 +436,9 @@
             class="needs-validation" novalidate>
 
             <div class="form-floating">
-            <input class="form-control" id="sanguineo" required type="text" name="sanguineo" placeholder="Grupo sanguíneo">
-            <label for="sanguineo">Grupo sanguíneo</label>
+              <input class="form-control" id="sanguineo" required type="text" name="sanguineo"
+                placeholder="Grupo sanguíneo">
+              <label for="sanguineo">Grupo sanguíneo</label>
             </div>
 
             <hr class="my-4">
@@ -746,7 +699,7 @@
     </div>
   </div>
 
-   <!-- Modal cambio de correo -->
+  <!-- Modal cambio de correo -->
   <div class="modal fade" id="editarCorreo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -799,19 +752,11 @@
 
   <!-- Footer -->
 
-  <footer class="container-fluid mt-5 py-3">
-    <div class="row ">
-
-      <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
-            height="28" /></span> Hardy</h6>
-
-    </div>
-
-  </footer>
+  <footer th:replace="fragmentos :: footer"></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+  </script>
   <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
