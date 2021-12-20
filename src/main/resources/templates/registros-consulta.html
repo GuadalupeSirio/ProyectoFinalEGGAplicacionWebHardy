@@ -172,6 +172,8 @@
               <input type="hidden" th:value="${registro.id}" name="idRegistro">
               <input type="hidden" th:value="${ruta}" name="ruta">
 
+              <input type="hidden" th:value="${ruta}" name="ruta">
+
               <hr class="my-4">
               <div class="modal-dialog-centered justify-content-center">
                 <button title="Guardar archivo" type="submit" class="btn no-btn">
@@ -212,6 +214,10 @@
                   <td th:if="${estudio.registro.id} eq ${registro.id}">
                     <a th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}">Descarga</a>
                   </td>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
                 </tr>
               </tbody>
             </table>

@@ -16,6 +16,10 @@
 <body>
 
   <!--NAVBAR-->
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
@@ -45,12 +49,20 @@
               Perfil
             </a>
             <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
               <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
               <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
               <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
               <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
             </ul>
           </li>
@@ -74,10 +86,18 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
+<<<<<<< HEAD
   </div>
 
   <!-- Cabecera -->
 
+=======
+
+  </div>
+
+  <!-- Cabecera -->
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
   <section class="container cabeza mt-5 py-4 shadow">
     <div class="row">
 
@@ -119,7 +139,10 @@
 
                   </div>
                 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
               </div>
             </div>
           </div>
@@ -142,12 +165,20 @@
               <div class="col-7">
                 <button type="button" class="btn  col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
                   data-bs-target="#perfil">Modificar perfil</button>
+<<<<<<< HEAD
               </div>
               <div class="col-7">
                 <button th:if="${fichaMedica}" type="button" class="btn  col-11 col-md-12 mx-3 reg py-2"
                   data-bs-toggle="modal" data-bs-target="#editarFichamedica">Modificar ficha</button>
               </div>
 
+=======
+              </div>
+              <div class="col-7">
+                <button th:if="${fichaMedica}" type="button" class="btn  col-11 col-md-12 mx-3 reg py-2"
+                  data-bs-toggle="modal" data-bs-target="#editarFichamedica">Modificar ficha</button>
+              </div>
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
 
             </div>
           </div>
@@ -285,9 +316,15 @@
     </div>
 
   </section>
+<<<<<<< HEAD
 
   <!-- modales -->
 
+=======
+
+  <!-- modales -->
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
   <!-- editar nombre -->
   <div class="modal fade" id="editarNombre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -328,6 +365,7 @@
         <div class="modal-body">
           <form th:action="@{/perfil/editar-apellido}" autocomplete="off" method="POST" class="needs-validation"
             novalidate>
+<<<<<<< HEAD
 
             <div class="form-floating">
               <input class="form-control" id="apellido" required type="text" name="apellido" placeholder="Apellido">
@@ -358,10 +396,43 @@
           <form th:action="@{/perfil/editar-documento}" autocomplete="off" method="POST" class="needs-validation"
             novalidate>
 
+=======
+
+            <div class="form-floating">
+              <input class="form-control" id="apellido" required type="text" name="apellido" placeholder="Apellido">
+              <label for="apellido">Apellido</label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar documento -->
+  <div class="modal fade" id="editarDocumento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-documento}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
             <div class="form-floating">
               <input class="form-control" id="documento" required type="number" name="documento" placeholder="Documento">
               <label for="documento">Documento</label>
             </div>
+<<<<<<< HEAD
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
@@ -451,6 +522,116 @@
               <label for="altura">Altura</label>
             </div>
 
+=======
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<<<<<<< HEAD
+  <!-- editar grupo sanguineo -->
+  <div class="modal fade" id="editarSangre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cambiar grupo sanguíneo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/ficha-medica/modificar-sanguineo}" autocomplete="off" method="POST"
+            class="needs-validation" novalidate>
+
+            <div class="form-floating">
+            <input class="form-control" id="sanguineo" required type="text" name="sanguineo" placeholder="Grupo sanguíneo">
+            <label for="sanguineo">Grupo sanguíneo</label>
+=======
+  <!-- editar fecha de nacimiento -->
+  <div class="modal fade" id="editarFecha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-fecha-nacimiento}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="fecha" required type="date" name="fechaNacimiento" placeholder="Fecha de nacimiento">
+              <label for="fecha">Fecha de nacimiento</label>
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<<<<<<< HEAD
+=======
+  <!-- editar peso -->
+  <div class="modal fade" id="editarPeso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/ficha-medica/modificar-peso}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="peso" required type="number" name="peso" placeholder="Peso">
+              <label for="peso">Peso</label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar altura -->
+  <div class="modal fade" id="editarAltura" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/ficha-medica/modificar-altura}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="altura" required type="number" name="altura" placeholder="Altura">
+              <label for="altura">Altura</label>
+            </div>
+
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
               <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
@@ -493,6 +674,7 @@
   </div>
 
 
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
   <!-- Editar foto-->
   <div class="modal fade" id="editarFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -733,7 +915,10 @@
           </div>
 
         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
       </div>
     </div>
   </div>
@@ -751,6 +936,10 @@
 
   </footer>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>

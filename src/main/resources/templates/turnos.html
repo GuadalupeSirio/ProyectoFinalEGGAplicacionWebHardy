@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!--css-->
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
     <link rel="stylesheet" th:href="@{/css/styleSignup.css}">
     <link rel="stylesheet" th:href="@{/css/calendario.css}">
     <link rel="stylesheet" th:href="@{/css/turnos.css}">
@@ -36,6 +40,10 @@
                 <ul class="navbar-nav text-end">
 
                     <li class="nav-item">
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
                         <a class="nav-link " th:href="@{/registro}">Registros</a>
                     </li>
 
@@ -53,12 +61,20 @@
                             Perfil
                         </a>
                         <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
                             <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
                             <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
                             <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
                             <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
                         </ul>
                     </li>
@@ -74,6 +90,7 @@
             <strong th:text="${exito}"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+<<<<<<< HEAD
 
         <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
             th:if="${error != null}">
@@ -81,6 +98,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
+=======
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
     </div>
 
 
@@ -89,6 +108,7 @@
 
             <!--Calendario-->
             <div class="col-12 col-md-6 col-lg-4">
+<<<<<<< HEAD
                 <div class="containerCal container pt-5">
                     <div class="calendario">
                         <div class="headerCal">
@@ -103,6 +123,23 @@
                         </div>
                         <div class="diasSemana">
 
+=======
+
+                <div class="containerCal container pt-5">
+                    <div class="calendario">
+                        <div class="headerCal">
+                            <i class="fas fa-chevron-left anterior flecha"></i>
+                            <div class="header-fechas">
+                                <p class="mes">
+                                </p>
+                                <p class="today">
+                                </p>
+                            </div>
+                            <i class="fas fa-chevron-right siguiente flecha"></i>
+                        </div>
+                        <div class="diasSemana">
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
                             <div>Dom</div>
                             <div>Lun</div>
                             <div>Mar</div>
@@ -133,6 +170,10 @@
                             aria-selected="true">Turnos de este mes</button>
                     </li>
                     <li class="nav-item" role="presentation">
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
                         <button class=" nav-link" id="mesProximo" data-bs-toggle="pill" data-bs-target="#pills-profile"
                             type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Futuros
                             turnos</button>
@@ -142,6 +183,10 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="mesCurso">
@@ -187,6 +232,7 @@
                                         th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
                                         alt="" />
                                 </div>
+<<<<<<< HEAD
 
                                 <div class="info col-3">
                                     <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
@@ -210,6 +256,33 @@
                                     </div>
                                 </div>
                             </div>
+=======
+
+                                <div class="info col-3">
+                                    <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
+                                    <!-- <p class="medico" th:text="${turno.medico}">Medico dr asda</p>
+                                                                    <p class="direccion" th:text="${turno.lugar}"></p> -->
+                                </div>
+
+                                <div class="time col-5">
+                                    <p class="dia" th:text="${turno.fecha}"></p>
+                                    <p class="hora d-none d-sm-block" th:text="|${turno.hora} Hrs|"></p>
+                                </div>
+
+                                <div class="botones col-1 col-sm-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="" class="editar"><i class="fas fa-edit"></i></a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
 
                         </div>
                     </div>
@@ -296,9 +369,17 @@
                                         </div>
                                     </div>
                                 </form>
+<<<<<<< HEAD
                             </div>
                         </div>
                     </div>
+=======
+
+                            </div>
+                        </div>
+                    </div>
+
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
 
                 </div>
 
@@ -316,7 +397,10 @@
                         height="28" /></span> Hardy</h6>
 
         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
     </footer>
 
 
@@ -347,9 +431,35 @@
         })()
     </script>
 
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+
     <script th:src="@{/js/calendario.js}"></script>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> fefff1328ceaba4f3a96f5c23cff3526f5b2583c
 
 </body>
 
