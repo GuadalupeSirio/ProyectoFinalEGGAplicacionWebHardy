@@ -47,7 +47,7 @@
 
   <div th:if=${registros.isEmpty()}>
     <div class="container mt-4 text-center">
-      <p>todavia no tienes registro cargados de esta especialidad</p>
+      <p>Todavía no tenés registros cargados de esta especialidad</p>
       <div class="col-12 pb-5 pt-4 pb-lg-0 text-center">
         <button type="button" class="btn col-6 reg py-3" data-bs-toggle="modal" data-bs-target="#registromedico">
           Nuevo registro
@@ -65,7 +65,7 @@
         <!--Databs-target = al id -->
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed colores" type="button" data-bs-toggle="collapse"
-            th:attr="data-bs-target=|#acordion${registro.id}|" th:text="${registro.fecha}" aria-expanded="false"
+            th:attr="data-bs-target=|#acordion${registro.id}|" th:text="|${registro.especialidad.nombre} - ${registro.fecha}|" aria-expanded="false"
             th:aria-controls="|#acordion${registro.id}|">
 
           </button>
@@ -167,10 +167,10 @@
     </div>
 
     <div class="modal fade" th:attr="id=|verestudio${registro.id}|" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Ver archivo</h5>
+            <h5 class="modal-title">Documentos</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -189,10 +189,10 @@
                   <td th:if="${estudio.registro.id} eq ${registro.id}" th:text="${estudio.nombre}">
                   </td>
                   <td th:if="${estudio.registro.id} eq ${registro.id}">
-                    <a th:attr="href=|\upload\${estudio.adjunto}|" target="_blank">Ver</a>
+                    <a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|" target="_blank"><i class="far fa-eye"></i></a>
                   </td>
                   <td th:if="${estudio.registro.id} eq ${registro.id}">
-                    <a th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}">Descarga</a>
+                    <a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}"><i class="fas fa-download"></i></a>
                   </td>
 
                 </tr>

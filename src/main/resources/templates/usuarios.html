@@ -38,165 +38,172 @@
     </div>
 
 
+  </section>
+
+  <div class="container pt-5 mt-4">
+    <div class="row">
+      <div class="col-12 table-responsive">
+        <table class="table text-center table-bordered shadow">
+          <thead>
+
+            <th class="col">ID</th>
+            <th class="col">Correo</th>
+            <th class="col">Rol</th>
+            <th class="col">Estado</th>
+            <th class="col">Acciones</th>
+
+          </thead>
+          <tbody>
+            <tr th:each="usuario : ${usuarios}">
+              <div>
+                <td class="col" th:text="${usuario.id}"></td>
+                <td class="col" th:text="${usuario.correo}"></td>
+                <td class="col" th:text="${usuario.rol.nombre}"></td>
+                <td class="col" th:text="${usuario.alta} ? 'Activo' : 'Baja'"></td>
+                <td class="col d-flex justify-content-center">
+                  <button class="btn btn-primary me-4  boton-editar" data-bs-toggle="modal"
+                    th:attr="data-bs-target=|#editar${usuario.id}|">Editar</button>
 
 
-    <div class="container pt-5 mt-4">
-      <table class="table text-center table-bordered shadow">
-        <thead>
-
-          <th class="col">ID</th>
-          <th class="col">Correo</th>
-          <th class="col">Rol</th>
-          <th class="col">Estado</th>
-          <th class="col">Acciones</th>
-
-        </thead>
-        <tbody>
-          <tr th:each="usuario : ${usuarios}">
-            <div>
-              <td class="col" th:text="${usuario.id}"></td>
-              <td class="col" th:text="${usuario.correo}"></td>
-              <td class="col" th:text="${usuario.rol.nombre}"></td>
-              <td class="col" th:text="${usuario.alta} ? 'Activo' : 'Baja'"></td>
-              <td class="col d-flex justify-content-center">
-                <button class="btn btn-primary me-4  boton-editar" data-bs-toggle="modal"
-                  th:attr="data-bs-target=|#editar${usuario.id}|">Editar</button>
-
-
-                <form th:if=${usuario.alta} method="post" th:action="@{/usuarios/baja/__${usuario.id}__}">
-                  <button class="btn btn-danger boton-baja" type="submit">Dar de baja</button>
-                </form>
-                <form th:if=${!usuario.alta} method="post" th:action="@{/usuarios/alta/__${usuario.id}__}">
-                  <button class="btn btn-success boton-alta" type="submit">Dar de alta</button>
-                </form>
-              </td>
-            </div>
-          </tr>
-        </tbody>
-      </table>
+                  <form th:if=${usuario.alta} method="post" th:action="@{/usuarios/baja/__${usuario.id}__}">
+                    <button class="btn btn-danger boton-baja" type="submit">Baja</button>
+                  </form>
+                  <form th:if=${!usuario.alta} method="post" th:action="@{/usuarios/alta/__${usuario.id}__}">
+                    <button class="btn btn-success boton-alta" type="submit">Alta</button>
+                  </form>
+                </td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 
 
-    <div class="container ">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col">
       <button type="button" class="btn boton-crear" data-bs-toggle="modal" data-bs-target="#crearAdmin">Crear
         ADMIN</button>
     </div>
+  </div>
+  </div>
 
 
 
 
-    <!-- Footer -->
+  <!-- Footer -->
 
-    <footer th:replace="fragmentos :: footer"></footer>
-
-
+  <footer th:replace="fragmentos :: footer"></footer>
 
 
-    <!--MODAL CREAR ADMIN-->
-    <div class="modal fade " id="crearAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
-        <div class="modal-content fondomodal">
-          <div class="modal-header">
-            <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Crear Administrador</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body ">
 
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-6 d-none d-xl-block">
-                  <img th:src="@{/img/Admin.svg}" alt="" class="img-fluid d-none d-sm-block" width="500">
-                </div>
 
-                <div class="col-12 col-xl-6 align-self-center">
-                  <form th:action="@{usuarios/crear-admin}" method="post">
-                    <div class="container">
-                      <div class="row">
-                        <div class=" mb-3 col-12">
-                          <label for="correo" class="form-label">Correo
-                            electronico</label>
-                          <input type="email" class="form-control" id="correo" name="correo">
+  <!--MODAL CREAR ADMIN-->
+  <div class="modal fade " id="crearAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Crear Administrador</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
 
-                        </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/Admin.svg}" alt="" class="img-fluid d-none d-sm-block" width="500">
+              </div>
 
-                        <div class=" mb-3 col-12">
-                          <label for="claveUno" class="form-label">Contraseña</label>
-                          <input type="password" class="form-control" id="claveUno" name="claveUno">
-                        </div>
-                        <div class=" mb-3 col-12">
-                          <label for="claveDos" class="form-label">Repita la contraseña</label>
-                          <input type="password" class="form-control" id="claveDos" name="claveDos">
-                        </div>
-
-                        <button type="submit" class="btn btn reg mt-3">Guardar</button>
-
+              <div class="col-12 col-xl-6 align-self-center">
+                <form th:action="@{usuarios/crear-admin}" method="post">
+                  <div class="container">
+                    <div class="row">
+                      <div class=" mb-3 col-12">
+                        <label for="correo" class="form-label">Correo
+                          electronico</label>
+                        <input type="email" class="form-control" id="correo" name="correo">
 
                       </div>
+
+                      <div class=" mb-3 col-12">
+                        <label for="claveUno" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="claveUno" name="claveUno">
+                      </div>
+                      <div class=" mb-3 col-12">
+                        <label for="claveDos" class="form-label">Repita la contraseña</label>
+                        <input type="password" class="form-control" id="claveDos" name="claveDos">
+                      </div>
+
+                      <button type="submit" class="btn btn reg mt-3">Guardar</button>
+
+
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </div>
-
           </div>
 
         </div>
+
       </div>
     </div>
+  </div>
 
 
-    <!--MODAL EDITAR-->
-    <div th:each="usuario : ${usuarios}" class="modal fade" th:attr="id=|editar${usuario.id}|" tabindex="-1"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
-        <div class="modal-content fondomodal">
-          <div class="modal-header">
-            <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Editar usuario</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body ">
+  <!--MODAL EDITAR-->
+  <div th:each="usuario : ${usuarios}" class="modal fade" th:attr="id=|editar${usuario.id}|" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Editar usuario</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
 
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-6 d-none d-xl-block">
-                  <img th:src="@{/img/Admin.svg}" alt="" class="img-fluid d-none d-sm-block" width="500">
-                </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/Admin.svg}" alt="" class="img-fluid d-none d-sm-block" width="500">
+              </div>
 
-                <div class="col-12 col-xl-6 align-self-center">
-                  <form th:action="@{/usuarios/editar}" method="post">
-                    <div class="container">
-                      <div class="row">
-                        <div class="form mb-3 col-xl-6">
-                          <input class="form-control" id="idUsuario" name="idUsuario" th:value="${usuario.id}"
-                            type="hidden" />
-                        </div>
-                        <div class=" mb-3 col-12">
-                          <label for="correo" class="form-label">Correo electronico</label>
-                          <input type="email" class="form-control" id="correo" name="correo"
-                            th:value="${usuario.correo}">
-                        </div>
-                        <div class="form mb-3 col-xl-6 fs-5">
-                          <label for="rol">Rol:</label> <br>
-                          <select aria-label="Elegir rol" class="form-select" id="idRol" name="idRol">
-                            <option selected value="">Elegir rol</option>
-                            <option th:each="rol : ${roles}" th:text="|${rol.nombre}|" th:value="${rol.id}"></option>
-                          </select>
-                        </div>
-                        <button type="submit" class="btn btn reg mt-5">Guardar</button>
+              <div class="col-12 col-xl-6 align-self-center">
+                <form th:action="@{/usuarios/editar}" method="post">
+                  <div class="container">
+                    <div class="row">
+                      <div class="form mb-3 col-xl-6">
+                        <input class="form-control" id="idUsuario" name="idUsuario" th:value="${usuario.id}"
+                          type="hidden" />
                       </div>
+                      <div class=" mb-3 col-12">
+                        <label for="correo" class="form-label">Correo electronico</label>
+                        <input type="email" class="form-control" id="correo" name="correo" th:value="${usuario.correo}">
+                      </div>
+                      <div class="form mb-3 col-xl-6 fs-5">
+                        <label for="rol">Rol:</label> <br>
+                        <select aria-label="Elegir rol" class="form-select" id="idRol" name="idRol">
+                          <option selected value="">Elegir rol</option>
+                          <option th:each="rol : ${roles}" th:text="|${rol.nombre}|" th:value="${rol.id}"></option>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn reg mt-5">Guardar</button>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </div>
-
           </div>
 
         </div>
+
       </div>
     </div>
+  </div>
 
-    <!-- Modal cambio de correo -->
+  <!-- Modal cambio de correo -->
   <div th:replace="fragmentos :: modificarCorreo"></div>
 
   <!-- Modal modificar contraseña -->
@@ -204,8 +211,8 @@
   <div th:replace="fragmentos :: modificarContraseña"></div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
 </body>
 
