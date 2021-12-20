@@ -25,7 +25,6 @@
 
     <nav th:replace="fragmentos :: navbar"></nav>
 
-
     <div class="row justify-content-center">
         <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
             th:if="${exito != null}">
@@ -38,6 +37,7 @@
             <strong th:text="${error}"></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+
     </div>
 
 
@@ -46,9 +46,6 @@
 
             <!--Calendario-->
             <div class="col-12 col-md-6 col-lg-4">
-
-                <div class="containerCal container pt-5">
-
                 <div class="containerCal container pt-5 mt-3">
                     <div class="calendario">
                         <div class="headerCal">
@@ -62,7 +59,6 @@
                             <i class="fas fa-chevron-right siguiente flecha"></i>
                         </div>
                         <div class="diasSemana">
-
 
                             <div>Dom</div>
                             <div>Lun</div>
@@ -96,14 +92,15 @@
                             aria-selected="true">Turnos de este mes</button>
                     </li>
                     <li class="nav-item" role="presentation">
-
-
                         <button class=" nav-link" id="mesProximo" data-bs-toggle="pill" data-bs-target="#pills-profile"
                             type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Futuros
                             turnos</button>
                     </li>
                 </ul>
                 <div class="container mt-5 px-4 turnos pt-4 mb-5 overflow-auto altura">
+
+
+
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="mesCurso">
@@ -175,6 +172,7 @@
 
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -260,12 +258,10 @@
                                         </div>
                                     </div>
                                 </form>
-
-
-
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
@@ -364,12 +360,7 @@
     <!-- Modal cambio de correo -->
     <div th:replace="fragmentos :: modificarCorreo"></div>
 
-
-        </div>
-    </footer>
-
     <!-- Modal modificar contraseña -->
-
 
     <div th:replace="fragmentos :: modificarContraseña"></div>
 

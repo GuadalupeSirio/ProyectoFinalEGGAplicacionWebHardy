@@ -38,8 +38,10 @@ public class AgendaControlador {
     @Autowired
     private ClienteServicio clienteServicio;
 
+
     @GetMapping
     public ModelAndView mostrarTodos(HttpSession sesion, HttpServletRequest request) throws Exception {
+
         ModelAndView mav = new ModelAndView("turnos");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {

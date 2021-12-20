@@ -20,6 +20,7 @@
 </head>
 
 <body>
+
   <!--NAVBAR-->
   <nav th:replace="fragmentos :: navbar"></nav>
 
@@ -146,13 +147,10 @@
 
               <label for="nombre">Nombre del archivo</label>
               <input class="form-control" id="nombre" type="text" name="nombre">
-
               <label for="estudio" class="mt-3">Seleccione el archivo</label>
               <input id="estudio" class="form-control border-0" type="file" name="adjunto"
                 accept="image/*,.pdf, .docx, .doc">
-
               <input type="hidden" th:value="${registro.id}" name="idRegistro">
-              <input type="hidden" th:value="${ruta}" name="ruta">
 
               <input type="hidden" th:value="${ruta}" name="ruta">
 
@@ -196,6 +194,7 @@
                   <td th:if="${estudio.registro.id} eq ${registro.id}">
                     <a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}"><i class="fas fa-download"></i></a>
                   </td>
+
                 </tr>
               </tbody>
             </table>
