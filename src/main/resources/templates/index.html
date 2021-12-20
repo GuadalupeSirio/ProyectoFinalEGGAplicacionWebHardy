@@ -142,54 +142,11 @@
   </section>
 
   <!-- Modal cambio de correo -->
-  <div class="modal fade" id="editarCorreo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modificar correo</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form th:action="@{/modificar-correo}" autocomplete="off" method="POST" class="needs-validation" novalidate>
-            <input class="form-control" id="correo" placeholder="Correo" required type="email" name="correo"
-              th:value="${session.correo}">
-
-            <hr class="my-4">
-            <div class="modal-dialog-centered justify-content-center">
-              <button type="submit" value="Submit" class="btn reg">
-                Guardar
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div th:replace="fragmentos :: modificarCorreo"></div>
 
   <!-- Modal modificar contraseña -->
 
-  <div class="modal fade" id="editarClave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modificar clave</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form th:action="@{/clave}" autocomplete="off" method="POST" class="needs-validation" novalidate>
-            <input class="form-control mb-4" id="clave" placeholder="Contraseña" required type="password" name="clave">
-            <input class="form-control" id="clave" placeholder="Confirmacion" required type="password" name="clave2">
-            <hr class="my-4">
-            <div class="modal-dialog-centered justify-content-center">
-              <button type="submit" value="Submit" class="btn reg">
-                Guardar
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div th:replace="fragmentos :: modificarContraseña"></div>
 
   <!-- Footer -->
   <footer th:replace="fragmentos :: footer"></footer>
