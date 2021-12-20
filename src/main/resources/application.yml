@@ -38,7 +38,8 @@ logging:
         web: debug
 my:
 
-    property: C:\Users\JunioAbril\Desktop\GG\SPRING\ProyectoFinalEGGAplicacionWebHardy\src\main\resources\static\upload
+    property: C:\Users\PC\OneDrive\Escritorio\nuevo nuevo\ProyectoFinalEGGAplicacionWebHardy\src\main\resources\static\upload
+    #C:\Users\JunioAbril\Desktop\GG\SPRING\ProyectoFinalEGGAplicacionWebHardy\src\main\resources\static\upload
     #C:\Users\Andrea\Documents\NetBeansProjects\Proyecto-Final\src\main\resources\static\upload
     
     
