@@ -37,7 +37,7 @@ logging:
       springframework:
         web: debug
 my:
-    property: C:\Users\JunioAbril\Desktop\GG\SPRING\ProyectoFinalEGGAplicacionWebHardy\src\main\resources\static\upload
-    #C:\Users\Andrea\Documents\NetBeansProjects\Proyecto-Final\src\main\resources\static\upload
+    property: C:\Users\Andrea\Documents\NetBeansProjects\Proyecto-Final\src\main\resources\static\upload
+    #C:\Users\JunioAbril\Desktop\GG\SPRING\ProyectoFinalEGGAplicacionWebHardy\src\main\resources\static\upload
     
     
