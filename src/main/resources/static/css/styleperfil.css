@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #89c0ff #b9d9fd;
+}
+
+
+/* Background*/
+
+
+body {
+    background: rgb(197, 200, 254);
+    background: linear-gradient(180deg, rgb(177, 198, 253) 1%, rgb(208, 241, 255) 35%, rgba(255, 255, 255, 1) 100%);
+    background-repeat: no-repeat;
+}
+
 /* body{
     font-family: sans-serif;
     background-image: url("/antonella/Frame-174.jpg"); 
@@ -9,8 +31,46 @@
     
 
 } */
+
+/*------NAVBAR------*/
+
+#nav-bar {
+    top: 0;
+    z-index: 10;
+    padding-left: 30px;
+}
+
+/*Titulo*/
+.navbar-brand {
+    font-family: 'Poppins',
+        sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 20px;
+}
+
+.logo-navbar {
+    width: 35px;
+}
+
+
+/*Fonts links*/
+.navbar-nav {
+    padding-right: 40px;
+    font-family: 'Roboto',
+        sans-serif;
+    font-size: 18px;
+
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+    padding: 0 15px;
+}
+
+
 .cabeza{
-    background-color:rgb(157,184,254);
+    background-color:rgb(142, 173, 253);
     border-radius: 15px;
 }
 .ficha{

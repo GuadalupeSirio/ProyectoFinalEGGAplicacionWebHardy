@@ -1,57 +1,126 @@
-.altura{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #89c0ff #b9d9fd;
+}
+
+/* Background*/
+
+
+body {
+    background: rgb(197, 200, 254);
+    background: linear-gradient(180deg, rgb(177, 198, 253) 1%, rgb(208, 241, 255) 35%, rgba(255, 255, 255, 1) 100%);
+    background-repeat: no-repeat;
+}
+
+/*------NAVBAR------*/
+
+#nav-bar {
+    top: 0;
+    z-index: 10;
+    padding-left: 30px;
+}
+
+/*Titulo*/
+.navbar-brand {
+    font-family: 'Poppins',
+        sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 20px;
+}
+
+.logo-navbar {
+    width: 35px;
+}
+
+
+/*Fonts links*/
+.navbar-nav {
+    padding-right: 40px;
+    font-family: 'Roboto',
+        sans-serif;
+    font-size: 18px;
+
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+    padding: 0 15px;
+}
+
+
+
+.altura {
     height: 30rem;
 }
 
 
-.circulo{
-    
-    
+.circulo {
+
+
     position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    
+
     border-radius: 50%;
     width: 130px;
     height: 130px;
-    background: rgb(196,217,243);
-}
- .estilo4, .estilo6, .estilo10, .estilo12{
-    background: rgb(196,217,243);
-}
-.estilo1, .estilo5, .estilo7, .estilo11{
-    background: rgb(254,233,191);
-}
-.estilo2, .estilo3, .estilo8, .estilo9{
-    background: rgb(243,211,212);
+    background: rgb(196, 217, 243);
 }
 
-.circulop{
-    background: rgb(241,243,255);
+.estilo4,
+.estilo6,
+.estilo10,
+.estilo12 {
+    background: rgb(196, 217, 243);
+}
+
+.estilo1,
+.estilo5,
+.estilo7,
+.estilo11 {
+    background: rgb(254, 233, 191);
+}
+
+.estilo2,
+.estilo3,
+.estilo8,
+.estilo9 {
+    background: rgb(243, 211, 212);
+}
+
+.circulop {
+    background: rgb(241, 243, 255);
     border-radius: 15px 50px;
 }
-.parrafo{
+
+.parrafo {
     font-size: 1.1rem;
 }
-.reg{
-    background-color:#8BE9E1;
-    color:black;
+
+.reg {
+    background-color: #8BE9E1;
+    color: black;
     font-weight: bold;
     border: 2px solid #8BE9E1;
     padding: 10px;
     border-radius: 2em 1em 4em / 0.5em 3em;
-  }
+}
 
-  .nobtn{
+.nobtn {
     border: none;
     background-color: transparent;
 }
-
 footer{
     background-color: rgb(241,243,255);
   color: black;
   text-decoration: none;
   font-size: 1rem;
+  position: absolute;
+    bottom: 0;
 }
 .fondomodal {
   background-image: url("../img/Group6.png");
