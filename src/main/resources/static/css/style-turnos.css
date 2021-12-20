@@ -18,9 +18,22 @@ body {
     background: rgb(197, 200, 254);
     background: linear-gradient(180deg, rgb(164, 187, 252) 1%, rgb(194, 235, 253) 35%, rgba(255, 255, 255, 1) 100%);
     background-repeat: no-repeat;
+} 
+
+
+/* 
+body {
+    font-family: sans-serif;
+    background-image: url("../img/Group6.png");
+    width: 100%;
+    top: 0;
+    position: absolute;
+    left: 0px;
+    background-repeat: no-repeat;
+
+
 }
-
-
+ */
 
 /*------NAVBAR------*/
 
@@ -35,12 +48,12 @@ body {
     font-family: 'Poppins',
         sans-serif;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     padding-left: 20px;
 }
 
 .logo-navbar {
-    width: 35px;
+    width: 40px;
 }
 
 
@@ -50,7 +63,7 @@ body {
     font-family: 'Roboto',
         sans-serif;
     font-size: 18px;
-
+    
 }
 
 /*Espacio entre links*/
@@ -95,7 +108,7 @@ body {
 
 
 
-.boton {
+.btn {
     background-image: linear-gradient(to right, #6190E8 0%, #949bfd 51%, #6190E8 100%);
     text-align: center;
     text-transform: uppercase;
@@ -105,15 +118,32 @@ body {
     box-shadow: 0 0 20px rgb(238, 238, 238);
     border-radius: 10px;
     display: block;
-    width: 250px;
 }
 
-.boton:hover {
+.btn:hover {
     background-position: right center;
     color: black;
     text-decoration: none;
 }
 
+
+.boton-sesion {
+    background-image: linear-gradient(to right, #6190E8 0%, #6670fc 51%, #397bf5 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    box-shadow:none;
+    background-size: 200% auto;
+    color: black;
+    border-radius: 10px;
+    display: block;
+}
+
+.boton-sesion:hover {
+    background-position: right center;
+    color: black;
+    text-decoration: none;
+}
 
 /*CARDS*/
 .turno {
@@ -130,11 +160,11 @@ body {
 .turno {
     background-color: rgba(110, 166, 250, 0.432);
     box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
-    /* text-align: center;
+    text-align: center;
     display: flex;
     height: 85px;
     margin-bottom: 20px;
-    border-radius: 10px; */
+    border-radius: 10px;
 }
 
 .turno:hover {
@@ -143,8 +173,7 @@ body {
 
 .icono {
     width: 50px;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin: 15px;
 }
 
 
@@ -155,19 +184,19 @@ body {
 }
 
 .especialidad {
-    font-size: 23px;
+    font-size: 25px;
     font-weight: 500;
     margin-top: 5px;
     margin-bottom: 0;
 }
 
 .medico {
-    font-size: 12px;
+    font-size: 15px;
     margin-bottom: 0;
 }
 
 .direccion {
-    font-size: 12px;
+    font-size: 15px;
     margin-bottom: 0;
 }
 
@@ -276,26 +305,4 @@ body {
     }
 
 
-}
-
-.altura {
-    height: 20rem;
-}
-
-footer {
-    background-color: rgb(241, 243, 255);
-    color: black;
-    text-decoration: none;
-    font-size: 1rem;
-    position: absolute;
-    bottom: 0;
-}
-
-.reg {
-    background-color: #8BE9E1;
-    color: black;
-    font-weight: bold;
-    border: 2px solid #8BE9E1;
-    padding: 10px;
-    border-radius: 2em 1em 4em / 0.5em 3em;
 }

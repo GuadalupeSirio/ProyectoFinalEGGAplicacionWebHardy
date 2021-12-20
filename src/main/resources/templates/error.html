@@ -1,95 +1,52 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hardy</title>
-    <link rel="icon" th:href="@{/img/heartbeat-solid.svg}">
-    <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!--Bootstrap icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <!--Fontawesome icons-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <!--css-->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hardy</title>
+  <link rel="icon" th:href="@{/img/heartbeat-solid.svg}">
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!--Bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <!--Fontawesome icons-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <!--css-->
 
-    <link rel="stylesheet" th:href="@{/css/calendario.css}">
-    <link rel="stylesheet" th:href="@{/css/turnos.css}">
+  <link rel="stylesheet" th:href="@{/css/calendario.css}">
+  <link rel="stylesheet" th:href="@{/css/turnos.css}">
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-        <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
-        <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav text-end">
-
-                <li class="nav-item">
-                    <a class="nav-link " th:href="@{/registro}">Registros</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/agenda}">Agenda</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/documento}">Documentos</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Perfil
-                    </a>
-                    <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
-                        <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-
-        </div>
-    </div>
-</nav>
+  <nav th:replace="fragmentos :: navbar"></nav>
 
 
-    <div class="container text-center pt-3">
-        <h3 class="fw-bold" th:text="${codigo}"></h3>
-        <p th:text="${mensaje}"></p>
-        <img th:src="@{/img/robot.png}" alt="" width="280">
-    </div>
+  <div class="container text-center pt-3">
+    <h3 class="fw-bold" th:text="${codigo}"></h3>
+    <p th:text="${mensaje}"></p>
+    <img th:src="@{/img/robot.png}" alt="" width="280">
+  </div>
 
-    <!--Footer-->
-    <footer class="p-5 mt-5 text-black text-center position-relative fixed-bottom">
-        <div class="container">
-            <p class="lead">Copyright &copy; 2021 Hardy - Grupo 9</p>
-            <a href="/" class="position-absolute bottom-0 end-0 p-5">
-                <i class="bi bi-arrow-up-circle h1 arrow"></i>
-            </a>
-        </div>
-    </footer>
+  <!--Footer-->
+  <footer th:replace="fragmentos :: footer"></footer>
+
+  <!-- Modal cambio de correo -->
+  <div th:replace="fragmentos :: modificarCorreo"></div>
+
+  <!-- Modal modificar contraseña -->
+
+  <div th:replace="fragmentos :: modificarContraseña"></div>
 
 
-    <!-- bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+  </script>
 
 </body>
 

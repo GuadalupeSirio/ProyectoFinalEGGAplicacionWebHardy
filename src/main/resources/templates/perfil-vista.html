@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Hardy</title>
+  <link rel="icon" th:href="@{/img/heartbeat-solid.svg}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -15,51 +16,8 @@
 
 <body>
 
-  <!--NAVBAR-->
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-      <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
-      <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul class="navbar-nav text-end">
+  <nav th:replace="fragmentos :: navbar"></nav>
 
-          <li class="nav-item">
-            <a class="nav-link " th:href="@{/registro}">Registros</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/agenda}">Agenda</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/documento}">Documentos</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Perfil
-            </a>
-            <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-              <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
-              <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
-            </ul>
-          </li>
-
-        </ul>
-
-      </div>
-    </div>
-  </nav>
 
   <div class="row justify-content-center">
     <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
@@ -73,6 +31,7 @@
       <strong th:text="${error}"></strong>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
 
   </div>
 
@@ -119,7 +78,6 @@
 
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -147,7 +105,6 @@
                 <button th:if="${fichaMedica}" type="button" class="btn  col-11 col-md-12 mx-3 reg py-2"
                   data-bs-toggle="modal" data-bs-target="#editarFichamedica">Modificar ficha</button>
               </div>
-
 
             </div>
           </div>
@@ -359,10 +316,10 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="documento" required type="number" name="documento" placeholder="Documento">
+              <input class="form-control" id="documento" required type="number" name="documento"
+                placeholder="Documento">
               <label for="documento">Documento</label>
             </div>
-
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
               <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
@@ -388,7 +345,8 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="fecha" required type="date" name="fechaNacimiento" placeholder="Fecha de nacimiento">
+              <input class="form-control" id="fecha" required type="date" name="fechaNacimiento"
+                placeholder="Fecha de nacimiento">
               <label for="fecha">Fecha de nacimiento</label>
             </div>
 
@@ -476,8 +434,9 @@
             class="needs-validation" novalidate>
 
             <div class="form-floating">
-            <input class="form-control" id="sanguineo" required type="text" name="sanguineo" placeholder="Grupo sanguíneo">
-            <label for="sanguineo">Grupo sanguíneo</label>
+              <input class="form-control" id="sanguineo" required type="text" name="sanguineo"
+                placeholder="Grupo sanguíneo">
+              <label for="sanguineo">Grupo sanguíneo</label>
             </div>
 
             <hr class="my-4">
@@ -733,27 +692,26 @@
           </div>
 
         </div>
-
       </div>
     </div>
   </div>
 
+  <!-- Modal cambio de correo -->
+  <div th:replace="fragmentos :: modificarCorreo"></div>
+
+  <!-- Modal modificar contraseña -->
+
+  <div th:replace="fragmentos :: modificarContraseña"></div>
+
 
   <!-- Footer -->
 
-  <footer class="container-fluid mt-5 py-3">
-    <div class="row ">
+  <footer th:replace="fragmentos :: footer"></footer>
 
-      <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
-            height="28" /></span> Hardy</h6>
-
-    </div>
-
-  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+  </script>
   <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
