@@ -39,7 +39,7 @@ private DocumentoServicio dcoumentoServicio;
 
     @GetMapping
     public ModelAndView mostrarRegistro(HttpSession sesion, HttpServletRequest request) throws Exception {
-        ModelAndView mav = new ModelAndView("documentos-vista");
+        ModelAndView mav = new ModelAndView("documentos");
         
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
