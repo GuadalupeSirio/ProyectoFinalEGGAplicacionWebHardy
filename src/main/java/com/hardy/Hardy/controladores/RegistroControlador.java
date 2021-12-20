@@ -55,25 +55,48 @@ public class RegistroControlador {
             mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error-name"));
         }
-        mav.addObject("estudios", estudioServicio.buscarTodos());
-        mav.addObject("especialidades", especialidadServicio.obtenerEspeciaidades());
+        mav.addObject("ruta", "/registro");
+        mav.addObject("especialidades", especialidadServicio.buscarPorUsuario((Integer) sesion.getAttribute("idUsuario")));
         return mav;
     }
 
     @GetMapping("/ver-registros")
     public ModelAndView mostrarRegistros(HttpSession sesion, HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView("registros-consulta");
-        
+
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error-name"));
         }
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
-        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
         
-        mav.addObject("tipo", "Historial medico");
+        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+        mav.addObject("ruta", "/registro/ver-registros");
+        mav.addObject("titulo", "Historial médico");
+        mav.addObject("especialidad", new Especialidad());
+        mav.addObject("estudios", estudioServicio.buscarTodosxCliente(cliente.getId()));
         mav.addObject("registros", registroServicio.obtenerRegistroCliente(cliente.getId()));
+        return mav;
+    }
+
+    @GetMapping("/ver-registros/{especialidadId}")
+    public ModelAndView mostrarRegistrosEspecialidad(@PathVariable Integer especialidadId, HttpSession sesion, HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView("registros-consulta");
+
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error-name"));
+        }
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(especialidadId, cliente.getId());
+        mav.addObject("ruta", "/registro/ver-registros/"+especialidadId);
+        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+        mav.addObject("titulo", "Historial de " + especialidad.getNombre());
+        mav.addObject("especialidad", especialidad);
+        mav.addObject("estudios", estudioServicio.buscarTodosxCliente(cliente.getId()));
+        mav.addObject("registros", registroServicio.obtenerRegistroEspecialidad(cliente.getId(), especialidadId));
         return mav;
     }
 
@@ -119,7 +142,7 @@ public class RegistroControlador {
     public RedirectView guardar(HttpSession sesion, HttpServletRequest request, RedirectAttributes attributes,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico,
             @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados,
-            @RequestParam Integer especialidad) throws Exception {
+            @RequestParam Integer especialidad, @RequestParam String ruta) throws Exception {
 
         try {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
@@ -128,10 +151,10 @@ public class RegistroControlador {
 
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
-            return new RedirectView("/registro");
+            return new RedirectView(ruta);
         }
 
-        return new RedirectView("/registro");
+        return new RedirectView(ruta);
 
     }
 
@@ -147,6 +170,6 @@ public class RegistroControlador {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
 
-        return new RedirectView("/registros");
+        return new RedirectView("/registro");
     }
 }

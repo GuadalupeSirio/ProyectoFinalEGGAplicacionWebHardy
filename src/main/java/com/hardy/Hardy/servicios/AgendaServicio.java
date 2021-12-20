@@ -29,12 +29,12 @@ public class AgendaServicio {
     private ClienteRepositorio clienteRepositorio;
 
     @Transactional
-    public void crearAgenda(LocalDate fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad, Cliente cliente) throws MiExcepcion, Exception {
+    public void crearAgenda(LocalDate fecha, LocalTime hora, String medico, String lugar, Especialidad especialidad, Cliente cliente) throws MiExcepcion, Exception {
         try {
 
             validarNombre(medico, "medico");
             validarNombre(lugar, "lugar");
-            //validarFecha(fecha);
+            validarFecha(fecha);
             validarHora(hora);
             validarCliente(cliente);
 
@@ -46,10 +46,8 @@ public class AgendaServicio {
             agenda.setLugar(lugar);
             agenda.setAlta(true);
             agenda.setCliente(cliente);
-
-            Especialidad especialidad = especialidadRepositorio.findById(idEspecialidad).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
             agenda.setEspecialidad(especialidad);
-            
+
             agendaRepositorio.save(agenda);
 
         } catch (MiExcepcion ex) {
@@ -65,7 +63,7 @@ public class AgendaServicio {
             validarNombre(medico, "medico");
             validarNombre(lugar, "lugar");
             validarFecha(fecha);
-            validarHora(hora); 
+            validarHora(hora);
 
             Agenda agenda = agendaRepositorio.findById(idAgenda).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
 
@@ -91,6 +89,36 @@ public class AgendaServicio {
             return agendaRepositorio.findAll();
         } catch (Exception e) {
             throw new Exception("Error al obtener turnos");
+        }
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Agenda> buscarMes(Integer clienteId) throws Exception {
+        try {
+            LocalDate fechadeHoy = LocalDate.now();
+            return agendaRepositorio.obtenerAgendaMes(clienteId, fechadeHoy);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener turnos");
+        }
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Agenda> buscarFuturos(Integer clienteId) throws Exception {
+        try {
+            LocalDate fechadeHoy = LocalDate.now();
+            return agendaRepositorio.obtenerAgendaFuturo(clienteId, fechadeHoy);
+        } catch (Exception e) {
+            throw new Exception("Error al obtener turnos");
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<Agenda> buscarPorUsuario(Integer clienteId) throws Exception {
+        try {
+
+            return agendaRepositorio.obtenerAgendaCliente(clienteId);
+        } catch (Exception e) {
+            throw new Exception("Error al buscar por Id");
         }
     }
 
@@ -171,7 +199,7 @@ public class AgendaServicio {
 
             LocalDate fechaActual = LocalDate.now();
 
-            if (fecha.equals(fechaActual) || fecha.isBefore(fechaActual)) {
+            if (fecha.isBefore(fechaActual)) {
                 throw new MiExcepcion("La fecha ingresada no es válida");
             }
         } catch (MiExcepcion ex) {

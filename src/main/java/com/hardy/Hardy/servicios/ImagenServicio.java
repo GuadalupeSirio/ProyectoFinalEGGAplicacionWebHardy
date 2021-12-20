@@ -22,7 +22,7 @@ public class ImagenServicio {
             Files.copy(archivo.getInputStream(), ruta, StandardCopyOption.REPLACE_EXISTING);
             return imagen;
         } catch (IOException e) {
-            throw new Exception("Error al guardar el archivo");
+            throw e;
        }
     }
     
@@ -32,7 +32,7 @@ public class ImagenServicio {
             Files.delete(ruta);
             return imagen;
         } catch (IOException e) {
-            throw new Exception("Error al eliminar el archivo");
+            throw e;
         }
     }
 }

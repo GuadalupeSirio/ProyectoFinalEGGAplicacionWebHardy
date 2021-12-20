@@ -36,9 +36,9 @@ public class RegistroServicio {
 
         try {
 
-            if (fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()) == null) {
+            /*if (fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()) == null) {
                 throw new Exception("Tiene que cargar la ficha medica primero");
-            }
+            }*/
             validacionFecha(fecha);
             validacionMedico(medico, "Medico");
             validacionCobertura(cobertura, "Cobertura");
@@ -54,11 +54,11 @@ public class RegistroServicio {
             registro.setEspecialidad(especialidadServicio.obtenerEspecialidadId(especialidad));
             registro.setCliente(cliente);
 
-            FichaMedica fichamedica = fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId());
+            /*FichaMedica fichamedica = fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId());
             if (fichamedica.getUltimoChequeo().isBefore(fecha) || fichamedica.getUltimoChequeo() == null) {
                 fichamedica.setUltimoChequeo(fecha);
                 fichaMedicaRepositorio.save(fichamedica);
-            }
+            }*/
             registroRepositorio.save(registro);
 
         } catch (MiExcepcion ex) {
@@ -100,6 +100,16 @@ public class RegistroServicio {
 
         try {
             return registroRepositorio.findAll();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<Registro> obtenerRegistroEspecialidad(Integer clienteId, Integer especialidadId) throws Exception {
+
+        try {
+            return registroRepositorio.obtenerRegistroEspecialidad(clienteId, especialidadId);
         } catch (Exception e) {
             throw e;
         }

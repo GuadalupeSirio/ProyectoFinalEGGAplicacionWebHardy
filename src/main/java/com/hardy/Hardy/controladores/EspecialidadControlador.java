@@ -8,6 +8,8 @@ import com.hardy.Hardy.servicios.EspecialidadServicio;
 import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/especialidad")
 public class EspecialidadControlador {
     
+    @Autowired
     private EspecialidadServicio especialidadServicio;
     
     @GetMapping
@@ -33,7 +36,7 @@ public class EspecialidadControlador {
         return mav;
     }
     
-    @GetMapping("/guardar-especialidad")
+    /*@GetMapping("/guardar-especialidad")
     public ModelAndView crearEspecialidad(HttpServletRequest request) {
 
         ModelAndView mav = new ModelAndView("especialidad-formulario");
@@ -48,7 +51,7 @@ public class EspecialidadControlador {
         mav.addObject("action", "guardar");
 
         return mav;
-    }
+    }*/
     
      @GetMapping("/editar/{id}")
     public ModelAndView editarEspecialidad(HttpServletRequest request, @PathVariable Integer id) throws Exception {
@@ -67,18 +70,20 @@ public class EspecialidadControlador {
     }
     
     @PostMapping("/guardar")
-    public RedirectView guardar(HttpServletRequest request, RedirectAttributes attributes, @RequestParam String nombre) throws Exception {
+    public RedirectView guardar(HttpServletRequest request, HttpSession sesion, RedirectAttributes attributes, @RequestParam String nombre) throws Exception {
 
         try {
-
-            especialidadServicio.crearEspecialidad(nombre);
+            if (sesion.getAttribute("rol").equals("ADMIN")) {
+                especialidadServicio.crearEspecialidad(nombre, 0);
+            }else{           
+            especialidadServicio.crearEspecialidad(nombre, (Integer) sesion.getAttribute("idUsuario"));          
+ }
             attributes.addFlashAttribute("exito-name", "La especialidad se cargo exitosamente");
-
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
 
-        return new RedirectView("/registros");
+        return new RedirectView("/registro");
 
     }
     
