@@ -20,12 +20,15 @@ public class ClienteServicio {
 
     @Autowired
     private ImagenServicio imagenServicio;
-    
+
+    @Autowired
+    private FichaMedicaServicio fichaMedicaServicio;
+
     //Metodos CRUD
     @Transactional
     public void guardarCliente(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento,
             MultipartFile imagen, Usuario usuario) throws Exception, MiExcepcion {
-        
+
         try {
 
             Cliente cliente = new Cliente();
@@ -45,8 +48,60 @@ public class ClienteServicio {
         }
     }
 
+    @Transactional
+    public void editarNombre(String nombre, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionNombre(nombre, "Nombre");
+            cliente.setNombre(nombre);
+            clienteRepositorio.save(cliente);
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void editarApellido(String apellido, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionNombre(apellido, "Apellido");
+            cliente.setApellido(apellido);
+            clienteRepositorio.save(cliente);
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void editarDocumento(Integer documento, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionDni(documento);
+            cliente.setDni(documento);
+            clienteRepositorio.save(cliente);
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void editarFechaNacimiento(LocalDate fechaNacimiento, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionFechaNacimiento(fechaNacimiento);
+            cliente.setFechaNacimiento(fechaNacimiento);
+            fichaMedicaServicio.modificarEdad(Period.between(cliente.getFechaNacimiento(), LocalDate.now()).getYears(), cliente);
+            clienteRepositorio.save(cliente);
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     //Metodos de validacion
-    
     public void validacionNombre(String nombre, String tipo) throws Exception, MiExcepcion {
         try {
             if (nombre == null) {
@@ -111,6 +166,21 @@ public class ClienteServicio {
         }
     }
 
+    @Transactional
+    public void modificarImagen(Cliente cliente, MultipartFile imagen) throws Exception {
+        try {
+            if (!imagen.isEmpty()) {
+                if (cliente.getImagen()!=null) {
+                    imagenServicio.borrarImagen(cliente.getImagen());
+                }
+                cliente.setImagen(imagenServicio.copiar(imagen));
+                clienteRepositorio.save(cliente);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     //Metodos de consulta
     @Transactional(readOnly = true)
     public List<Cliente> obtenerClientes() throws Exception {
@@ -130,4 +200,5 @@ public class ClienteServicio {
             throw e;
         }
     }
+    
 }

@@ -64,7 +64,7 @@ public class EspecialidadServicio {
             throw e;
         }
     }
-    
+
     @Transactional(readOnly = true)
     public List<Especialidad> buscarPorUsuario(Integer id) throws Exception {
 
@@ -74,6 +74,19 @@ public class EspecialidadServicio {
             throw e;
         }
     }
+    
+    @Transactional(readOnly = true)
+    public Especialidad obtenerEspecialidadIdCliente(Integer especialidadId, Integer clienteId) throws Exception {
+        try {
+
+            Optional<Especialidad> especialidadOptional = especialidadRepositorio.BuscarPorUsuario(especialidadId, clienteId);
+            return especialidadOptional.orElse(null);
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 
     @Transactional(readOnly = true)
     public Especialidad obtenerEspecialidadId(Integer id) throws Exception {
@@ -81,7 +94,7 @@ public class EspecialidadServicio {
 
             Optional<Especialidad> especialidadOptional = especialidadRepositorio.findById(id);
             return especialidadOptional.orElse(null);
-            
+
         } catch (Exception e) {
             throw e;
         }
