@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+
+
+
+.sectionindex{
+  background-color:rgb(254,245,228);
+
+}
+.cuadro{
+  background-color: rgb(122,205,52);
+  color: white;
+}
+
+.tarjeta{
+  background-color: rgb(193,193,233);
+}
+.tituloblanco{
+  color:black;
+}
+.bordes{
+  border-radius: 2rem;
+}
+footer {
+  background-color: rgb(241, 243, 255);
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+}

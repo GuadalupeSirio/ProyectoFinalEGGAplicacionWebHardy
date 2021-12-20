@@ -16,90 +16,343 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!--css-->
-    <link rel="stylesheet" href="../static/css/styleeri.css">
+
+    <link rel="stylesheet" th:href="@{/css/styleSignup.css}">
+    <link rel="stylesheet" th:href="@{/css/calendario.css}">
+    <link rel="stylesheet" th:href="@{/css/turnos.css}">
 </head>
-    
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" id="nav-bar">
-        <div class="container-fluid">
-            <img src="../static/img/logo-heart.png" alt="logo-heart" class="logo-navbar">
-            <a class="navbar-brand" href="#">Hardy.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
+            <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav text-end">
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
+
+                        <a class="nav-link " th:href="@{/registro}">Registros</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Ficha medica</a>
+                        <a class="nav-link" th:href="@{/agenda}">Agenda</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Registro medico</a>
+                        <a class="nav-link" href="#">Documentos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Turnos</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Perfil
+                        </a>
+                        <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
+
+                            <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Cambiar correo electronico</a></li>
+                            <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+                        </ul>
                     </li>
-                    <li>
-                        <button type="button" class="btn btn-lg ms-5">Cerrar Sesión</button>
-                    </li>
+
                 </ul>
+
             </div>
         </div>
     </nav>
-
-    <div class="container px-4">
-        <!--Titulo-->
-        <div class="container pt-4 px-5">
-            <h1 class="pt-5 titulo">Mis Turnos</h1>
+    <div class="row justify-content-center">
+        <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+            th:if="${exito != null}">
+            <strong th:text="${exito}"></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <!--Form-->
-        <div class="container mt-5 px-5 pt-3">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="../static/img/Online Doctor-rafiki.png" alt="" class="img-fluid d-none d-sm-block">
-                </div>
-               
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-floating mb-4 ms-5 mt-5">
-                            <input type="date" class="form-control border border-secondary" id="turno"
-                                placeholder="Turno">
-                            <label for="turno">Fecha del Turno</label>
-                        </div>
-                        <div class="form-floating mb-4 ms-5 mt-5">
-                            <input type="text" class="form-control border border-secondary" id="especialidad"
-                                placeholder="Especialidad">
-                            <label for="especialidad">Especialidad</label>
-                        </div>
-                        <div class="form-floating mb-4 ms-5 mt-5">
-                            <input type="text" class="form-control border border-secondary" id="medico"
-                                placeholder="Medico">
-                            <label for="medico">Médico</label>
-                        </div>
-                        <div class="form-floating mb-4 ms-5 mt-5">
-                            <input type="textr" class="form-control border border-secondary" id="sede"
-                                placeholder="Sede">
-                            <label for="sede">Sede</label>
-                        </div>
+    </div>
 
 
-                        <div class="alert alert-danger mb-4 ms-5" role="alert">
-                            Mensaje de alerta
+    <div class="container mt-5">
+        <div class="row">
+
+            <!--Calendario-->
+            <div class="col-12 col-md-6 col-lg-4">
+
+                <div class="containerCal container pt-5">
+                    <div class="calendario">
+                        <div class="headerCal">
+                            <i class="fas fa-chevron-left anterior flecha"></i>
+                            <div class="header-fechas">
+                                <p class="mes">
+                                </p>
+                                <p class="today">
+                                </p>
+                            </div>
+                            <i class="fas fa-chevron-right siguiente flecha"></i>
+                        </div>
+                        <div class="diasSemana">
+
+                            <div>Dom</div>
+                            <div>Lun</div>
+                            <div>Mar</div>
+                            <div>Mie</div>
+                            <div>Jue</div>
+                            <div>Vie</div>
+                            <div>Sab</div>
+
+                        </div>
+                        <div class="dias">
+
+
                         </div>
 
-                        <button type="button" class="btn btn-lg ms-5">Agendar</button>
                     </div>
                 </div>
+                
+                <button type="button" class="btn btn-outline-primary col-5 mx-3 ing " data-bs-toggle="modal"
+                    data-bs-target="#agendarTurno">Agendar Turno</button>
+            </div>
+
+            <!--Turnos-->
+            <div class="col-12  col-lg-8">
+                <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class=" nav-link active" id="mesCurso" data-bs-toggle="pill"
+                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true">Turnos de este mes</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+
+                        <button class=" nav-link" id="mesProximo" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                            type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Futuros
+                            turnos</button>
+                    </li>
+                </ul>
+                <div class="container mt-5 px-4 turnos pt-4 mb-5 overflow-auto altura">
+
+
+
+
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                            aria-labelledby="mesCurso">
+
+                            <div class="turno row" th:each="turno : ${turnosMes}">
+
+                                <div class="col-2">
+                                    <img class="img-fluid"
+                                        th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
+                                        alt="" />
+                                </div>
+
+                                <div class="info col-3">
+                                    <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
+                                    <!-- <p class="medico" th:text="${turno.medico}">Medico dr asda</p>
+                                        <p class="direccion" th:text="${turno.lugar}"></p> -->
+                                </div>
+
+                                <div class="time col-5">
+                                    <p class="dia" th:text="${turno.fecha}"></p>
+                                    <p class="hora d-none d-sm-block" th:text="|${turno.hora} Hrs|"></p>
+                                </div>
+
+                                <div class="botones col-1 col-sm-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="" class="editar"><i class="fas fa-edit"></i></a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="mesProximo">
+
+                            <div class="turno row" th:each="turno : ${turnosFuturo}">
+
+                                <div class="col-2">
+                                    <img class="img-fluid"
+                                        th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
+                                        alt="" />
+                                </div>
+
+                                <div class="info col-3">
+                                    <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
+                                    <!-- <p class="medico" th:text="${turno.medico}">Medico dr asda</p>
+                                                                    <p class="direccion" th:text="${turno.lugar}"></p> -->
+                                </div>
+
+                                <div class="time col-5">
+                                    <p class="dia" th:text="${turno.fecha}"></p>
+                                    <p class="hora d-none d-sm-block" th:text="|${turno.hora} Hrs|"></p>
+                                </div>
+
+                                <div class="botones col-1 col-sm-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="" class="editar"><i class="fas fa-edit"></i></a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
         </div>
     </div>
 
-     <!-- bootstrap -->
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    <!-- modales -->
+
+    <!-- Modal agendar turno -->
+
+    <div class="modal fade " id="agendarTurno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+            <div class="modal-content fondomodal">
+                <div class="modal-header">
+                    <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Agendar Turno</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 d-none d-xl-block">
+                                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+                            </div>
+                            <div class="col-12 col-xl-6 align-self-center">
+
+                                <form class="needs-validation" th:action="@{/agenda/guardar}" method="POST" novalidate>
+                                    <div class="row g-5">
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="date" class="form-control border border-secondary"
+                                                    id="fecha" placeholder="fecha" name="fecha">
+                                                <label for="fecha">Fecha del turno</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="time" class="form-control border border-secondary"
+                                                    id="horario" placeholder="horario" name="hora">
+                                                <label for="horario">Horario</label>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="text" class="form-control border border-secondary"
+                                                    id="medico" placeholder="medico" name="medico">
+                                                <label for="medico">Médico</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-floating">
+                                                <input required type="text" class="form-control border border-secondary"
+                                                    id="locacion" placeholder="locacion" name="lugar">
+                                                <label for="locacion">Locacion</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <select required aria-label="Elegir especialidad" class="form-select"
+                                                    id="especialidad" name="idEspecialidad">
+                                                    <option selected value="">Seleccionar</option>
+                                                    <option th:each="especialidad : ${especialidades}"
+                                                        th:text="|${especialidad.nombre}|" th:if="${especialidad.alta}"
+                                                        th:value="${especialidad.id}">
+                                                    </option>
+                                                </select>
+                                                <label for="especialidad">Especialidades:</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Footer-->
+    <footer class="container-fluid mt-5 py-3">
+        <div class="row ">
+
+            <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
+                        height="28" /></span> Hardy</h6>
+
+        </div>
+    </footer>
+
+
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
     </script>
 
+    <script th:src="@{/js/calendario.js}"></script>
+
 </body>
+
 </html>

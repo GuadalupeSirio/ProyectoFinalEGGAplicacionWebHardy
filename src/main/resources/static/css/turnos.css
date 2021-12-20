@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #89c0ff #b9d9fd;
+}
+
+
+/* Background*/
+
+
+body {
+    background: rgb(197, 200, 254);
+    background: linear-gradient(180deg, rgb(164, 187, 252) 1%, rgb(194, 235, 253) 35%, rgba(255, 255, 255, 1) 100%);
+    background-repeat: no-repeat;
+} 
+
+
+/* 
+body {
+    font-family: sans-serif;
+    background-image: url("../img/Group6.png");
+    width: 100%;
+    top: 0;
+    position: absolute;
+    left: 0px;
+    background-repeat: no-repeat;
+
+
+}
+ */
+
+/*------NAVBAR------*/
+
+#nav-bar {
+    top: 0;
+    z-index: 10;
+    padding-left: 30px;
+}
+
+/*Titulo*/
+.navbar-brand {
+    font-family: 'Poppins',
+        sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.logo-navbar {
+    width: 40px;
+}
+
+
+/*Fonts links*/
+.navbar-nav {
+    padding-right: 40px;
+    font-family: 'Roboto',
+        sans-serif;
+    font-size: 18px;
+    
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+    padding: 0 15px;
+}
+
+/*Titulo pag*/
+.titulo {
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: black;
+}
+
+
+
+/*Flecha footer*/
+.arrow {
+    color: rgb(126, 138, 252);
+}
+
+
+
+.turnos {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+    overflow: hidden;
+    color: #000;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(to right bottom rgba(225, 225, 255, 0.7), rgba(225, 225, 255, 0.3));
+}
+
+/*otro color*/
+.turnos {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+    overflow: hidden;
+    color: #000;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.774);
+    background: linear-gradient(to right bottom rgba(225, 225, 255, 0.795), rgba(225, 225, 255, 0.61));
+}
+
+
+
+.btn {
+    background-image: linear-gradient(to right, #6190E8 0%, #949bfd 51%, #6190E8 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: black;
+    box-shadow: 0 0 20px rgb(238, 238, 238);
+    border-radius: 10px;
+    display: block;
+}
+
+.btn:hover {
+    background-position: right center;
+    color: black;
+    text-decoration: none;
+}
+
+
+.boton-sesion {
+    background-image: linear-gradient(to right, #6190E8 0%, #6670fc 51%, #397bf5 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    box-shadow:none;
+    background-size: 200% auto;
+    color: black;
+    border-radius: 10px;
+    display: block;
+}
+
+.boton-sesion:hover {
+    background-position: right center;
+    color: black;
+    text-decoration: none;
+}
+
+/*CARDS*/
+.turno {
+    background-color: rgba(138, 142, 243, 0.308);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+    text-align: center;
+    display: flex;
+    height: 85px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/*otro color*/
+.turno {
+    background-color: rgba(110, 166, 250, 0.432);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+    /* text-align: center;
+    display: flex;
+    height: 85px;
+    margin-bottom: 20px;
+    border-radius: 10px; */
+}
+
+.turno:hover {
+    transform: scale(1.02);
+}
+
+.icono {
+    width: 50px;
+    margin: 15px;
+}
+
+
+
+/* .info {
+
+
+    width: 350px;
+    text-align: center;
+}
+
+.especialidad {
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.medico {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.direccion {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.time {
+    margin-left: 10px;
+    margin-right: 30px;
+    width: 100px;
+    text-align: center;
+}
+
+.dia {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.hora {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.botones {
+    width: 90px;
+    display: flex;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.editar {
+    color: black;
+    margin-right: 10px;
+    margin-left: 20px;
+
+
+}
+
+.eliminar {
+    color: black;
+    margin-right: 5px;
+    margin-left: 2px;
+
+} */
+
+
+
+
+/*media querys*/
+
+
+@media (max-width: 520px) {
+
+
+    .time {
+        margin-right: 3px;
+    }
+
+    .botones {
+        margin-left: 0;
+    }
+
+    .editar {
+        margin-left: 2px;
+    }
+
+
+}
+
+@media (max-width: 475px) {
+
+
+
+    .info {
+        margin-left: 5px;
+
+    }
+
+    .especialidad {
+        margin-left: 0;
+        font-size: 20px;
+    }
+
+    .medico {
+        margin-left: 0;
+    }
+
+    .direccion {
+        margin-left: 0;
+    }
+
+    .time {
+        margin-left: 3px;
+        margin-right: 0;
+    }
+
+    .dia {
+        margin-left: 0;
+        font-size: 20px;
+    }
+
+
+    .botones {
+        margin-left: 0;
+    }
+
+    .editar {
+        margin-left: 5px;
+    }
+
+
+}
+.altura{
+    height: 20rem;
+}
+
+footer {
+  background-color: rgb(241, 243, 255);
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+
+.reg{
+    background-color:#8BE9E1;
+    color:black;
+    font-weight: bold;
+    border: 2px solid #8BE9E1;
+    padding: 10px;
+    border-radius: 2em 1em 4em / 0.5em 3em;
+  }
+
