@@ -172,10 +172,15 @@
 
       </div>
 
-      <div class=" col-12 col-md-7 border-start border-5 border-white" th:unless="${fichaMedica}">
-        <p>Ficha medica no se encuentra cargada</p>
-        <button type="button" class="btn  col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
-          data-bs-target="#guardarFichamedica">Crear ficha</button>
+      <div class=" col-12 col-md-7 border-start border-5 border-white py-5" th:unless="${fichaMedica} ">
+        <div class="row align-items-center">
+          <p class="col-12 text-center">La ficha médica no se encuentra cargada</p>
+          <div class="col-12 text-center">
+          <button type="button" class="btn reg py-2" data-bs-toggle="modal"
+            data-bs-target="#guardarFichamedica">Crear ficha</button>
+          </div>
+        </div>
+        
       </div>
 
       <div class=" col-12 col-md-7 border-start border-5 border-white" th:if="${fichaMedica}">

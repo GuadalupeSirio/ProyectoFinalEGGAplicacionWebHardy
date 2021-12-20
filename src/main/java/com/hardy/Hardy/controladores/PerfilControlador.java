@@ -43,7 +43,7 @@ class PerfilControlador {
         ModelAndView mav = new ModelAndView("perfil-vista");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-            mav.addObject("exito", flashMap.get("exito-name"));
+            //mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error-name"));
         }
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
@@ -67,6 +67,7 @@ class PerfilControlador {
             }
             usuarioServicio.crearUsuario(nombre, apellido, dni, fechaNacimiento, correo, claveUno, claveDos, imagen);
             
+            request.login(correo, claveUno);
             //attributes.addFlashAttribute("exito-name", "Usuario registrado exitosamente");
             request.login(correo, claveUno);
         } catch (Exception e) {
