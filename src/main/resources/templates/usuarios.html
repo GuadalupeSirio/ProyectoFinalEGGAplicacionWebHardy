@@ -34,7 +34,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Documentos</a>
+          <a class="nav-link" th:href="@{/documento}">Documentos</a>
         </li>
 
 
@@ -44,13 +44,13 @@
             Perfil
           </a>
           <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
             <li><a class="dropdown-item" href="#">Cambiar e-mail</a></li>
             <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+            <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
           </ul>
         </li>
 

@@ -1,0 +1,65 @@
+.altura{
+    height: 25rem;
+}
+
+
+.circulo{
+    
+    
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    background: rgb(196,217,243);
+}
+ .estilo4, .estilo6, .estilo10, .estilo12{
+    background: rgb(196,217,243);
+}
+.estilo1, .estilo5, .estilo7, .estilo11{
+    background: rgb(254,233,191);
+}
+.estilo2, .estilo3, .estilo8, .estilo9{
+    background: rgb(243,211,212);
+}
+
+.circulop{
+    background: rgb(241,243,255);
+    border-radius: 15px 50px;
+}
+.parrafo{
+    font-size: 1.1rem;
+}
+.reg{
+    background-color:#8BE9E1;
+    color:black;
+    font-weight: bold;
+    border: 2px solid #8BE9E1;
+    padding: 10px;
+    border-radius: 2em 1em 4em / 0.5em 3em;
+  }
+
+  .nobtn{
+    border: none;
+    background-color: transparent;
+}
+
+footer{
+    background-color: rgb(241,243,255);
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.fondomodal {
+  background-image: url("../img/Group6.png");
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  left: 0px;
+}
