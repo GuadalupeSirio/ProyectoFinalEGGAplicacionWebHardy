@@ -87,7 +87,7 @@
       <div class="col-12 col-lg-5 col-xl-6 border-start">
         <div class="row align-items-center pt-4">
 
-          <div class="col-4">
+          <div class="col-4" th:if="${fichaMedica}">
             <div class="row gy-3 ">
               <p class="col-12 text-center" th:text="|Ultima consulta: ${fichaMedica.ultimoChequeo}|"></p>
               <p class="col-12 text-center" th:text="|Enfermedades: ${fichaMedica.enfermedades}|"></p>
@@ -190,13 +190,13 @@
           <div class="col-12 pt-3">
             <div class="row  bordes">
               <p class="col-4">Ultima consulta</p>
-              <p class="col-4" th:text="${fichaMedica.ultimoChequeo}"></p>
+              <p class="col-4" th:text="${#temporals.format(fichaMedica.ultimoChequeo, 'dd/MM/yyyy')}"></p>
               <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
               data-bs-target="#editarUltimoChequeo"></button>            
             </div>
           </div>
 
-          <div class="col-12 ">
+          <div class="col-12">
             <div class="row  bordes">
               <p class="col-4">Edad</p>
               <p class="col-4" th:text="${fichaMedica.edad}"></p>
