@@ -142,6 +142,7 @@
                     <div class="form-floating">
                       <select required aria-label="Elegir especialidad" class="form-select border border-secondary"
                         id="especialidad" name="especialidad">
+                        <option selected value="">Seleccionar</option>
                         <option th:each="especialidad : ${especialidades}" th:text="|${especialidad.nombre}|"
                           th:if="${especialidad.alta}" th:value="${especialidad.id}">
                         </option>

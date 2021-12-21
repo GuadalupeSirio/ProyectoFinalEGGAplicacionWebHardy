@@ -58,6 +58,7 @@ public class AgendaServicio {
         }
     }
 
+    @Transactional
     public void modificar(Integer idAgenda, LocalDate fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad) throws MiExcepcion, Exception {
         try {
             validarNombre(medico, "medico");
@@ -67,7 +68,7 @@ public class AgendaServicio {
 
             Agenda agenda = agendaRepositorio.findById(idAgenda).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
 
-            //agenda.setFecha(fecha);
+            agenda.setFecha(fecha);
             agenda.setHora(hora);
             agenda.setMedico(medico);
             agenda.setLugar(lugar);
