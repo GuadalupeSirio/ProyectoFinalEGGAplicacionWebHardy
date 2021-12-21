@@ -29,7 +29,7 @@ public class EstudioControlador {
     @Autowired
     private EstudioServicio estudioServicio;
 
-    @GetMapping
+    /*@GetMapping
     public ModelAndView mostrarTodos(HttpServletRequest request) throws Exception, MiExcepcion {
 
         ModelAndView mav = new ModelAndView("estudios");
@@ -55,7 +55,7 @@ public class EstudioControlador {
             e.printStackTrace();
             throw e;
         }
-    }
+    }*/
 
     @PostMapping("/guardar")
     public RedirectView guardarEstudios(@RequestParam MultipartFile adjunto, @RequestParam Integer idRegistro, 
@@ -71,7 +71,7 @@ public class EstudioControlador {
         return new RedirectView(ruta);
     }
 
-    @PostMapping("/baja/{id}")
+    /*@PostMapping("/baja/{id}")
     public RedirectView bajaEstudio(@PathVariable Integer idEstudio, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             estudioServicio.baja(idEstudio);
@@ -81,5 +81,5 @@ public class EstudioControlador {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
         return new RedirectView("/estudios");
-    }
+    }*/
 }
