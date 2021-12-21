@@ -7,14 +7,23 @@ html {
 /* Background*/
 
 
-body {
+/* body {
     background: rgb(197, 200, 254);
     background: linear-gradient(180deg, rgb(164, 187, 252) 1%, rgb(194, 235, 253) 35%, rgba(255, 255, 255, 1) 100%);
     background-repeat: no-repeat;
+} */
+body{
+    background-image: url(../img/Section-0.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 
 .altura{
     height: 25rem;
+    
 }
 
 
