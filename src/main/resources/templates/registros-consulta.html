@@ -104,40 +104,47 @@
 
                 <div class="col-12 pt-4">
                   <div class="row">
-                    <p class="col-4"><b>Estudios:</b></h>
-                    <div class="col-4">
-                      <button class="btn boton" title="Agregar archivo" type="button" data-bs-toggle="modal"
-                        th:attr="data-bs-target=|#cargarestudio${registro.id}|">
-                        Agregar archivo
-                      </button>
 
+                    <div class="col-12">
+                      <div class="row">
+                        <p class="col-12 col-md-4"><b>Estudios:</b></h>
+                        <div class="col-6 col-md-4">
+                          <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button"
+                            data-bs-toggle="modal" th:attr="data-bs-target=|#cargarestudio${registro.id}|">
+                            Agregar
+                          </button>
+                        </div>
+                        <div class="col-6 col-md-4">
+                          <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button"
+                            data-bs-toggle="modal" th:attr="data-bs-target=|#verestudio${registro.id}|">
+                            Ver
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-4">
-                      <button class="btn boton" title="Agregar archivo" type="button" data-bs-toggle="modal"
-                        th:attr="data-bs-target=|#verestudio${registro.id}|">
-                        Ver archivos
-                      </button>
+
+                    <div class="col-12 pt-4">
+                      <div class="row">
+                        <p class="col-12 col-md-4"><b>Opciones</b></h>
+                        <div class="col-6 col-md-4">
+                          <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button"
+                            data-bs-toggle="modal" th:attr="data-bs-target=|#editar${registro.id}|">
+                            Editar
+                          </button>
+
+                        </div>
+                        <div class="col-6 col-md-4">
+                          <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button"
+                            data-bs-toggle="modal" th:attr="data-bs-target=|#baja${registro.id}|">
+                            Eliminar
+                          </button>
+                        </div>
+                      </div>
                     </div>
+
+
                   </div>
-                </div>
 
-                <div class="col-12 pt-4">
-                  <div class="row">
-                    <p class="col-4"><b>Opciones</b></h>
-                    <div class="col-4">
-                      <button class="btn boton" title="Agregar archivo" type="button" data-bs-toggle="modal"
-                        th:attr="data-bs-target=|#editar${registro.id}|">
-                        Editar
-                      </button>
-
-                    </div>
-                    <div class="col-4">
-                      <button class="btn boton" title="Agregar archivo" type="button" data-bs-toggle="modal"
-                        th:attr="data-bs-target=|#baja${registro.id}|">
-                        Eliminar
-                      </button>
-                    </div>
-                  </div>
                 </div>
 
 
