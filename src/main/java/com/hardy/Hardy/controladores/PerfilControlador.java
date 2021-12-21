@@ -68,8 +68,6 @@ class PerfilControlador {
             usuarioServicio.crearUsuario(nombre, apellido, dni, fechaNacimiento, correo, claveUno, claveDos, imagen);
             
             request.login(correo, claveUno);
-            //attributes.addFlashAttribute("exito-name", "Usuario registrado exitosamente");
-            request.login(correo, claveUno);
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
@@ -141,5 +139,20 @@ class PerfilControlador {
         }
         return new RedirectView("/perfil");
     }
+     // metodos POST
+    @PostMapping("/editar-perfil")
+    public RedirectView EditarPerfil(RedirectAttributes attributes, HttpServletRequest request,
+            Principal principal, @RequestParam String nombre,
+            @RequestParam String apellido, @RequestParam Integer dni,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento, @RequestParam MultipartFile imagen, HttpSession sesion) throws Exception {
+        try {
+            attributes.addFlashAttribute("exito-name", "El perfil se modifico exitosamente");
+             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            clienteServicio.editarCliente(nombre, apellido, dni, fechaNacimiento, imagen, cliente);
 
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
 }
