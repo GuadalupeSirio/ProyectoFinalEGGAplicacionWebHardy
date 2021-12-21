@@ -147,7 +147,7 @@ class PerfilControlador {
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento, @RequestParam MultipartFile imagen, HttpSession sesion) throws Exception {
         try {
             attributes.addFlashAttribute("exito-name", "El perfil se modifico exitosamente");
-             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
             clienteServicio.editarCliente(nombre, apellido, dni, fechaNacimiento, imagen, cliente);
 
         } catch (Exception e) {
