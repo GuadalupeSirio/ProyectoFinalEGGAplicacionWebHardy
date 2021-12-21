@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegistroRepositorio extends JpaRepository<Registro, Integer> {
 
-    @Query("SELECT r FROM Registro r WHERE r.cliente.id = :clienteId")
+    @Query("SELECT r FROM Registro r WHERE r.cliente.id = :clienteId AND r.alta = true")
     public List<Registro> obtenerRegistroCliente(@Param("clienteId") Integer clienteId);
     
-    @Query("SELECT r FROM Registro r WHERE r.cliente.id = :clienteId and r.especialidad.id= :especialidadId")
+    @Query("SELECT r FROM Registro r WHERE r.cliente.id = :clienteId and r.especialidad.id= :especialidadId AND r.alta = true")
     public List<Registro> obtenerRegistroEspecialidad(@Param("clienteId") Integer clienteId,@Param("especialidadId") Integer especialidadId);
 
 }
