@@ -94,3 +94,6 @@ footer, footer a, footer a:link, footer, a:visited{
 .fondocontacto{
   background-color:  rgb(255,255,255);
 }
+.card:hover {
+  transform: scale(1.04);
+}
