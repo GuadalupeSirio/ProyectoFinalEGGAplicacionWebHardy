@@ -191,7 +191,7 @@
           <div class="col-12 pt-3">
             <div class="row  bordes">
               <p class="col-4">Ultima consulta</p>
-              <p class="col-4" th:text="${fichaMedica.ultimoChequeo}"></p>
+              <p class="col-4" th:text="${#temporals.format(fichaMedica.ultimoChequeo, 'dd/MM/yyyy')}"></p>
               <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
               data-bs-target="#editarUltimoChequeo"></button>            
             </div>

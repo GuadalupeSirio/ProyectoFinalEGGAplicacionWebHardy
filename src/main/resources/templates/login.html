@@ -426,7 +426,8 @@
                                 <form th:action="@{/logincheck}" method="post" class="needs-validation" novalidate>
                                     <div class="container">
                                         <div class="row">
-                                            <div class="mb-3 col-12 ">
+
+                                            <div class="mb-3 col-12">
                                                 <div class="form-floating">
                                                     <input required type="email" class="form-control" id="correo"
                                                         name="correo" placeholder="Correo electronico">
@@ -434,7 +435,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class=" mb-3 col-12">
+                                            <div class=" mb-3  col-12">
                                                 <div class="form-floating">
                                                     <input required type="password" class="form-control" id="clave"
                                                         name="clave" placeholder="Contraseña">
@@ -442,27 +443,15 @@
                                                 </div>
                                             </div>
 
-                                            <button type="submit" class="btn btn reg">Ingresar</button>
+                                            <div class="col text-center">
+                                                <button type="submit" class="btn btn reg col-12">Ingresar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <!-- <form th:action="@{/logincheck}" method="post">
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp" name="correo">
-
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="clave">
-                        </div>
-
-                        <button type="submit" class="btn btn ing">Ingresar</button>
-                    </form> -->
                 </div>
 
             </div>
