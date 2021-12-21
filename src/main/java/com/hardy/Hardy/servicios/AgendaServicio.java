@@ -58,21 +58,23 @@ public class AgendaServicio {
         }
     }
 
-    public void modificar(Integer idAgenda, LocalDate fecha, LocalTime hora, String medico, String lugar, Integer idEspecialidad) throws MiExcepcion, Exception {
+    @Transactional
+    public void modificar(Integer agendaId, Integer clienteId, LocalDate fecha, LocalTime hora, String medico, String lugar, Especialidad especialidad) throws MiExcepcion, Exception {
         try {
             validarNombre(medico, "medico");
             validarNombre(lugar, "lugar");
             validarFecha(fecha);
             validarHora(hora);
-
-            Agenda agenda = agendaRepositorio.findById(idAgenda).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
-
-            //agenda.setFecha(fecha);
+            validaEspecialidad(especialidad);
+            
+            Agenda agenda = agendaRepositorio.obtenerAgendaCliente(clienteId, agendaId).
+                    orElseThrow(() -> new MiExcepcion("Error al obtener turno"));
+            
+            agenda.setFecha(fecha);
             agenda.setHora(hora);
             agenda.setMedico(medico);
             agenda.setLugar(lugar);
 
-            Especialidad especialidad = especialidadRepositorio.findById(idEspecialidad).orElseThrow(() -> new MiExcepcion("No se encontró el Id"));
             agenda.setEspecialidad(especialidad);
             agendaRepositorio.save(agenda);
 
@@ -91,7 +93,7 @@ public class AgendaServicio {
             throw new Exception("Error al obtener turnos");
         }
     }
-    
+
     @Transactional(readOnly = true)
     public List<Agenda> buscarMes(Integer clienteId) throws Exception {
         try {
@@ -101,7 +103,7 @@ public class AgendaServicio {
             throw new Exception("Error al obtener turnos");
         }
     }
-    
+
     @Transactional(readOnly = true)
     public List<Agenda> buscarFuturos(Integer clienteId) throws Exception {
         try {
@@ -133,16 +135,11 @@ public class AgendaServicio {
     }
 
     @Transactional
-    public void baja(Integer id) throws MiExcepcion {
+    public void baja(Integer clienteId, Integer agendaId) throws MiExcepcion {
         try {
-            Optional<Agenda> agendaOptional = agendaRepositorio.findById(id);
-            if (agendaOptional.isPresent()) {
-                Agenda agenda = agendaOptional.get();
-                agenda.setAlta(agenda.getAlta() ? false : true);
-                agendaRepositorio.save(agenda);
-            } else {
-                throw new MiExcepcion("No se encontró el Id");
-            }
+            Agenda agenda = agendaRepositorio.obtenerAgendaCliente(clienteId, agendaId).orElseThrow(() -> new MiExcepcion("Error al obtener turno"));
+            agenda.setAlta(agenda.getAlta() ? false : true);
+            agendaRepositorio.save(agenda);
         } catch (MiExcepcion ex) {
             throw ex;
         } catch (Exception e) {
@@ -233,6 +230,18 @@ public class AgendaServicio {
         try {
             if (cliente == null) {
                 throw new MiExcepcion("Error al obtener perfil");
+            }
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void validaEspecialidad(Especialidad especialidad) throws MiExcepcion, Exception {
+        try {
+            if (especialidad == null) {
+                throw new MiExcepcion("Error al obtener especialidad");
             }
         } catch (MiExcepcion ex) {
             throw ex;

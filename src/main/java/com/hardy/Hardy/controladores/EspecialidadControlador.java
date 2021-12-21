@@ -51,7 +51,7 @@ public class EspecialidadControlador {
         mav.addObject("action", "guardar");
 
         return mav;
-    }*/
+    }
     
      @GetMapping("/editar/{id}")
     public ModelAndView editarEspecialidad(HttpServletRequest request, @PathVariable Integer id) throws Exception {
@@ -67,7 +67,7 @@ public class EspecialidadControlador {
         mav.addObject("title", "Modificar Especialidad");
         mav.addObject("action", "modificar");
         return mav;
-    }
+    }*/
     
     @PostMapping("/guardar")
     public RedirectView guardar(HttpServletRequest request, HttpSession sesion, RedirectAttributes attributes, @RequestParam String nombre) throws Exception {
@@ -93,7 +93,7 @@ public class EspecialidadControlador {
         try {
 
             especialidadServicio.modificarEspecialidad(especialidad);
-            attributes.addFlashAttribute("exito-name", "El registro se cargo exitosamente");
+            attributes.addFlashAttribute("exito-name", "La especialidad se modifico exitosamente");
 
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
