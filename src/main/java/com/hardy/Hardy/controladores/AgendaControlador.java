@@ -55,7 +55,7 @@ public class AgendaControlador {
         return mav;
     }
 
-    @GetMapping("/crear")
+    /*@GetMapping("/crear")
     public ModelAndView crearAgendas(HttpServletRequest request) throws Exception {
         try {
             ModelAndView mav = new ModelAndView("agendas-formulario");
@@ -94,7 +94,7 @@ public class AgendaControlador {
         } catch (Exception e) {
             throw e;
         }
-    }
+    }*/
 
     @PostMapping("/guardar")
     public RedirectView guardarAgendas(@RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora,
@@ -113,13 +113,16 @@ public class AgendaControlador {
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificarAgendas(@RequestParam Integer idAgenda, 
+    public RedirectView modificarAgendas(HttpSession sesion,@RequestParam Integer idAgenda, 
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, 
             @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, 
             @RequestParam String medico, @RequestParam String lugar, 
             @RequestParam Integer idEspecialidad, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
-            agendaServicio.modificar(idAgenda, fecha, hora, medico, lugar, idEspecialidad);
+             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+             Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(idEspecialidad, cliente.getId());
+
+            agendaServicio.modificar(idAgenda, cliente.getId(), fecha, hora, medico, lugar, especialidad);
             attributes.addFlashAttribute("exito-name", "El turno ha sido modificado exitosamente");
 
         } catch (Exception e) {
@@ -129,9 +132,10 @@ public class AgendaControlador {
     }
 
     @PostMapping("/baja")
-    public RedirectView bajaAgenda(@RequestParam Integer idAgenda, RedirectAttributes attributes) throws Exception, MiExcepcion {
+    public RedirectView bajaAgenda(HttpSession sesion, @RequestParam Integer idAgenda, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
-            agendaServicio.baja(idAgenda);
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            agendaServicio.baja(cliente.getId() ,idAgenda);
             Agenda agenda = agendaServicio.buscarPorId(idAgenda);
             attributes.addFlashAttribute("exito-name", "El turno ha sido " + ((agenda.getAlta()) ? "habilitado" : "deshabilitado") + "  exitosamente");
         } catch (Exception e) {

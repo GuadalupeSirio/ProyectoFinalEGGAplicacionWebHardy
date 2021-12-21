@@ -94,6 +94,7 @@ public class RegistroControlador {
         }
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
         Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(especialidadId, cliente.getId());
+        
         mav.addObject("ruta", "/registro/ver-registros/" + especialidadId);
         mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
         mav.addObject("titulo", "Historial de " + especialidad.getNombre());
