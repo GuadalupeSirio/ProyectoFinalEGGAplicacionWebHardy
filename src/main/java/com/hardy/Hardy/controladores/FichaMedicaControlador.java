@@ -32,23 +32,23 @@ public class FichaMedicaControlador {
     private ClienteServicio clienteServicio;
 
     // metodos GET
-    @GetMapping
-    public ModelAndView mostrarFichaMedica(HttpSession sesion, HttpServletRequest request) throws MiExcepcion, Exception {
-
-        ModelAndView mav = new ModelAndView("");
-        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-        if (flashMap != null) {
-            mav.addObject("exito", flashMap.get("exito-name"));
-            mav.addObject("error", flashMap.get("error-name"));
-        }
-
-        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
-        FichaMedica ficha = fichaMedicaServicio.obtenerFichamedicaId(cliente.getId());
-
-        mav.addObject("perfil", cliente);
-        mav.addObject("ficha", ficha);
-        return mav;
-    }
+//    @GetMapping
+//    public ModelAndView mostrarFichaMedica(HttpSession sesion, HttpServletRequest request) throws MiExcepcion, Exception {
+//
+//        ModelAndView mav = new ModelAndView("");
+//        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+//        if (flashMap != null) {
+//            mav.addObject("exito", flashMap.get("exito-name"));
+//            mav.addObject("error", flashMap.get("error-name"));
+//        }
+//
+//        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+//        FichaMedica ficha = fichaMedicaServicio.obtenerFichamedicaId(cliente.getId());
+//
+//        mav.addObject("perfil", cliente);
+//        mav.addObject("ficha", ficha);
+//        return mav;
+//    }
 
     // metodos POST
     @PostMapping("/guardar-ficha")
@@ -133,4 +133,19 @@ public class FichaMedicaControlador {
         }
         return new RedirectView("/perfil");
     }
+    
+        
+    @PostMapping("/editar-ultimoChequeo")
+    public RedirectView editarUltimoChequeo(RedirectAttributes attributes, HttpServletRequest request,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate ultimoChequeo, HttpSession sesion) throws Exception {
+        try {
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            fichaMedicaServicio.modificarUltimoChequeo(ultimoChequeo, cliente);
+            attributes.addFlashAttribute("exito-name", "La fecha de la ultima consulta se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
 }
