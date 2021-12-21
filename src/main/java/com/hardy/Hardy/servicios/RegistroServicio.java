@@ -53,6 +53,7 @@ public class RegistroServicio {
             registro.setResultados(resultados);
             registro.setEspecialidad(especialidadServicio.obtenerEspecialidadId(especialidad));
             registro.setCliente(cliente);
+            registro.setAlta(true);
 
             FichaMedica fichamedica = fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId());
             if (fichamedica.getUltimoChequeo().isBefore(fecha) || fichamedica.getUltimoChequeo() == null) {
@@ -69,7 +70,8 @@ public class RegistroServicio {
     }
 
     @Transactional
-    public void modificarRegistro(Integer id, LocalDate fecha, String medico, String cobertura, String lugar, String resultados) throws Exception, MiExcepcion {
+    public void modificarRegistro(Integer id, LocalDate fecha, String medico, String cobertura,
+            String lugar, String resultados, Especialidad especialidad) throws Exception, MiExcepcion {
 
         try {
 
@@ -91,9 +93,23 @@ public class RegistroServicio {
                 fichamedica.setUltimoChequeo(fecha);
                 fichaMedicaRepositorio.save(fichamedica);
             }
+            registro.setEspecialidad(especialidad);
 
             registroRepositorio.save(registro);
 
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void registroBaja(Integer registroId) throws Exception, MiExcepcion {
+        try {
+            Registro registro = registroRepositorio.findById(registroId).orElseThrow(() -> new MiExcepcion("Error al obtener registro"));
+            registro.setAlta(false);
+            registroRepositorio.save(registro);
         } catch (MiExcepcion ex) {
             throw ex;
         } catch (Exception e) {
@@ -127,6 +143,16 @@ public class RegistroServicio {
             //Registro registro = registroRepositorio.findById(id).orElseThrow(() -> new MiExcepcion("Error al obtener registro"));
             Optional<Registro> registroOptional = registroRepositorio.findById(id);
             return registroOptional.orElse(null);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+        @Transactional(readOnly = true)
+    public Boolean obtenerRegistroAlta(Integer id) throws Exception {
+        try {
+            Registro registro = registroRepositorio.findById(id).orElseThrow(() -> new MiExcepcion("Error al obtener registro"));
+            return registro.getAlta();
         } catch (Exception e) {
             throw e;
         }

@@ -113,27 +113,31 @@ public class AgendaControlador {
     }
 
     @PostMapping("/modificar")
-    public RedirectView modificarAgendas(@RequestParam Integer idAgenda, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, @RequestParam String medico, @RequestParam String lugar, @RequestParam("especialidad") Integer idEspecialidad, RedirectAttributes attributes) throws Exception, MiExcepcion {
+    public RedirectView modificarAgendas(@RequestParam Integer idAgenda, 
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, 
+            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime hora, 
+            @RequestParam String medico, @RequestParam String lugar, 
+            @RequestParam Integer idEspecialidad, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             agendaServicio.modificar(idAgenda, fecha, hora, medico, lugar, idEspecialidad);
-            attributes.addFlashAttribute("exito-name", "La agenda ha sido modificada exitosamente");
+            attributes.addFlashAttribute("exito-name", "El turno ha sido modificado exitosamente");
 
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
-        return new RedirectView("/agendas");
+        return new RedirectView("/agenda");
     }
 
-    @PostMapping("/baja/{id}")
-    public RedirectView bajaAgenda(@PathVariable Integer idAgenda, RedirectAttributes attributes) throws Exception, MiExcepcion {
+    @PostMapping("/baja")
+    public RedirectView bajaAgenda(@RequestParam Integer idAgenda, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             agendaServicio.baja(idAgenda);
             Agenda agenda = agendaServicio.buscarPorId(idAgenda);
-            attributes.addFlashAttribute("exito-name", "La agenda ha sido " + ((agenda.getAlta()) ? "habilitada" : "deshabilitada") + "  exitosamente");
+            attributes.addFlashAttribute("exito-name", "El turno ha sido " + ((agenda.getAlta()) ? "habilitado" : "deshabilitado") + "  exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
-        return new RedirectView("/agendas");
+        return new RedirectView("/agenda");
     }
 
 }
