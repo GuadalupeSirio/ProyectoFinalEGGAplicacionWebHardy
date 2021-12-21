@@ -14,11 +14,11 @@ html {
 /* Background*/
 
 
-/* body {
+body {
     background: rgb(197, 200, 254);
     background: linear-gradient(180deg, rgb(177, 198, 253) 1%, rgb(208, 241, 255) 35%, rgba(255, 255, 255, 1) 100%);
     background-repeat: no-repeat;
-} */
+}
 
 /* body{
     font-family: sans-serif;
@@ -31,14 +31,6 @@ html {
     
 
 } */
-
-body{
-    background-image: url(../img/Section-0.jpg);
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 
 /*------NAVBAR------*/
 

@@ -7,7 +7,7 @@ html {
 
 /* Background*/
 
-/* body {
+body {
   background: rgb(197, 200, 254);
   background: linear-gradient(
     180deg,
@@ -16,13 +16,6 @@ html {
     rgba(255, 255, 255, 1) 100%
   );
   background-repeat: no-repeat;
-} */
-body{
-  background-image: url(../img/Section-0.jpg);
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 /*------NAVBAR------*/
@@ -59,7 +52,6 @@ body{
 
 .altura {
   height: 30rem;
-  
 }
 
 .circulo {
@@ -96,7 +88,7 @@ body{
 }
 
 .circulop {
-  background: rgb(238,232,255);
+  background: rgb(241, 243, 255);
   border-radius: 15px 50px;
 }
 

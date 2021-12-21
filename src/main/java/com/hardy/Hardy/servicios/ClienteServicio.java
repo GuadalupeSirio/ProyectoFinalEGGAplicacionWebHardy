@@ -49,32 +49,6 @@ public class ClienteServicio {
     }
 
     @Transactional
-    public void editarCliente(String nombre, String apellido, Integer dni, LocalDate fechaNacimiento,
-            MultipartFile imagen, Cliente cliente) throws Exception, MiExcepcion {
-
-        try {
-            validacionNombre(nombre, "Nombre");
-            validacionNombre(apellido, "Apellido");
-            validacionFechaNacimiento(fechaNacimiento);
-
-            cliente.setNombre(nombre);
-            cliente.setApellido(apellido);
-            cliente.setDni(dni);
-            cliente.setFechaNacimiento(fechaNacimiento);
-            fichaMedicaServicio.modificarEdad(Period.between(cliente.getFechaNacimiento(), LocalDate.now()).getYears(), cliente);
-
-            if (!imagen.isEmpty()) {
-                cliente.setImagen(imagenServicio.copiar(imagen));
-            }
-            clienteRepositorio.save(cliente);
-        } catch (MiExcepcion ex) {
-            throw ex;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    @Transactional
     public void editarNombre(String nombre, Cliente cliente) throws Exception, MiExcepcion {
         try {
             validacionNombre(nombre, "Nombre");
@@ -196,7 +170,7 @@ public class ClienteServicio {
     public void modificarImagen(Cliente cliente, MultipartFile imagen) throws Exception {
         try {
             if (!imagen.isEmpty()) {
-                if (cliente.getImagen() != null) {
+                if (cliente.getImagen()!=null) {
                     imagenServicio.borrarImagen(cliente.getImagen());
                 }
                 cliente.setImagen(imagenServicio.copiar(imagen));
@@ -226,5 +200,5 @@ public class ClienteServicio {
             throw e;
         }
     }
-
+    
 }

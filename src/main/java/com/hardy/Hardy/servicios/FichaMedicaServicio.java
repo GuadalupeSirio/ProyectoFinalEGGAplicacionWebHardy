@@ -58,7 +58,7 @@ public class FichaMedicaServicio {
             validacionGrupoSanguineo(grupoSanguineo);
             validacionPeso(peso);
             validacionAltura(altura);
-            validacionEnfermedades(enfermedades);
+            //validacionEnfermedades(enfermedades);
             validacionUltimoChequeo(ultimoChequeo);
             validacionCliente(cliente);
             
@@ -67,8 +67,9 @@ public class FichaMedicaServicio {
             fichaMedica.setGrupoSanguineo(grupoSanguineo);
             fichaMedica.setPeso(peso);
             fichaMedica.setAltura(altura);
-            fichaMedica.setEnfermedades(enfermedades);
+            //fichaMedica.setEnfermedades(enfermedades);
             fichaMedica.setUltimoChequeo(ultimoChequeo);
+            
             fichaMedicaRepositorio.save(fichaMedica);
             
         } catch (MiExcepcion ex) {
@@ -129,21 +130,6 @@ public class FichaMedicaServicio {
             validacionCliente(cliente);
             FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
             fichaMedica.setGrupoSanguineo(grupoSanguineo);
-            fichaMedicaRepositorio.save(fichaMedica);
-        } catch (MiExcepcion ex) {
-            throw ex;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-    
-        @Transactional
-    public void modificarUltimoChequeo(LocalDate ultimoChequeo, Cliente cliente) throws Exception, MiExcepcion {
-        try {
-            validacionUltimoChequeo(ultimoChequeo);
-            validacionCliente(cliente);
-            FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
-            fichaMedica.setUltimoChequeo(ultimoChequeo);
             fichaMedicaRepositorio.save(fichaMedica);
         } catch (MiExcepcion ex) {
             throw ex;
