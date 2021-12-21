@@ -66,9 +66,6 @@ class PerfilControlador {
                 return new RedirectView("/inicio");
             }
             usuarioServicio.crearUsuario(nombre, apellido, dni, fechaNacimiento, correo, claveUno, claveDos, imagen);
-            
-            request.login(correo, claveUno);
-            //attributes.addFlashAttribute("exito-name", "Usuario registrado exitosamente");
             request.login(correo, claveUno);
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());

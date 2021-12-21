@@ -42,7 +42,7 @@
 
 
     <div class="container mt-5">
-        <div class="row">
+        <div class="row gy-5 gy-md-0">
 
             <!--Calendario-->
             <div class="col-12 col-md-6 col-lg-4">
@@ -105,33 +105,36 @@
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="mesCurso">
 
-                            <div class="turno" th:each="turno : ${turnosMes}">
+                            <div class="turno" th:each="turnom : ${turnosMes}">
 
                                 <div class="especialidad-icon">
                                     <img class="icono"
-                                        th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
+                                        th:src="${turnom.especialidad.nombreImagen != null} ? @{/img/__${turnom.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
                                         alt="" />
                                 </div>
 
                                 <div class="info">
-                                    <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
-                                    <p class="medico" th:text="${turno.medico}"></p>
-                                    <p class="direccion" th:text="${turno.lugar}"></p>
+                                    <p class="especialidad" th:text="${turnom.especialidad.nombre}"></p>
+                                    <p class="medico" th:text="${turnom.medico}"></p>
+                                    <p class="direccion" th:text="${turnom.lugar}"></p>
                                 </div>
 
                                 <div class="time">
-                                    <p class="dia" th:text="${turno.fecha}"></p>
-                                    <p class="hora " th:text="|${turno.hora} Hrs|"></p>
+                                    <p class="dia" th:text="${turnom.fecha}"></p>
+                                    <p class="hora " th:text="|${turnom.hora} Hrs|"></p>
                                 </div>
 
                                 <div class="botones">
 
                                     <div>
                                         <a href="" class="editar" data-bs-toggle="modal"
-                                            data-bs-target="#editarTurno"><i class="fas fa-edit"></i></a>
+                                            th:attr="data-bs-target=|#editar${turnom.id}|"><i
+                                                class="fas fa-edit"></i></a>
                                     </div>
                                     <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+                                        <a href="" class="eliminar" data-bs-toggle="modal"
+                                            th:attr="data-bs-target=|#baja${turnom.id}|"><i
+                                                class="far fa-trash-alt"></i></a>
                                     </div>
 
                                 </div>
@@ -140,36 +143,36 @@
 
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="mesProximo">
 
-                            <div class="turno row" th:each="turno : ${turnosFuturo}">
-
+                            <div class="turno" th:each="turnof : ${turnosFuturo}">
+                            
                                 <div class="especialidad-icon">
                                     <img class="icono"
-                                        th:src="${turno.especialidad.nombreImagen != null} ? @{/img/__${turno.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
+                                        th:src="${turnof.especialidad.nombreImagen != null} ? @{/img/__${turnof.especialidad.nombreImagen}__} : @{/img/Agregar.svg}"
                                         alt="" />
                                 </div>
-
-
+                            
                                 <div class="info">
-                                    <p class="especialidad" th:text="${turno.especialidad.nombre}"></p>
-                                    <p class="medico" th:text="${turno.medico}"></p>
-                                    <p class="direccion" th:text="${turno.lugar}"></p>
+                                    <p class="especialidad" th:text="${turnof.especialidad.nombre}"></p>
+                                    <p class="medico" th:text="${turnof.medico}"></p>
+                                    <p class="direccion" th:text="${turnof.lugar}"></p>
                                 </div>
-
+                            
                                 <div class="time">
-                                    <p class="dia" th:text="${turno.fecha}"></p>
-                                    <p class="hora " th:text="|${turno.hora} Hrs|"></p>
+                                    <p class="dia" th:text="${turnof.fecha}"></p>
+                                    <p class="hora " th:text="|${turnof.hora} Hrs|"></p>
                                 </div>
-
+                            
                                 <div class="botones">
-
+                            
                                     <div>
-                                        <a href="" class="editar" data-bs-toggle="modal"
-                                            data-bs-target="#editarTurno"><i class="fas fa-edit"></i></a>
+                                        <a href="" class="editar" data-bs-toggle="modal" th:attr="data-bs-target=|#editar${turnof.id}|"><i
+                                                class="fas fa-edit"></i></a>
                                     </div>
                                     <div>
-                                        <a href="" class="eliminar"><i class="far fa-trash-alt"></i></a>
+                                        <a href="" class="eliminar" data-bs-toggle="modal" th:attr="data-bs-target=|#baja${turnof.id}|"><i
+                                                class="far fa-trash-alt"></i></a>
                                     </div>
-
+                            
                                 </div>
                             </div>
 
@@ -268,91 +271,254 @@
         </div>
     </div>
 
-    <!-- Modal editar turno -->
+    <!-- Modales para turnos del mes -->
 
-    <div class="modal fade " id="editarTurno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
-            <div class="modal-content fondomodal">
-                <div class="modal-header">
-                    <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Editar turno</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-                </div>
-                <div class="modal-body ">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-6 d-none d-xl-block">
-                                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
-                            </div>
-                            <div class="col-12 col-xl-6 align-self-center">
+    <!-- Modale para editar -->
+    <div th:each="turnom : ${turnosMes}">
 
-                                <form class="needs-validation" th:action="@{/agenda/editar}" method="POST" novalidate>
-                                    <div class="row g-5">
+        <div class="modal fade " th:attr="id=|editar${turnom.id}|" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+                <div class="modal-content fondomodal">
+                    <div class="modal-header">
+                        <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Editar turno</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-6 d-none d-xl-block">
+                                    <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+                                </div>
+                                <div class="col-12 col-xl-6 align-self-center">
 
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-floating">
-                                                <input required type="date" class="form-control border border-secondary"
-                                                    id="fecha" placeholder="fecha" name="fecha">
-                                                <label for="fecha">Fecha del turno</label>
+                                    <form class="needs-validation" th:action="@{/agenda/modificar}" method="POST"
+                                        novalidate>
+                                        <div class="row g-5">
+
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-floating">
+                                                    <input required type="date"
+                                                        class="form-control border border-secondary" id="fecha"
+                                                        placeholder="fecha" name="fecha">
+                                                    <label for="fecha">Fecha del turno</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-floating">
+                                                    <input required type="time"
+                                                        class="form-control border border-secondary" id="horario"
+                                                        placeholder="horario" name="hora">
+                                                    <label for="horario">Horario</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-floating">
+                                                    <input required type="text"
+                                                        class="form-control border border-secondary" id="medico"
+                                                        placeholder="medico" name="medico">
+                                                    <label for="medico">Médico</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-floating">
+                                                    <input required type="text"
+                                                        class="form-control border border-secondary" id="locacion"
+                                                        placeholder="locacion" name="lugar">
+                                                    <label for="locacion">Locacion</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <select required aria-label="Elegir especialidad"
+                                                        class="form-select" id="especialidad" name="idEspecialidad">
+                                                        <option selected value="">Seleccionar</option>
+                                                        <option th:each="especialidad : ${especialidades}"
+                                                            th:text="|${especialidad.nombre}|"
+                                                            th:if="${especialidad.alta}" th:value="${especialidad.id}">
+                                                        </option>
+                                                    </select>
+                                                    <label for="especialidad">Especialidades:</label>
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" th:value="${turnom.id}" name="idAgenda">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
                                             </div>
                                         </div>
-
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-floating">
-                                                <input required type="time" class="form-control border border-secondary"
-                                                    id="horario" placeholder="horario" name="hora">
-                                                <label for="horario">Horario</label>
-                                            </div>
-                                        </div>
-
-
-
-
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-floating">
-                                                <input required type="text" class="form-control border border-secondary"
-                                                    id="medico" placeholder="medico" name="medico">
-                                                <label for="medico">Médico</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-floating">
-                                                <input required type="text" class="form-control border border-secondary"
-                                                    id="locacion" placeholder="locacion" name="lugar">
-                                                <label for="locacion">Locacion</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="form-floating">
-                                                <select required aria-label="Elegir especialidad" class="form-select"
-                                                    id="especialidad" name="idEspecialidad">
-                                                    <option selected value="">Seleccionar</option>
-                                                    <option th:each="especialidad : ${especialidades}"
-                                                        th:text="|${especialidad.nombre}|" th:if="${especialidad.alta}"
-                                                        th:value="${especialidad.id}">
-                                                    </option>
-                                                </select>
-                                                <label for="especialidad">Especialidades:</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
+
+                <div class="modal fade " th:attr="id=|baja${turnom.id}|" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Estas seguro que deseas
+                                    eliminar? XD</h3>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                            </div>
+                            <div class="modal-body ">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12 align-self-center">
+                
+                                            <form class="needs-validation" th:action="@{/agenda/baja}" method="POST" novalidate>
+                                                <div class="row g-5">
+                                                    <input type="hidden" th:value="${turnom.id}" name="idAgenda">
+                                                    <div class="col-12">
+                                                        <button type="submit" class="btn btn-lg ms-1 reg">Confirmar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                            </div>
+                
+                        </div>
+                    </div>
+                </div>
+
     </div>
 
+    <!-- Modales para turnos futuros -->
 
+    <!-- Modal para editar -->
+    <div th:each="turnof : ${turnosFuturo}">
+
+        <div class="modal fade " th:attr="id=|editar${turnof.id}|" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+                <div class="modal-content fondomodal">
+                    <div class="modal-header">
+                        <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Editar turno</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-6 d-none d-xl-block">
+                                    <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+                                </div>
+                                <div class="col-12 col-xl-6 align-self-center">
+
+                                    <form class="needs-validation" th:action="@{/agenda/modificar}" method="POST"
+                                        novalidate>
+                                        <div class="row g-5">
+
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-floating">
+                                                    <input required type="date"
+                                                        class="form-control border border-secondary" id="fecha"
+                                                        placeholder="fecha" name="fecha">
+                                                    <label for="fecha">Fecha del turno</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-floating">
+                                                    <input required type="time"
+                                                        class="form-control border border-secondary" id="horario"
+                                                        placeholder="horario" name="hora">
+                                                    <label for="horario">Horario</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-floating">
+                                                    <input required type="text"
+                                                        class="form-control border border-secondary" id="medico"
+                                                        placeholder="medico" name="medico">
+                                                    <label for="medico">Médico</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-floating">
+                                                    <input required type="text"
+                                                        class="form-control border border-secondary" id="locacion"
+                                                        placeholder="locacion" name="lugar">
+                                                    <label for="locacion">Locacion</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <select required aria-label="Elegir especialidad"
+                                                        class="form-select" id="especialidad" name="idEspecialidad">
+                                                        <option selected value="">Seleccionar</option>
+                                                        <option th:each="especialidad : ${especialidades}"
+                                                            th:text="|${especialidad.nombre}|"
+                                                            th:if="${especialidad.alta}" th:value="${especialidad.id}">
+                                                        </option>
+                                                    </select>
+                                                    <label for="especialidad">Especialidades:</label>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" th:value="${turnof.id}" name="idAgenda">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade " th:attr="id=|baja${turnof.id}|" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Estas seguro que deseas
+                            eliminar? XD</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 align-self-center">
+
+                                    <form class="needs-validation" th:action="@{/agenda/baja}" method="POST" novalidate>
+                                        <div class="row g-5">
+                                            <input type="hidden" th:value="${turnof.id}" name="idAgenda">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-lg ms-1 reg">Confirmar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <!--Footer-->
     <footer th:replace="fragmentos :: footer"></footer>
@@ -367,7 +533,7 @@
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+        </script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {

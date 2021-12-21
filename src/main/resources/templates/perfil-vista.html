@@ -190,9 +190,9 @@
 
           <div class="col-12 pt-3">
             <div class="row  bordes">
-              <p class="col-4">Ultima consulta(revisar)</p>
-              <p class="col-4">20/09/2021</p>
-              <a href="#" class="col-4 text-center text-decoration-none text-reset">Cardiologia</a>
+              <p class="col-4">Ultima consulta</p>
+              <p class="col-4" th:text="${#temporals.format(fichaMedica.ultimoChequeo, 'dd/MM/yyyy')}"></p>
+              <!-- <a href="#" class="col-4 text-center text-decoration-none text-reset">Cardiologia</a> -->
             </div>
           </div>
 
