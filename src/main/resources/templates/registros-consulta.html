@@ -57,55 +57,56 @@
 
   </div>
 
-  <div class="container m-5 px-5">
-    <div class="accordion ps-5" id="accordionExample" th:each="registro : ${registros}">
+  <div class="container-fluid">
+  <div class="container m-auto mt-5">
+    <div class="row justify-content-evenly">
 
-      <div class="accordion-item espacio">
+      <div class="col-12">
 
-        <!--Databs-target = al id -->
-        <h2 class="accordion-header" id="flush-headingOne">
-          <button class="accordion-button collapsed colores" type="button" data-bs-toggle="collapse"
-            th:attr="data-bs-target=|#acordion${registro.id}|"
-            th:text="|${registro.especialidad.nombre}  -  ${#temporals.format(registro.fecha, 'dd/MM/yyyy')}"
-            aria-expanded="false" th:aria-controls="|#acordion${registro.id}|">
+        <div class="accordion" id="accordionExample" th:each="registro : ${registros}">
 
-          </button>
-        </h2>
+          <div class="accordion-item espacio">
 
-        <!--id = id del registro-->
-        <div th:attr="id=|acordion${registro.id}|" class="accordion-collapse collapse"
-          data-bs-parent="#accordionExample">
-          <div class="accordion-body">
+            <!--Databs-target = al id -->
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed colores" type="button" data-bs-toggle="collapse"
+                th:attr="data-bs-target=|#acordion${registro.id}|"
+                th:text="|${registro.especialidad.nombre}  -  ${#temporals.format(registro.fecha, 'dd/MM/yyyy')}"
+                aria-expanded="false" th:aria-controls="|#acordion${registro.id}|">
 
+              </button>
+            </h2>
 
-            <div class="container">
-              <div class="row">
-                <div class="col-12 pt-3">
-                  <div class="row  bordes">
-                    <p class="col-4"><b>Médico:</b></p>
-                    <p th:text="${registro.medico}" class="col-8"></p>
-                  </div>
-                </div>
+            <!--id = id del registro-->
+            <div th:attr="id=|acordion${registro.id}|" class="accordion-collapse collapse"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
 
-                <div class="col-12 pt-3 ">
-                  <div class="row  bordes">
-                    <p class="col-4 bold"><b>Cobertura:</b> </p>
-                    <p th:text="${registro.cobertura}" class="col-8"></p>
-                  </div>
-                </div>
-
-                <div class="col-12 pt-3">
-                  <div class="row bordes">
-                    <p class="col-4 bold"><b>Resultados:</b></p>
-                    <p th:text="${registro.resultados}" class="col-8"></p>
-                  </div>
-                </div>
-
-
-                <div class="col-12 pt-4">
+                <div class="container">
                   <div class="row">
 
-                    <div class="col-12">
+                    <div class="col-12 pt-3">
+                      <div class="row  bordes">
+                        <p class="col-4"><b>Médico:</b></p>
+                        <p th:text="${registro.medico}" class="col-8"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 pt-3 ">
+                      <div class="row  bordes">
+                        <p class="col-4 bold"><b>Cobertura:</b> </p>
+                        <p th:text="${registro.cobertura}" class="col-8"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                      <div class="row bordes">
+                        <p class="col-4 bold"><b>Resultados:</b></p>
+                        <p th:text="${registro.resultados}" class="col-8"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-12  pt-4">
                       <div class="row">
                         <p class="col-12 col-md-4"><b>Estudios:</b></h>
                         <div class="col-6 col-md-4">
@@ -141,34 +142,31 @@
                         </div>
                       </div>
                     </div>
-
-
                   </div>
 
                 </div>
-
 
               </div>
             </div>
 
           </div>
+
         </div>
-
-
       </div>
-
     </div>
   </div>
+</div>
+  <!-- modales -->
 
   <div th:each="registro : ${registros}">
 
+    <!-- eliminar consulta medica -->
     <div class="modal fade " th:attr="id=|baja${registro.id}|" tabindex="-1" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Estas seguro que deseas
-              eliminar? XD</h3>
+            <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Eliminar consulta</h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
           </div>
           <div class="modal-body ">
@@ -180,7 +178,7 @@
                     <div class="row g-5">
                       <input type="hidden" th:value="${registro.id}" name="registroId">
                       <input type="hidden" th:value="${ruta}" name="ruta">
-                      <div class="col-12">
+                      <div class="col-12 text-center">
                         <button type="submit" class="btn btn-lg ms-1 reg">Confirmar</button>
                       </div>
                     </div>
@@ -195,6 +193,8 @@
       </div>
     </div>
 
+
+    <!-- editar consulta medica -->
     <div class="modal fade" th:attr="id=|editar${registro.id}|" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
@@ -283,6 +283,8 @@
       </div>
     </div>
 
+
+    <!-- cargar archivo de la consulta medica -->
     <div class="modal fade" th:attr="id=|cargarestudio${registro.id}|" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -314,6 +316,7 @@
       </div>
     </div>
 
+    <!-- Visualizaz archivos -->
     <div class="modal fade" th:attr="id=|verestudio${registro.id}|" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
@@ -338,11 +341,11 @@
                   </td>
                   <td th:if="${estudio.registro.id} eq ${registro.id}">
                     <a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|"
-                      target="_blank"><i class="far fa-eye"></i></a>
+                      target="_blank"><img th:src="@{/img/eyearchivo.png}" alt=""></i></a>
                   </td>
                   <td th:if="${estudio.registro.id} eq ${registro.id}">
                     <a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|"
-                      th:download="${estudio.nombre}"><i class="fas fa-download"></i></a>
+                      th:download="${estudio.nombre}"><img th:src="@{/img/downloadarchivos.png}" alt=""></a>
                   </td>
 
                 </tr>
@@ -358,7 +361,17 @@
   </div>
 
   <!--Footer-->
-  <footer th:replace="fragmentos :: footer"></footer>
+
+  <!-- <footer th:replace="fragmentos :: footer"></footer> -->
+  <footer class="container-fluid mt-5 py-3 fixed-bottom">
+    <div class="row ">
+
+      <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
+            height="28" /></span> Hardy</h6>
+
+    </div>
+
+  </footer>
 
 
   <!-- Modal registro de consulta-->
@@ -407,8 +420,8 @@
                     <div class="form-floating">
                       <select required aria-label="Elegir especialidad" class="form-select border border-secondary"
                         id="especialidad" name="especialidad">
-                         <option selected th:value="${especialidad.id}" 
-                          th:text="${especialidad.nombre}"></option> 
+
+                        <option selected th:value="${especialidad.id}" th:text="${especialidad.nombre}"></option>
                         <!-- <option th:each="especialidxd : ${especialidades}" th:text="|${especialidxd.nombre}|"
                           th:if="${especialidxd.alta and especialidxd.id != especialidad.id}" th:value="${especialidxd.id}">
                         </option> -->

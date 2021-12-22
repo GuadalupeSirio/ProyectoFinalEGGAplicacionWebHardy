@@ -36,9 +36,9 @@ public class RegistroServicio {
 
         try {
 
-            /*if (fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()) == null) {
+            if (fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()) == null) {
                 throw new Exception("Tiene que cargar la ficha medica primero");
-            }*/
+            }
             validacionFecha(fecha);
             validacionMedico(medico, "Medico");
             validacionCobertura(cobertura, "Cobertura");

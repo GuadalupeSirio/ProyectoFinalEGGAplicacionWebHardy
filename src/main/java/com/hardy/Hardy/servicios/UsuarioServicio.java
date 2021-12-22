@@ -79,7 +79,6 @@ public class UsuarioServicio implements UserDetailsService {
             usuarioRepositorio.save(usuario);
 
             clienteServicio.guardarCliente(nombre, apellido, dni, fechaNacimiento, imagen, usuario);
-
             emailServicio.enviarThread(correo); //--> para enviar el correo de bienvenida   
         } catch (Exception e) {
             throw e;
@@ -113,7 +112,7 @@ public class UsuarioServicio implements UserDetailsService {
             especialidadRepositorio.save(especialidad);
             especialidad = new Especialidad("Psiquiatría", "Psiquiatría.png", true, 0);
             especialidadRepositorio.save(especialidad);
-            especialidad = new Especialidad("Otro", null, true, 0);
+            especialidad = new Especialidad("Otro", "Otro.svg", true, 0);
             especialidadRepositorio.save(especialidad);
 
         } catch (Exception e) {

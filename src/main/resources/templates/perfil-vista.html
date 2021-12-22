@@ -16,7 +16,59 @@
 
 <body>
 
-  <nav th:replace="fragmentos :: navbar"></nav>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28">
+      <a class="navbar-brand ms-1" th:href="@{/inicio}">Hardy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav text-end">
+
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/registro}">Consultas</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/agenda}">Agenda</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/documento}">Documentos</a>
+          </li>
+
+          <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+            <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <img th:src="${session.imagen != null} ? @{/upload/__${session.imagen}__} : @{/upload/profile-1-1.png}"
+                alt="imagen de perfil" width="35" class=" rounded-circle mb-1">
+            </a>
+            <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
+
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarCorreo">Cambiar
+                  e-mail</a>
+              </li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarClave">Cambiar
+                  contraseña</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
 
 
   <div class="row justify-content-center">
@@ -31,8 +83,6 @@
       <strong th:text="${error}"></strong>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-
-
   </div>
 
   <!-- Cabecera -->
@@ -49,7 +99,8 @@
               <div class="col-12">
                 <a data-bs-toggle="modal" data-bs-target="#editarFoto"> <img class="img-fluid rounded-circle"
                     th:src="${cliente.imagen != null} ? @{/upload/__${cliente.imagen}__} : @{/upload/profile-1-1.png}"
-                    alt="" width="140" /></a>
+                    alt="" width="140" />
+                </a>
               </div>
             </div>
           </div>
@@ -75,7 +126,6 @@
                   <div class="cards col-3 text-center">
                     <img th:src="@{/img/weight-scale.png}" alt="" class="ficha-med-img img-fluid">
                     <h3 th:if="${fichaMedica}" th:text="|${fichaMedica.peso} Kg|"></h3>
-
                   </div>
                 </div>
               </div>
@@ -84,25 +134,28 @@
         </div>
       </div>
 
+  </div>
+
 
       <div class="col-12 col-lg-5 col-xl-6 border-start">
         <div class="row align-items-center pt-4">
 
           <div class="col-4" th:if="${fichaMedica}">
             <div class="row gy-3 ">
-              <p class="col-12 text-center" th:text="|Ultima consulta: ${#temporals.format(fichaMedica.ultimoChequeo, 'dd/MM/yyyy')}|"></p>
               <p class="col-12 text-center" th:text="|Enfermedades: ${fichaMedica.enfermedades}|"></p>
             </div>
           </div>
 
           <div class="col-8 ">
             <div class="row gy-3 justify-content-center ">
+
               <div class="col-7">
-                <button type="button" class="btn  col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
+                <button type="button" class="btn col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
                   data-bs-target="#perfil">Modificar perfil</button>
               </div>
+
               <div class="col-7">
-                <button th:if="${fichaMedica}" type="button" class="btn  col-11 col-md-12 mx-3 reg py-2"
+                <button type="button" th:if="${fichaMedica}" class="btn col-11 col-md-12 mx-3 reg py-2"
                   data-bs-toggle="modal" data-bs-target="#editarFichamedica">Modificar ficha</button>
               </div>
 
@@ -116,7 +169,7 @@
   </section>
 
   <!-- Ficha -->
-  <section class="container mt-3 ficha shadow">
+  <section class="container mt-3 ficha shadow mb-5">
     <div class="row ">
 
       <div class="col-12 col-md-5 datos border-end border-5 border-white ">
@@ -160,8 +213,7 @@
           <div class="col-12">
             <div class="row">
               <p class="col-4">Fecha de nacimiento</p>
-              <p class="col-4" th:text="${cliente.fechaNacimiento}"></p>
-
+              <p class="col-4" th:text="${#temporals.format(cliente.fechaNacimiento, 'dd/MM/yyyy')}"></p>
               <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
                 data-bs-target="#editarFecha"></button>
             </div>
@@ -180,7 +232,6 @@
               ficha</button>
           </div>
         </div>
-
       </div>
 
       <div class=" col-12 col-md-7 border-start border-5 border-white" th:if="${fichaMedica}">
@@ -188,16 +239,17 @@
         <div class="row gy-3">
 
 
-          <div class="col-12 pt-3" >
+          <div class="col-12 pt-3">
             <div class="row  bordes">
               <p class="col-4">Ultima consulta</p>
-              <p class="col-4" th:text="${#temporals.format(fichaMedica.ultimoChequeo, 'dd/MM/yyyy')}" ></p>
+
+              <p class="col-4" th:text="${#temporals.format(fichaMedica.ultimoChequeo, 'dd/MM/yyyy')}"></p>
               <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
                 data-bs-target="#editarUltimoChequeo"></button>
             </div>
           </div>
 
-          <div class="col-12 ">
+          <div class="col-12">
             <div class="row  bordes">
               <p class="col-4">Edad</p>
               <p class="col-4" th:text="${fichaMedica.edad}"></p>
@@ -243,7 +295,10 @@
         </div>
       </div>
 
-
+          <div class="col-12">
+            <div class="row">
+              <p class="col-4">Fecha de nacimiento</p>
+              <p class="col-4" th:text="${cliente.fechaNacimiento}"></p>
 
     </div>
 
@@ -251,6 +306,14 @@
 
   <!-- modales -->
 
+    <!-- Modal cambio de correo -->
+    <div th:replace="fragmentos :: modificarCorreo"></div>
+
+    <!-- Modal modificar contraseña -->
+  
+    <div th:replace="fragmentos :: modificarContraseña"></div>
+
+    
   <!-- editar nombre -->
   <div class="modal fade" id="editarNombre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -264,10 +327,10 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="nombre" placeholder="Nombre" required type="text" name="nombre">
-              <label for="nombre">Nombre</label>
+              <input class="form-control" id="nombre1" placeholder="Nombre" required type="text" name="nombre">
+              <label for="nombre1">Nombre</label>
             </div>
-
+          </div>
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
               <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
@@ -293,8 +356,8 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="apellido" required type="text" name="apellido" placeholder="Apellido">
-              <label for="apellido">Apellido</label>
+              <input class="form-control" id="apellido3" required type="text" name="apellido" placeholder="Apellido">
+              <label for="apellido3">Apellido</label>
             </div>
 
             <hr class="my-4">
@@ -351,14 +414,14 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="fecha" required type="date" name="fechaNacimiento"
+              <input class="form-control" id="Editarfecha" required type="date" name="fechaNacimiento"
                 placeholder="Fecha de nacimiento">
-              <label for="fecha">Fecha de nacimiento</label>
+              <label for="Editarfecha">Fecha de nacimiento</label>
             </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
-              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+              <button title="Guardar" type="submit" value="Submit" class="btn reg">
                 Guardar
               </button>
             </div>
@@ -382,13 +445,13 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="peso" required type="number" name="peso" placeholder="Peso">
-              <label for="peso">Peso</label>
+              <input class="form-control" id="Edpeso" required type="number" name="peso" placeholder="Peso">
+              <label for="Edpeso">Peso</label>
             </div>
 
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
-              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+              <button title="Guardar" type="submit" value="Submit" class="btn reg">
                 Guardar
               </button>
             </div>
@@ -411,8 +474,8 @@
             novalidate>
 
             <div class="form-floating">
-              <input class="form-control" id="altura" required type="number" name="altura" placeholder="Altura">
-              <label for="altura">Altura</label>
+              <input class="form-control" id="edAltura" required type="number" name="altura" placeholder="Altura">
+              <label for="edAltura">Altura</label>
             </div>
 
             <hr class="my-4">
@@ -485,6 +548,75 @@
     </div>
   </div>
 
+  
+  <!-- Modal perfil -->
+
+  <div class="modal fade " id="perfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Perfil</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+              </div>
+              <div class="col-12 col-xl-6 align-self-center">
+
+                <form th:action="@{/perfil/editar-perfil}" autocomplete="off" method="POST" class="needs-validation"
+                  novalidate enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="text" class="form-control border border-secondary" id="nombre2" name="nombre"
+                          placeholder="Nombre">
+                        <label for="nombre2">Nombre</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="text" class="form-control border border-secondary" name="apellido"
+                          id="apellidoEd" placeholder="Apellido">
+                        <label for="apellidoEd">Apellido</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="number" class="form-control border border-secondary" name="dni"
+                          id="dni" placeholder="DNI">
+                        <label for="dni">DNI</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="date" class="form-control border border-secondary" name="fechaNacimiento"
+                          id="fecha-nacimiento" placeholder="Fecha nacimiento">
+                        <label for="fecha-nacimiento">Fecha nacimiento</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                      <label for="imagen">Nueva foto: </label>
+                      <input class="form-control border-0" type="file" name="imagen" accept="image/*">
+                    </div>
+
+                    <div class="mt-4">
+                      <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- editar fecha ultimo Chequeo -->
   <div class="modal fade" id="editarUltimoChequeo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -495,6 +627,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+
           <form th:action="@{/ficha-medica/editar-ultimoChequeo}" autocomplete="off" method="POST"
             class="needs-validation" novalidate>
 
@@ -514,6 +647,78 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Modal editar perfil -->
+  <div class="modal fade " id="perfil" tabindex="-1" aria-labelledby="perfil" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Perfil</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+              </div>
+              <div class="col-12 col-xl-6 align-self-center">
+
+                <form th:action="@{/perfil/editar-perfil}" autocomplete="off" method="POST" class="needs-validation"
+                  novalidate enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="text" class="form-control border border-secondary" id="nombre" name="nombre"
+                          th:value="${cliente.nombre}" placeholder="Nombre">
+                        <label for="nombre">Nombre</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="text" class="form-control border border-secondary" name="apellido"
+                          th:value="${cliente.apellido}" id="apellido" placeholder="Apellido">
+                        <label for="apellido">Apellido</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="number" class="form-control border border-secondary" name="dni"
+                          th:value="${cliente.dni}" id="dni" placeholder="DNI">
+                        <label for="dni">DNI</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="date" class="form-control border border-secondary" name="fechaNacimiento"
+                          th:value="${cliente.fechaNacimiento}" id="fecha-nacimiento" placeholder="Fecha nacimiento">
+                        <label for="fecha-nacimiento">Fecha nacimiento</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <label for="imagen">Nueva foto: </label>
+                      <input class="form-control border-0" type="file" name="imagen" accept="image/*">
+                    </div>
+
+                    <div class="col-12 mt-4">
+                      <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   </div>
 
   <!-- Modal crear ficha medica -->
@@ -549,28 +754,28 @@
                   <div class="row">
                     <div class="col-md-6 col-sm-12">
                       <div class="form-floating mb-4 ms-1 mt-1">
-                        <input required type="number" class="form-control border border-secondary" id="peso"
+                        <input required type="number" class="form-control border border-secondary" id="pesoFicha"
                           placeholder="Peso" name="peso">
-                        <label for="peso">Peso</label>
+                        <label for="pesoFicha">Peso</label>
                       </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                       <div class="form-floating mb-4 ms-1 mt-1">
-                        <input required type="number" class="form-control border border-secondary" id="altura"
+                        <input required type="number" class="form-control border border-secondary" id="alturaFicha"
                           placeholder="Altura" name="altura">
-                        <label for="altura">Altura</label>
+                        <label for="alturaFicha">Altura</label>
                       </div>
                     </div>
                   </div>
                   <div class="form-floating mb-4 ms-1 mt-1">
-                    <textarea required class="form-control border border-secondary" id="enfermedades" rows="3"
+                    <textarea required class="form-control border border-secondary" id="1" rows="3"
                       name="enfermedades" placeholder="enfermedades"></textarea>
-                    <label for="enfermedades" class="form-label">Enfermedades</label>
+                    <label for="enfermedades1" class="form-label">Enfermedades</label>
                   </div>
                   <div class="form-floating mb-4 ms-1 mt-1">
-                    <input required type="date" class="form-control border border-secondary" id="chequeo"
+                    <input required type="date" class="form-control border border-secondary" id="chequeo1"
                       placeholder="Ultimo Chequeo" name="ultimoChequeo">
-                    <label for="chequeo">Fecha Último Chequeo</label>
+                    <label for="chequeo1">Fecha Último Chequeo</label>
                   </div>
                   <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
               </div>
@@ -583,11 +788,37 @@
 
     </div>
   </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- editar apellido -->
+  <div class="modal fade" id="editarApellido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-apellido}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+
 
   <!-- Modal editar ficha medica -->
 
-   <div th:if="${fichaMedica}" class="modal fade " id="editarFichamedica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div th:if="${fichaMedica}" class="modal fade " id="editarFichamedica" tabindex="-1"
+    aria-labelledby="editarFichamedica" aria-hidden="true">
     <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
       <div class="modal-content fondomodal">
         <div class="modal-header">
@@ -617,9 +848,10 @@
 
                   <div class="col-md-6 col-sm-12">
                     <div class="form-floating mb-4 ms-1 mt-1">
-                      <input type="date" class="form-control border border-secondary" id="chequeo"
+
+                      <input type="date" class="form-control border border-secondary" id="chequeo2"
                         placeholder="Chequeo" name="ultimoChequeo" th:value="${fichaMedica.ultimoChequeo}">
-                      <label for="chequeo">Fecha Último Chequeo</label>
+                      <label for="chequeo2">Fecha Último Chequeo</label>
                     </div>
                   </div>
 
@@ -628,17 +860,17 @@
 
                   <div class="col-md-6 col-sm-12">
                     <div class="form-floating mb-4 ms-1 mt-1">
-                      <input type="number" class="form-control border border-secondary" id="peso" 
+                      <input type="number" class="form-control border border-secondary" id="pesoF" 
                       placeholder="Peso" name="peso" th:value="${fichaMedica.peso}">
-                      <label for="peso">Peso</label>
+                      <label for="pesoF">Peso</label>
                     </div>
                   </div>
 
                   <div class="col-md-6 col-sm-12">
                     <div class="form-floating mb-4 ms-1 mt-1">
-                      <input type="number" class="form-control border border-secondary" id="altura"
+                      <input type="number" class="form-control border border-secondary" id="altura2"
                         placeholder="Altura" name="altura" th:value="${fichaMedica.altura}">
-                      <label for="altura">Altura</label>
+                      <label for="altura2">Altura</label>
                     </div>
                   </div>
 
@@ -648,9 +880,9 @@
 
                   <div class="col-12  mb-4 ms-1 mt-1">
                     <div class="form-floating">
-                      <textarea class="form-control border border-secondary" id="enfermedades"
-                      placeholder="Enfermedades" name="enfermedades" th:value="${fichaMedica.enfermedades}"></textarea>
-                      <label for="enfermedades" class="form-label">Enfermedades</label>
+                      <input class="form-control border border-secondary" id="enfermedades2"
+                      placeholder="Enfermedades" name="enfermedades" th:value="${fichaMedica.enfermedades}"></input>
+                      <label for="enfermedades2" class="form-label">Enfermedades</label>
                     </div>
                   </div>
 
@@ -659,81 +891,6 @@
                   </div>
                   </form>
                 </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div> 
-
-
-
-
-
-  <!-- Modal perfil -->
-
-  <div class="modal fade " id="perfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
-      <div class="modal-content fondomodal">
-        <div class="modal-header">
-          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Perfil</h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body ">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-6 d-none d-xl-block">
-                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
-              </div>
-              <div class="col-12 col-xl-6 align-self-center">
-
-                <form th:action="@{/perfil/editar-perfil}" autocomplete="off" method="POST" class="needs-validation"
-                  novalidate enctype="multipart/form-data">
-                  <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-floating mb-4 ms-1 mt-1">
-                        <input type="text" class="form-control border border-secondary" id="nombre" name="nombre"
-                          th:value="${cliente.nombre}" placeholder="Nombre">
-                        <label for="nombre">Nombre</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-floating mb-4 ms-1 mt-1">
-                        <input type="text" class="form-control border border-secondary" name="apellido"
-                          th:value="${cliente.apellido}" id="apellido" placeholder="Apellido">
-                        <label for="apellido">Apellido</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-floating mb-4 ms-1 mt-1">
-                        <input type="number" class="form-control border border-secondary" name="dni"
-                          th:value="${cliente.dni}" id="dni" placeholder="DNI">
-                        <label for="dni">DNI</label>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-floating mb-4 ms-1 mt-1">
-                        <input type="date" class="form-control border border-secondary" name="fechaNacimiento"
-                          th:value="${cliente.fechaNacimiento}" id="fecha-nacimiento" placeholder="Fecha nacimiento">
-                        <label for="fecha-nacimiento">Fecha nacimiento</label>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 col-sm-12">
-                      <label for="imagen">Nueva foto: </label>
-                      <input class="form-control border-0" type="file" name="imagen" accept="image/*">
-                    </div>
-
-                    <div class="mt-4">
-                      <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
-                    </div>
-                  </div>
               </div>
 
             </div>
@@ -754,6 +911,14 @@
   <!-- Footer -->
 
   <footer th:replace="fragmentos :: footer"></footer>
+
+    </div> 
+
+
+
+  <!-- Footer -->
+
+  <!-- <footer th:replace="fragmentos :: footer"></footer> -->
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -784,3 +949,4 @@
 </body>
 
 </html>
+
