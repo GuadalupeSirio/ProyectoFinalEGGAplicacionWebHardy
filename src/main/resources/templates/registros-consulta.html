@@ -84,7 +84,28 @@
                 <div class="container">
                   <div class="row">
 
-                    <div class="col-12">
+                    <div class="col-12 pt-3">
+                      <div class="row  bordes">
+                        <p class="col-4"><b>Médico:</b></p>
+                        <p th:text="${registro.medico}" class="col-8"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 pt-3 ">
+                      <div class="row  bordes">
+                        <p class="col-4 bold"><b>Cobertura:</b> </p>
+                        <p th:text="${registro.cobertura}" class="col-8"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 pt-3">
+                      <div class="row bordes">
+                        <p class="col-4 bold"><b>Resultados:</b></p>
+                        <p th:text="${registro.resultados}" class="col-8"></p>
+                      </div>
+                    </div>
+
+                    <div class="col-12  pt-4">
                       <div class="row">
                         <p class="col-12 col-md-4"><b>Estudios:</b></h>
                         <div class="col-6 col-md-4">
@@ -341,15 +362,15 @@
 
   <!--Footer-->
   <!-- <footer th:replace="fragmentos :: footer"></footer> -->
-  <footer  class="container-fluid mt-5 py-3 fixed-bottom">
+  <footer class="container-fluid mt-5 py-3 fixed-bottom">
     <div class="row ">
 
-        <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
-                    height="28" /></span> Hardy</h6>
+      <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
+            height="28" /></span> Hardy</h6>
 
     </div>
 
-</footer>
+  </footer>
 
 
   <!-- Modal registro de consulta-->
@@ -398,8 +419,7 @@
                     <div class="form-floating">
                       <select required aria-label="Elegir especialidad" class="form-select border border-secondary"
                         id="especialidad" name="especialidad">
-                         <option selected th:value="${especialidad.id}" 
-                          th:text="${especialidad.nombre}"></option> 
+                        <option selected th:value="${especialidad.id}" th:text="${especialidad.nombre}"></option>
                         <!-- <option th:each="especialidxd : ${especialidades}" th:text="|${especialidxd.nombre}|"
                           th:if="${especialidxd.alta and especialidxd.id != especialidad.id}" th:value="${especialidxd.id}">
                         </option> -->
@@ -458,7 +478,7 @@
   </div>
 
   <!-- Modal cambio de correo -->
-  <div th:replace="fragmentos :: modificarCorreo"></div> 
+  <div th:replace="fragmentos :: modificarCorreo"></div>
 
 
   <!-- Modal modificar contraseña -->
