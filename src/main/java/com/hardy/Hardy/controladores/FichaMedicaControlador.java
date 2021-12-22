@@ -69,23 +69,6 @@ public class FichaMedicaControlador {
         return new RedirectView("/perfil");
     }
 
-    @PostMapping("/modificar-ficha")
-    public RedirectView modificarFicha(@RequestParam String grupoSanguineo, @RequestParam Double peso,
-            @RequestParam Integer altura, @RequestParam String enfermedades, LocalDate ultimoChequeo,
-            HttpSession sesion, RedirectAttributes attributes) throws Exception {
-        try {
-
-            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
-
-            fichaMedicaServicio.modificarFichaMedica(grupoSanguineo, peso, altura, enfermedades, ultimoChequeo, cliente);
-
-            attributes.addFlashAttribute("exito-name", "Ficha medica registrada exitosamente");
-        } catch (Exception e) {
-            attributes.addFlashAttribute("error-name", e.getMessage());
-        }
-        return new RedirectView("/perfil");
-    }
-
     @PostMapping("/modificar-peso")
     public RedirectView modificarPeso(@RequestParam Double peso, HttpSession sesion,
             RedirectAttributes attributes) throws Exception {
@@ -128,6 +111,36 @@ public class FichaMedicaControlador {
             fichaMedicaServicio.modificarGrupoSanguineo(sanguineo, cliente);
 
             attributes.addFlashAttribute("exito-name", "El grupo sanguineo se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/modificar-ficha")
+    public RedirectView modificarFicha(@RequestParam String grupoSanguineo, @RequestParam Double peso,
+            @RequestParam Integer altura, @RequestParam String enfermedades, LocalDate ultimoChequeo,
+            HttpSession sesion, RedirectAttributes attributes) throws Exception {
+        try {
+
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+
+            fichaMedicaServicio.modificarFichaMedica(grupoSanguineo, peso, altura, enfermedades, ultimoChequeo, cliente);
+
+            attributes.addFlashAttribute("exito-name", "Ficha medica registrada exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/editar-ultimoChequeo")
+    public RedirectView editarUltimoChequeo(RedirectAttributes attributes, HttpServletRequest request,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate ultimoChequeo, HttpSession sesion) throws Exception {
+        try {
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            fichaMedicaServicio.modificarUltimoChequeo(ultimoChequeo, cliente);
+            attributes.addFlashAttribute("exito-name", "La fecha de la ultima consulta se modifico exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }

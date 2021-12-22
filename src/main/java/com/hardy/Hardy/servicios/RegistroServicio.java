@@ -55,11 +55,11 @@ public class RegistroServicio {
             registro.setCliente(cliente);
             registro.setAlta(true);
 
-            /*FichaMedica fichamedica = fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId());
+            FichaMedica fichamedica = fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId());
             if (fichamedica.getUltimoChequeo().isBefore(fecha) || fichamedica.getUltimoChequeo() == null) {
                 fichamedica.setUltimoChequeo(fecha);
                 fichaMedicaRepositorio.save(fichamedica);
-            }*/
+            }
             registroRepositorio.save(registro);
 
         } catch (MiExcepcion ex) {
@@ -88,7 +88,12 @@ public class RegistroServicio {
             registro.setLugar(lugar);
             registro.setResultados(resultados);
             registro.setEspecialidad(especialidad);
-
+            
+            FichaMedica fichamedica = fichaMedicaServicio.obtenerFichamedicaIdCliente(registro.getCliente().getId());
+            if (fichamedica.getUltimoChequeo().isBefore(fecha) || fichamedica.getUltimoChequeo() == null) {
+                fichamedica.setUltimoChequeo(fecha);
+                fichaMedicaRepositorio.save(fichamedica);
+            }
             registroRepositorio.save(registro);
 
         } catch (MiExcepcion ex) {

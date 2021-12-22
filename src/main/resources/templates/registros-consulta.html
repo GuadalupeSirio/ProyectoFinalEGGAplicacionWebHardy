@@ -360,6 +360,7 @@
   <!--Footer-->
   <footer th:replace="fragmentos :: footer"></footer>
 
+
   <!-- Modal registro de consulta-->
 
   <div class="modal fade " id="registromedico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -388,12 +389,31 @@
                     </div>
                   </div>
 
-                  <div th:if="${especialidad}" class="col-12 col-md-6">
+                  <div th:if="${select}" class="col-12 col-md-6">
                     <div class="form-floating">
-                      <select id="especialidad" required class="form-select" name="especialidad">
-                        <option selected th:text="${especialidad.nombre}" th:value="${especialidad.id}"></option>
+                      <select required aria-label="Elegir especialidad" class="form-select border border-secondary"
+                        id="especialidad" name="especialidad">
+                        <!-- <option selected th:value="${especialidad.id}" 
+                                            th:text="${especialidad.nombre}"></option> -->
+                        <option th:each="especialidxd : ${especialidades}" th:text="|${especialidxd.nombre}|"
+                          th:if="${especialidxd.alta}" th:value="${especialidxd.id}">
+                        </option>
                       </select>
-                      <label for="especialidad">Especialidad</label>
+                      <label for="especialidad">Especialidades:</label>
+                    </div>
+                  </div>
+
+                  <div th:if="${select eq false}" class=" col-12 col-md-6">
+                    <div class="form-floating">
+                      <select required aria-label="Elegir especialidad" class="form-select border border-secondary"
+                        id="especialidad" name="especialidad">
+                         <option selected th:value="${especialidad.id}" 
+                          th:text="${especialidad.nombre}"></option> 
+                        <!-- <option th:each="especialidxd : ${especialidades}" th:text="|${especialidxd.nombre}|"
+                          th:if="${especialidxd.alta and especialidxd.id != especialidad.id}" th:value="${especialidxd.id}">
+                        </option> -->
+                      </select>
+                      <label for="especialidad">Especialidades:</label>
                     </div>
                   </div>
 
