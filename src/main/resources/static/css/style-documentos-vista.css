@@ -13,13 +13,43 @@ html {
     background-repeat: no-repeat;
 } */
 body{
-    background-image: url(../img/Section-0.jpg);
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: rgb(247,246,254);
+}
+/*------NAVBAR------*/
+
+#nav-bar {
+    top: 0;
+    z-index: 10;
+    padding-left: 30px;
 }
 
+/*Titulo*/
+.navbar-brand {
+    font-family: 'Poppins',
+        sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.logo-navbar {
+    width: 40px;
+}
+
+
+/*Fonts links*/
+.navbar-nav {
+    padding-right: 40px;
+    font-family: 'Roboto',
+        sans-serif;
+    font-size: 18px;
+    
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+    padding: 0 15px;
+}
 
 .altura{
     height: 25rem;

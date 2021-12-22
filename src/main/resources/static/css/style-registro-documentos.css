@@ -11,6 +11,9 @@
 
 
 } */
+body{
+    background-color: rgb(247,246,254);
+}
 
 /*------NAVBAR------*/
 
@@ -28,6 +31,7 @@
     font-size: 25px;
     padding-left: 20px;
 }
+
 
 .logo-navbar {
     width: 35px;

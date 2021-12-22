@@ -13,7 +13,7 @@
             <ul class="navbar-nav text-end">
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/registro}">Registros</a>
+                    <a class="nav-link" th:href="@{/registro}">Consultas</a>
                 </li>
 
                 <li class="nav-item">
@@ -35,13 +35,9 @@
                             alt="imagen de perfil" width="35" class=" rounded-circle mb-1">
                     </a>
                     <ul class="dropdown-menu text-end text-lg-start" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarCorreo">Cambiar
-                                e-mail</a>
-                        </li>
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarClave">Cambiar
-                                contraseña</a>
-                        </li>
+                        <li><a class="dropdown-item" th:href="@{/perfil}">Mi cuenta</a></li>
+                        
+                        
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -55,7 +51,7 @@
     </div>
 </nav>
 
-<footer th:fragment="footer" class="container-fluid mt-5 py-3">
+<footer th:fragment="footer" class="container-fluid  py-3">
     <div class="row ">
 
         <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
