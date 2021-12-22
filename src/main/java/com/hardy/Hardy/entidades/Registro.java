@@ -20,7 +20,7 @@ public class Registro {
     private Integer id;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
 
     //@Temporal(TemporalType.DATE)
     private LocalDate fecha;
