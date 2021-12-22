@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardy</title>
+  <link rel="icon" th:href="@{/img/heartbeat-solid.svg}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/styleperfil.css}" />
+</head>
+
+<body>
+
+  <nav th:replace="fragmentos :: navbar"></nav>
+
+
+  <div class="row justify-content-center">
+    <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+      th:if="${exito != null}">
+      <strong th:text="${exito}"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
+      th:if="${error != null}">
+      <strong th:text="${error}"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+
+  </div>
+
+  <!-- Cabecera -->
+
+  <section class="container cabeza mt-5 py-4 shadow">
+    <div class="row">
+
+      <div class="col-12 col-lg-7 col-xl-6">
+        <div class="row">
+
+
+          <div class="col-12 col-lg-5 align-self-center">
+            <div class="row text-center">
+              <div class="col-12">
+                <a data-bs-toggle="modal" data-bs-target="#editarFoto"> <img class="img-fluid rounded-circle"
+                    th:src="${cliente.imagen != null} ? @{/upload/__${cliente.imagen}__} : @{/upload/profile-1-1.png}"
+                    alt="" width="140" /></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="row">
+
+              <div class="ficha-med col-12">
+                <div class="row justify-content-around">
+                  <p class="col-12 col-lg-10 nombre text-center" th:text="${cliente.nombre}"></p>
+
+                  <div class="cards col-3 text-center">
+                    <img th:src="@{/img/time.svg}" alt="" class="ficha-med-img img-fluid">
+                    <h3 th:if="${fichaMedica}" th:text="|${fichaMedica.edad} años|"></h3>
+                  </div>
+
+                  <div class="cards col-3 text-center">
+                    <img th:src="@{/img/measuring-tape.png}" alt="" class="ficha-med-img img-fluid">
+                    <h3 th:if="${fichaMedica}" th:text="|${fichaMedica.altura} cm|"></h3>
+
+                  </div>
+
+                  <div class="cards col-3 text-center">
+                    <img th:src="@{/img/weight-scale.png}" alt="" class="ficha-med-img img-fluid">
+                    <h3 th:if="${fichaMedica}" th:text="|${fichaMedica.peso} Kg|"></h3>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 col-lg-5 col-xl-6 border-start">
+        <div class="row align-items-center pt-4">
+
+          <div class="col-4" th:if="${fichaMedica}">
+            <div class="row gy-3 ">
+              <p class="col-12 text-center" th:text="|Ultima consulta: ${#temporals.format(fichaMedica.ultimoChequeo, 'dd/MM/yyyy')}|"></p>
+              <p class="col-12 text-center" th:text="|Enfermedades: ${fichaMedica.enfermedades}|"></p>
+            </div>
+          </div>
+
+          <div class="col-8 ">
+            <div class="row gy-3 justify-content-center ">
+              <div class="col-7">
+                <button type="button" class="btn  col-11 col-md-12 mx-3 reg py-2" data-bs-toggle="modal"
+                  data-bs-target="#perfil">Modificar perfil</button>
+              </div>
+              <div class="col-7">
+                <button th:if="${fichaMedica}" type="button" class="btn  col-11 col-md-12 mx-3 reg py-2"
+                  data-bs-toggle="modal" data-bs-target="#editarFichamedica">Modificar ficha</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Ficha -->
+  <section class="container mt-3 ficha shadow">
+    <div class="row ">
+
+      <div class="col-12 col-md-5 datos border-end border-5 border-white ">
+        <div class="row gy-3">
+
+          <div class="col-12 pt-3">
+            <div class="row  bordes">
+              <p class="col-4">Datos personales</p>
+              <!-- <p class="col-4">Tomas</p>
+                                   <button class="col-4 far fa-edit border-0 btn"></button>  -->
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row  bordes ">
+              <p class="col-4">Nombre</p>
+              <p class="col-4" th:text="${cliente.nombre}"></p>
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarNombre"></button>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row  bordes">
+              <p class="col-4">Apellido</p>
+              <p class="col-4" th:text="${cliente.apellido}"></p>
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarApellido"></button>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row  bordes">
+              <p class="col-4">Documento</p>
+              <p class="col-4" th:text="${cliente.dni}"></p>
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarDocumento"></button>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row">
+              <p class="col-4">Fecha de nacimiento</p>
+              <p class="col-4" th:text="${cliente.fechaNacimiento}"></p>
+
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarFecha"></button>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <div class=" col-12 col-md-7 border-start border-5 border-white py-5" th:unless="${fichaMedica} ">
+        <div class="row align-items-center">
+          <p class="col-12 text-center">La ficha médica no se encuentra cargada</p>
+          <div class="col-12 text-center">
+            <button type="button" class="btn reg py-2" data-bs-toggle="modal" data-bs-target="#guardarFichamedica">Crear
+              ficha</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class=" col-12 col-md-7 border-start border-5 border-white" th:if="${fichaMedica}">
+
+        <div class="row gy-3">
+
+
+          <div class="col-12 pt-3" >
+            <div class="row  bordes">
+              <p class="col-4">Ultima consulta</p>
+              <p class="col-4" th:text="${#temporals.format(fichaMedica.ultimoChequeo, 'dd/MM/yyyy')}" ></p>
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarUltimoChequeo"></button>
+            </div>
+          </div>
+
+          <div class="col-12 ">
+            <div class="row  bordes">
+              <p class="col-4">Edad</p>
+              <p class="col-4" th:text="${fichaMedica.edad}"></p>
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarFecha"></button>
+            </div>
+          </div>
+
+          <div class="col-12 bordes">
+            <div class="row">
+              <p class="col-4">Peso</p>
+              <p class="col-4" th:text="|${fichaMedica.peso} Kg|"></p>
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarPeso"></button>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row  bordes">
+              <p class="col-4">Altura</p>
+              <p class="col-4" th:text="|${fichaMedica.altura} cm|"></p>
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarAltura"></button>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row  ">
+              <p class="col-4">Grupo Sanguineo</p>
+              <p class="col-4" th:text="${fichaMedica.grupoSanguineo}"></p>
+              <button class="col-4 far fa-edit border-0 btn" data-bs-toggle="modal"
+                data-bs-target="#editarSangre"></button>
+            </div>
+          </div>
+
+          <!-- <div class="col-12">
+                                <div class="row">
+                                    <p class="col-4">Enfermedades</p>
+                                   <p class="col-4">No posee</p>
+                                   <button class="col-4 far fa-edit border-0 btn"></button>
+                                </div>
+                               </div> -->
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </section>
+
+  <!-- modales -->
+
+  <!-- editar nombre -->
+  <div class="modal fade" id="editarNombre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-nombre}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="nombre" placeholder="Nombre" required type="text" name="nombre">
+              <label for="nombre">Nombre</label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar apellido -->
+  <div class="modal fade" id="editarApellido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-apellido}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="apellido" required type="text" name="apellido" placeholder="Apellido">
+              <label for="apellido">Apellido</label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar documento -->
+  <div class="modal fade" id="editarDocumento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-documento}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="documento" required type="number" name="documento"
+                placeholder="Documento">
+              <label for="documento">Documento</label>
+            </div>
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar fecha de nacimiento -->
+  <div class="modal fade" id="editarFecha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-fecha-nacimiento}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="fecha" required type="date" name="fechaNacimiento"
+                placeholder="Fecha de nacimiento">
+              <label for="fecha">Fecha de nacimiento</label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- editar peso -->
+  <div class="modal fade" id="editarPeso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/ficha-medica/modificar-peso}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="peso" required type="number" name="peso" placeholder="Peso">
+              <label for="peso">Peso</label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar altura -->
+  <div class="modal fade" id="editarAltura" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/ficha-medica/modificar-altura}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="altura" required type="number" name="altura" placeholder="Altura">
+              <label for="altura">Altura</label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar grupo sanguineo -->
+  <div class="modal fade" id="editarSangre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cambiar grupo sanguíneo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/ficha-medica/modificar-sanguineo}" autocomplete="off" method="POST"
+            class="needs-validation" novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="sanguineo" required type="text" name="sanguineo"
+                placeholder="Grupo sanguíneo">
+              <label for="sanguineo">Grupo sanguíneo</label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Editar foto-->
+  <div class="modal fade" id="editarFoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cambiar foto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-foto}" autocomplete="off" method="POST" class="needs-validation" novalidate
+            enctype="multipart/form-data">
+
+            <label for="imagen">Nueva foto: </label>
+            <input class="form-control border-0" type="file" name="imagen" accept="image/*">
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- editar fecha ultimo Chequeo -->
+  <div class="modal fade" id="editarUltimoChequeo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/ficha-medica/editar-ultimoChequeo}" autocomplete="off" method="POST"
+            class="needs-validation" novalidate>
+
+            <div class="form-floating">
+              <input class="form-control" id="ultimoChequeo" required type="date" name="ultimoChequeo"
+                placeholder="Fecha de nacimiento">
+              <label for="fecha">Fecha de la ultima consulta: </label>
+            </div>
+
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal crear ficha medica -->
+
+  <div class="modal fade " id="guardarFichamedica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Ficha Médica</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+              </div>
+              <div class="col-12 col-xl-6 align-self-center">
+
+
+
+                <form th:action="@{/ficha-medica/guardar-ficha}" autocomplete="off" method="POST"
+                  class="needs-validation" novalidate>
+                  <div class="row"></div>
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-floating mb-4 ms-1 mt-1">
+                      <input required type="text" class="form-control border border-secondary" id="grupo-sanguineo"
+                        placeholder="Grupo-sanguineo" name="grupoSanguineo">
+                      <label for="grupo-sanguineo">Grupo Sanguineo</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input required type="number" class="form-control border border-secondary" id="peso"
+                          placeholder="Peso" name="peso">
+                        <label for="peso">Peso</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input required type="number" class="form-control border border-secondary" id="altura"
+                          placeholder="Altura" name="altura">
+                        <label for="altura">Altura</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-floating mb-4 ms-1 mt-1">
+                    <textarea required class="form-control border border-secondary" id="enfermedades" rows="3"
+                      name="enfermedades" placeholder="enfermedades"></textarea>
+                    <label for="enfermedades" class="form-label">Enfermedades</label>
+                  </div>
+                  <div class="form-floating mb-4 ms-1 mt-1">
+                    <input required type="date" class="form-control border border-secondary" id="chequeo"
+                      placeholder="Ultimo Chequeo" name="ultimoChequeo">
+                    <label for="chequeo">Fecha Último Chequeo</label>
+                  </div>
+                  <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  <!-- Modal editar ficha medica -->
+
+   <div th:if="${fichaMedica}" class="modal fade " id="editarFichamedica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Ficha Médica</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+              </div>
+              <div class="col-12 col-xl-6 align-self-center">
+
+                <form th:action="@{/ficha-medica/modificar-ficha}" autocomplete="off" method="POST"
+                class="needs-validation" novalidate>
+                
+                <div class="row">
+
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-floating mb-4 ms-1 mt-1">
+                      <input type="text" class="form-control border border-secondary" id="grupoSanguineo"
+                        placeholder="Grupo-sanguineo" name="grupoSanguineo" th:value="${fichaMedica.grupoSanguineo}">
+                      <label for="grupo-sanguineo">Grupo Sanguineo</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-floating mb-4 ms-1 mt-1">
+                      <input type="date" class="form-control border border-secondary" id="chequeo"
+                        placeholder="Chequeo" name="ultimoChequeo" th:value="${fichaMedica.ultimoChequeo}">
+                      <label for="chequeo">Fecha Último Chequeo</label>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-floating mb-4 ms-1 mt-1">
+                      <input type="number" class="form-control border border-secondary" id="peso" 
+                      placeholder="Peso" name="peso" th:value="${fichaMedica.peso}">
+                      <label for="peso">Peso</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-floating mb-4 ms-1 mt-1">
+                      <input type="number" class="form-control border border-secondary" id="altura"
+                        placeholder="Altura" name="altura" th:value="${fichaMedica.altura}">
+                      <label for="altura">Altura</label>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-12  mb-4 ms-1 mt-1">
+                    <div class="form-floating">
+                      <textarea class="form-control border border-secondary" id="enfermedades"
+                      placeholder="Enfermedades" name="enfermedades" th:value="${fichaMedica.enfermedades}"></textarea>
+                      <label for="enfermedades" class="form-label">Enfermedades</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div> 
+
+
+
+
+
+  <!-- Modal perfil -->
+
+  <div class="modal fade " id="perfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-fullscreen modal-dialog-scrollable ">
+      <div class="modal-content fondomodal">
+        <div class="modal-header">
+          <h3 class="modal-title col-11 text-center" id="exampleModalLabel">Perfil</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 d-none d-xl-block">
+                <img th:src="@{/img/routine-health-checkup.png}" alt="" class="img-fluid ">
+              </div>
+              <div class="col-12 col-xl-6 align-self-center">
+
+                <form th:action="@{/perfil/editar-perfil}" autocomplete="off" method="POST" class="needs-validation"
+                  novalidate enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="text" class="form-control border border-secondary" id="nombre" name="nombre"
+                          th:value="${cliente.nombre}" placeholder="Nombre">
+                        <label for="nombre">Nombre</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="text" class="form-control border border-secondary" name="apellido"
+                          th:value="${cliente.apellido}" id="apellido" placeholder="Apellido">
+                        <label for="apellido">Apellido</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="number" class="form-control border border-secondary" name="dni"
+                          th:value="${cliente.dni}" id="dni" placeholder="DNI">
+                        <label for="dni">DNI</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-floating mb-4 ms-1 mt-1">
+                        <input type="date" class="form-control border border-secondary" name="fechaNacimiento"
+                          th:value="${cliente.fechaNacimiento}" id="fecha-nacimiento" placeholder="Fecha nacimiento">
+                        <label for="fecha-nacimiento">Fecha nacimiento</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                      <label for="imagen">Nueva foto: </label>
+                      <input class="form-control border-0" type="file" name="imagen" accept="image/*">
+                    </div>
+
+                    <div class="mt-4">
+                      <button type="submit" class="btn btn-lg ms-1 reg">Guardar</button>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal cambio de correo -->
+  <div th:replace="fragmentos :: modificarCorreo"></div>
+
+  <!-- Modal modificar contraseña -->
+
+  <div th:replace="fragmentos :: modificarContraseña"></div>
+
+
+  <!-- Footer -->
+
+  <footer th:replace="fragmentos :: footer"></footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
+</body>
+
+</html>

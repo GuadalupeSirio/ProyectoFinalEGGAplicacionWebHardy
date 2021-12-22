@@ -5,6 +5,7 @@ import com.hardy.Hardy.entidades.FichaMedica;
 import com.hardy.Hardy.excepciones.MiExcepcion;
 import com.hardy.Hardy.repositorios.FichaMedicaRepositorio;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +26,130 @@ public class FichaMedicaServicio {
             validacionPeso(peso);
             validacionAltura(altura);
             validacionEnfermedades(enfermedades);
+            //metodo ficha
+            validacionCliente(cliente);
+
+            FichaMedica fichaMedica = new FichaMedica();
+
+            Integer edad = Period.between(cliente.getFechaNacimiento(), LocalDate.now()).getYears();
+
+            fichaMedica.setAlta(true);
+            fichaMedica.setGrupoSanguineo(grupoSanguineo);
+            fichaMedica.setPeso(peso);
+            fichaMedica.setAltura(altura);
+            fichaMedica.setEnfermedades(enfermedades);
+            fichaMedica.setUltimoChequeo(ultimoChequeo);
+            fichaMedica.setCliente(cliente);
+            fichaMedica.setEdad(edad);
+
+            fichaMedicaRepositorio.save(fichaMedica);
+
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void modificarFichaMedica(String grupoSanguineo, Double peso, Integer altura,
+            String enfermedades, LocalDate ultimoChequeo, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionGrupoSanguineo(grupoSanguineo);
+            validacionPeso(peso);
+            validacionAltura(altura);
+            //validacionEnfermedades(enfermedades);
             validacionUltimoChequeo(ultimoChequeo);
             validacionCliente(cliente);
-            
 
+            FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
+
+            fichaMedica.setGrupoSanguineo(grupoSanguineo);
+            fichaMedica.setPeso(peso);
+            fichaMedica.setAltura(altura);
+            //fichaMedica.setEnfermedades(enfermedades);
+            fichaMedica.setUltimoChequeo(ultimoChequeo);
+
+            fichaMedicaRepositorio.save(fichaMedica);
+
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void modificarEdad(Integer edad, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionCliente(cliente);
+            FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
+
+            if (fichaMedica != null) {
+                fichaMedica.setEdad(edad);
+                fichaMedicaRepositorio.save(fichaMedica);
+            }
+
+        } catch (MiExcepcion ex) {
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void modificarPeso(Double peso, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionPeso(peso);
+            validacionCliente(cliente);
+            FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
+            fichaMedica.setPeso(peso);
+            fichaMedicaRepositorio.save(fichaMedica);
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void modificarAltura(Integer altura, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionAltura(altura);
+            validacionCliente(cliente);
+            FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
+            fichaMedica.setAltura(altura);
+            fichaMedicaRepositorio.save(fichaMedica);
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void modificarGrupoSanguineo(String grupoSanguineo, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionGrupoSanguineo(grupoSanguineo);
+            validacionCliente(cliente);
+            FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
+            fichaMedica.setGrupoSanguineo(grupoSanguineo);
+            fichaMedicaRepositorio.save(fichaMedica);
+        } catch (MiExcepcion ex) {
+            throw ex;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void modificarUltimoChequeo(LocalDate ultimoChequeo, Cliente cliente) throws Exception, MiExcepcion {
+        try {
+            validacionUltimoChequeo(ultimoChequeo);
+            validacionCliente(cliente);
+            FichaMedica fichaMedica = obtenerFichamedicaId(cliente.getId());
+            fichaMedica.setUltimoChequeo(ultimoChequeo);
+            fichaMedicaRepositorio.save(fichaMedica);
         } catch (MiExcepcion ex) {
             throw ex;
         } catch (Exception e) {
@@ -126,9 +247,8 @@ public class FichaMedicaServicio {
             throw e;
         }
     }
-    
+
     //Metodos de consulta
-    
     @Transactional(readOnly = true)
     public List<FichaMedica> obtenerFichasMedicas() throws Exception {
         try {
@@ -139,9 +259,19 @@ public class FichaMedicaServicio {
     }
 
     @Transactional(readOnly = true)
-    public FichaMedica obtenerFichamedicaId(Integer id) throws Exception, MiExcepcion {
+    public FichaMedica obtenerFichamedicaId(Integer idCliente) throws Exception, MiExcepcion {
         try {
-            FichaMedica fichaMedica = fichaMedicaRepositorio.findById(id).orElseThrow(() -> new MiExcepcion("Error al obtener ficha medica"));
+            FichaMedica fichaMedica = fichaMedicaRepositorio.obtenerFichaMedica(idCliente).orElseThrow(() -> new MiExcepcion("Error al obtener ficha medica"));
+            return fichaMedica;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public FichaMedica obtenerFichamedicaIdCliente(Integer idCliente) throws Exception, MiExcepcion {
+        try {
+            FichaMedica fichaMedica = fichaMedicaRepositorio.obtenerFichaMedica(idCliente).orElse(null);
             return fichaMedica;
         } catch (Exception e) {
             throw e;

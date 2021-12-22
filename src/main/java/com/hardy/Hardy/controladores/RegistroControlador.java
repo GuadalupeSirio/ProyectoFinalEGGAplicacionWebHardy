@@ -3,10 +3,18 @@ package com.hardy.Hardy.controladores;
 import com.hardy.Hardy.entidades.Cliente;
 import com.hardy.Hardy.entidades.Especialidad;
 import com.hardy.Hardy.entidades.Registro;
+import com.hardy.Hardy.excepciones.MiExcepcion;
+import com.hardy.Hardy.servicios.ClienteServicio;
+import com.hardy.Hardy.servicios.EspecialidadServicio;
+import com.hardy.Hardy.servicios.EstudioServicio;
+import com.hardy.Hardy.servicios.FichaMedicaServicio;
 import com.hardy.Hardy.servicios.RegistroServicio;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,69 +31,168 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/registro")
 public class RegistroControlador {
 
+    @Autowired
     private RegistroServicio registroServicio;
 
-    @GetMapping
-    public ModelAndView mostrarRegistros() throws Exception {
-        ModelAndView mav = new ModelAndView("registros");
-        mav.addObject("registros", registroServicio.obtenerRegistros());
-        return mav;
-    }
+    @Autowired
+    private ClienteServicio clienteServicio;
+
+    @Autowired
+    private EspecialidadServicio especialidadServicio;
+
+    @Autowired
+    private FichaMedicaServicio fichaMedicaServicio;
+
+    @Autowired
+    private EstudioServicio estudioServicio;
 
     @GetMapping
-    public ModelAndView crearRegistro(HttpServletRequest request) {
-
-        ModelAndView mav = new ModelAndView("registro-formulario");
+    public ModelAndView mostrarRegistro(HttpSession sesion, HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView("registro-vista");
 
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error-name"));
         }
-        mav.addObject("registro", new Registro());
-        mav.addObject("title", "Crear Registro");
-        mav.addObject("action", "guardar");
-
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+        mav.addObject("ruta", "/registro");
+        mav.addObject("especialidades", especialidadServicio.buscarPorUsuario((Integer) sesion.getAttribute("idUsuario")));
         return mav;
     }
 
-    @GetMapping("/editar/{id}")
-    public ModelAndView editarRegistro(@PathVariable Integer id) throws Exception {
+    @GetMapping("/ver-registros")
+    public ModelAndView mostrarRegistros(HttpSession sesion, HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView("registros-consulta");
+
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error-name"));
+        }
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+
+        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+        mav.addObject("select", true);
+        mav.addObject("ruta", "/registro/ver-registros");
+        mav.addObject("titulo", "Historial médico");
+        mav.addObject("especialidades", especialidadServicio.buscarPorUsuario((Integer) sesion.getAttribute("idUsuario")));
+        mav.addObject("especialidad", new Especialidad());
+        mav.addObject("estudios", estudioServicio.buscarTodosxCliente(cliente.getId()));
+        mav.addObject("registros", registroServicio.obtenerRegistroCliente(cliente.getId()));
+        return mav;
+    }
+
+    @GetMapping("/ver-registros/{especialidadId}")
+    public ModelAndView mostrarRegistrosEspecialidad(@PathVariable Integer especialidadId, HttpSession sesion, HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView("registros-consulta");
+
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error-name"));
+        }
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(especialidadId, (Integer) sesion.getAttribute("idUsuario"));
+        mav.addObject("select", false);
+        mav.addObject("ruta", "/registro/ver-registros/" + especialidadId);
+        mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
+        mav.addObject("titulo", "Historial de " + especialidad.getNombre());
+        mav.addObject("especialidades", especialidadServicio.buscarPorUsuario((Integer) sesion.getAttribute("idUsuario")));
+        mav.addObject("especialidad", especialidad);
+        mav.addObject("estudios", estudioServicio.buscarTodosxCliente(cliente.getId()));
+        mav.addObject("registros", registroServicio.obtenerRegistroEspecialidad(cliente.getId(), especialidadId));
+        return mav;
+    }
+
+    /*@GetMapping("/crear-registro")
+    public ModelAndView crearRegistro(HttpSession sesion, RedirectAttributes attributes, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("registro-formulario");
-        mav.addObject("registro", registroServicio.obtenerRegistroId(id));
-        mav.addObject("title", "Crear Registro");
-        mav.addObject("action", "modificar");
-        return mav;
-    }
-
-    @PostMapping("/guardar")
-    public RedirectView guardar(HttpServletRequest request, RedirectAttributes attributes, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico, @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados, @RequestParam Especialidad especialidad, @RequestParam Cliente cliente) throws Exception {
 
         try {
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            mav.addObject("fichaMedica", fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()));
 
-            registroServicio.crearRegistro(fecha, medico, cobertura, lugar, resultados, especialidad, cliente);
-            attributes.addFlashAttribute("exito-name", "El registro se cargo exitosamente");
-
+            Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+            if (flashMap != null) {
+                mav.addObject("exito", flashMap.get("exito-name"));
+                mav.addObject("error", flashMap.get("error-name"));
+            }
+            mav.addObject("registro", new Registro());
+            mav.addObject("especialidades", especialidadServicio.obtenerEspeciaidades());
+            mav.addObject("title", "Crear Registro");
+            mav.addObject("action", "guardar");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
 
-        return new RedirectView("/registros");
+        return mav;
+    }*/
 
+ /*@GetMapping("/editar/{id}")
+    public ModelAndView editarRegistro(RedirectAttributes attributes, @PathVariable Integer id) throws Exception {
+        ModelAndView mav = new ModelAndView("registro-formulario");
+        try {
+            mav.addObject("registro", registroServicio.obtenerRegistroId(id));
+            mav.addObject("especialidad", especialidadServicio.obtenerEspeciaidades());
+            mav.addObject("title", "Crear Registro");
+            mav.addObject("action", "modificar");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return mav;
+    }*/
+    @PostMapping("/guardar")
+    public RedirectView guardar(HttpSession sesion, HttpServletRequest request, RedirectAttributes attributes,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha, @RequestParam String medico,
+            @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados,
+            @RequestParam Integer especialidad, @RequestParam String ruta) throws Exception {
+
+        try {
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            registroServicio.crearRegistro(fecha, medico, cobertura, lugar, resultados, especialidad, cliente);
+            attributes.addFlashAttribute("exito-name", "La consulta se cargo exitosamente");
+
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+            return new RedirectView(ruta);
+        }
+
+        return new RedirectView(ruta);
+
+    }
+
+    @PostMapping("/modificar")
+    public RedirectView modificar(HttpSession sesion, HttpServletRequest request, RedirectAttributes attributes,
+            @RequestParam Integer idRegistro, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha,
+            @RequestParam String medico, @RequestParam String cobertura, @RequestParam String lugar,
+            @RequestParam String resultados, @RequestParam String ruta, 
+            @RequestParam Integer especialidadiD) throws Exception {
+
+        try {
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(especialidadiD, cliente.getId());
+            registroServicio.modificarRegistro(idRegistro, fecha, medico, cobertura, lugar, resultados, especialidad);
+            attributes.addFlashAttribute("exito-name", "La consulta se modifico exitosamente");
+
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+            return new RedirectView(ruta);
+        }
+
+        return new RedirectView(ruta);
     }
     
-    @PostMapping("/modificar")
-    public RedirectView modificar (HttpServletRequest request, RedirectAttributes attributes,@RequestParam Integer id, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam String medico, @RequestParam String cobertura, @RequestParam String lugar, @RequestParam String resultados, @RequestParam Especialidad especialidad, @RequestParam Cliente cliente) throws Exception {
-        
+        @PostMapping("/baja")
+    public RedirectView bajaAgenda(@RequestParam Integer registroId,@RequestParam String ruta, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
-
-            registroServicio.modificarRegistro(id, fecha, medico, cobertura, lugar, resultados);
-            attributes.addFlashAttribute("exito-name", "El registro se cargo exitosamente");
-
+            registroServicio.registroBaja(registroId);
+            Boolean estado = registroServicio.obtenerRegistroAlta(registroId);
+            attributes.addFlashAttribute("exito-name", "La consulta ha sido " + ((estado) ? "eliminada" : "recuperada") + "  exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
-
-        return new RedirectView("/registros");
+        return new RedirectView(ruta);
     }
 }

@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #89c0ff #b9d9fd;
+}
+
+
+/* Background*/
+
+body {
+background-color: rgb(247,246,254);
+} 
+
+
+/* body{
+    font-family: sans-serif;
+    background-image: url("/antonella/Frame-174.jpg"); 
+    background-position: center;
+    
+    background-repeat: no-repeat;
+    background-repeat: repeat-x, no-repeat;
+    background-repeat: repeat-y, no-repeat;
+    
+
+} */
+
+/*------NAVBAR------*/
+
+#nav-bar {
+    top: 0;
+    z-index: 10;
+    padding-left: 30px;
+}
+
+/*Titulo*/
+.navbar-brand {
+    font-family: 'Poppins',
+        sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 20px;
+}
+
+.logo-navbar {
+    width: 35px;
+}
+
+
+/*Fonts links*/
+.navbar-nav {
+    padding-right: 40px;
+    font-family: 'Roboto',
+        sans-serif;
+    font-size: 18px;
+
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+    padding: 0 15px;
+}
+
+
+.cabeza{
+    background-color:rgb(142, 173, 253);
+    border-radius: 15px;
+}
+.ficha{
+    background-color:rgb(222,232,254);
+    border-radius: 0px 15px 15px 0px;
+}
+.datos{
+    background-color:rgb(229,246,254);
+    border-radius: 15px 0px 0px 15px;
+   
+}
+.reg{
+    background-color:rgb(215,227,254);
+    color:black;
+    /* font-weight: bold; */
+    border: 2px solid #8BE9E1;
+    padding: 10px;
+    
+  }
+  .nombre{
+      font-size: 2rem;
+      font-weight:500;
+  }
+  .personal{
+      font-size: 1.1rem;
+  }
+  .bordes{
+    border-bottom: 1px solid black;
+  }
+
+  footer{
+    background-color: rgb(241,243,255);
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.vr{
+   height: 10em;
+  }
+  
+  /* .ficha-med {
+    display: inline-flex;
+    margin-bottom: 2rem;
+    width: 400px;
+    height: 150px;
+     justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
+} */
+
+.ficha-med .cards {
+    background: linear-gradient(to right bottom,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.5));
+    border-radius: 1rem;
+    margin: 1rem .3rem;
+    padding: .5rem;
+    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+    /* justify-content: space-between;
+    align-items: center; */
+
+}
+
+.ficha-med-img {
+    width: 40px;
+    padding: 0 3px;
+    padding-top: .5rem;
+}
+.cards h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.fondomodal {
+    background-image: url("../img/Group6.png");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    top: 0;
+    position: absolute;
+    left: 0px;
+  }
+  

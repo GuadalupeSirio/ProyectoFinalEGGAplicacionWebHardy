@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #89c0ff #b9d9fd;
+}
+
+
+/* Background*/
+body {
+background-color: rgb(247,246,254);
+} 
+
+
+
+/* body {
+    font-family: sans-serif;
+    background-image: url("../img/Frame-174.jpg");
+    background-position: center;
+
+    background-repeat: no-repeat;
+    background-repeat: repeat-x, no-repeat;
+    background-repeat: repeat-y, no-repeat;
+
+
+} */
+
+/*------NAVBAR------*/
+
+#nav-bar {
+    top: 0;
+    z-index: 10;
+    padding-left: 30px;
+}
+
+/*Titulo*/
+.navbar-brand {
+    font-family: 'Poppins',
+        sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 20px;
+}
+
+.logo-navbar {
+    width: 35px;
+}
+
+
+/*Fonts links*/
+.navbar-nav {
+    padding-right: 40px;
+    font-family: 'Roboto',
+        sans-serif;
+    font-size: 18px;
+
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+    padding: 0 15px;
+}
+
+
+/*Titulo pag*/
+.titulo {
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: black;
+}
+
+/*Boton guardar*/
+.btn {
+    background-color: rgb(84, 193, 251);
+}
+
+
+/*Flecha footer*/
+.arrow {
+    color: rgb(84, 193, 251);
+}
+
+.accordion {
+    border-radius: 20px;
+}
+
+.espacio {
+    margin-bottom: 20px;
+    border: none;
+    background: rgb(247, 244, 253)
+}
+
+.colores {
+    background: rgba(93, 33, 210, 0.5);
+}
+
+.dropdown-menu {
+    background-color: transparent;
+}
+
+.reg {
+    background-color: #8BE9E1;
+    color: black;
+    font-weight: bold;
+    border: 2px solid #8BE9E1;
+    padding: 10px;
+    
+}
+
+.nobtn {
+    border: none;
+    background-color: transparent;
+}
+
+footer {
+    background-color: rgb(241, 243, 255);
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+    /* position: absolute;
+    bottom: 0; */
+
+}
+
+.boton {
+    background-image: linear-gradient(to right, #6190E8 0%, #949bfd 51%, #6190E8 100%);
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: black;
+    box-shadow: 0 0 20px rgb(238, 238, 238);
+    border-radius: 10px;
+    display: block;
+    
+}
+
+.boton:hover {
+    background-position: right center;
+    color: black;
+    text-decoration: none;
+}
+
+.accordion-body{
+    background-color:rgb(222, 232, 254);
+}
+
+.fondomodal {
+  background-image: url("../img/Group6.png");
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  left: 0px;
+}
+.bordes {
+    border-bottom: 1px solid black;
+}
+
+.reg {
+    background-color: #8BE9E1;
+    color: black;
+    font-weight: bold;
+    border: 2px solid #8BE9E1;
+    padding: 10px;
+   
+}
