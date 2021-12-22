@@ -1,22 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap");
 
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #89c0ff #b9d9fd;
-}
-
-/* Background*/
 
 body {
-  background: rgb(197, 200, 254);
-  background: linear-gradient(
-    180deg,
-    rgb(177, 198, 253) 1%,
-    rgb(208, 241, 255) 35%,
-    rgba(255, 255, 255, 1) 100%
-  );
-  background-repeat: no-repeat;
-}
+background-color: rgb(247,246,254);
+} 
 
 /*------NAVBAR------*/
 
