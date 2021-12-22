@@ -70,17 +70,17 @@ public class UsuarioServicio implements UserDetailsService {
                 rolRepositorio.save(r2);
                 usuario.setRol(r1);
                 cargarEspecialidades();
-                
+
             } else {
                 usuario.setRol(rolRepositorio.buscarRol("CLIENTE")); //Luego todos los usuarios se setean con el rol de CLIENTE pero el admin puede modificarlo 
             }
             usuario.setAlta(true);
 
             usuarioRepositorio.save(usuario);
-            
+
             clienteServicio.guardarCliente(nombre, apellido, dni, fechaNacimiento, imagen, usuario);
 
-           // emailServicio.enviarThread(correo); //--> para enviar el correo de bienvenida   
+            emailServicio.enviarThread(correo); //--> para enviar el correo de bienvenida   
         } catch (Exception e) {
             throw e;
         }
@@ -112,6 +112,8 @@ public class UsuarioServicio implements UserDetailsService {
             especialidad = new Especialidad("Pediatría", "Pediatría.png", true, 0);
             especialidadRepositorio.save(especialidad);
             especialidad = new Especialidad("Psiquiatría", "Psiquiatría.png", true, 0);
+            especialidadRepositorio.save(especialidad);
+            especialidad = new Especialidad("Otro", null, true, 0);
             especialidadRepositorio.save(especialidad);
 
         } catch (Exception e) {
@@ -153,7 +155,7 @@ public class UsuarioServicio implements UserDetailsService {
             throw e;
         }
     }
-    
+
     @Transactional
     public void modificarConRol(Integer id, Integer idRol, String correo) throws Exception {
         try {
@@ -167,7 +169,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuarioRepositorio.save(usuario);
         } catch (Exception e) {
             throw e;
-       }
+        }
     }
 
     @Transactional
@@ -187,7 +189,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-      Usuario usuario = usuarioRepositorio.findByCorreo(correo).orElseThrow(() -> new UsernameNotFoundException("No existe un usuario asociado al correo ingresado"));
+        Usuario usuario = usuarioRepositorio.findByCorreo(correo).orElseThrow(() -> new UsernameNotFoundException("No existe un usuario asociado al correo ingresado"));
         if (!usuario.getAlta()) {
             throw new UsernameNotFoundException("El usuario esta dado de baja");
         }
@@ -204,7 +206,7 @@ public class UsuarioServicio implements UserDetailsService {
         } catch (Exception ex) {
             Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new User(usuario.getCorreo(), usuario.getClave(), Collections.singletonList(authority));          
+        return new User(usuario.getCorreo(), usuario.getClave(), Collections.singletonList(authority));
     }
 
     @Transactional(readOnly = true)
@@ -258,7 +260,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (correo == null || correo.trim().isEmpty()) {
             throw new MiExcepcion("El correo no puede estar vacio.");
         }
-        
+
         if (usuarioRepositorio.existsUsuarioByCorreo(correo)) {
             throw new MiExcepcion("Ya existe un usuario asociado al correo ingresado");
         }

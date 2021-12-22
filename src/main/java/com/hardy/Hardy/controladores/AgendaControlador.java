@@ -103,7 +103,7 @@ public class AgendaControlador {
             HttpSession sesion, RedirectAttributes attributes) throws Exception, MiExcepcion {
         try {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
-            Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(idEspecialidad, cliente.getId());
+            Especialidad especialidad = especialidadServicio.obtenerEspecialidadIdCliente(idEspecialidad, (Integer) sesion.getAttribute("idUsuario"));
             agendaServicio.crearAgenda(fecha, hora, medico, lugar, especialidad, cliente);
             attributes.addFlashAttribute("exito-name", "El turno ha sido guardado exitosamente");
         } catch (Exception e) {

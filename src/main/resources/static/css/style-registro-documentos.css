@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #89c0ff #b9d9fd;
+}
+
+
+/* Background*/
+body {
+background-color: rgb(247,246,254);
+} 
+
 /* body {
     font-family: sans-serif;
     background-image: url("../img/Frame-174.jpg");

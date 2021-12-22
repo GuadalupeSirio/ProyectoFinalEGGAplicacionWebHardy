@@ -84,77 +84,45 @@
                 <div class="container">
                   <div class="row">
 
-                    <div class="col-12 pt-3">
-                      <div class="row  bordes">
-                        <p class="col-4"><b>Médico:</b></p>
-                        <p th:text="${registro.medico}" class="col-8"></p>
+                    <div class="col-12">
+                      <div class="row">
+                        <p class="col-12 col-md-4"><b>Estudios:</b></h>
+                        <div class="col-6 col-md-4">
+                          <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button"
+                            data-bs-toggle="modal" th:attr="data-bs-target=|#cargarestudio${registro.id}|">
+                            Agregar
+                          </button>
+                        </div>
+                        <div class="col-6 col-md-4">
+                          <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button"
+                            data-bs-toggle="modal" th:attr="data-bs-target=|#verestudio${registro.id}|">
+                            Ver
+                          </button>
+                        </div>
                       </div>
                     </div>
-
-                    <div class="col-12 pt-3 ">
-                      <div class="row  bordes">
-                        <p class="col-4 bold"><b>Cobertura:</b> </p>
-                        <p th:text="${registro.cobertura}" class="col-8"></p>
-                      </div>
-                    </div>
-
-                    <div class="col-12 pt-3">
-                      <div class="row bordes">
-                        <p class="col-4 bold"><b>Resultados:</b></p>
-                        <p th:text="${registro.resultados}" class="col-8"></p>
-                      </div>
-                    </div>
-
 
                     <div class="col-12 pt-4">
                       <div class="row">
+                        <p class="col-12 col-md-4"><b>Opciones</b></h>
+                        <div class="col-6 col-md-4">
+                          <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button"
+                            data-bs-toggle="modal" th:attr="data-bs-target=|#editar${registro.id}|">
+                            Editar
+                          </button>
 
-                        <div class="col-12">
-                          <div class="row">
-                            <p class="col-12 col-md-4"><b>Estudios:</b></h>
-                            <div class="col-6 col-md-4">
-                              <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button" data-bs-toggle="modal"
-                                th:attr="data-bs-target=|#cargarestudio${registro.id}|">
-                                Agregar
-                              </button>
-                            </div>
-                            <div class="col-6 col-md-4">
-                              <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button" data-bs-toggle="modal"
-                                th:attr="data-bs-target=|#verestudio${registro.id}|">
-                                Ver
-                              </button>
-                            </div>
-                          </div>
                         </div>
-
-                        <div class="col-12 pt-4">
-                          <div class="row">
-                            <p class="col-12 col-md-4"><b>Opciones</b></h>
-                            <div class="col-6 col-md-4">
-                              <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button" data-bs-toggle="modal"
-                                th:attr="data-bs-target=|#editar${registro.id}|">
-                                Editar
-                              </button>
-
-                            </div>
-                            <div class="col-6 col-md-4">
-                              <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button" data-bs-toggle="modal"
-                                th:attr="data-bs-target=|#baja${registro.id}|">
-                                Eliminar
-                              </button>
-                            </div>
-                          </div>
+                        <div class="col-6 col-md-4">
+                          <button class="btn boton col-12 col-lg-6" title="Agregar archivo" type="button"
+                            data-bs-toggle="modal" th:attr="data-bs-target=|#baja${registro.id}|">
+                            Eliminar
+                          </button>
                         </div>
-
-
                       </div>
-
                     </div>
 
-
-
-
                   </div>
+
                 </div>
 
               </div>
@@ -383,6 +351,7 @@
 
 </footer>
 
+
   <!-- Modal registro de consulta-->
 
   <div class="modal fade " id="registromedico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -411,12 +380,31 @@
                     </div>
                   </div>
 
-                  <div th:if="${especialidad}" class="col-12 col-md-6">
+                  <div th:if="${select}" class="col-12 col-md-6">
                     <div class="form-floating">
-                      <select id="especialidad" required class="form-select" name="especialidad">
-                        <option selected th:text="${especialidad.nombre}" th:value="${especialidad.id}"></option>
+                      <select required aria-label="Elegir especialidad" class="form-select border border-secondary"
+                        id="especialidad" name="especialidad">
+                        <!-- <option selected th:value="${especialidad.id}" 
+                                            th:text="${especialidad.nombre}"></option> -->
+                        <option th:each="especialidxd : ${especialidades}" th:text="|${especialidxd.nombre}|"
+                          th:if="${especialidxd.alta}" th:value="${especialidxd.id}">
+                        </option>
                       </select>
-                      <label for="especialidad">Especialidad</label>
+                      <label for="especialidad">Especialidades:</label>
+                    </div>
+                  </div>
+
+                  <div th:if="${select eq false}" class=" col-12 col-md-6">
+                    <div class="form-floating">
+                      <select required aria-label="Elegir especialidad" class="form-select border border-secondary"
+                        id="especialidad" name="especialidad">
+                         <option selected th:value="${especialidad.id}" 
+                          th:text="${especialidad.nombre}"></option> 
+                        <!-- <option th:each="especialidxd : ${especialidades}" th:text="|${especialidxd.nombre}|"
+                          th:if="${especialidxd.alta and especialidxd.id != especialidad.id}" th:value="${especialidxd.id}">
+                        </option> -->
+                      </select>
+                      <label for="especialidad">Especialidades:</label>
                     </div>
                   </div>
 

@@ -76,10 +76,10 @@ public class EspecialidadServicio {
     }
     
     @Transactional(readOnly = true)
-    public Especialidad obtenerEspecialidadIdCliente(Integer especialidadId, Integer clienteId) throws Exception {
+    public Especialidad obtenerEspecialidadIdCliente(Integer especialidadId, Integer usuarioId) throws Exception {
         try {
 
-            Optional<Especialidad> especialidadOptional = especialidadRepositorio.BuscarPorUsuario(especialidadId, clienteId);
+            Optional<Especialidad> especialidadOptional = especialidadRepositorio.BuscarPorId(especialidadId);
             return especialidadOptional.orElse(null);
 
         } catch (Exception e) {

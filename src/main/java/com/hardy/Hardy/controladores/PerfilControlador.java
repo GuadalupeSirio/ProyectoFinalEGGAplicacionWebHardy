@@ -76,7 +76,7 @@ class PerfilControlador {
 
     @PostMapping("/editar-foto")
     public RedirectView modificarImagen(RedirectAttributes attributes, @RequestParam MultipartFile imagen, HttpSession sesion) throws Exception {
-        try {    
+        try {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
             clienteServicio.modificarImagen(cliente, imagen);
             sesion.setAttribute("imagen", cliente.getImagen());
@@ -139,7 +139,7 @@ class PerfilControlador {
         }
         return new RedirectView("/perfil");
     }
-     // metodos POST
+
     @PostMapping("/editar-perfil")
     public RedirectView EditarPerfil(RedirectAttributes attributes, HttpServletRequest request,
             Principal principal, @RequestParam String nombre,
@@ -155,4 +155,5 @@ class PerfilControlador {
         }
         return new RedirectView("/perfil");
     }
+
 }
