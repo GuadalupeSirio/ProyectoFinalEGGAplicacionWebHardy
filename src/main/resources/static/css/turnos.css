@@ -13,12 +13,10 @@ html {
 
 /* Background*/
 
-
 body {
-    background: rgb(197, 200, 254);
-    background: linear-gradient(180deg, rgb(164, 187, 252) 1%, rgb(194, 235, 253) 35%, rgba(255, 255, 255, 1) 100%);
-    background-repeat: no-repeat;
-}
+background-color: rgb(247,246,254);
+} 
+
 
 
 
@@ -287,8 +285,8 @@ footer {
     color: black;
     text-decoration: none;
     font-size: 1rem;
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
 }
 
 .reg {

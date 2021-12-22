@@ -24,7 +24,7 @@ public class EmailServicio {
 
     @Value("${my.property}")
     private String directory;
-    
+
     private static final String SUBJECT = "Bienvenido a Hardy!";
 
     public void enviarThread(String to) {
@@ -39,6 +39,23 @@ public class EmailServicio {
                 helper.setText("<html><body><img src='cid:identifier1234'></body></html>", true);
                 FileSystemResource res = new FileSystemResource(new File(directory + "\\card.png"));
                 helper.addInline("identifier1234", res);
+                sender.send(message);
+            } catch (MessagingException ex) {
+                Logger.getLogger(EmailServicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
+    }
+
+    public void contacto(String celular, String mensaje, String nombre, String mail) {
+        new Thread(() -> {
+            try {
+                MimeMessage message = sender.createMimeMessage();
+
+                MimeMessageHelper helper = new MimeMessageHelper(message, true);
+                helper.setTo("asistente.hardy@gmail.com");
+                helper.setSubject("Consulta de usuario");
+                //helper.setText("<html><body> <h1>Bienvenido a Hardy!</h1> <h3>El registro en Hardy fue exitoso. Esperamos que disfrutes mucho nuestra aplicación!</h3> <br> <img src='cid:identifier1234'> <br> <h4>Equipo de Hardy®</h4> </body></html>", true);
+                helper.setText("<html><body><h2>Nuevo mensaje de: " + nombre +"<br>"+celular+"<br>"+ mail + " </h2> <br> <h3>" + mensaje + "</h3></body></html>",true);
                 sender.send(message);
             } catch (MessagingException ex) {
                 Logger.getLogger(EmailServicio.class.getName()).log(Level.SEVERE, null, ex);

@@ -43,7 +43,7 @@ class PerfilControlador {
         ModelAndView mav = new ModelAndView("perfil-vista");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
-            mav.addObject("exito", flashMap.get("exito-name"));
+            //mav.addObject("exito", flashMap.get("exito-name"));
             mav.addObject("error", flashMap.get("error-name"));
         }
         Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
@@ -68,7 +68,6 @@ class PerfilControlador {
             usuarioServicio.crearUsuario(nombre, apellido, dni, fechaNacimiento, correo, claveUno, claveDos, imagen);
             
             request.login(correo, claveUno);
-            attributes.addFlashAttribute("exito-name", "Usuario registrado exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
@@ -77,7 +76,7 @@ class PerfilControlador {
 
     @PostMapping("/editar-foto")
     public RedirectView modificarImagen(RedirectAttributes attributes, @RequestParam MultipartFile imagen, HttpSession sesion) throws Exception {
-        try {    
+        try {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
             clienteServicio.modificarImagen(cliente, imagen);
             sesion.setAttribute("imagen", cliente.getImagen());
@@ -135,6 +134,22 @@ class PerfilControlador {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
             clienteServicio.editarFechaNacimiento(fechaNacimiento, cliente);
             attributes.addFlashAttribute("exito-name", "La fecha de nacimiento se modifico exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
+    @PostMapping("/editar-perfil")
+    public RedirectView EditarPerfil(RedirectAttributes attributes, HttpServletRequest request,
+            Principal principal, @RequestParam String nombre,
+            @RequestParam String apellido, @RequestParam Integer dni,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaNacimiento, @RequestParam MultipartFile imagen, HttpSession sesion) throws Exception {
+        try {
+            attributes.addFlashAttribute("exito-name", "El perfil se modifico exitosamente");
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+            clienteServicio.editarCliente(nombre, apellido, dni, fechaNacimiento, imagen, cliente);
+
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }

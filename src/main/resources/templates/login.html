@@ -48,11 +48,11 @@
         </nav>
 
         <div class="row justify-content-center">
-            <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+             <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
                 th:if="${exito != null}">
                 <strong th:text="${exito}"></strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            </div> 
 
             <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
                 th:if="${error != null}">
@@ -216,21 +216,21 @@
     <section class="container my-5 py-5" id="contacto">
         <div class="row py-5">
 
-            <div class="col-6">
+            <div class="col-12 - col-lg-6">
                 <div class="row">
 
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
 
                                         <p class="contactotitulo"><span><img th:src="@{/img/mail.png}" alt=""></span>
                                             E-mail
                                         </p>
                                         <p class="contactonormal">asistente.hardy@gmail.com</p>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <p class="contactotitulo"><span><img th:src="@{/img/location.png}"
                                                     alt=""></span>
                                             Dirección</p>
@@ -243,35 +243,36 @@
 
                         </div>
                     </div>
+
                     <div class="col-12">
-                        <img th:src="@{/img/contacto.svg}" alt="">
+                        <img th:src="@{/img/contacto.svg}" alt="" class="img-fluid">
                     </div>
 
                 </div>
-
             </div>
 
-            <div class="col-5 border offset-1 p-5 fondocontacto">
+
+            <div class="col-12  col-lg-5 border offset-lg-1 p-5 fondocontacto">
 
                 <h3 class="text-center contactonormal mb-4">Contacto</h3>
 
-                <form>
+                <form th:action="@{/emailContacto}"  method="POST" class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nombre completo</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nombre">
 
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Correo electronico</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="email" class="form-control" id="exampleInputPassword1" name="email">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Numero de celular</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="celular">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="mensaje"></textarea>
                     </div>
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary">Enviar</button>
@@ -311,6 +312,7 @@
                 <div class="modal-body ">
                     <div class="container-fluid">
                         <div class="row">
+
                             <div class="col-6 d-none d-xl-block">
                                 <img th:src="@{/img/Doctor-cuate.svg}" alt="" class="img-fluid ">
                             </div>
@@ -339,8 +341,9 @@
 
                                             <div class=" mb-3 col-12 col-md-6">
                                                 <div class="form-floating">
-                                                    <input required type="number" class="form-control" id="exampldnieInputEmail1"
-                                                        aria-describedby="emailHelp" name="dni" placeholder="documento">
+                                                    <input required type="number" class="form-control"
+                                                        id="exampldnieInputEmail1" aria-describedby="emailHelp"
+                                                        name="dni" placeholder="documento">
                                                     <label for="dni" class="form-label">Documento</label>
                                                 </div>
                                             </div>
@@ -388,7 +391,9 @@
                                                     <label for="imagen" class="form-label">Cargar foto: </label>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn reg">Guardar</button>
+                                            <div class="col text-center">
+                                                <button type="submit" class="btn btn reg col-12">Registrar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -421,7 +426,8 @@
                                 <form th:action="@{/logincheck}" method="post" class="needs-validation" novalidate>
                                     <div class="container">
                                         <div class="row">
-                                            <div class="mb-3 col-12 ">
+
+                                            <div class="mb-3 col-12">
                                                 <div class="form-floating">
                                                     <input required type="email" class="form-control" id="correo"
                                                         name="correo" placeholder="Correo electronico">
@@ -429,7 +435,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class=" mb-3 col-12">
+                                            <div class=" mb-3  col-12">
                                                 <div class="form-floating">
                                                     <input required type="password" class="form-control" id="clave"
                                                         name="clave" placeholder="Contraseña">
@@ -437,27 +443,15 @@
                                                 </div>
                                             </div>
 
-                                            <button type="submit" class="btn btn reg">Ingresar</button>
+                                            <div class="col text-center">
+                                                <button type="submit" class="btn btn reg col-12">Ingresar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <!-- <form th:action="@{/logincheck}" method="post">
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp" name="correo">
-
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="clave">
-                        </div>
-
-                        <button type="submit" class="btn btn ing">Ingresar</button>
-                    </form> -->
                 </div>
 
             </div>

@@ -3,6 +3,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Noto Sans" , sans-serif;
 }
 
 html {
@@ -32,7 +33,7 @@ body {
 /*Titulo*/
 .navbar-brand {
   font-family: 'Poppins',
-    sans-serif;
+  sans-serif;
   font-weight: bold;
   font-size: 25px;
   padding-left: 20px;

@@ -42,12 +42,15 @@
 
     <div class="container">
       <div class="row">
-        <img th:src="@{/img/Drawkit-Vector-Illustration-Medical-19.png}" alt="">
+        <div class="col-12">
+        <img th:src="@{/img/Drawkit-Vector-Illustration-Medical-19.png}" alt="" class="img-fluid">
+        </div>
 
+      </div>
       </div>
   </section>
 
-  <section class="container-fluid py-5   tarjeta" id="extras">
+  <section class="container-fluid py-5 tarjeta" id="extras">
     <div class="row ">
       <div class="col-12 text-center">
         <span class="badge rounded-pill bg-primary col  mb-3 texto1">Extras</span>
@@ -57,9 +60,9 @@
         <!-- Tarjetas -->
         <div class="row">
           <div class="col">
-            <div class="row justify-content-evenly ">
+            <div class="row justify-content-evenly gy-5 gy-lg-0">
 
-              <div class="col-4">
+              <div class="col-12 col-sm-10 col-md-8 col-lg-4">
                 <a th:href="@{/registro}" class="text-decoration-none text-reset">
                   <div class="card h-100 card1 shadow bg-body rounded bordes ms-4 me-4">
                     <div class="row justify-content-center">
@@ -72,7 +75,7 @@
                     <div class="card-body row align-items-end">
                       <div class="col-12">
                         <h5 class="">Registros</h5>
-                        <p class="card-text">Gestioná y visualizá toda tu historia clinica</p>
+                        <p class="card-text d-lg-none d-xl-block">Gestioná y visualizá toda tu historia clinica</p>
                       </div>
                     </div>
 
@@ -82,7 +85,7 @@
 
               </div>
 
-              <div class="col-4">
+              <div class="col-12 col-sm-10 col-md-8 col-lg-4">
                 <a th:href="@{/agenda}" class="text-decoration-none text-reset">
                   <div class="card h-100 card1 shadow bg-body rounded ms-4 me-4">
                     <div class="row justify-content-center">
@@ -95,7 +98,7 @@
                     <div class="card-body row align-items-end">
                       <div class="col-12">
                         <h5 class="card-title">Turnos</h5>
-                        <p class="card-text">Registrá tus turnos y no te olvides de ninguna cita</p>
+                        <p class="card-text d-lg-none d-xl-block">Registrá tus turnos y no te olvides de ninguna cita</p>
                       </div>
                     </div>
 
@@ -105,8 +108,8 @@
 
               </div>
 
-              <div class="col-4">
-                <a href="" class="text-decoration-none text-reset">
+              <div class="col-12 col-sm-10 col-md-8 col-lg-4">
+                <a th:href="@{/documento}" class="text-decoration-none text-reset">
                   <div class="card h-100 card1 shadow bg-body rounded ms-4 me-4">
                     <div class="row justify-content-center">
                       <div class="col-8">
@@ -118,7 +121,7 @@
                     <div class="card-body row align-items-end">
                       <div class="col-12">
                         <h5 class="card-title">Documentos</h5>
-                        <p class="card-text">Organizá y visualizá todos tus estudios medicos</p>
+                        <p class="card-text d-lg-none d-xl-block">Organizá y visualizá todos tus estudios medicos</p>
                       </div>
                     </div>
 

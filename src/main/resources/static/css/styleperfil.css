@@ -13,12 +13,10 @@ html {
 
 /* Background*/
 
-
 body {
-    background: rgb(197, 200, 254);
-    background: linear-gradient(180deg, rgb(177, 198, 253) 1%, rgb(208, 241, 255) 35%, rgba(255, 255, 255, 1) 100%);
-    background-repeat: no-repeat;
-}
+background-color: rgb(247,246,254);
+} 
+
 
 /* body{
     font-family: sans-serif;
@@ -88,7 +86,7 @@ body {
     /* font-weight: bold; */
     border: 2px solid #8BE9E1;
     padding: 10px;
-    border-radius: 2em 1em 4em / 0.5em 3em;
+    
   }
   .nombre{
       font-size: 2rem;
