@@ -93,8 +93,28 @@ footer, footer a, footer a:link, footer, a:visited{
   color: rgb(49,136,216);
 }
 .fondocontacto{
-  background-color:  rgb(255,255,255);
+  background-color:  rgb(247,246,254);
+  border-radius: 10px;
 }
+.boton {
+  background-image: linear-gradient(to right, #0088D8 0%, #949bfd 51%, #0088D8 100%);
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: black;
+  box-shadow: 0 0 20px rgb(238, 238, 238);
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
+}
+
+.boton:hover {
+  background-position: right center;
+  color: black;
+  text-decoration: none;
+}
+
 .card:hover {
   transform: scale(1.04);
 }

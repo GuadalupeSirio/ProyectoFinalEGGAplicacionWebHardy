@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
     integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
-  <link rel="stylesheet" th:href="@{/css/style-documentos-vista.css}" />
+  <link rel="stylesheet" th:href="@{/css/style-documentos-vista.css}"/>
 </head>
 
 <body>
@@ -116,10 +116,10 @@
                   <td th:if="${documento.especialidad.id} eq ${especialidad.id}" th:text="${documento.nombre}">
                   </td>
                   <td th:if="${documento.especialidad.id} eq ${especialidad.id}">
-                    <a class="text-decoration-none text-reset" th:attr="href=|\upload\${documento.adjunto}|" target="_blank"> <i class="far fa-eye"></i> </a>
+                    <a class="text-decoration-none text-reset" th:attr="href=|\upload\${documento.adjunto}|" target="_blank"> <img th:src="@{/img/eyearchivo.png}" alt=""> </a>
                   </td>
                   <td th:if="${documento.especialidad.id} eq ${especialidad.id}">
-                    <a class="text-decoration-none text-reset" th:attr="href=|\upload\${documento.adjunto}|" th:download="${documento.nombre}"><i class="fas fa-download"></i></a>
+                    <a class="text-decoration-none text-reset" th:attr="href=|\upload\${documento.adjunto}|" th:download="${documento.nombre}"><img th:src="@{/img/downloadarchivos.png}" alt=""></i></a>
                   </td>
                 </tr>
                 <tr th:each="estudio : ${estudios}">
@@ -127,10 +127,10 @@
                   </td>
                   <td th:if="${estudio.registro.especialidad.id} eq ${especialidad.id}">
                     <a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|" target="_blank"><a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|" target="_blank">
-                      <i class="far fa-eye"></i></a>
+                      <img th:src="@{/img/eyearchivo.png}" alt=""></a>
                   </td>
                   <td th:if="${estudio.registro.especialidad.id} eq ${especialidad.id}">
-                    <a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}"><i class="fas fa-download"></i></a>
+                    <a class="text-decoration-none text-reset" th:attr="href=|\upload\${estudio.adjunto}|" th:download="${estudio.nombre}"><img th:src="@{/img/downloadarchivos.png}" alt=""></i></a>
                   </td>
 
                 </tr>
