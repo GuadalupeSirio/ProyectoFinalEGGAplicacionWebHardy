@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap");
+
 html {
     scrollbar-width: thin;
     scrollbar-color: #89c0ff #b9d9fd;
@@ -6,18 +8,63 @@ html {
 
 /* Background*/
 
-body {
-background-color: rgb(247,246,254);
-}  
 
-.altura{
-    height: 25rem;
+/* body {
+    background: rgb(197, 200, 254);
+    background: linear-gradient(180deg, rgb(164, 187, 252) 1%, rgb(194, 235, 253) 35%, rgba(255, 255, 255, 1) 100%);
+    background-repeat: no-repeat;
+} */
+body{
+    background-color: rgb(247,246,254);
+}
+/*------NAVBAR------*/
+#nav-bar {
+  top: 0;
+  z-index: 10;
+  padding-left: 30px;
+}
+
+/*Titulo*/
+.navbar-brand {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  padding-left: 20px;
+}
+
+.logo-navbar {
+  width: 35px;
+}
+
+/*Fonts links*/
+.navbar-nav {
+  padding-right: 40px;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+  padding: 0 15px;
 }
 
 
-.circulo{
+
+/*Titulo pag*/
+.titulo {
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: black;
+}
+
+
+.altura{
+    height: 25rem;
     
-    
+}
+
+
+.circulo{ 
     position: relative;
     display: inline-flex;
     justify-content: center;

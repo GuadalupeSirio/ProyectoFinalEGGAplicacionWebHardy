@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap");
+
 
 * {
   margin: 0;
   padding: 0;
-  font-family: "Noto Sans" , sans-serif;
 }
 
 html {
@@ -32,8 +32,7 @@ body {
 
 /*Titulo*/
 .navbar-brand {
-  font-family: 'Poppins',
-  sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: bold;
   font-size: 25px;
   padding-left: 20px;
@@ -43,21 +42,17 @@ body {
   width: 35px;
 }
 
-
 /*Fonts links*/
 .navbar-nav {
   padding-right: 40px;
-  font-family: 'Roboto',
-    sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 18px;
-
 }
 
 /*Espacio entre links*/
 .navbar-nav li {
   padding: 0 15px;
 }
-
 
 
 .sectionindex{
@@ -98,5 +93,4 @@ footer {
   font-weight: bold;
   border: 2px solid #8BE9E1;
   padding: 10px;
-  border-radius: 2em 1em 4em / 0.5em 3em;
 }
