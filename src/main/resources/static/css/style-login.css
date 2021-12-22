@@ -64,6 +64,7 @@ h2 {
   color: #8be9e1;
   font-weight: bold;
 }
+
 .card1 {
   background-color: rgb(247, 244, 253);
 }
@@ -122,4 +123,8 @@ footer, footer a, footer a:link, footer, a:visited{
   background-position: right center;
   color: black;
   text-decoration: none;
+}
+
+.card:hover {
+  transform: scale(1.04);
 }
