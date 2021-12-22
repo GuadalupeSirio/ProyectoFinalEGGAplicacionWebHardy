@@ -32,23 +32,23 @@ public class FichaMedicaControlador {
     private ClienteServicio clienteServicio;
 
     // metodos GET
-//    @GetMapping
-//    public ModelAndView mostrarFichaMedica(HttpSession sesion, HttpServletRequest request) throws MiExcepcion, Exception {
-//
-//        ModelAndView mav = new ModelAndView("");
-//        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-//        if (flashMap != null) {
-//            mav.addObject("exito", flashMap.get("exito-name"));
-//            mav.addObject("error", flashMap.get("error-name"));
-//        }
-//
-//        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
-//        FichaMedica ficha = fichaMedicaServicio.obtenerFichamedicaId(cliente.getId());
-//
-//        mav.addObject("perfil", cliente);
-//        mav.addObject("ficha", ficha);
-//        return mav;
-//    }
+    @GetMapping
+    public ModelAndView mostrarFichaMedica(HttpSession sesion, HttpServletRequest request) throws MiExcepcion, Exception {
+
+        ModelAndView mav = new ModelAndView("");
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if (flashMap != null) {
+            mav.addObject("exito", flashMap.get("exito-name"));
+            mav.addObject("error", flashMap.get("error-name"));
+        }
+
+        Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+        FichaMedica ficha = fichaMedicaServicio.obtenerFichamedicaId(cliente.getId());
+
+        mav.addObject("perfil", cliente);
+        mav.addObject("ficha", ficha);
+        return mav;
+    }
 
     // metodos POST
     @PostMapping("/guardar-ficha")
@@ -61,23 +61,6 @@ public class FichaMedicaControlador {
             Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
 
             fichaMedicaServicio.guardarFichaMedica(grupoSanguineo, peso, altura, enfermedades, ultimoChequeo, cliente);
-
-            attributes.addFlashAttribute("exito-name", "Ficha medica registrada exitosamente");
-        } catch (Exception e) {
-            attributes.addFlashAttribute("error-name", e.getMessage());
-        }
-        return new RedirectView("/perfil");
-    }
-
-    @PostMapping("/modificar-ficha")
-    public RedirectView modificarFicha(@RequestParam String grupoSanguineo, @RequestParam Double peso,
-            @RequestParam Integer altura, @RequestParam String enfermedades, LocalDate ultimoChequeo,
-            HttpSession sesion, RedirectAttributes attributes) throws Exception {
-        try {
-
-            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
-
-            fichaMedicaServicio.modificarFichaMedica(grupoSanguineo, peso, altura, enfermedades, ultimoChequeo, cliente);
 
             attributes.addFlashAttribute("exito-name", "Ficha medica registrada exitosamente");
         } catch (Exception e) {
@@ -133,8 +116,24 @@ public class FichaMedicaControlador {
         }
         return new RedirectView("/perfil");
     }
-    
-        
+
+    @PostMapping("/modificar-ficha")
+    public RedirectView modificarFicha(@RequestParam String grupoSanguineo, @RequestParam Double peso,
+            @RequestParam Integer altura, @RequestParam String enfermedades, LocalDate ultimoChequeo,
+            HttpSession sesion, RedirectAttributes attributes) throws Exception {
+        try {
+
+            Cliente cliente = clienteServicio.obtenerPerfil((Integer) sesion.getAttribute("idUsuario"));
+
+            fichaMedicaServicio.modificarFichaMedica(grupoSanguineo, peso, altura, enfermedades, ultimoChequeo, cliente);
+
+            attributes.addFlashAttribute("exito-name", "Ficha medica registrada exitosamente");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("error-name", e.getMessage());
+        }
+        return new RedirectView("/perfil");
+    }
+
     @PostMapping("/editar-ultimoChequeo")
     public RedirectView editarUltimoChequeo(RedirectAttributes attributes, HttpServletRequest request,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate ultimoChequeo, HttpSession sesion) throws Exception {
@@ -147,5 +146,4 @@ public class FichaMedicaControlador {
         }
         return new RedirectView("/perfil");
     }
-
 }

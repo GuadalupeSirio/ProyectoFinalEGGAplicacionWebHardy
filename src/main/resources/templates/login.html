@@ -21,7 +21,8 @@
 
         <nav class="navbar navbar-expand-lg navbar-light mb-3">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/login}">Hardy</a>
+                <img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34" height="28"><a class="navbar-brand ms-2"
+                    th:href="@{/login}">Hardy</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -48,11 +49,11 @@
         </nav>
 
         <div class="row justify-content-center">
-            <!-- <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
+             <div class="alert alert-secondary alert-dismissible fade show text-center col-5 tooltip" role="alert"
                 th:if="${exito != null}">
                 <strong th:text="${exito}"></strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div> -->
+            </div> 
 
             <div class="alert alert-warning alert-dismissible fade show text-center col-5 tooltip" role="alert"
                 th:if="${error != null}">
@@ -157,35 +158,32 @@
                 <div class="row">
                     <div class="col">
                         <div class="row row-cols-1 row-cols-md-3 g-4">
-
-                            <div class="col">
-                                <div class="card h-100 card2 rounded">
-                                    <img th:src="@{/img/body-checkup.png}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Consultas médicas</h5>
-                                        <p class="card-text">Accedé a tu historial clínico y tenelo siempre organizado</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                            
                             <div class="col">
                                 <div class="card h-100 card1 rounded">
                                     <img th:src="@{/img/hospital-reception.png}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title">Agenda</h5>
-                                        <p class="card-text">Guardá todos tus turnos y recordatorios, así no te pierdes ninguna cita </p>
+                                        <p class="card-text">Guardá todos tus turnos y recordatorios aquí</p>
                                     </div>
 
                                 </div>
                             </div>
-                            
+                            <div class="col">
+                                <div class="card h-100 card2 rounded">
+                                    <img th:src="@{/img/body-checkup.png}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Alertas</h5>
+                                        <p class="card-text">Recibí información importante sobre tus chequeos</p>
+                                    </div>
+
+                                </div>
+                            </div>
                             <div class="col">
                                 <div class="card h-100 card3 rounded">
                                     <img th:src="@{/img/research-lab.png}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">Documentos</h5>
-                                        <p class="card-text">Visualizá todos tus resultados médicos sin extraviar ningún archivo </p>
+                                        <h5 class="card-title">Lorem, ipsum</h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                                     </div>
 
                                 </div>
@@ -259,23 +257,23 @@
 
                 <h3 class="text-center contactonormal mb-4">Contacto</h3>
 
-                <form>
+                <form th:action="@{/emailContacto}"  method="POST" class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nombre completo</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nombre">
 
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Correo electronico</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="email" class="form-control" id="exampleInputPassword1" name="email">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Numero de celular</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="celular">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="mensaje"></textarea>
                     </div>
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary">Enviar</button>
@@ -344,8 +342,9 @@
 
                                             <div class=" mb-3 col-12 col-md-6">
                                                 <div class="form-floating">
-                                                    <input required type="number" class="form-control" id="exampldnieInputEmail1"
-                                                        aria-describedby="emailHelp" name="dni" placeholder="documento">
+                                                    <input required type="number" class="form-control"
+                                                        id="exampldnieInputEmail1" aria-describedby="emailHelp"
+                                                        name="dni" placeholder="documento">
                                                     <label for="dni" class="form-label">Documento</label>
                                                 </div>
                                             </div>
@@ -393,7 +392,9 @@
                                                     <label for="imagen" class="form-label">Cargar foto: </label>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn reg">Guardar</button>
+                                            <div class="col text-center">
+                                                <button type="submit" class="btn btn reg col-12">Registrar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>

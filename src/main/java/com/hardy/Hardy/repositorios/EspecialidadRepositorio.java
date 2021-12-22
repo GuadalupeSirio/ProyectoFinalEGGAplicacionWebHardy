@@ -19,6 +19,7 @@ public interface EspecialidadRepositorio extends JpaRepository<Especialidad, Int
     @Query("SELECT e FROM Especialidad e WHERE e.idUsuario = :id OR e.idUsuario = 0 AND e.alta = true")
     List<Especialidad> BuscarPorUsuario(@Param("id") Integer id);
 
-    @Query("SELECT e FROM Especialidad e WHERE e.idUsuario = :clienteId OR e.idUsuario = 0 AND e.alta = true AND e.id= :especialidadId")
-    Optional<Especialidad> BuscarPorUsuario(@Param("especialidadId") Integer especialidadId, @Param("clienteId") Integer clienteId);
+    //@Query("SELECT e FROM Especialidad e WHERE e.idUsuario = :idUsuario OR (e.idUsuario = 0 AND e.idUsuario != :idUsuario) AND e.alta = true AND e.id= :especialidadId")
+    @Query("SELECT e FROM Especialidad e WHERE e.id= :especialidadId")
+    Optional<Especialidad> BuscarPorId(@Param("especialidadId") Integer especialidadId);
 }

@@ -1,5 +1,6 @@
 package com.hardy.Hardy.controladores;
 
+import com.hardy.Hardy.servicios.EmailServicio;
 import com.hardy.Hardy.servicios.UsuarioServicio;
 import java.security.Principal;
 import java.util.Map;
@@ -20,10 +21,12 @@ public class LoginControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+    
+    @Autowired
+    private EmailServicio emailServicio;
 
     @GetMapping("/login")
-    public ModelAndView login(HttpServletRequest request, @RequestParam(required = false)
-            String error, @RequestParam(required = false) String logout, Principal principal) {
+    public ModelAndView login(HttpServletRequest request, @RequestParam(required = false) String error, @RequestParam(required = false) String logout, Principal principal) {
 
         ModelAndView mv = new ModelAndView("login");
         Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
@@ -67,5 +70,17 @@ public class LoginControlador {
             attributes.addFlashAttribute("error", e.getMessage());
         }
         return new RedirectView("/");
+    }
+
+    @PostMapping("/emailContacto")
+    public RedirectView emailDeContacto(RedirectAttributes attributes, @RequestParam String celular, @RequestParam String mensaje, 
+            @RequestParam String nombre, @RequestParam String email) {
+        try {
+            emailServicio.contacto(celular, mensaje, nombre, email);
+            attributes.addFlashAttribute("exito-name", "El correo se envio exitosamente");
+        } catch (Exception e) {
+            throw e;
+        }
+        return new RedirectView("/login");
     }
 }

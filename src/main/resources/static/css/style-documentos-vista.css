@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap");
+
 html {
     scrollbar-width: thin;
     scrollbar-color: #89c0ff #b9d9fd;
@@ -13,11 +15,46 @@ html {
     background-repeat: no-repeat;
 } */
 body{
-    background-image: url(../img/Section-0.jpg);
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: rgb(247,246,254);
+}
+/*------NAVBAR------*/
+#nav-bar {
+  top: 0;
+  z-index: 10;
+  padding-left: 30px;
+}
+
+/*Titulo*/
+.navbar-brand {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  padding-left: 20px;
+}
+
+.logo-navbar {
+  width: 35px;
+}
+
+/*Fonts links*/
+.navbar-nav {
+  padding-right: 40px;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+}
+
+/*Espacio entre links*/
+.navbar-nav li {
+  padding: 0 15px;
+}
+
+
+
+/*Titulo pag*/
+.titulo {
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: black;
 }
 
 
@@ -27,9 +64,7 @@ body{
 }
 
 
-.circulo{
-    
-    
+.circulo{ 
     position: relative;
     display: inline-flex;
     justify-content: center;

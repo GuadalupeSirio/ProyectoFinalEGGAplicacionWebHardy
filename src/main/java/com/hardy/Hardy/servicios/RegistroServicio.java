@@ -36,9 +36,9 @@ public class RegistroServicio {
 
         try {
 
-            /*if (fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()) == null) {
+            if (fichaMedicaServicio.obtenerFichamedicaIdCliente(cliente.getId()) == null) {
                 throw new Exception("Tiene que cargar la ficha medica primero");
-            }*/
+            }
             validacionFecha(fecha);
             validacionMedico(medico, "Medico");
             validacionCobertura(cobertura, "Cobertura");
@@ -87,14 +87,13 @@ public class RegistroServicio {
             registro.setCobertura(cobertura);
             registro.setLugar(lugar);
             registro.setResultados(resultados);
+            registro.setEspecialidad(especialidad);
             
             FichaMedica fichamedica = fichaMedicaServicio.obtenerFichamedicaIdCliente(registro.getCliente().getId());
             if (fichamedica.getUltimoChequeo().isBefore(fecha) || fichamedica.getUltimoChequeo() == null) {
                 fichamedica.setUltimoChequeo(fecha);
                 fichaMedicaRepositorio.save(fichamedica);
             }
-            registro.setEspecialidad(especialidad);
-
             registroRepositorio.save(registro);
 
         } catch (MiExcepcion ex) {
