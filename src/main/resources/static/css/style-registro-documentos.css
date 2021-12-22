@@ -5,6 +5,7 @@
     padding: 0;
 }
 
+
 html {
     scrollbar-width: thin;
     scrollbar-color: #89c0ff #b9d9fd;
@@ -63,6 +64,7 @@ background-color: rgb(247,246,254);
 .navbar-nav li {
     padding: 0 15px;
 }
+
 
 
 /*Titulo pag*/

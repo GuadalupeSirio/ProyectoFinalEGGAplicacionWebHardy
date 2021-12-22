@@ -177,7 +177,7 @@ background-color: rgb(247,246,254);
 }
 
 .dia {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     margin-top: 10px;
     margin-bottom: 0;
@@ -295,5 +295,4 @@ footer {
     font-weight: bold;
     border: 2px solid #8BE9E1;
     padding: 10px;
-    border-radius: 2em 1em 4em / 0.5em 3em;
 }
