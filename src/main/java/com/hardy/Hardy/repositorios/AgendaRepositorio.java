@@ -4,6 +4,7 @@ import com.hardy.Hardy.entidades.Agenda;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,10 +27,13 @@ public interface AgendaRepositorio extends JpaRepository<Agenda, Integer> {
 
     @Query("SELECT a FROM Agenda a WHERE a.cliente.id = :clienteId")
     public List<Agenda> obtenerAgendaCliente(@Param("clienteId") Integer clienteId);
-    
+
+    @Query("SELECT a FROM Agenda a WHERE a.cliente.id = :clienteId AND a.id = :agendaId")
+    public Optional<Agenda> obtenerAgendaCliente(@Param("clienteId") Integer clienteId, @Param("agendaId") Integer agendaId);
+
     @Query("SELECT a FROM Agenda a WHERE a.cliente.id = :clienteId AND MONTH(a.fecha)=MONTH(:fechadeHoy) AND YEAR(a.fecha) =YEAR(:fechadeHoy) AND a.alta = true")
     public List<Agenda> obtenerAgendaMes(@Param("clienteId") Integer clienteId, @Param("fechadeHoy") LocalDate fechadeHoy);
-    
+
     @Query("SELECT a FROM Agenda a WHERE a.cliente.id = :clienteId AND (MONTH(a.fecha)!=MONTH(:fechadeHoy) AND YEAR(a.fecha)!=YEAR(:fechadeHoy)) AND a.fecha>:fechadeHoy AND a.alta = true")
     public List<Agenda> obtenerAgendaFuturo(@Param("clienteId") Integer clienteId, @Param("fechadeHoy") LocalDate fechadeHoy);
 }
