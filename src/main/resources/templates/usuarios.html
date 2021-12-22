@@ -67,7 +67,6 @@
 
                   <form th:if=${usuario.alta} method="post" th:action="@{/usuarios/baja/__${usuario.id}__}">
                     <button class="btn btn-danger boton-baja" type="submit">Baja</button>
-                    
                   </form>
                   <form th:if=${!usuario.alta} method="post" th:action="@{/usuarios/alta/__${usuario.id}__}">
                     <button class="btn btn-success boton-alta" type="submit">Alta</button>
@@ -96,6 +95,7 @@
 
   <!-- Footer -->
 
+
 <footer  class="container-fluid  py-3 fixed-bottom">
   <div class="row ">
 
@@ -106,6 +106,7 @@
 
 </footer>
 
+  <footer th:replace="fragmentos :: footer"></footer>
 
 
 

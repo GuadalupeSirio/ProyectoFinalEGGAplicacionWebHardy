@@ -134,6 +134,8 @@
         </div>
       </div>
 
+  </div>
+
 
       <div class="col-12 col-lg-5 col-xl-6 border-start">
         <div class="row align-items-center pt-4">
@@ -293,7 +295,10 @@
         </div>
       </div>
 
-
+          <div class="col-12">
+            <div class="row">
+              <p class="col-4">Fecha de nacimiento</p>
+              <p class="col-4" th:text="${cliente.fechaNacimiento}"></p>
 
     </div>
 
@@ -325,7 +330,7 @@
               <input class="form-control" id="nombre1" placeholder="Nombre" required type="text" name="nombre">
               <label for="nombre1">Nombre</label>
             </div>
-
+          </div>
             <hr class="my-4">
             <div class="modal-dialog-centered justify-content-center">
               <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
@@ -622,6 +627,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+
           <form th:action="@{/ficha-medica/editar-ultimoChequeo}" autocomplete="off" method="POST"
             class="needs-validation" novalidate>
 
@@ -783,6 +789,29 @@
     </div>
   </div>
 
+            <hr class="my-4">
+            <div class="modal-dialog-centered justify-content-center">
+              <button title="Guardar Especialidad" type="submit" value="Submit" class="btn reg">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar apellido -->
+  <div class="modal fade" id="editarApellido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/perfil/editar-apellido}" autocomplete="off" method="POST" class="needs-validation"
+            novalidate>
 
 
 
@@ -819,6 +848,7 @@
 
                   <div class="col-md-6 col-sm-12">
                     <div class="form-floating mb-4 ms-1 mt-1">
+
                       <input type="date" class="form-control border border-secondary" id="chequeo2"
                         placeholder="Chequeo" name="ultimoChequeo" th:value="${fichaMedica.ultimoChequeo}">
                       <label for="chequeo2">Fecha Último Chequeo</label>
@@ -866,8 +896,21 @@
             </div>
           </div>
         </div>
-
       </div>
+    </div>
+  </div>
+
+  <!-- Modal cambio de correo -->
+  <div th:replace="fragmentos :: modificarCorreo"></div>
+
+  <!-- Modal modificar contraseña -->
+
+  <div th:replace="fragmentos :: modificarContraseña"></div>
+
+
+  <!-- Footer -->
+
+  <footer th:replace="fragmentos :: footer"></footer>
 
     </div> 
 
@@ -906,3 +949,4 @@
 </body>
 
 </html>
+

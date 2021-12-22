@@ -142,14 +142,12 @@
                         </div>
                       </div>
                     </div>
-
                   </div>
 
                 </div>
 
               </div>
             </div>
-
 
           </div>
 
@@ -194,6 +192,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- editar consulta medica -->
     <div class="modal fade" th:attr="id=|editar${registro.id}|" tabindex="-1" aria-hidden="true">
@@ -284,6 +283,7 @@
       </div>
     </div>
 
+
     <!-- cargar archivo de la consulta medica -->
     <div class="modal fade" th:attr="id=|cargarestudio${registro.id}|" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -361,6 +361,7 @@
   </div>
 
   <!--Footer-->
+
   <!-- <footer th:replace="fragmentos :: footer"></footer> -->
   <footer class="container-fluid mt-5 py-3 fixed-bottom">
     <div class="row ">
@@ -419,6 +420,7 @@
                     <div class="form-floating">
                       <select required aria-label="Elegir especialidad" class="form-select border border-secondary"
                         id="especialidad" name="especialidad">
+
                         <option selected th:value="${especialidad.id}" th:text="${especialidad.nombre}"></option>
                         <!-- <option th:each="especialidxd : ${especialidades}" th:text="|${especialidxd.nombre}|"
                           th:if="${especialidxd.alta and especialidxd.id != especialidad.id}" th:value="${especialidxd.id}">
@@ -479,7 +481,6 @@
 
   <!-- Modal cambio de correo -->
   <div th:replace="fragmentos :: modificarCorreo"></div>
-
 
   <!-- Modal modificar contraseña -->
 
