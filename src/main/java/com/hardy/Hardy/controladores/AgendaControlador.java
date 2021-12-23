@@ -74,7 +74,6 @@ public class AgendaControlador {
             throw e;
         }
     }
-
     @GetMapping("/editar/{id}")
     public ModelAndView editarAgendas(@PathVariable Integer id, HttpServletRequest request) throws Exception, MiExcepcion {
         try {
