@@ -51,15 +51,18 @@
     </div>
 </nav>
 
-<footer th:fragment="footer" class="container-fluid  py-3">
+<div class="footer-espacio " th:fragment="footer">
+<div class="espacio container-fluid p-5 mb-5">
+</div>
+<footer class="container-fluid  py-3 fixed-bottom mt-5">
     <div class="row ">
 
         <h6 class="col-12 text-center"><span><img th:src="@{/img/logo-heart.png}" class="logo-navbar" width="34"
                     height="28" /></span> Hardy</h6>
 
     </div>
-
 </footer>
+</div>
 
 <!--Modal modificar correo-->
 <div th:fragment="modificarCorreo" class="modal fade" id="editarCorreo" tabindex="-1"

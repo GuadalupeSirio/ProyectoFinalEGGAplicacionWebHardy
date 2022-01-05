@@ -34,6 +34,6 @@ public interface AgendaRepositorio extends JpaRepository<Agenda, Integer> {
     @Query("SELECT a FROM Agenda a WHERE a.cliente.id = :clienteId AND MONTH(a.fecha)=MONTH(:fechadeHoy) AND YEAR(a.fecha) =YEAR(:fechadeHoy) AND a.alta = true")
     public List<Agenda> obtenerAgendaMes(@Param("clienteId") Integer clienteId, @Param("fechadeHoy") LocalDate fechadeHoy);
 
-    @Query("SELECT a FROM Agenda a WHERE a.cliente.id = :clienteId AND (MONTH(a.fecha)!=MONTH(:fechadeHoy) AND YEAR(a.fecha)!=YEAR(:fechadeHoy)) AND a.fecha>:fechadeHoy AND a.alta = true")
+    @Query("SELECT a FROM Agenda a WHERE a.cliente.id = :clienteId AND (MONTH(a.fecha)!=MONTH(:fechadeHoy) AND YEAR(a.fecha)>=YEAR(:fechadeHoy)) AND a.fecha>:fechadeHoy AND a.alta = true")
     public List<Agenda> obtenerAgendaFuturo(@Param("clienteId") Integer clienteId, @Param("fechadeHoy") LocalDate fechadeHoy);
 }

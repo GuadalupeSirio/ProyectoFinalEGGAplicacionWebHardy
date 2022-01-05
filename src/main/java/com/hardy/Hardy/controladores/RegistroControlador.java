@@ -189,7 +189,7 @@ public class RegistroControlador {
         try {
             registroServicio.registroBaja(registroId);
             Boolean estado = registroServicio.obtenerRegistroAlta(registroId);
-            attributes.addFlashAttribute("exito-name", "La consulta ha sido " + ((estado) ? "eliminada" : "recuperada") + "  exitosamente");
+            attributes.addFlashAttribute("exito-name", "La consulta ha sido " + ((estado) ? "recuperada" : "eliminada") + "  exitosamente");
         } catch (Exception e) {
             attributes.addFlashAttribute("error-name", e.getMessage());
         }
