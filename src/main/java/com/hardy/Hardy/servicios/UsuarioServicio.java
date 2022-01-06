@@ -79,7 +79,6 @@ public class UsuarioServicio implements UserDetailsService {
             usuarioRepositorio.save(usuario);
 
             clienteServicio.guardarCliente(nombre, apellido, dni, fechaNacimiento, imagen, usuario);
-
             emailServicio.enviarThread(correo); //--> para enviar el correo de bienvenida   
         } catch (Exception e) {
             throw e;
